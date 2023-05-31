@@ -1,0 +1,22 @@
+{
+    "name": "multiplechain/utils",
+    "version": "0.1.0",
+    "description": "Blockchain general utils",
+    "type": "library",
+    "license": "MIT",
+    "author": "multiplechain",
+    "support": {
+        "issues": "https://github.com/MultipleChain/utils-php/issues"
+    },
+    "homepage": "https://github.com/MultipleChain/utils-php",
+    "require": {
+        "php": ">=7.4",
+        "phpseclib/phpseclib": "~2.0.11",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MultipleChain\\" : "src"
+        }
+    }
+}

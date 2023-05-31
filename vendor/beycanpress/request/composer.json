@@ -1,0 +1,22 @@
+{
+    "name": "beycanpress/request",
+    "version": "0.1.0",
+    "description": "It is a simple and useful class for receiving data in many different request types and sending requests.",
+    "keywords": ["request", "send", "get", "post", "all", "json", "xml"],
+    "type": "library",
+    "license": "MIT",
+    "author": "BeycanPress",
+    "support": {
+        "issues": "https://github.com/BeycanPress/request/issues"
+    },
+    "homepage": "https://github.com/BeycanPress/request",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "BeycanPress\\" : "src"
+        }
+    }
+}
+

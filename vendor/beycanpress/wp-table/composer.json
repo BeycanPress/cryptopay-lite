@@ -1,0 +1,21 @@
+{
+    "name": "beycanpress/wp-table",
+    "version": "0.1.0",
+    "description": "Create tables for WordPress very easily. For beycanpress/wp-model",
+    "keywords": ["wordpress", "wp-list-table", "table", "creator", "builder", "WP_List_Table", "examples"],
+    "type": "library",
+    "license": "LGPL-3.0",
+    "author": "BeycanPress",
+    "support": {
+        "issues": "https://github.com/BeycanPress/wp-table/issues"
+    },
+    "homepage": "https://github.com/BeycanPress/wp-table",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "BeycanPress\\WPTable\\" : "src"
+        }
+    }
+}

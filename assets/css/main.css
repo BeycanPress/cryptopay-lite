@@ -1,0 +1,23 @@
+.cryptopay-payment-details-table {
+    border: 1px solid rgba(0,0,0,.1);
+    margin: 0 -1px 24px 0;
+    text-align: left;
+    width: 100%;
+    border-collapse: separate;
+    border-radius: 5px
+}
+
+.cryptopay-payment-details-table tr:not(:last-child) td,
+.cryptopay-payment-details-table tr:not(:last-child) th {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.cryptopay-payment-details-table tr td,
+.cryptopay-payment-details-table tr th {
+    padding: 10px;
+}
+
+.cryptopay-payment-details-table tr th {
+    padding-left: 10px;
+    border-right: 1px solid rgba(0,0,0,.1);
+}

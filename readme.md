@@ -1,0 +1,1 @@
+Review premium version: [Cryptocurrency payments](https://beycanpress.com/cryptopay)

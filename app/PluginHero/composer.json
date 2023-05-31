@@ -1,0 +1,27 @@
+{
+    "name": "beycan/plugin-hero",
+    "version": "1.5.3",
+    "description": "A plugin development library for WordPress that contains many utilities.",
+    "keywords": ["wordpress", "plugin", "framework", "library"],
+    "type": "library",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Halil Beycan",
+            "email": "halilbeycan0@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/BeycanDeveloper/plugin-hero/issues"
+    },
+    "homepage": "https://github.com/BeycanDeveloper/plugin-hero",
+    "require": {
+        "php": ">=7.3",
+        "beycan/license-verifier": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Beycan\\PluginHero\\" : "src"
+        }
+    }
+}

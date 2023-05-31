@@ -1,0 +1,25 @@
+{
+    "name": "multiplechain/evm-chains",
+    "version": "0.1.5",
+    "description": "Ready node library for transacting on many EVM based chains.",
+    "type": "library",
+    "license": "MIT",
+    "author": "MultipleChain",
+    "support": {
+        "issues": "https://github.com/MultipleChain/evm-chains-php/issues"
+    },
+    "homepage": "https://github.com/MultipleChain/evm-chains-php",
+    "require": {
+        "php": ">=7.4",
+        "web3p/ethereum-tx": "^0.4.3",
+        "ext-bcmath": "*",
+        "web3p/web3.php": "^0.1.6",
+        "multiplechain/evm-based-chains": "^0.1.0",
+        "multiplechain/utils": "^0.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MultipleChain\\EvmChains\\" : "src"
+        }
+    }
+}
