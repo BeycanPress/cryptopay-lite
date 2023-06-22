@@ -101,7 +101,7 @@ class Loader extends PluginHero\Plugin
     
             $headers = [
                 'Content-Type: text/html; charset=UTF-8',
-                'From: ' . $data['name'] . ' <' . $data['userEmail'] . '>',
+                'From: ' . $data['name'] . ' <' . $data['email'] . '>',
             ];
     
 			wp_send_json_success(wp_mail('beycanpress@gmail.com', 'CryptoPay Lite Feedback', $body, $headers));
