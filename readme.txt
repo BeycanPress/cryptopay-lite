@@ -71,10 +71,12 @@ Are you ready to speed up the process of receiving cryptocurrency payments on Wo
 * Unlimited coin payments support
 * Lots of extra feature add-ons
 * Lots of network support add-ons
+* Bitcoin, Solana, Tron, Others
 * Lots of converter API support add-ons
 * Custom token support & prices support
 * Payment feature on the "Checkout" page
 * WalletConnect support
+* QR code support
 * 1 Domain license
 * 1 Year of updates
 * 1 Year of support
