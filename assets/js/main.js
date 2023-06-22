@@ -22,7 +22,7 @@
             throw new Error('Order currency is required');
         }
 
-        return initCryptoPayLite('cryptopay', Object.assign(CryptoPayLite, {order}));
+        return window.CryptoPayLiteApp = initCryptoPayLite('cryptopay', Object.assign(CryptoPayLite, {order}));
     }
 
     if (CryptoPayLite.autoInit) {

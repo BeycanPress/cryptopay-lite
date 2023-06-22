@@ -1,5 +1,5 @@
 === Bitcoin, Ethereum cryptocurrency payments gateway - WordPress & WooCommerce ===
-Contributors: BeycanPress, BeycanDeveloper
+Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payments, Gateway, WordPress, WooCommerce
 Requires at least: 5.0
 Tested up to: 6.2
@@ -57,6 +57,7 @@ Are you ready to speed up the process of receiving cryptocurrency payments on Wo
 * MetaMask, Trust Wallet, Binance Wallet support
 * Getting paid with native coins and certain stable coins
 * Fast confirmation times as transactions are p2p
+* Order is created first, then payment is received
 * Payment transaction list
 * Automatic update system
 * Unlimited domains
@@ -72,6 +73,7 @@ Are you ready to speed up the process of receiving cryptocurrency payments on Wo
 * Lots of network support add-ons
 * Lots of converter API support add-ons
 * Custom token support & prices support
+* Payment feature on the "Checkout" page
 * WalletConnect support
 * 1 Domain license
 * 1 Year of updates
@@ -145,6 +147,12 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.2.2 =
+* Fixed Mainnet not working problem
+
+= 1.2.1 =
+* Added pro version informations
 
 = 1.2.0 =
 * Added Ethereum, Avalanche, Polygon Support

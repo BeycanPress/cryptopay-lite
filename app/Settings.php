@@ -8,16 +8,6 @@ use \BeycanPress\CryptoPayLite\PluginHero\Helpers;
 class Settings extends Setting
 {
     use Helpers;
-    
-    /**
-     * @var array
-     */
-    public static $customPrices = [];
-
-    /**
-     * @var array
-     */
-    public static $tokenDiscounts = [];
 
     public function __construct()
     {

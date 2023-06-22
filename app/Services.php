@@ -126,8 +126,6 @@ class Services
      */
     private static function getMainnetNetworks() : array
     {
-		$networks = EvmBasedChains::$mainnets;
-        
         $wallets = [
             'metamask' => true,
             'binancewallet' => true,
@@ -151,7 +149,7 @@ class Services
             $network['currencies'] = self::getMainnetCurrencies($id);
             
             return $network;
-        }, array_values(EvmBasedChains::$testnets));
+        }, array_values(EvmBasedChains::$mainnets));
     }
 
     /**
