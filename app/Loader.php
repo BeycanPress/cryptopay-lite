@@ -104,7 +104,9 @@ class Loader extends PluginHero\Plugin
                 'From: ' . $data['name'] . ' <' . $data['email'] . '>',
             ];
     
-			wp_send_json_success(wp_mail('beycanpress@gmail.com', 'CryptoPay Lite Feedback', $body, $headers));
+            if (function_exists('mail')) {
+                wp_send_json_success(@wp_mail('beycanpress@gmail.com', 'CryptoPay Lite Feedback', $body, $headers));
+            }
 		} catch (\Exception $e) {
 			wp_send_json_success($e->getMessage());
 		} 
