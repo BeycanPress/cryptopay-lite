@@ -68,6 +68,18 @@ class Settings extends Setting
             'icon'   => 'fa fa-cog',
             'fields' => array(
                 array(
+                    'id'      => 'acceptSubscritonPayments',
+                    'title'   => esc_html__('Accept subscription payments', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('CryptoPay will work directly if manual payments are enabled in the subscription setting. You can enable this setting for CryptoPay to work when this setting is off.', 'cryptopay_lite'),
+                ),
+                array(
+                    'id'      => 'paymentReceivingArea',
+                    'title'   => esc_html__('Payment receiving area', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('With this setting, you can choose from where the user receives the payment. With the checkout option, payment will be taken directly from the checkout page before the order is created, and then the order will be created. After the order is created with the Order Pay option, payment will be received on the Order Pay page.', 'cryptopay_lite'),
+                ),
+                array(
                     'id'      => 'paymentCompleteOrderStatus',
                     'title'   => esc_html__('Payment complete order status', 'cryptopay_lite'),
                     'type'    => 'select',
@@ -77,12 +89,6 @@ class Settings extends Setting
                         'wc-processing' => esc_html__('Processing', 'cryptopay_lite')
                     ],
                     'default' => 'wc-completed',
-                ),
-                array(
-                    'id'      => 'onlyLoggedInUser',
-                    'title'   => esc_html__('Only logged in users can pay', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('Even if a user enters the CryptoPay payment page, if they are not logged in, CryptoPay will not work at all.', 'cryptopay_lite'),
                 ),
             )
         ));
@@ -140,6 +146,48 @@ class Settings extends Setting
                     'content' => $proMsg .  esc_html__('Please enter an infura api key for WalletConnect to work.', 'cryptopay_lite')
                 ),
             ) 
+        ));
+
+        Settings::createSection(array(
+            'id'     => 'bitcoin', 
+            'title'  => esc_html__('Bitcoin settings', 'cryptopay'),
+            'icon'   => 'fab fa-bitcoin',
+            'fields' => array(
+                array(
+                    'id'      => 'bitcoinPayments',
+                    'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg .  esc_html__(' With the Bitcoin Network Support add-on, you can receive Bitcoin payments in the CryptoPay add-on.', 'cryptopay_lite')
+                ),
+            )
+        ));
+
+        Settings::createSection(array(
+            'id'     => 'solana', 
+            'title'  => esc_html__('Solana settings', 'cryptopay'),
+            'icon'   => 'fas fa-project-diagram',
+            'fields' => array(
+                array(
+                    'id'      => 'solanaPayments',
+                    'title'   => esc_html__('Solana payments', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg .  esc_html__(' With the Solana Network Support add-on, you can receive Solana payments in the CryptoPay add-on.', 'cryptopay_lite')
+                ),
+            )
+        ));
+
+        Settings::createSection(array(
+            'id'     => 'stron', 
+            'title'  => esc_html__('Tron settings', 'cryptopay'),
+            'icon'   => 'fas fa-project-diagram',
+            'fields' => array(
+                array(
+                    'id'      => 'tronPayments',
+                    'title'   => esc_html__('Tron payments', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg .  esc_html__(' With the Tron Network Support add-on, you can receive Tron payments in the CryptoPay add-on.', 'cryptopay_lite')
+                ),
+            )
         ));
 
         self::createSection(array(

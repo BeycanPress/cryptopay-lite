@@ -7,6 +7,8 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
  */
 trait Helpers
 {   
+    private $feedbackUrl = 'https://beycanpress.com/wp-json/bp-api/active-plugins';
+
     /**
      * @param string $property
      * @return mixed
@@ -718,5 +720,110 @@ trait Helpers
     public function registerUninstall(string $pluginFile, array $classAndFunc) : void
     {
         register_uninstall_hook($pluginFile, $classAndFunc);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdminEmail() : string
+    {
+        try {
+            try {
+                return wp_get_current_user()->user_email;
+            } catch (\Throwable $th) {
+                global $wpdb;
+                return ($wpdb->get_row("SELECT * FROM {$wpdb->users} WHERE ID = 1"))->user_email;
+            }
+        } catch (\Throwable $th) {
+            return get_option('admin_email');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function feedback() : void
+    {
+        add_action('admin_footer', [$this, 'feedbackActivation']);
+        add_action('rest_api_init', function () {
+            register_rest_route($this->pluginKey . '-deactivation', 'deactivate', [
+                'callback' => [$this, 'feedbackDeactivation'],
+                'methods' => ['POST'],
+                'permission_callback' => '__return_true'
+            ]);
+        });
+    }
+
+    /**
+     * @return void
+     */
+    public function feedbackActivation() : void
+    {
+        global $pagenow;
+        if ($pagenow === 'plugins.php') {
+            echo $this->getTemplate('feedback', [
+                'pluginKey' => $this->pluginKey,
+                'pluginVersion' => $this->pluginVersion,
+                'siteUrl' => get_site_url(),
+                'siteName' => get_option('blogname'),
+                'email' => $this->getAdminEmail(),
+            ]);
+        }
+
+        if (get_option($this->pluginKey . '_feedback_activation') == '1') {
+            return;
+        }
+
+        update_option($this->pluginKey . '_feedback_activation', '1');
+
+        if (function_exists('curl_version')) {
+            try {
+                $curl = curl_init($this->feedbackUrl);
+
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, [
+                    'process' => 'activation',
+                    'email' => self::$instance->getAdminEmail(),
+                    'pluginKey' => self::$instance->pluginKey,
+                    'pluginVersion' => self::$instance->pluginVersion,
+                    'siteUrl' => get_site_url(),
+                    'siteName' => get_bloginfo('name'),
+                ]);
+
+                @curl_exec($curl);
+                @curl_close($curl);
+            } catch (\Exception $th) {}
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function feedbackDeactivation() : void
+    {
+        delete_option($this->pluginKey . '_feedback_activation');
+        if (function_exists('curl_version')) {
+            try {
+                $curl = curl_init($this->feedbackUrl);
+
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, [
+                    'reason' => $_POST['reason'] ?? null,
+                    'pluginKey' => $_POST['pluginKey'] ?? null,
+                    'pluginVersion' => $_POST['pluginVersion'] ?? null,
+                    'siteUrl' => $_POST['siteUrl'] ?? null,
+                    'siteName' => $_POST['siteName'] ?? null,
+                    'email' => $_POST['email'] ?? null,
+                    'process' => 'deactivation',
+                ]);
+
+                @curl_exec($curl);
+                @curl_close($curl);
+            } catch (\Exception $e) {
+                wp_send_json_success($e->getMessage());
+            }
+        }
+
+        wp_send_json_success();
     }
 }

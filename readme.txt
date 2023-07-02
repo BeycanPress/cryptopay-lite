@@ -114,9 +114,9 @@ Bitcoin, Ethereum, Binance, Solana, Tron, Avalanche, Polygon, MetaMask, TrustWal
 
 With the default configuration, this plugin, in itself, does not:
 
-* track users by stealth;
-* send any data to external servers;
 * use cookies;
+* track users by stealth;
+* It only sends active plugin count and active feedback;
 
 = Translations =
 
