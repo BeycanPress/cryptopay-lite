@@ -36,28 +36,10 @@ class Settings extends Setting
                     'help'    => esc_html__('When you activate this setting, CryptoPay starts working on testnets.', 'cryptopay_lite')
                 ),
                 array(
-                    'id'      => 'debugging',
-                    'title'   => esc_html__('Debugging', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('This setting has been added for the developer team rather than the users. If you open a support ticket to us due to a bug, we will use this setting to check the plugin progress.', 'cryptopay_lite')
-                ),
-                array(
                     'id'      => 'backendConfirmation',
                     'title'   => esc_html__('Backend confirmation', 'cryptopay_lite'),
                     'type'    => 'content',
                     'content' => $proMsg . esc_html__('If you open this break, let\'s assume that the user left the page during the payment, his internet was lost or his computer was shut down. When this setting is on, when the user comes back to the site and looks at their orders, the payment status of the order is checked while the order page is loaded, and if the transaction is successful, the order is confirmed. It also happens when an admin enters the Order transaction page.', 'cryptopay_lite')
-                ),
-                array(
-                    'id'      => 'theme',
-                    'title'   => esc_html__('Theme', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => '<div style="display:flex;align-items:center">'.sprintf(esc_html__('This is a pro feature => %s', 'cryptopay_lite'), '<a href="https://bit.ly/3pOiY25" target="_blank" class="button" style="margin-left: 10px">' . __('Buy pro', 'cryptopay_lite') . '</a>').'</div>',
-                ),
-                array(
-                    'id'      => 'networkSorting',
-                    'title'   => esc_html__('Network sorting', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('If you have multiple networks, you can sort them by dragging and dropping.', 'cryptopay_lite')
                 ),
             )
         ));
@@ -116,18 +98,6 @@ class Settings extends Setting
                     }
                 ),
                 array(
-                    'id'      => 'evmBasedActivePassive',
-                    'title'   => esc_html__('Active/Passive', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg
-                ),
-                array(
-                    'id'      => 'evmBasedBlockConfirmationCount',
-                    'title'   => esc_html__('Block confirmation count', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg
-                ),
-                array(
                     'id'      => 'evmBasedWallets',
                     'title'   => esc_html__('Wallets', 'cryptopay_lite'),
                     'type'    => 'content',
@@ -138,12 +108,6 @@ class Settings extends Setting
                     'title'   => esc_html__('Accepted networks', 'cryptopay_lite'),
                     'type'    => 'content',
                     'content' => $proMsg .  esc_html__('Add the blockchain networks and crtyptocurrencies you accept to receive payments.', 'cryptopay_lite')
-                ),
-                array(
-                    'id'      => 'infuraProjectId',
-                    'title'   => esc_html__('Infura API Key', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg .  esc_html__('Please enter an infura api key for WalletConnect to work.', 'cryptopay_lite')
                 ),
             ) 
         ));

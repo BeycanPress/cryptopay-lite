@@ -4,8 +4,8 @@ Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurren
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable Tag: 1.2.1
-Version: 1.2.1
+Stable Tag: 1.2.4
+Version: 1.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -149,6 +149,10 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.2.4 =
+* Improvements have been made to the Dokan crypto withdrawal feature
+* Fixed issue where checkout process stopped working due to update
 
 = 1.2.2 =
 * Fixed Mainnet not working problem

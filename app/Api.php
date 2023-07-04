@@ -82,6 +82,7 @@ class Api extends AbstractApi
         'CT102' => 'Transaction already exists!',
         'PAYF101' => 'Transaction record not found!',
         'PAYF102' => 'Payment not verified via Blockchain',
+        'MOD103' => 'Model not found!',
         'ORDER_NOT_FOUND' => 'The relevant order was not found!',
     ];
 
@@ -89,10 +90,9 @@ class Api extends AbstractApi
     {
         $this->request = new Request();
         $this->userId = get_current_user_id();
-        $this->addon = $this->request->getParam('addon_lite');
+        $this->addon = $this->request->getParam('cp_lite_addon');
         if ($this->addon) {
             $this->model = Services::getModelByAddon($this->addon);
-            $this->verifier = new Verifier($this->model);
             $this->hash = $this->request->getParam('hash');
             $this->order = $this->request->getParam('order');
             $this->network = $this->request->getParam('network');
@@ -105,7 +105,8 @@ class Api extends AbstractApi
                 'hash' => $this->hash,
                 'network' => $this->network,
                 'model' => $this->model,
-                'status' => 'pending'
+                'status' => 'pending',
+                'params' => $this->request->getParam('params')
             ];
 
         }
@@ -160,10 +161,7 @@ class Api extends AbstractApi
             Response::error(esc_html__('There was a problem getting wallet address!', 'cryptopay_lite'), 'INIT102');
         }
 
-        $receiver = Hook::callFilter(
-            $this->network->code . '_receiver_' . $this->addon, 
-            $receiver, $this->order, $this->network
-        );
+        $receiver = Hook::callFilter('receiver_' . $this->addon, $receiver, $this->data);
 
         Response::success(null, [
             'receiver' => $receiver,
@@ -177,34 +175,38 @@ class Api extends AbstractApi
      */
     public function createTransaction() : void
     {
-        Hook::callAction('check_order_' . $this->addon, $this->order);
-        Hook::callAction('before_payment_started_' . $this->addon, $this->data);
+        if ($this->model) {
+            Hook::callAction('check_order_' . $this->addon, $this->order);
+            Hook::callAction('before_payment_started_' . $this->addon, $this->data);
 
-        if (!$this->hash) {
-            Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'CT101');
+            if (!$this->hash) {
+                Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'CT101');
+            }
+            
+            $date = date('Y-m-d H:i:s', $this->getUTCTime()->getTimestamp());
+            if ($this->model->findOneBy(['hash' => $this->hash])) {
+                Response::error(esc_html__('Transaction already exists!', 'cryptopay_lite'), 'CT102');
+            }
+            
+            $this->model->insert([
+                'hash' => $this->hash,
+                'order' => json_encode($this->order),
+                'orderId' => $this->order->id ?? null,
+                'userId' => $this->userId,
+                'network' => json_encode($this->network),
+                'code' => $this->network->code,
+                'testnet' => boolval(Settings::get('testnet')),
+                'status' => Hook::callFilter('transaction_status_' . $this->addon, 'pending'),
+                'updatedAt' => $date,
+                'createdAt' => $date,
+            ]);
+
+            Hook::callAction('payment_started_' . $this->addon, $this->data);
+
+            Response::success();
         }
-        
-        $date = date('Y-m-d H:i:s', $this->getUTCTime()->getTimestamp());
-        if ($this->model->findOneBy(['hash' => $this->hash])) {
-            Response::error(esc_html__('Transaction already exists!', 'cryptopay_lite'), 'CT102');
-        }
-        
-        $this->model->insert([
-            'hash' => $this->hash,
-            'order' => json_encode($this->order),
-            'orderId' => $this->order->id ?? null,
-            'userId' => $this->userId,
-            'network' => json_encode($this->network),
-            'code' => $this->network->code,
-            'testnet' => boolval(Settings::get('testnet')),
-            'status' => Hook::callFilter('transaction_status_' . $this->addon, 'pending'),
-            'updatedAt' => $date,
-            'createdAt' => $date,
-        ]);
 
-        Hook::callAction('payment_started_' . $this->addon, $this->data);
-
-        Response::success();
+        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
     }
 
     /**
@@ -212,46 +214,50 @@ class Api extends AbstractApi
      */
     public function paymentFinished() : void
     {   
-        Hook::callAction('check_order_' . $this->addon, $this->order);
-        Hook::callAction('before_payment_finished_' . $this->addon, $this->data);
-        
-        if (!$this->hash) {
-            Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'GNR101');
+        if ($this->model) {
+            Hook::callAction('check_order_' . $this->addon, $this->order);
+            Hook::callAction('before_payment_finished_' . $this->addon, $this->data);
+            
+            if (!$this->hash) {
+                Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'GNR101');
+            }
+
+            if (!$transaction = $this->model->findOneBy(['hash' => $this->hash])) {
+                Response::error(esc_html__('Transaction record not found!', 'cryptopay_lite'), 'PAYF101');
+            }
+
+            try {
+                $this->data->status = (new Verifier($this->model))->verifyTransaction($transaction);
+            } catch (\Exception $e) {
+                $this->data->status = false;
+            }
+
+            Hook::callAction('payment_finished_' . $this->addon, $this->data);
+
+            $urls = Hook::callFilter('payment_redirect_urls_' . $this->addon, $this->data);
+
+            if (!$urls['success'] || !$urls['failed']) {
+                Response::badRequest(esc_html__('Redirect links cannot finded!', 'cryptopay_lite'), 'GNR102');
+            }
+
+            if ($this->data->status) {
+                Response::success(Hook::callFilter(
+                    'payment_success_message_' . $this->addon, 
+                    esc_html__('Payment completed successfully', 'cryptopay_lite')
+                ), [
+                    'redirect' => $urls['success']
+                ]);
+            } else {
+                Response::error(Hook::callFilter(
+                    'payment_failed_message_' . $this->addon, 
+                    esc_html__('Payment not verified via Blockchain', 'cryptopay_lite')
+                ), 'PAYF102', [
+                    'redirect' => $urls['failed']
+                ]);
+            }
         }
 
-        if (!$transaction = $this->model->findOneBy(['hash' => $this->hash])) {
-            Response::error(esc_html__('Transaction record not found!', 'cryptopay_lite'), 'PAYF101');
-        }
-
-        try {
-            $this->data->status = $this->verifier->verifyTransaction($transaction);
-        } catch (\Exception $e) {
-            $this->data->status = false;
-        }
-
-        Hook::callAction('payment_finished_' . $this->addon, $this->data);
-
-        $urls = Hook::callFilter('payment_redirect_urls_' . $this->addon, $this->data);
-
-        if (!$urls['success'] || !$urls['failed']) {
-            Response::badRequest(esc_html__('Redirect links cannot finded!', 'cryptopay_lite'), 'GNR102');
-        }
-
-        if ($this->data->status) {
-            Response::success(Hook::callFilter(
-                'payment_success_message_' . $this->addon, 
-                esc_html__('Payment completed successfully', 'cryptopay_lite')
-            ), [
-                'redirect' => $urls['success']
-            ]);
-        } else {
-            Response::error(Hook::callFilter(
-                'payment_failed_message_' . $this->addon, 
-                esc_html__('Payment not verified via Blockchain', 'cryptopay_lite')
-            ), 'PAYF102', [
-                'redirect' => $urls['failed']
-            ]);
-        }
+        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
     }
 
     /**
@@ -273,20 +279,15 @@ class Api extends AbstractApi
     /**
      * @return void
      */
-    public function oldTransactions() : void
-    {
-        $code = $this->request->getParam('code');
-        Response::success(null, (Services::getModelByAddon($this->addon))->getOldTransactionByCode($code));
-    }
-
-    /**
-     * @return void
-     */
     public function verifyPendingTransactions() : void
     {
-        $code = $this->request->getParam('code') ?? 'all';
-        (new Verifier(Services::getModelByAddon($this->addon)))->verifyPendingTransactions(0, $code);
+        if ($this->model) {
+            $code = $this->request->getParam('code') ?? 'all';
+            (new Verifier($this->model))->verifyPendingTransactions(0, $code);
 
-        Response::success();
+            Response::success();
+        }
+
+        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
     }
 }

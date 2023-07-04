@@ -322,19 +322,15 @@ class Services
 
     /**
      * @param string $addon
-     * @return object
+     * @return object|null
      */    
-    public static function getModelByAddon(string $addon) : object
+    public static function getModelByAddon(string $addon) : ?object
     {
         $models = Hook::callFilter('models', [
             'woocommerce' => new Models\OrderTransaction()
         ]);
 
-        if (isset($models[$addon])) {
-            return $models[$addon];
-        } else {
-            throw new \Exception('Model not found!');
-        }
+        return isset($models[$addon]) ? $models[$addon] : null;
     }
 
     /**
