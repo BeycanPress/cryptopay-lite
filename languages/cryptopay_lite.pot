@@ -1,0 +1,596 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CryptoPay Lite\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-05 06:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.4; wp-6.2.2\n"
+"X-Domain: cryptopay_lite"
+
+#: app/Settings.php:124
+msgid ""
+" With the Bitcoin Network Support add-on, you can receive Bitcoin payments "
+"in the CryptoPay add-on."
+msgstr ""
+
+#: app/Settings.php:138
+msgid ""
+" With the Solana Network Support add-on, you can receive Solana payments in "
+"the CryptoPay add-on."
+msgstr ""
+
+#: app/Settings.php:152
+msgid ""
+" With the Tron Network Support add-on, you can receive Tron payments in the "
+"CryptoPay add-on."
+msgstr ""
+
+#: app/Settings.php:54
+msgid "Accept subscription payments"
+msgstr ""
+
+#: app/Settings.php:108
+msgid "Accepted networks"
+msgstr ""
+
+#: app/Settings.php:110
+msgid ""
+"Add the blockchain networks and crtyptocurrencies you accept to receive "
+"payments."
+msgstr ""
+
+#. Description of the plugin
+msgid "All In One Cryptocurrency Payments for WordPress lite version"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:106
+msgid "Amount"
+msgstr ""
+
+#: app/Lang.php:23
+msgid "Amount to be paid:"
+msgstr ""
+
+#: app/Settings.php:173
+msgid "API's"
+msgstr ""
+
+#: app/Settings.php:40
+msgid "Backend confirmation"
+msgstr ""
+
+#: app/Settings.php:193 app/Settings.php:198
+msgid "Backup"
+msgstr ""
+
+#. Author of the plugin
+msgid "BeycanPress"
+msgstr ""
+
+#: app/Settings.php:122
+msgid "Bitcoin payments"
+msgstr ""
+
+#: app/WooCommerce/Register.php:55
+msgid "Blockchain network"
+msgstr ""
+
+#: app/Settings.php:179 app/Settings.php:180
+msgid "Buy custom converter API's"
+msgstr ""
+
+#: index.php:49 app/Loader.php:23 app/Pages/HomePage.php:20
+#: views/pages/home-page/index.php:9
+msgid "Buy premium"
+msgstr ""
+
+#: app/Settings.php:17
+msgid "Buy pro"
+msgstr ""
+
+#: views/woocommerce/pending.php:1
+msgid "click to pay"
+msgstr ""
+
+#: app/Settings.php:70
+msgid "Completed"
+msgstr ""
+
+#: app/Lang.php:21
+msgid "Connection error!"
+msgstr ""
+
+#: app/Lang.php:35
+msgid "Connection rejected!"
+msgstr ""
+
+#: app/Settings.php:184
+msgid "Converter API"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:109
+msgid "Created at"
+msgstr ""
+
+#: app/Settings.php:186
+msgid ""
+"CryptoCompare generally only lists popular cryptocurrencies. If you have a "
+"private token and you want to get paid with it. It is necessary to get the "
+"price value of your token from popular APIs such as CoinMarketCap, CoinGecko."
+" Therefore, this setting and extra API support are required. So if you want "
+"to get paid with your own tokens, you will need it."
+msgstr ""
+
+#. Name of the plugin
+#: app/Pages/HomePage.php:19 app/WooCommerce/Gateway.php:16
+#: app/WooCommerce/Gateway.php:53
+msgid "CryptoPay Lite"
+msgstr ""
+
+#: app/Settings.php:56
+msgid ""
+"CryptoPay will work directly if manual payments are enabled in the "
+"subscription setting. You can enable this setting for CryptoPay to work when "
+"this setting is off."
+msgstr ""
+
+#: app/Settings.php:164
+msgid "Custom prices"
+msgstr ""
+
+#: app/Settings.php:159
+msgid "Custom token prices"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:113
+msgid ""
+"Customer has chosen CryptoPay Wallet payment method, payment is pending."
+msgstr ""
+
+#: app/Settings.php:26
+msgid "Data deletion status"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:110 app/Pages/TransactionPage.php:152
+msgid "Delete"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:56
+msgid "Description"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:45
+msgid "Enable"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:44
+msgid "Enable/Disable"
+msgstr ""
+
+#: app/Settings.php:80
+msgid "EVM Based settings"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:141 views/pages/transaction-page/form.php:16
+msgid "Failed"
+msgstr ""
+
+#: views/pages/transaction-page/form.php:23
+msgid "Filter"
+msgstr ""
+
+#: views/pages/transaction-page/form.php:11
+msgid "Filter by status"
+msgstr ""
+
+#: app/Settings.php:21
+msgid "General settings"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:102
+msgid "Hash"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://beycanpress.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://beycanpress.com/cryptopay"
+msgstr ""
+
+#: app/Settings.php:42
+msgid ""
+"If you open this break, let's assume that the user left the page during the "
+"payment, his internet was lost or his computer was shut down. When this "
+"setting is on, when the user comes back to the site and looks at their "
+"orders, the payment status of the order is checked while the order page is "
+"loaded, and if the transaction is successful, the order is confirmed. It "
+"also happens when an admin enters the Order transaction page."
+msgstr ""
+
+#: app/Lang.php:31
+msgid "Insufficient balance!"
+msgstr ""
+
+#: app/Lang.php:25
+msgid "Loading..."
+msgstr ""
+
+#: app/Api.php:209 app/Api.php:260 app/Api.php:291
+msgid "Model not found!"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:105
+msgid "Network"
+msgstr ""
+
+#: app/Services.php:83
+msgid "No network is active, please activate at least one network!"
+msgstr ""
+
+#: app/Lang.php:39
+msgid ""
+"No working wallets were found on this network. Please make sure you have a "
+"{networkName} wallet."
+msgstr ""
+
+#: app/Lang.php:16
+msgid "Open in explorer"
+msgstr ""
+
+#: app/Lang.php:32
+msgid "Open wallet"
+msgstr ""
+
+#: app/Lang.php:12
+msgid "Order amount:"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:62
+msgid "Order button text"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:103
+msgid "Order ID"
+msgstr ""
+
+#: app/Lang.php:11
+msgid "Order ID:"
+msgstr ""
+
+#: app/WooCommerce/Register.php:29
+msgid "Order transactions"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:64
+msgid "Pay button on the checkout page"
+msgstr ""
+
+#: app/Lang.php:24
+msgid "Pay now"
+msgstr ""
+
+#: app/Lang.php:33
+msgid "Payment address:"
+msgstr ""
+
+#: app/Settings.php:66
+msgid "Payment complete order status"
+msgstr ""
+
+#: app/Api.php:246
+msgid "Payment completed successfully"
+msgstr ""
+
+#: app/WooCommerce/Register.php:65
+msgid "Payment currency"
+msgstr ""
+
+#: app/Lang.php:22
+msgid "Payment currency:"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:111
+msgid "Payment is awaited."
+msgstr ""
+
+#: app/Api.php:253
+msgid "Payment not verified via Blockchain"
+msgstr ""
+
+#: app/WooCommerce/Register.php:85
+msgid "Payment not verified via Blockchain!"
+msgstr ""
+
+#: app/WooCommerce/Register.php:70
+msgid "Payment price"
+msgstr ""
+
+#: app/Settings.php:60
+msgid "Payment receiving area"
+msgstr ""
+
+#: app/Lang.php:27
+msgid "Payment rejected!"
+msgstr ""
+
+#: app/Lang.php:34
+msgid "Payment timed out!"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:137 views/pages/transaction-page/form.php:19
+msgid "Pending"
+msgstr ""
+
+#: app/Api.php:183 app/Api.php:222
+msgid "Please enter a valid data."
+msgstr ""
+
+#: app/Lang.php:30
+msgid "Please try again!"
+msgstr ""
+
+#: app/Lang.php:19
+msgid ""
+"Please try to connect again by selecting network {networkName} from your "
+"wallet!"
+msgstr ""
+
+#: app/Lang.php:36
+msgid "Please wait..."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:65
+msgid "Proceed to CryptoPay Lite"
+msgstr ""
+
+#: app/Settings.php:71
+msgid "Processing"
+msgstr ""
+
+#: app/Api.php:240
+msgid "Redirect links cannot finded!"
+msgstr ""
+
+#: views/pages/transaction-page/form.php:24
+msgid "Reset"
+msgstr ""
+
+#: index.php:50 views/pages/home-page/index.php:10
+msgid "Review now"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:117
+msgid "Search..."
+msgstr ""
+
+#: app/Lang.php:10
+msgid "Select network"
+msgstr ""
+
+#: app/Lang.php:18
+msgid "Select wallet"
+msgstr ""
+
+#: app/Lang.php:13
+msgid "Selected network:"
+msgstr ""
+
+#: app/Settings.php:15
+msgid "Settings"
+msgstr ""
+
+#: app/Settings.php:136
+msgid "Solana payments"
+msgstr ""
+
+#: app/Settings.php:104
+msgid "Specify the wallets you want to accept payments from."
+msgstr ""
+
+#: app/Pages/TransactionPage.php:107
+msgid "Status"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:87
+msgid "Successfully deleted!"
+msgstr ""
+
+#: app/Settings.php:33
+msgid "Testnet"
+msgstr ""
+
+#: app/Settings.php:87
+msgid ""
+"The account address to which the payments will be transferred. (BEP20, ERC20,"
+" MetaMask, Trust Wallet, Binance Wallet )"
+msgstr ""
+
+#: app/WooCommerce/Register.php:43
+msgid "The relevant order was not found!"
+msgstr ""
+
+#: app/Settings.php:68
+msgid "The status to apply for WooCommerce order after payment is complete."
+msgstr ""
+
+#: app/Lang.php:40
+msgid ""
+"There is currently a process on the wallet. Please try again after "
+"completing the relevant process."
+msgstr ""
+
+#: app/Api.php:157 app/Api.php:273 app/Lang.php:37
+msgid "There was a problem converting currency!"
+msgstr ""
+
+#: app/Api.php:161
+msgid "There was a problem getting wallet address!"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:58
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:52
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: app/Settings.php:17
+#, php-format
+msgid "This is a pro feature => %s"
+msgstr ""
+
+#: app/Settings.php:29
+msgid ""
+"This setting is passive come by default. You enable this setting. All data "
+"created by the plug-in will be deleted while removing the plug-in."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:50
+msgid "Title"
+msgstr ""
+
+#: app/Api.php:188
+msgid "Transaction already exists!"
+msgstr ""
+
+#: app/Lang.php:29
+msgid "Transaction create fail!"
+msgstr ""
+
+#: app/WooCommerce/Register.php:60
+msgid "Transaction hash"
+msgstr ""
+
+#: views/pages/transaction-page/index.php:3
+msgid "Transaction list"
+msgstr ""
+
+#: app/Api.php:226
+msgid "Transaction record not found!"
+msgstr ""
+
+#: app/Lang.php:38
+msgid "Transaction sent"
+msgstr ""
+
+#: app/Lang.php:28
+msgid "Transfer amount need to be bigger from zero!"
+msgstr ""
+
+#: app/Settings.php:150
+msgid "Tron payments"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:108
+msgid "Updated at"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:104
+msgid "User ID"
+msgstr ""
+
+#: app/Pages/TransactionPage.php:139 views/pages/transaction-page/form.php:13
+msgid "Verified"
+msgstr ""
+
+#: app/Lang.php:26
+msgid "Waiting approval..."
+msgstr ""
+
+#: app/Lang.php:17
+msgid "Waiting confirmation..."
+msgstr ""
+
+#: app/Lang.php:14
+msgid "Waiting for block confirmations:"
+msgstr ""
+
+#: app/Lang.php:15
+msgid "Waiting for transaction confirmation..."
+msgstr ""
+
+#: app/Settings.php:85
+msgid "Wallet address"
+msgstr ""
+
+#: app/Settings.php:94
+msgid "Wallet address cannot be empty."
+msgstr ""
+
+#: app/Settings.php:96
+msgid "Wallet address must consist of 42 characters."
+msgstr ""
+
+#: app/Lang.php:20
+msgid "Wallet connection timed out!"
+msgstr ""
+
+#: app/Lang.php:41
+msgid "Wallet not found!"
+msgstr ""
+
+#: app/Settings.php:102
+msgid "Wallets"
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:107
+msgid ""
+"Was directly approved by CryptoPay WooCommerce as the order amount was zero!"
+msgstr ""
+
+#: app/Settings.php:36
+msgid "When you activate this setting, CryptoPay starts working on testnets."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:17
+msgid ""
+"With CryptoPay, your customers can easily pay with their cryptocurrencies."
+msgstr ""
+
+#: app/Settings.php:62
+msgid ""
+"With this setting, you can choose from where the user receives the payment. "
+"With the checkout option, payment will be taken directly from the checkout "
+"page before the order is created, and then the order will be created. After "
+"the order is created with the Order Pay option, payment will be received on "
+"the Order Pay page."
+msgstr ""
+
+#: app/Settings.php:49
+msgid "WooCommerce settings"
+msgstr ""
+
+#: app/Settings.php:166
+msgid ""
+"You can assign prices corresponding to fiat currencies to your own custom "
+"tokens."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:59
+msgid "You can pay with supported networks and cryptocurrencies."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:98 app/WooCommerce/Register.php:78
+msgid "Your order is complete."
+msgstr ""
+
+#: app/WooCommerce/Gateway.php:100 app/WooCommerce/Register.php:80
+msgid "Your order is processing."
+msgstr ""
+
+#: views/woocommerce/pending.php:1
+#, php-format
+msgid "Your order is waiting for payment, %s."
+msgstr ""
