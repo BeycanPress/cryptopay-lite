@@ -19,10 +19,6 @@
                 <label for="<?php echo $pluginKey; ?>_better_plugin">
                     <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_better_plugin" value="I found a better plugin"> I found a better plugin
                 </label>
-                <div class="bp-feedback-modal-reason-input" id="<?php echo $pluginKey; ?>-feedback-modal-reason-better-plugin">
-                    <span class="message error-message">Kindly tell us the wich plugin so we can improve.</span>
-                    <input type="text" id="<?php echo $pluginKey; ?>_deactivation_reason_better_plugin" name="<?php echo $pluginKey; ?>_deactivation_reason_better_plugin" maxlength="128" placeholder="">
-                </div>
             </li>
             <li>
                 <label for="<?php echo $pluginKey; ?>_insufficient_feature">
@@ -46,12 +42,8 @@
             </li>
             <li>
                 <label for="<?php echo $pluginKey; ?>_other">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_other" value="other"> Other
+                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_other" value="Other"> Other
                 </label>
-                <div class="bp-feedback-modal-reason-input" id="<?php echo $pluginKey; ?>-feedback-modal-reason-other">
-                    <span class="message error-message">Kindly tell us the reason so we can improve.</span>
-                    <input type="text" id="<?php echo $pluginKey; ?>_deactivation_reason_other" name="<?php echo $pluginKey; ?>_deactivation_reason_other" maxlength="128" placeholder="">
-                </div>
             </li>
         </ul>
         <div class="bp-feedback-modal-footer" id="<?php echo $pluginKey; ?>-feedback-modal-footer"> 
@@ -77,17 +69,14 @@
                 try {
                     e.preventDefault();
                     var reason = $('.<?php echo $pluginKey; ?>_deactivation_reason:checked').val();
+                    var detail = $('#<?php echo $pluginKey; ?>_deactivation_reason_detail').val();
 
-                    if (reason == 'other') {
-                        reason = $('#<?php echo $pluginKey; ?>_deactivation_reason_other').val();
-                    } else if (reason == 'I found a better plugin') {
-                        reason = "I found a better plugin: " + $('#<?php echo $pluginKey; ?>_deactivation_reason_better_plugin').val();
-                    }
-
-                    if (!reason) {
+                    if (!reason || !detail) {
                         alert('Please select or enter a reason!');
                         return false;
                     }
+
+                    reason = reason + ": " + detail;
 
                     $.ajax({
                         url: "<?php echo home_url('wp-json/' . $pluginKey . '-deactivation/deactivate'); ?>",
@@ -126,14 +115,15 @@
             $(document).on('change', '.<?php echo $pluginKey; ?>_deactivation_reason', function(e){
                 e.preventDefault()
                 var value = $(this).attr('id');
-                if (value == '<?php echo $pluginKey; ?>_other') {
-                    $('#<?php echo $pluginKey; ?>-feedback-modal-reason-other').show();
-                } else if (value == '<?php echo $pluginKey; ?>_better_plugin') {
-                    $('#<?php echo $pluginKey; ?>-feedback-modal-reason-better-plugin').show();
-                } else {
-                    $('#<?php echo $pluginKey; ?>-feedback-modal-reason-other').hide();
-                    $('#<?php echo $pluginKey; ?>-feedback-modal-reason-better-plugin').hide();
-                }
+                let html = `
+                    <div class="bp-feedback-modal-reason-input" id="<?php echo $pluginKey; ?>-feedback-modal-reason-detail">
+                        <span class="message error-message">Can you provide more information?</span>
+                        <input type="text" id="<?php echo $pluginKey; ?>_deactivation_reason_detail" name="<?php echo $pluginKey; ?>_deactivation_reason_detail" maxlength="128" placeholder="">
+                    </div>`;
+
+                $('#<?php echo $pluginKey; ?>-feedback-modal-reason-detail').remove();
+
+                $(this).parent().parent().append(html);
             });
         })
     })(jQuery);
@@ -193,7 +183,6 @@
 
     .bp-feedback-modal-reason-input {
         margin-left: 20px;
-        display: none;
     }
 
     .bp-feedback-modal-reason-input input {
