@@ -1,6 +1,6 @@
 {
     "name": "multiplechain/evm-based-chains",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "EVM Based chain informations",
     "type": "library",
     "license": "MIT",

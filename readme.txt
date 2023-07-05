@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payments, Gateway, WordPress, WooCommerce
 Requires at least: 5.0
-Tested up to: 6.2
+Tested up to: 6.2.2
 Requires PHP: 7.4
-Stable Tag: 1.2.4
-Version: 1.2.4
+Stable Tag: 1.2.5
+Version: 1.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -149,6 +149,10 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.2.5 =
+* Updated: .pot language file
+* Updated: EvmChains package
 
 = 1.2.4 =
 * Improvements have been made to the Dokan crypto withdrawal feature

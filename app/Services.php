@@ -339,7 +339,10 @@ class Services
      */
     public static function getProviderByTx(object $transaction) : object
     {
-        return new Provider(json_decode($transaction->network), boolval($transaction->testnet), 20);
+        return new Provider([
+            "network" => json_decode($transaction->network),
+            "testnet" => boolval($transaction->testnet)
+        ]);
     }
 
     /**

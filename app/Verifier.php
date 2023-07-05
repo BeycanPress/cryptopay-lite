@@ -35,7 +35,7 @@ class Verifier
         $provider = Services::getProviderByTx($transaction);
         $transaction = $provider->Transaction($transaction->hash);
 
-        if (is_null($transaction->getStatus())) {
+        if (is_null($transaction->validate())) {
             return null;
         }
 

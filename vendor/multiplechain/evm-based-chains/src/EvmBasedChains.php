@@ -48,6 +48,17 @@ class EvmBasedChains {
                 "symbol" => "MATIC",
                 "decimals" => 18
             ]
+        ],
+        "fantom" => [
+            "id" => 250,
+            "hexId" => "0xfa",
+            "name" => "Fantom Opera",
+            "rpcUrl" => "https://rpc.fantom.network",
+            "explorerUrl" => "https://ftmscan.com/",
+            "nativeCurrency" => [
+                "symbol" => "FTM",
+                "decimals" => 18
+            ]
         ]
     ];
 
@@ -57,6 +68,7 @@ class EvmBasedChains {
             "hexId" => "0x5",
             "name" => "Ethereum Goerli Testnet",
             "rpcUrl" => "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+            "wsUrl" => "wss://goerli.infura.io/ws/v3/9aa3d95b3bc440fa88ea12eaa4456161",
             "explorerUrl" => "https://goerli.etherscan.io/",
             "nativeCurrency" => [
                 "symbol" => "ETH",
@@ -94,6 +106,17 @@ class EvmBasedChains {
             "explorerUrl" => "https://mumbai.polygonscan.com/",
             "nativeCurrency" => [
                 "symbol" => "MATIC",
+                "decimals" => 18
+            ]
+        ],
+        "fantom" => [
+            "id" => 4002,
+            "hexId" => "0xfa2",
+            "name" => "Fantom Testnet",
+            "rpcUrl" => "https://rpc.testnet.fantom.network/",
+            "explorerUrl" => "https://testnet.ftmscan.com/",
+            "nativeCurrency" => [
+                "symbol" => "FTM",
                 "decimals" => 18
             ]
         ]

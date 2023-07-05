@@ -109,8 +109,8 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
         ),
         'MultipleChain\\' => 
         array (
-            0 => __DIR__ . '/..' . '/multiplechain/evm-based-chains/src',
-            1 => __DIR__ . '/..' . '/multiplechain/utils/src',
+            0 => __DIR__ . '/..' . '/multiplechain/utils/src',
+            1 => __DIR__ . '/..' . '/multiplechain/evm-based-chains/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

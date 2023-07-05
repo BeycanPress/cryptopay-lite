@@ -4,8 +4,43 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "637817f4b9f63ba360d679f3de702289",
+    "content-hash": "1d9026e5dbfb4604f4a3c070d1dd38b1",
     "packages": [
+        {
+            "name": "beycanpress/http",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeycanPress/http.git",
+                "reference": "dc6ad1f1d30e3ad47bc9b26bce5ea295ce7caded"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeycanPress/http/zipball/dc6ad1f1d30e3ad47bc9b26bce5ea295ce7caded",
+                "reference": "dc6ad1f1d30e3ad47bc9b26bce5ea295ce7caded",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BeycanPress\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A simple and useful library for HTTP requests, response and client.",
+            "homepage": "https://github.com/BeycanPress/http",
+            "support": {
+                "issues": "https://github.com/BeycanPress/http/issues",
+                "source": "https://github.com/BeycanPress/http/tree/0.1.3"
+            },
+            "time": "2023-05-04T08:25:39+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "7.4.2",
@@ -380,16 +415,16 @@
         },
         {
             "name": "multiplechain/evm-based-chains",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-based-chains-php.git",
-                "reference": "a26a71eb9fa4982bdf0036933637045157929c33"
+                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/a26a71eb9fa4982bdf0036933637045157929c33",
-                "reference": "a26a71eb9fa4982bdf0036933637045157929c33",
+                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
+                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
                 "shasum": ""
             },
             "require": {
@@ -409,9 +444,9 @@
             "homepage": "https://github.com/MultipleChain/evm-based-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-based-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.0"
+                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.2"
             },
-            "time": "2023-03-22T08:31:46+00:00"
+            "time": "2023-06-22T14:24:41+00:00"
         },
         {
             "name": "multiplechain/utils",

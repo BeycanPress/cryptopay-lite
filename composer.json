@@ -6,8 +6,8 @@
     },
     "require": {
         "beycanpress/wp-model": "^0.1.0",
-        "multiplechain/evm-chains": "^0.1.5",
-        "multiplechain/evm-based-chains": "^0.1.1",
+        "multiplechain/evm-chains": "^0.1.12",
+        "multiplechain/evm-based-chains": "^0.1.2",
         "beycanpress/http": "^0.1.3",
         "beycanpress/wp-table": "^0.1.0"
     }
