@@ -165,7 +165,7 @@ class Services
         ];
 
         $prepareWallets = [];
-        return array_map(function(&$network) use ($wallets) {
+        return array_map(function($network) use ($wallets) {
     
             $id = intval($network['id']);
             
