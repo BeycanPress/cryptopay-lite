@@ -50,7 +50,7 @@ class Gateway extends \WC_Payment_Gateway
                 'title'       => esc_html__('Title', 'cryptopay_lite'),
                 'type'        => 'text',
                 'description' => esc_html__('This controls the title which the user sees during checkout.', 'cryptopay_lite'),
-                'default'     => esc_html__('cryptopay_lite', 'cryptopay_lite')
+                'default'     => esc_html__('CryptoPay Lite', 'cryptopay_lite')
             ),
             'description' => array(
                 'title'       => esc_html__('Description', 'cryptopay_lite'),
