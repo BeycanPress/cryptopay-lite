@@ -16,6 +16,8 @@ class Register
     {   
         // Register WooCommerce
         if (function_exists('WC')) {
+            Services::registerAddon('woocommerce');
+            
             // Register gateways
             add_filter('woocommerce_payment_gateways', function($gateways) {
                 $gateways[] = Gateway::class;
