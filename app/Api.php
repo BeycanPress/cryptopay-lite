@@ -132,10 +132,6 @@ class Api extends AbstractApi
                 'old-transactions' => [
                     'callback' => 'oldTransactions',
                     'methods' => ['GET']
-                ],
-                'verify-pending-transactions' => [
-                    'callback' => 'verifyPendingTransactions',
-                    'methods' => ['GET']
                 ]
             ]
         ]);
@@ -236,11 +232,14 @@ class Api extends AbstractApi
 
             $urls = Hook::callFilter('payment_redirect_urls_' . $this->addon, $this->data);
 
-            if (!$urls['success'] || !$urls['failed']) {
+            if (is_object($urls)) {
                 Response::badRequest(esc_html__('Redirect links cannot finded!', 'cryptopay_lite'), 'GNR102');
             }
 
             if ($this->data->status) {
+                
+                $this->model->updateStatusToVerifiedByHash($transaction->hash);
+
                 Response::success(Hook::callFilter(
                     'payment_success_message_' . $this->addon, 
                     esc_html__('Payment completed successfully', 'cryptopay_lite')
@@ -248,6 +247,9 @@ class Api extends AbstractApi
                     'redirect' => $urls['success']
                 ]);
             } else {
+                
+                $this->model->updateStatusToFailedByHash($transaction->hash);
+
                 Response::error(Hook::callFilter(
                     'payment_failed_message_' . $this->addon, 
                     esc_html__('Payment not verified via Blockchain', 'cryptopay_lite')
@@ -276,18 +278,4 @@ class Api extends AbstractApi
         Response::success(null, $paymentPrice);
     }
 
-    /**
-     * @return void
-     */
-    public function verifyPendingTransactions() : void
-    {
-        if ($this->model) {
-            $code = $this->request->getParam('code') ?? 'all';
-            (new Verifier($this->model))->verifyPendingTransactions(0, $code);
-
-            Response::success();
-        }
-
-        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
-    }
 }

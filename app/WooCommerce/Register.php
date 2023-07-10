@@ -27,7 +27,7 @@ class Register
             } else {
                 new TransactionPage(
                     esc_html__('Order transactions', 'cryptopay_lite'),
-                    'cp_lite_order_transactions',
+                    'order_transactions',
                     'woocommerce',
                     2,
                     [

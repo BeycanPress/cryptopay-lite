@@ -40,9 +40,7 @@ class Services
         array $order, string $addon, bool $confirmation = true, array $params = []
     ) : string
     {
-        if (!isset($order['id'])) {
-            throw new \Exception('Order id parameter is required!');
-        } elseif (!isset($order['amount'])) {
+        if (!isset($order['amount'])) {
             throw new \Exception('Order amount parameter is required!');
         } elseif (!isset($order['currency'])) {
             throw new \Exception('Order currency parameter is required!');

@@ -56,6 +56,8 @@ class TransactionPage extends Page
         array $excludeColumns = []
     )
     {
+        $slug = $this->pluginKey . '_' . sanitize_title($slug);
+        
         if (in_array($slug, self::$slugs)) {
             throw new \Exception('This slug is already registered, please choose another slug!');
         }
@@ -86,8 +88,6 @@ class TransactionPage extends Page
         if (isset($_GET['id']) && $this->model->delete(['id' => absint($_GET['id'])])) {
             $this->notice(esc_html__('Successfully deleted!', 'cryptopay_lite'), 'success', true);
         }
-
-        (new Verifier($this->model))->verifyPendingTransactions(0, 'evmBased');
 
         $params = [
             'code' => 'evmBased',

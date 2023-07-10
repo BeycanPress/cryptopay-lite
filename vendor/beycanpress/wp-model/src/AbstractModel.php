@@ -65,6 +65,7 @@ class AbstractModel
     {
         $this->initWPDB();
         $this->addColumns($columns);
+        $this->createTable();
     }
 
     /**

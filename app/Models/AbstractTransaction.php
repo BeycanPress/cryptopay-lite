@@ -3,12 +3,15 @@
 namespace BeycanPress\CryptoPayLite\Models;
 
 use BeycanPress\WPModel\AbstractModel;
+use BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
 /**
  * General transaction table model
  */
 abstract class AbstractTransaction extends AbstractModel
 {
+    use Helpers;
+
     /**
      * @param string $tableName
      */
@@ -108,6 +111,39 @@ abstract class AbstractTransaction extends AbstractModel
                 ORDER BY id DESC
             ")) ?? 0
         ];
+    }
+
+    /**
+     * @param string $hash
+     * @param string $status
+     * @return bool|null
+     */
+    public function updateStatusByHash(string $hash, string $status) : ?bool
+    {
+        return $this->update([
+            'status' => $status,
+            'updatedAt' => date('Y-m-d H:i:s', $this->getUTCTime()->getTimestamp())
+        ], [
+            'hash' => $hash
+        ]);
+    }
+
+    /**
+     * @param string $hash
+     * @return bool|null
+     */
+    public function updateStatusToVerifiedByHash(string $hash) : ?bool
+    {
+        return $this->updateStatusByHash($hash, 'verified');
+    }
+
+    /**
+     * @param string $hash
+     * @return bool|null
+     */
+    public function updateStatusToFailedByHash(string $hash) : ?bool
+    {
+        return $this->updateStatusByHash($hash, 'failed');
     }
 
     /**
