@@ -22,7 +22,6 @@ class Services
 
     public static function registerAddon(string $addon) : void
     {
-        var_dump(self::$addons);
         if (in_array($addon, self::$addons)) {
             throw new \Exception('This add-on is already registered, please choose another name!');
         }
