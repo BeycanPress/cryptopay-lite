@@ -4,8 +4,8 @@ Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurren
 Requires at least: 5.0
 Tested up to: 6.2.2
 Requires PHP: 7.4
-Stable Tag: 1.2.5
-Version: 1.2.5
+Stable Tag: 1.2.6
+Version: 1.2.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -149,6 +149,9 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.2.6 =
+* Improved: For add-ons
 
 = 1.2.5 =
 * Updated: .pot language file
