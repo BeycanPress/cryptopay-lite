@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CryptoPay Lite\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-05 06:55+0000\n"
+"POT-Creation-Date: 2023-07-10 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Bitcoin payments"
 msgstr ""
 
-#: app/WooCommerce/Register.php:55
+#: app/WooCommerce/Register.php:57
 msgid "Blockchain network"
 msgstr ""
 
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: app/Api.php:209 app/Api.php:260 app/Api.php:291
+#: app/Api.php:205 app/Api.php:262
 msgid "Model not found!"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: app/Services.php:83
+#: app/Services.php:81
 msgid "No network is active, please activate at least one network!"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Order ID:"
 msgstr ""
 
-#: app/WooCommerce/Register.php:29
+#: app/WooCommerce/Register.php:31
 msgid "Order transactions"
 msgstr ""
 
@@ -288,11 +288,11 @@ msgstr ""
 msgid "Payment complete order status"
 msgstr ""
 
-#: app/Api.php:246
+#: app/Api.php:245
 msgid "Payment completed successfully"
 msgstr ""
 
-#: app/WooCommerce/Register.php:65
+#: app/WooCommerce/Register.php:67
 msgid "Payment currency"
 msgstr ""
 
@@ -304,15 +304,15 @@ msgstr ""
 msgid "Payment is awaited."
 msgstr ""
 
-#: app/Api.php:253
+#: app/Api.php:255
 msgid "Payment not verified via Blockchain"
 msgstr ""
 
-#: app/WooCommerce/Register.php:85
+#: app/WooCommerce/Register.php:87
 msgid "Payment not verified via Blockchain!"
 msgstr ""
 
-#: app/WooCommerce/Register.php:70
+#: app/WooCommerce/Register.php:72
 msgid "Payment price"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: app/Api.php:183 app/Api.php:222
+#: app/Api.php:179 app/Api.php:218
 msgid "Please enter a valid data."
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: app/Api.php:240
+#: app/Api.php:236
 msgid "Redirect links cannot finded!"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: app/Pages/TransactionPage.php:87
+#: app/Pages/TransactionPage.php:89
 msgid "Successfully deleted!"
 msgstr ""
 
@@ -416,7 +416,7 @@ msgid ""
 " MetaMask, Trust Wallet, Binance Wallet )"
 msgstr ""
 
-#: app/WooCommerce/Register.php:43
+#: app/WooCommerce/Register.php:45
 msgid "The relevant order was not found!"
 msgstr ""
 
@@ -430,11 +430,11 @@ msgid ""
 "completing the relevant process."
 msgstr ""
 
-#: app/Api.php:157 app/Api.php:273 app/Lang.php:37
+#: app/Api.php:153 app/Api.php:275 app/Lang.php:37
 msgid "There was a problem converting currency!"
 msgstr ""
 
-#: app/Api.php:161
+#: app/Api.php:157
 msgid "There was a problem getting wallet address!"
 msgstr ""
 
@@ -461,7 +461,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: app/Api.php:188
+#: app/Api.php:184
 msgid "Transaction already exists!"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Transaction create fail!"
 msgstr ""
 
-#: app/WooCommerce/Register.php:60
+#: app/WooCommerce/Register.php:62
 msgid "Transaction hash"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Transaction list"
 msgstr ""
 
-#: app/Api.php:226
+#: app/Api.php:222
 msgid "Transaction record not found!"
 msgstr ""
 
@@ -582,11 +582,11 @@ msgstr ""
 msgid "You can pay with supported networks and cryptocurrencies."
 msgstr ""
 
-#: app/WooCommerce/Gateway.php:98 app/WooCommerce/Register.php:78
+#: app/WooCommerce/Gateway.php:98 app/WooCommerce/Register.php:80
 msgid "Your order is complete."
 msgstr ""
 
-#: app/WooCommerce/Gateway.php:100 app/WooCommerce/Register.php:80
+#: app/WooCommerce/Gateway.php:100 app/WooCommerce/Register.php:82
 msgid "Your order is processing."
 msgstr ""
 
