@@ -1,19 +1,20 @@
-=== Bitcoin, Ethereum cryptocurrency payments gateway - WordPress & WooCommerce ===
-Contributors: BeycanPress
-Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payments, Gateway, WordPress, WooCommerce
+=== Bitcoin, Ethereum cryptocurrency payment gateway - WordPress & WooCommerce ===
+Contributors: BeycanPress LLC
+Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payment, Gateway, WordPress, WooCommerce
 Requires at least: 5.0
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires PHP: 7.4
-Stable Tag: 1.2.6
-Version: 1.2.6
+Stable Tag: 1.3.0
+Version: 1.3.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-Bitcoin, Ethereum cryptocurrency payments gateway, With CryptoPay, you can receive payments on your WordPress sites with many Blockchain networks, especially WooCommerce, and the currencies (tokens) under these networks. You can also integrate it with other plugins thanks to the API. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
+Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress, With CryptoPay, you can receive payments on your WordPress sites with many Blockchain networks, especially WooCommerce, and the currencies (tokens) under these networks. You can also integrate it with other plugins thanks to the API. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
 
-**Review with video**
+
+**WooCommerce cryptocurrency payment gateway review with video**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **What advantages does CryptoPay provide you?**
@@ -27,7 +28,7 @@ As you know, virtual POS and many other payment methods deduct commission from y
 * 1-2 business days and no weekend nonsense
 * The money is in your account and in use on the same day 
 
-Are you ready to speed up the process of receiving cryptocurrency payments on WordPress with CryptoPay?
+Are you ready to speed up the process of receiving WooCommerce crypto payments on WordPress with CryptoPay?
 
 **Comparison with other services:**
 
@@ -149,6 +150,13 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.3.0 =
+* Added: All supported wallets are shown and can connect to detected wallets, while undetected ones redirect to download address.
+* Added: On mobile devices, wallets with mobile application are listed and when the wallet is clicked, the application redirects to the dapp browser.
+* Added: When changing the currency, the "..." dot is displayed in the price section.
+* Fixed: Redirects url's hook error.
+* Fixed: Very high gas recommendation for token transfers.
 
 = 1.2.6 =
 * Improved: For add-ons

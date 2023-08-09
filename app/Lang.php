@@ -39,6 +39,9 @@ class Lang
             "notFoundAnyWallet" => esc_html__('No working wallets were found on this network. Please make sure you have a {networkName} wallet.', 'cryptopay_lite'),
             "alreadyProcessing" => esc_html__('There is currently a process on the wallet. Please try again after completing the relevant process.', 'cryptopay_lite'),
             "wallet-not-found" => esc_html__('Wallet not found!', 'cryptopay_lite'),
+            "detected" => esc_html__('Detected', 'cryptopay'),
+            "download" => esc_html__('Download', 'cryptopay'),
+            "openInApp" => esc_html__('Open In App', 'cryptopay'),
         ];
     }
 
