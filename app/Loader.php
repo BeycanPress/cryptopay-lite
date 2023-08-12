@@ -2,8 +2,6 @@
 
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\Http\Client;
-
 class Loader extends PluginHero\Plugin
 {
     public function __construct($pluginFile)
@@ -13,7 +11,7 @@ class Loader extends PluginHero\Plugin
             'textDomain' => 'cryptopay_lite',
             'pluginKey' => 'cryptopay_lite',
             'settingKey' => 'cryptopay_lite_settings',
-            'pluginVersion' => '1.2.6',
+            'pluginVersion' => '1.3.0',
         ]);
         
         $this->feedback();

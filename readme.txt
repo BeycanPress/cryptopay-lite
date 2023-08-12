@@ -1,6 +1,6 @@
-=== Bitcoin, Ethereum cryptocurrency payment gateway - WordPress & WooCommerce ===
-Contributors: BeycanPress LLC
-Tags: Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, Cryptocurrency, Payment, Gateway, WordPress, WooCommerce
+=== WordPress & WooCommerce Cryptocurrency Payment Gateway - CryptoPay ===
+Contributors: BeycanPress
+Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, 
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.4
@@ -11,10 +11,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress, With CryptoPay, you can receive payments on your WordPress sites with many Blockchain networks, especially WooCommerce, and the currencies (tokens) under these networks. You can also integrate it with other plugins thanks to the API. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
+WordPress & WooCommerce Cryptocurrency Payment Gateway - CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
 
 
-**WooCommerce cryptocurrency payment gateway review with video**
+**Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress review with video**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **What advantages does CryptoPay provide you?**
