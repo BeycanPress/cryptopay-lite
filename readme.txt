@@ -1,6 +1,6 @@
-=== WordPress & WooCommerce Cryptocurrency Payment Gateway - CryptoPay ===
+=== MetaMask & WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
 Contributors: BeycanPress
-Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, 
+Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, MetaMask, TrustWallet, WalletConnect, Phantom, BTC, ETH, BNB, SOL, TRX
 Requires at least: 5.0
 Tested up to: 6.3.1
 Requires PHP: 7.4
@@ -9,11 +9,13 @@ Version: 1.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
+MetaMask & WooCommerce cryptocurrency payment gateway for WordPress. Accept crypto payments Bitcoin, Ethereum, Solana, USDT, BNB, BUSD, TRX, SOL, BTC, ETH
+
 == Description ==
 
-### WooCommerce Cryptocurrency Payment Gateway
+### MetaMask & WooCommerce Cryptocurrency Payment Gateway
 
-WordPress & WooCommerce Cryptocurrency Payment Gateway - CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
+MetaMask & WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
 
 
 **Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress review with video**
@@ -110,8 +112,6 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Dark theme mode is available for your dark themes.
 * With Loco Translate, you can easily translate into any language you want.
 * You can easily move your settings with the backup system.
-
-Bitcoin, Ethereum, Binance, Solana, Tron, Avalanche, Polygon, MetaMask, TrustWallet, WalletConnect, Phantom Cryptocurrency payments gateway plugin for WordPress & WooCommerce, cryptocurrency wordpress, cryptocurrency woocommerce, cryptocurrency payments, cryptocurrency payments gateway, cryptocurrency payments for woocommerce, cryptocurrency payments for wordpress, bitcoin payment for wordpress, woocommerce crypto payments, wordpress crypto payments, wordPress cryptocurrency payment plugin, woocommerce cryptocurrency payment gateway, cryptocurrency payment gateway for woocommerce, crypto payments woocommerce, accept cryptocurrency payments
 
 = Privacy notices =
 
