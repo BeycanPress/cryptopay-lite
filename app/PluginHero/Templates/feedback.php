@@ -31,11 +31,6 @@
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_dont_like_share_info">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_dont_like_share_info" value="I don't like to share my information with you"> I don't like to share my information with you
-                </label>
-            </li>
-            <li>
                 <label for="<?php echo $pluginKey; ?>_temporary_deactivation">
                     <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu"> It's a temporary deactivation - I'm troubleshooting an issue
                 </label>
@@ -56,72 +51,92 @@
 <script>
     (($) => {
         $(document).ready(() => {
+
+            let pluginKey = '<?php echo $pluginKey; ?>';
+
             var deactivationUrl = '';
             window.onload = function(){
                 $(document).on('click', '#deactivate-cryptopay-wc-lite', function(e){
                     e.preventDefault()
                     deactivationUrl =  $(this).attr('href');
-                    $('#<?php echo $pluginKey; ?>-feedback-modal').css('display', 'flex');
+                    $('#'+pluginKey+'-feedback-modal').css('display', 'flex');
                 });
             }
 
-            $(document).on('click', '.<?php echo $pluginKey; ?>-feedback-button-deactivate', function(e){
+            $(document).on('click', '.'+pluginKey+'-feedback-button-cancel', function(e){
+                e.preventDefault();
+                $('#'+pluginKey+'-feedback-modal').css('display', 'none');
+            });
+
+            let exlcludedForReasonBox = [
+                pluginKey+'_temporary_deactivation',
+                pluginKey+'_premium_version',
+            ];
+
+            $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e){
                 try {
                     e.preventDefault();
-                    var reason = $('.<?php echo $pluginKey; ?>_deactivation_reason:checked').val();
-                    var detail = $('#<?php echo $pluginKey; ?>_deactivation_reason_detail').val();
+                    var reason = $('.'+pluginKey+'_deactivation_reason:checked').val();
+                    var detail = $('#'+pluginKey+'_deactivation_reason_detail').val();
 
-                    if (!reason || !detail) {
-                        alert('Please select or enter a reason!');
+                    if (!reason) {
+                        alert('Please select a reason!');
                         return false;
                     }
 
-                    reason = reason + ": " + detail;
+                    if (!detail && !exlcludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
+                        alert('Please provide more information!');
+                        return false;
+                    } else {
+                        
+                    }
+
+                    if (detail) {
+                        reason = reason + ": " + detail;
+                    }
 
                     $.ajax({
                         url: "<?php echo home_url('wp-json/' . $pluginKey . '-deactivation/deactivate'); ?>",
                         type: 'POST',
                         data: {
-                            reason: reason,
+                            reason,
+                            pluginKey,
                             email: '<?php echo $email; ?>',
-                            pluginKey: '<?php echo $pluginKey; ?>',
                             pluginVersion: '<?php echo $pluginVersion; ?>',
                             siteUrl: '<?php echo $siteUrl; ?>',
                             siteName: '<?php echo $siteName; ?>',
                         },
                         beforeSend: function() {
-                            $('#<?php echo $pluginKey; ?>-feedback-modal-loading').show();
-                            $('#<?php echo $pluginKey; ?>-feedback-modal-question').hide();
-                            $('#<?php echo $pluginKey; ?>-feedback-modal-body').hide();
-                            $('#<?php echo $pluginKey; ?>-feedback-modal-footer').hide();
+                            $('#'+pluginKey+'-feedback-modal-loading').show();
+                            $('#'+pluginKey+'-feedback-modal-question').hide();
+                            $('#'+pluginKey+'-feedback-modal-body').hide();
+                            $('#'+pluginKey+'-feedback-modal-footer').hide();
                         },
                         success: function() {
-                            $('#<?php echo $pluginKey; ?>-feedback-modal').css('display', 'none');
+                            $('#'+pluginKey+'-feedback-modal').css('display', 'none');
                             window.location.href = deactivationUrl;
                         },
                         error: function(error) {
-                            $('#<?php echo $pluginKey; ?>-feedback-modal').css('display', 'none');
+                            $('#'+pluginKey+'-feedback-modal').css('display', 'none');
                             window.location.href = deactivationUrl;
                         }
                     });
                 } catch (error) {}
             });
-
-            $(document).on('click', '.<?php echo $pluginKey; ?>-feedback-button-cancel', function(e){
-                e.preventDefault();
-                $('#<?php echo $pluginKey; ?>-feedback-modal').css('display', 'none');
-            });
-
-            $(document).on('change', '.<?php echo $pluginKey; ?>_deactivation_reason', function(e){
+            
+            $(document).on('change', '.'+pluginKey+'_deactivation_reason', function(e) {
                 e.preventDefault()
-                var value = $(this).attr('id');
+                if (exlcludedForReasonBox.includes($(this).attr('id'))) {
+                    $('#'+pluginKey+'-feedback-modal-reason-detail').remove();
+                    return;
+                }
                 let html = `
-                    <div class="bp-feedback-modal-reason-input" id="<?php echo $pluginKey; ?>-feedback-modal-reason-detail">
+                    <div class="bp-feedback-modal-reason-input" id="${pluginKey}-feedback-modal-reason-detail">
                         <span class="message error-message">Can you provide more information?</span>
-                        <input type="text" id="<?php echo $pluginKey; ?>_deactivation_reason_detail" name="<?php echo $pluginKey; ?>_deactivation_reason_detail" maxlength="128" placeholder="">
+                        <input type="text" id="${pluginKey}_deactivation_reason_detail" name="${pluginKey}_deactivation_reason_detail" maxlength="128" placeholder="">
                     </div>`;
 
-                $('#<?php echo $pluginKey; ?>-feedback-modal-reason-detail').remove();
+                $('#'+pluginKey+'-feedback-modal-reason-detail').remove();
 
                 $(this).parent().parent().append(html);
             });

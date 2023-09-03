@@ -2,14 +2,16 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, 
 Requires at least: 5.0
-Tested up to: 6.3
+Tested up to: 6.3.1
 Requires PHP: 7.4
-Stable Tag: 1.3.0
-Version: 1.3.0
+Stable Tag: 1.5.0
+Version: 1.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
+
+### WooCommerce Cryptocurrency Payment Gateway
 
 WordPress & WooCommerce Cryptocurrency Payment Gateway - CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
 
@@ -150,6 +152,26 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.5.0 =
+* Added: The feature of appearing at the top of the detected wallets
+* Added: Network switching feature after selecting network
+* Added: Arbitrum Goerli testnet support
+* Added: EVM Based networks (Arbitrum One, Optimism) that come by default
+* Added: When selecting the network, if there is no supported wallet and qr payments are supported, qr payments are automatically selected. Otherwise, it gives a warning
+* Added: If there is only one wallet, the Pay now text is updated to Pay with {walletName} and a direct connection is established
+* Added: ENS domain support for Ethereum network
+* Added: Price update feature at regular intervals after selecting the network and cryptocurrency
+* Added: Custom image choosing for EVM Based networks (Bacuse networks like Arbitrum and Optimism show Ethereum icon due to ETH nativecoin)
+* Added: Phantom wallet support for Ethereum networks (Currently only supports mainnet)
+* Added: Feedback area to get users' opinions and improve our product better
+* Improved: The version system has been brought to the Websocket system of payment with QR. This way, you won't be stuck with any version-related incompatibilities
+* Updated: .pot Language file
+* Fixed: an issue where the WooCommerce order view page redirects to the transaction page
+* Fixed: Native Coin payments not working in WalletConnect with Trust Wallet
+* Fixed: No unsupported network warning in WalletConnect
+* Fixed: An issue where you can't add networks without adding currency in EVM Based networks
+* Fixed: QR code overflowing on mobile devices
 
 = 1.3.0 =
 * Added: All supported wallets are shown and can connect to detected wallets, while undetected ones redirect to download address.

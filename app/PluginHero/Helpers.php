@@ -7,8 +7,8 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
  */
 trait Helpers
 {   
-    private $feedbackUrl = 'https://beycanpress.com/wp-json/bp-api/active-plugins';
-
+    private $bpApiUrl = 'https://beycanpress.com/wp-json/bp-api/';
+    
     /**
      * @param string $property
      * @return mixed
@@ -17,18 +17,6 @@ trait Helpers
     {
         if (is_null(Plugin::$properties)) return null;
         return isset(Plugin::$properties->$property) ? Plugin::$properties->$property : null;
-    }
-
-    /**
-     * @param string $property
-     * @return mixed
-     */
-    public function __call(string $name , array $arguments)
-    {
-        if (isset(Plugin::$properties->$name)) {
-            $closure = Plugin::$properties->$name;
-            return $closure(...$arguments);
-        }
     }
 
     /**
@@ -62,6 +50,37 @@ trait Helpers
             }
         } else {
             Plugin::$properties->$property = $value;
+        }
+    }
+
+    /**
+     * @param string $name
+     * @param \Closure $closure
+     * @return void
+     */
+    public function addFunc(string $name, \Closure $closure)
+    {
+        if (!isset(Plugin::$properties->funcs)) {
+            Plugin::$properties->funcs = (object) [];
+        }
+
+        if (!isset(Plugin::$properties->funcs->$name)) {
+            Plugin::$properties->funcs->$name = $closure;
+        }
+    }
+
+    /**
+     * @param string $name
+     * @param mixed ...$args
+     * @return mixed
+     */
+    public function callFunc(string $name, ...$args)
+    {
+        if (isset(Plugin::$properties->funcs->$name)) {
+            $closure = Plugin::$properties->funcs->$name;
+            return $closure(...$args);
+        } else {
+            throw new \Exception('Function not found');
         }
     }
 
@@ -158,6 +177,20 @@ trait Helpers
         if (is_null($setting)) return Plugin::$settings;
 
         return isset(Plugin::$settings[$setting]) ? Plugin::$settings[$setting] : null;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return mixed
+     */
+    public function updateSetting(string $key, $value)
+    {
+        if (is_null(Plugin::$settings)) Plugin::$settings = get_option($this->settingKey); 
+
+        Plugin::$settings[$key] = $value;
+
+        update_option($this->settingKey, Plugin::$settings);
     }
 
     /**
@@ -269,9 +302,9 @@ trait Helpers
      */
     public function checkNonceField(?string $externalKey = null) : bool
     {
-        $key = $this->pluginKey . '_nonce' . $externalKey;
         if (!isset($_POST['nonce'])) return false;
-        return @wp_verify_nonce($_POST['nonce'], $key) ? true : false;
+        $key = $this->pluginKey . '_nonce' . $externalKey;
+        return @wp_verify_nonce(sanitize_text_field($_POST['nonce']), $key) ? true : false;
     }
 
     /**
@@ -280,7 +313,7 @@ trait Helpers
     public function getCurrentUrl() : string
     {
         $siteURL = explode('/', get_site_url());
-        $requestURL = explode('/', $_SERVER['REQUEST_URI']);
+        $requestURL = explode('/', esc_url_raw($_SERVER['REQUEST_URI']));
         $currentURL = array_unique(array_merge($siteURL, $requestURL));
         return implode('/', $currentURL);
     }
@@ -300,14 +333,24 @@ trait Helpers
     {
         return (new \DateTime())->setTimezone(new \DateTimeZone('UTC'));
     }
-
+    /**
+     * @param string $url
+     * @return void
+     */
+    public function redirect(string $url) : void
+    {
+        wp_redirect($url);
+        exit();
+    }
+    
     /**
      * @param string $url
      * @return void
      */
     protected function pageRedirect(string $url) : void
     {
-        die("<script>window.location.href = '".$url."'</script>");
+        echo "<script>window.location.href = '".$url."'</script>";
+        die();
     }
 
     /**
@@ -317,7 +360,8 @@ trait Helpers
     public function adminRedirect(string $url) : void
     {
         add_action('admin_init', function() use ($url) {
-			die(wp_redirect($url));
+			wp_redirect($url);
+            exit();
 		});
     }
 
@@ -328,7 +372,8 @@ trait Helpers
     public function templateRedirect(string $url) : void
     {
         add_action('template_redirect', function() use ($url) {
-			die(wp_redirect($url));
+            wp_redirect($url);
+			exit();
 		});
     }
 
@@ -678,11 +723,13 @@ trait Helpers
     }
 
     /**
-     * @param string $address
-     * @return string
+     * @param string|null $address
+     * @return string|null
      */
-    public function parseDomain(string $address) : string
+    public function parseDomain(?string $address) : ?string
     { 
+		if (!$address) return $address;
+		
         $parseUrl = parse_url(trim($address)); 
         if (isset($parseUrl['host'])) {
             return trim($parseUrl['host']);
@@ -691,35 +738,55 @@ trait Helpers
             return array_shift($domain);
         }
     } 
-
+    
     /**
-     * @param string $pluginFile
-     * @param array $classAndFunc
-     * @return void
+     * @param string $domain
+     * @return boolean
      */
-    public function registerActivation(string $pluginFile, array $classAndFunc) : void
-    {
-        register_activation_hook($pluginFile, $classAndFunc);
+    public function isValidDomain(string $domain) : bool {
+        if (!preg_match('/^[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})+$/', $domain)) {
+            return false;
+        }
+    
+        return true;
     }
 
     /**
-     * @param string $pluginFile
-     * @param array $classAndFunc
+     * @param mixed $closureOrMethodName
      * @return void
      */
-    public function registerDeactivation(string $pluginFile, array $classAndFunc) : void
+    public function registerActivation($closureOrMethodName) : void
     {
-        register_deactivation_hook($pluginFile, $classAndFunc);
+        register_activation_hook($this->pluginFile, $closureOrMethodName);
     }
 
     /**
-     * @param string $pluginFile
-     * @param array $classAndFunc
+     * @param mixed $closureOrMethodName
      * @return void
      */
-    public function registerUninstall(string $pluginFile, array $classAndFunc) : void
+    public function registerDeactivation($closureOrMethodName) : void
     {
-        register_uninstall_hook($pluginFile, $classAndFunc);
+        register_deactivation_hook($this->pluginFile, $closureOrMethodName);
+    }
+
+    /**
+     * @param mixed $closureOrMethodName
+     * @return void
+     */
+    public function registerUninstall($closureOrMethodName) : void
+    {
+        register_uninstall_hook($this->pluginFile, $closureOrMethodName);
+    }
+
+    /**
+     * @param string $field
+     * @param array $value
+     * @return object|null
+     */
+    public function getUserBy(string $field, $value) : ?object
+    {
+        global $wpdb;
+        return $wpdb->get_row("SELECT * FROM $wpdb->users WHERE $field = '$value'");
     }
 
     /**
@@ -740,14 +807,55 @@ trait Helpers
     }
 
     /**
+     * @return array
+     */
+    public function getSiteInfos() : array
+    {
+        return [
+            'email' => $this->getAdminEmail(),
+            'pluginKey' => $this->pluginKey,
+            'pluginVersion' => $this->pluginVersion,
+            'siteUrl' => get_site_url(),
+            'siteName' => get_bloginfo('name'),
+        ];
+    }
+
+    /**
+     * @param bool $form
+     * 
      * @return void
      */
-    public function feedback() : void
+    public function feedback(bool $form = true) : void
     {
-        add_action('admin_footer', [$this, 'feedbackActivation']);
+        $this->registerActivation([$this, '_sendActivationInfo']);
+
+        if ($form) {
+            global $pagenow;
+            if ($pagenow === 'plugins.php') {
+                add_action('admin_footer', function() {
+                    echo $this->getTemplate('feedback', $this->getSiteInfos());
+                });
+            }
+
+            $this->sendDeactivationInfoApi();
+        } else {
+            $this->registerDeactivation(function() {
+                $this->_sendDeactivationInfo([
+                    'reason' => 'Without feedback form',
+                    'email' => $this->getAdminEmail(),
+                ]);
+            });
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function sendDeactivationInfoApi() : void
+    {
         add_action('rest_api_init', function () {
             register_rest_route($this->pluginKey . '-deactivation', 'deactivate', [
-                'callback' => [$this, 'feedbackDeactivation'],
+                'callback' => [$this, '_sendDeactivationInfoApi'],
                 'methods' => ['POST'],
                 'permission_callback' => '__return_true'
             ]);
@@ -757,73 +865,116 @@ trait Helpers
     /**
      * @return void
      */
-    public function feedbackActivation() : void
-    {
-        global $pagenow;
-        if ($pagenow === 'plugins.php') {
-            echo $this->getTemplate('feedback', [
-                'pluginKey' => $this->pluginKey,
-                'pluginVersion' => $this->pluginVersion,
-                'siteUrl' => get_site_url(),
-                'siteName' => get_option('blogname'),
-                'email' => $this->getAdminEmail(),
-            ]);
-        }
-
-        if (get_option($this->pluginKey . '_feedback_activation') == '1') {
-            return;
-        }
-
-        update_option($this->pluginKey . '_feedback_activation', '1');
-
-        if (function_exists('curl_version')) {
-            try {
-                $curl = curl_init($this->feedbackUrl);
-
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, [
-                    'process' => 'activation',
-                    'email' => self::$instance->getAdminEmail(),
-                    'pluginKey' => self::$instance->pluginKey,
-                    'pluginVersion' => self::$instance->pluginVersion,
-                    'siteUrl' => get_site_url(),
-                    'siteName' => get_bloginfo('name'),
-                ]);
-
-                @curl_exec($curl);
-                @curl_close($curl);
-            } catch (\Exception $th) {}
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function feedbackDeactivation() : void
+    public function _sendDeactivationInfoApi() : void
     {
         delete_option($this->pluginKey . '_feedback_activation');
         if (function_exists('curl_version')) {
             try {
-                $curl = curl_init($this->feedbackUrl);
-
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, [
-                    'reason' => $_POST['reason'] ?? null,
-                    'pluginKey' => $_POST['pluginKey'] ?? null,
-                    'pluginVersion' => $_POST['pluginVersion'] ?? null,
-                    'siteUrl' => $_POST['siteUrl'] ?? null,
-                    'siteName' => $_POST['siteName'] ?? null,
-                    'email' => $_POST['email'] ?? null,
-                    'process' => 'deactivation',
+                $this->_sendDeactivationInfo([
+                    'reason' =>  isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : null,
+                    'email' => isset($_POST['email']) ? sanitize_text_field($_POST['email']) : null,
                 ]);
-
-                @curl_exec($curl);
-                @curl_close($curl);
             } catch (\Exception $e) {
                 wp_send_json_success($e->getMessage());
+                return;
             }
         }
 
         wp_send_json_success();
     }
+
+    /**
+     * @param string $message
+     * 
+     * @return bool
+     */
+    public function _sendFeedbackMessage(string $message) : bool
+    {
+        if (function_exists('curl_version')) {
+            try {
+                $curl = curl_init($this->bpApiUrl . 'plugin-feedbacks');
+
+                $data = array_merge([
+                    'message' => 'message',
+                ], $this->getSiteInfos());
+
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+                curl_exec($curl);
+                curl_close($curl);
+
+                return true;
+            } catch (\Exception $th) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function _sendActivationInfo() : bool
+    {
+        if (function_exists('curl_version')) {
+            try {
+                $curl = curl_init($this->bpApiUrl . 'active-plugins');
+
+                $data = array_merge([
+                    'process' => 'activation',
+                ], $this->getSiteInfos());
+
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+                curl_exec($curl);
+                curl_close($curl);
+
+                return true;
+            } catch (\Exception $th) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array $params
+     * 
+     * @return bool
+     */
+    public function _sendDeactivationInfo(array $params = []) : bool
+    {
+        if (function_exists('curl_version')) {
+            try {
+                $curl = curl_init($this->bpApiUrl . 'active-plugins');
+
+                $data = array_merge([
+                    'process' => 'deactivation',
+                ], array_merge(
+                    $this->getSiteInfos(), 
+                    $params
+                ));
+
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+                curl_exec($curl);
+                curl_close($curl);
+
+                return true;
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+    
 }
