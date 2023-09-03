@@ -11,7 +11,7 @@ class Loader extends PluginHero\Plugin
             'textDomain' => 'cryptopay_lite',
             'pluginKey' => 'cryptopay_lite',
             'settingKey' => 'cryptopay_lite_settings',
-            'pluginVersion' => '1.3.0',
+            'pluginVersion' => '1.5.0',
         ]);
         
         $this->feedback();

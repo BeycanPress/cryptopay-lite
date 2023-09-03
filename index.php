@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     1.3.0
+ * Version:     1.5.0
  * Plugin URI:  https://beycanpress.com/cryptopay
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress
