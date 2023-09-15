@@ -71,6 +71,9 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Pro Version:**
 
+* 1 Domain license
+* 1 Year of updates
+* 1 Year of support
 * All the features in the free package
 * Unlimited EVM-based network support
 * Unlimited coin payments support
@@ -81,10 +84,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Custom token support & prices support
 * Payment feature on the "Checkout" page
 * WalletConnect support
-* QR code support
-* 1 Domain license
-* 1 Year of updates
-* 1 Year of support
+* QR Code support
 * Ticket based support
 * Backend confirmation system
 * Dark and light theme option

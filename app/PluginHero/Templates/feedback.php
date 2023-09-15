@@ -1,49 +1,63 @@
-<div class="bp-feedback-modal" id="<?php echo $pluginKey; ?>-feedback-modal">
+<?php 
+    if ( ! defined( 'ABSPATH' ) ) exit;
+    $pattern = '/(?:plugins\\\\|plugins\/)(.*)/';
+    preg_match($pattern, $this->pluginFile, $matches);
+    $slug = str_replace('\\', '/', $matches[1]);
+    $slug = explode('/', $slug);
+?>
+
+<div class="bp-feedback-modal" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal">
     <div class="bp-feedback-modal-content">
         <div class="bp-feedback-modal-header">
             Quick Feedback
         </div>
-        <div class="bp-feedback-modal-loading" id="<?php echo $pluginKey; ?>-feedback-modal-loading">
+        <div class="bp-feedback-modal-loading" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-loading">
             Please wait... Your feedback is being sending...
         </div>
-        <div class="bp-feedback-modal-question" id="<?php echo $pluginKey; ?>-feedback-modal-question">
+        <div class="bp-feedback-modal-question" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-question">
             If you have a moment, please let us know why you are deactivating:
         </div>
-        <ul class="bp-feedback-modal-body" id="<?php echo $pluginKey; ?>-feedback-modal-body">
+        <ul class="bp-feedback-modal-body" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-body">
             <li>
-                <label for="<?php echo $pluginKey; ?>_not_working">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_not_working" value="The plugin didn't work"> The plugin didn't work
+                <label for="<?php echo esc_attr($pluginKey); ?>_not_working">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_not_working" value="The plugin didn't work"> The plugin didn't work
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_better_plugin">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_better_plugin" value="I found a better plugin"> I found a better plugin
+                <label for="<?php echo esc_attr($pluginKey); ?>_better_plugin">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_better_plugin" value="I found a better plugin"> I found a better plugin
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_insufficient_feature">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_insufficient_feature" value="Insufficient add-on feature"> Insufficient add-on feature
+                <label for="<?php echo esc_attr($pluginKey); ?>_insufficient_feature">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_insufficient_feature" value="Insufficient add-on feature"> Insufficient add-on feature
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_premium_version">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_premium_version" value="I will buy the premium version"> I will buy the premium version
+                <label for="<?php echo esc_attr($pluginKey); ?>_premium_version">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_premium_version" value="I will buy the premium version"> I will buy the premium version
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_temporary_deactivation">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu"> It's a temporary deactivation - I'm troubleshooting an issue
+                <label for="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu"> It's a temporary deactivation - I'm troubleshooting an issue
                 </label>
             </li>
             <li>
-                <label for="<?php echo $pluginKey; ?>_other">
-                    <input type="radio" class="<?php echo $pluginKey; ?>_deactivation_reason" name="<?php echo $pluginKey; ?>_deactivation_reason" id="<?php echo $pluginKey; ?>_other" value="Other"> Other
+                <label for="<?php echo esc_attr($pluginKey); ?>_other">
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_other" value="Other"> Other
                 </label>
             </li>
         </ul>
-        <div class="bp-feedback-modal-footer" id="<?php echo $pluginKey; ?>-feedback-modal-footer"> 
-            <a href="#" class="button button-secondary <?php echo $pluginKey; ?>-feedback-button-deactivate">Deactivate</a>
-            <a href="#" class="button button-secondary <?php echo $pluginKey; ?>-feedback-button-cancel">Cancel</a>		
+        <div class="bp-feedback-modal-footer" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-footer"> 
+            <a class="button-primary" href="https://wordpress.org/support/plugin/<?php echo esc_url(basename(urlencode($this->pluginFile))); ?>/" target="_blank">
+				<span class="dashicons dashicons-external" style="margin-top:3px;"></span>
+				Go to support
+            </a>
+            <a href="#" class="button button-primary <?php echo $pluginKey; ?>-feedback-button-deactivate">Deactivate</a>
+            <a href="#" class="button button-secondary <?php echo esc_attr($pluginKey); ?>-feedback-button-cancel">Cancel</a>		
+
+            <a href="#" class="<?php echo esc_attr($pluginKey); ?>-feedback-skip" style="float: right;">I rather wouldn't say</a>
         </div>
     </div>
 </div>
@@ -52,11 +66,11 @@
     (($) => {
         $(document).ready(() => {
 
-            let pluginKey = '<?php echo $pluginKey; ?>';
+            let pluginKey = '<?php echo esc_js($pluginKey); ?>';
 
             var deactivationUrl = '';
             window.onload = function(){
-                $(document).on('click', '#deactivate-cryptopay-wc-lite', function(e){
+                $(document).on('click', 'tr[data-plugin="<?php echo esc_js($slug[0]) . '/' . esc_js($slug[1]); ?>"] .column-primary .deactivate a', function(e){
                     e.preventDefault()
                     deactivationUrl =  $(this).attr('href');
                     $('#'+pluginKey+'-feedback-modal').css('display', 'flex');
@@ -73,28 +87,8 @@
                 pluginKey+'_premium_version',
             ];
 
-            $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e){
+            function deactivateProcess(reason) {
                 try {
-                    e.preventDefault();
-                    var reason = $('.'+pluginKey+'_deactivation_reason:checked').val();
-                    var detail = $('#'+pluginKey+'_deactivation_reason_detail').val();
-
-                    if (!reason) {
-                        alert('Please select a reason!');
-                        return false;
-                    }
-
-                    if (!detail && !exlcludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
-                        alert('Please provide more information!');
-                        return false;
-                    } else {
-                        
-                    }
-
-                    if (detail) {
-                        reason = reason + ": " + detail;
-                    }
-
                     $.ajax({
                         url: "<?php echo home_url('wp-json/' . $pluginKey . '-deactivation/deactivate'); ?>",
                         type: 'POST',
@@ -122,6 +116,35 @@
                         }
                     });
                 } catch (error) {}
+            }
+            
+            $(document).on('click', '.'+pluginKey+'-feedback-skip', function(e){
+                e.preventDefault();
+                deactivateProcess("I rather wouldn't say");
+            });
+
+            $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e){
+                e.preventDefault();
+                var reason = $('.'+pluginKey+'_deactivation_reason:checked').val();
+                var detail = $('#'+pluginKey+'_deactivation_reason_detail').val();
+
+                if (!reason) {
+                    alert('Please select a reason!');
+                    return false;
+                }
+
+                if (!detail && !exlcludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
+                    alert('Please provide more information!');
+                    return false;
+                } else {
+                    
+                }
+
+                if (detail) {
+                    reason = reason + ": " + detail;
+                }
+
+                deactivateProcess(reason);
             });
             
             $(document).on('change', '.'+pluginKey+'_deactivation_reason', function(e) {
@@ -165,7 +188,7 @@
         margin: 15% auto;
         padding: 0;
         border: 1px solid #888;
-        width: 500px;
+        width: 650px;
         box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
         border-radius: 5px;
         box-sizing: border-box;
@@ -212,6 +235,14 @@
         background: #fbfbfb;
         padding: 15px 20px;
         position: relative;
-        text-align: right;
+        text-align: left;
+        position: relative;
+    }
+
+    .bp-feedback-modal-footer a:last-child {
+        position: relative;
+        right: 0;
+        top: 9px;
+        font-size: 12px;
     }
 </style>
