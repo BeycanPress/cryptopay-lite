@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereu
 Requires at least: 5.0
 Tested up to: 6.3.1
 Requires PHP: 7.4
-Stable Tag: 1.5.0
-Version: 1.5.0
+Stable Tag: 1.6.0
+Version: 1.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

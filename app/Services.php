@@ -2,9 +2,7 @@
 
 namespace BeycanPress\CryptoPayLite;
 
-use \MultipleChain\EvmBasedChains;
 use \BeycanPress\CryptoPayLite\Lang;
-use \BeycanPress\CurrencyConverter;
 use \BeycanPress\CryptoPayLite\Settings;
 use \MultipleChain\EvmChains\Provider;
 use \BeycanPress\CryptoPayLite\PluginHero\Hook;
@@ -81,6 +79,12 @@ class Services
             return esc_html__('No network is active, please activate at least one network!', 'cryptopay_lite');
         }
 
+        if (count($networks) == 1) {
+            $init = self::autoInitalize($addon, $data, $networks[0]);
+            if (is_string($init)) return $init;
+            $data['init'] = $init;
+        }
+
         $data = array_merge([
             'providers' => [],
             'callbacks' => [],
@@ -95,15 +99,49 @@ class Services
             'lang' => Hook::callFilter('lang', Lang::get()),
         ], $data);
 
-        Plugin::$instance->addScript('cryptopay/js/chunk-vendors.js');
-        Plugin::$instance->addScript('cryptopay/js/app.js');
-        Plugin::$instance->addStyle('cryptopay/css/chunk-vendors.css');
-        Plugin::$instance->addStyle('cryptopay/css/app.css');
+        Plugin::$instance->addScript('/cryptopay/js/chunk-vendors.js');
+        Plugin::$instance->addScript('/cryptopay/js/app.js');
+        Plugin::$instance->addStyle('/cryptopay/css/chunk-vendors.css');
+        Plugin::$instance->addStyle('/cryptopay/css/app.css');
         
-        $key = Plugin::$instance->addScript('js/main.js');
+        $key = Plugin::$instance->addScript('main.js');
         wp_localize_script($key, 'CryptoPayLite', $data);
 
         return Plugin::$instance->view('checkout', compact('autoInit'));
+    }
+
+    /**
+     * @param string $addon
+     * @param array $data
+     * @param array $network
+     * @return array|string
+     */
+    private static function autoInitalize(string $addon, array $data, array $network)
+    {
+        $network = json_decode(json_encode($network));
+        $paymentCurrency = $network->currencies[0];
+
+        $paymentAmount = self::calculatePaymentAmount(
+            $data['order']['currency'], 
+            (object) $paymentCurrency, 
+            $data['order']['amount']
+        );
+
+        if (is_null($paymentAmount)) {
+            return esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay');
+        }
+
+        if (!$receiver = Settings::get('evmBasedWalletAddress')) {
+            return esc_html__('There was a problem getting wallet address!', 'cryptopay_lite');
+        }
+
+        $receiver = Hook::callFilter('receiver_' . $addon, $receiver, $data);
+
+        return  [
+            'receiver' => $receiver,
+            'paymentAmount' => $paymentAmount,
+            'blockConfirmationCount' => 10,
+        ];
     }
 
 
@@ -124,20 +162,21 @@ class Services
      */
     private static function getMainnetNetworks() : array
     {
+        $ids = self::getNetworkIds();
+
         $wallets = [
             'metamask' => true,
             'binancewallet' => true,
             'trustwallet' => true
         ];
 
-        $prepareWallets = [];
-        return array_map(function(&$network) use ($wallets) {
+        return array_map(function($network) use ($wallets) {
     
             $id = intval($network['id']);
             
             $prepareWallets = $wallets;
 
-            if (isset($wallets['binancewallet']) && $id != 56) {
+            if (isset($wallets['binancewallet']) && !in_array($id, [56, 1])) {
                 unset($prepareWallets['binancewallet']);
             } 
 
@@ -147,7 +186,9 @@ class Services
             $network['currencies'] = self::getMainnetCurrencies($id);
             
             return $network;
-        }, array_values(EvmBasedChains::$mainnets));
+        }, array_values(array_filter(EvmBasedChains::$mainnets, function($network) use ($ids) {
+            return in_array($network['id'], $ids);
+        })));
     }
 
     /**
@@ -155,21 +196,21 @@ class Services
      */
     private static function getTestnetNetworks() : array
     {
-        
+        $ids = self::getNetworkIds();
+
         $wallets = [
             'metamask' => true,
             'binancewallet' => true,
             'trustwallet' => true
         ];
 
-        $prepareWallets = [];
         return array_map(function($network) use ($wallets) {
     
             $id = intval($network['id']);
             
             $prepareWallets = $wallets;
 
-            if (isset($wallets['binancewallet']) && $id != 97) {
+            if (isset($wallets['binancewallet']) && !in_array($id, [97])) {
                 unset($prepareWallets['binancewallet']);
             } 
 
@@ -179,7 +220,23 @@ class Services
             $network['currencies'] = self::getTestnetsCurrencies($id);
             
             return $network;
-        }, array_values(EvmBasedChains::$testnets));
+        }, array_values(array_filter(EvmBasedChains::$testnets, function($network) use ($ids) {
+            return in_array($network['mainnetId'], $ids);
+        })));
+    }
+
+    private static function getNetworkIds() : array
+    {
+        $ids = Settings::get('evmBasedNetworksx');
+        if (!$ids) {
+            $ids = [1, 56, 43114, 137, 250];
+        }
+
+        return array_map(function($id) {
+            return intval(str_replace('id_', '', $id));
+        }, array_keys(array_filter($ids, function($state) {
+            return boolval($state);
+        })));
     }
 
     /**
@@ -344,14 +401,13 @@ class Services
     }
 
     /**
-     * @param string $fiatCurrency
-     * @param object $cryptoCurrency
+     * @param string $orderCurrency
+     * @param object $paymentCurrency
      * @param float $amount
-     * @param object $network
      * @return float|null
      */
-    public static function calculatePaymentPrice(
-        string $fiatCurrency, object $cryptoCurrency, float $amount, object $network
+    public static function calculatePaymentAmount(
+        string $orderCurrency, object $paymentCurrency, float $amount
     ) : ?float
     {
         $stableCoins = [
@@ -363,8 +419,8 @@ class Services
             'TUSD'
         ];
 
-        $from = $fiatCurrency;
-        $to = $cryptoCurrency->symbol;
+        $from = $orderCurrency;
+        $to = $paymentCurrency->symbol;
 
         if (strtoupper($from) == 'USD' || strtoupper($to) == 'USD') {
             if (in_array(strtoupper($from), $stableCoins) || in_array(strtoupper($to), $stableCoins)) {
@@ -381,9 +437,8 @@ class Services
                 return null;
             }
         } catch (\Exception $e) {
-            $paymentPrice = null;
+            return null;
         }
-
     }
 
     /**

@@ -27,7 +27,7 @@ class Verifier
     public function verifyTransaction(object $transaction) : ?bool
     {
         $order = json_decode($transaction->order);
-        $amount = $order->paymentPrice;
+        $amount = $order->paymentAmount;
         $currency = $order->paymentCurrency;
 
         $confirmationCount = 10;

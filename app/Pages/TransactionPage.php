@@ -129,7 +129,7 @@ class TransactionPage extends Page
             'amount' => function($tx) {
                 $order = json_decode($tx->order);
                 $currency = $order->paymentCurrency;
-                $amount = Services::toString($order->paymentPrice, $currency->decimals);
+                $amount = Services::toString($order->paymentPrice ?? $order->paymentAmount, $currency->decimals);
                 return esc_html($amount . " " . $currency->symbol);
             },
             'status' => function($tx) {

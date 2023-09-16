@@ -70,7 +70,7 @@ class Register
             
                     $order->update_meta_data(
                         esc_html__('Payment price', 'cryptopay_lite'),
-                        Services::toString($data->order->paymentPrice, $data->order->paymentCurrency->decimals)
+                        Services::toString($order->paymentPrice ?? $order->paymentAmount, $data->order->paymentCurrency->decimals)
                     );
 
                     $order->save();

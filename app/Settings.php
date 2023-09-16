@@ -98,16 +98,48 @@ class Settings extends Setting
                     }
                 ),
                 array(
+                    'id'      => 'evmBasedNetworksx',
+                    'title'   => esc_html__('Accepted networks', 'cryptopay_lite'),
+                    'help'   => esc_html__('Specify the networks you want to accept payments from.', 'cryptopay_lite'),
+                    'type'    => 'fieldset',
+                    'fields' => array(
+                        array(
+                            'id'      => 'id_1',
+                            'title'   => esc_html('Ethereum'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ),
+                        array(
+                            'id'      => 'id_56',
+                            'title'   => esc_html('BNB Smart Chain'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ),
+                        array(
+                            'id'      => 'id_43114',
+                            'title'   => esc_html('Avalanche C-Chain'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ),
+                        array(
+                            'id'      => 'id_137',
+                            'title'   => esc_html('Polygon'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ),
+                        array(
+                            'id'      => 'id_250',
+                            'title'   => esc_html('Fantom'),
+                            'type'    => 'switcher',
+                            'default' => true
+                        ),
+                    )
+                ),
+                array(
                     'id'      => 'evmBasedWallets',
                     'title'   => esc_html__('Wallets', 'cryptopay_lite'),
                     'type'    => 'content',
                     'content' => $proMsg . esc_html__('Specify the wallets you want to accept payments from.', 'cryptopay_lite')
-                ),
-                array(
-                    'id'      => 'evmBasedNetworks',
-                    'title'   => esc_html__('Accepted networks', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg .  esc_html__('Add the blockchain networks and crtyptocurrencies you accept to receive payments.', 'cryptopay_lite')
                 ),
             ) 
         ));

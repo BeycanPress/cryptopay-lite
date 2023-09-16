@@ -32,11 +32,6 @@ class Api extends AbstractApi
     private $model;
 
     /**
-     * @var Verifier
-     */
-    private $verifier;
-
-    /**
      * @var string
      */
     private $hash;
@@ -51,21 +46,6 @@ class Api extends AbstractApi
      * @var object
      */
     private $network;
-
-    /**
-     * @var float
-     */
-    private $amount;
-
-    /**
-     * @var string
-     */
-    private $fiatCurrency;
-
-    /**
-     * @var object
-     */
-    private $cryptoCurrency;
 
     /**
      * @var object
@@ -96,9 +76,6 @@ class Api extends AbstractApi
             $this->hash = $this->request->getParam('hash');
             $this->order = $this->request->getParam('order');
             $this->network = $this->request->getParam('network');
-            $this->amount = $this->request->getParam('amount');
-            $this->fiatCurrency = $this->request->getParam('fiatCurrency');
-            $this->cryptoCurrency = $this->request->getParam('cryptoCurrency');
             $this->data = (object) [
                 'userId' => $this->userId,
                 'order' => $this->order,
@@ -145,11 +122,11 @@ class Api extends AbstractApi
         Hook::callAction('init_' . $this->addon, $this->data);
         Hook::callAction('check_order_' . $this->addon, $this->order);
 
-        $paymentPrice = Services::calculatePaymentPrice(
-            $this->fiatCurrency, $this->cryptoCurrency, $this->amount, $this->network
+        $paymentAmount = Services::calculatePaymentAmount(
+            $this->order->currency, $this->order->paymentCurrency, $this->order->amount
         );
 
-        if (is_null($paymentPrice)) {
+        if (is_null($paymentAmount)) {
             Response::error(esc_html__('There was a problem converting currency!', 'cryptopay_lite'), 'INIT101');
         }
 
@@ -161,7 +138,7 @@ class Api extends AbstractApi
 
         Response::success(null, [
             'receiver' => $receiver,
-            'paymentPrice' => $paymentPrice,
+            'paymentAmount' => $paymentAmount,
             'blockConfirmationCount' => 10,
         ]);
     }
@@ -202,7 +179,9 @@ class Api extends AbstractApi
             Response::success();
         }
 
-        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
+        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103', [
+            'redirect' => 'reload'
+        ]);
     }
 
     /**
@@ -259,7 +238,9 @@ class Api extends AbstractApi
             }
         }
 
-        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103');
+        Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103', [
+            'redirect' => 'reload'
+        ]);
     }
 
     /**
@@ -267,15 +248,15 @@ class Api extends AbstractApi
      */
     public function currencyConverter() : void
     {   
-        $paymentPrice = Services::calculatePaymentPrice(
-            $this->fiatCurrency, $this->cryptoCurrency, $this->amount, $this->network
+        $paymentAmount = Services::calculatePaymentAmount(
+            $this->order->currency, $this->order->paymentCurrency, $this->order->amount, $this->network
         );
 
-        if (is_null($paymentPrice)) {
+        if (is_null($paymentAmount)) {
             Response::error(esc_html__('There was a problem converting currency!', 'cryptopay_lite'), 'GNR101');
         }
 
-        Response::success(null, $paymentPrice);
+        Response::success(null, $paymentAmount);
     }
 
 }

@@ -1,6 +1,36 @@
 {
     "packages": [
         {
+            "name": "beycanpress/csf",
+            "version": "2.3.1",
+            "version_normalized": "2.3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeycanPress/csf.git",
+                "reference": "7f97b21df15b572dfd17186c4bc79bb4efd7f1d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/7f97b21df15b572dfd17186c4bc79bb4efd7f1d2",
+                "reference": "7f97b21df15b572dfd17186c4bc79bb4efd7f1d2",
+                "shasum": ""
+            },
+            "time": "2023-09-16T07:02:59+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "Codestar Framework composer package",
+            "homepage": "https://github.com/BeycanPress/csf",
+            "support": {
+                "issues": "https://github.com/BeycanPress/csf/issues",
+                "source": "https://github.com/BeycanPress/csf/tree/2.3.1"
+            },
+            "install-path": "../beycanpress/csf"
+        },
+        {
             "name": "beycanpress/http",
             "version": "0.1.3",
             "version_normalized": "0.1.3.0",
@@ -136,23 +166,23 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.7.0",
-            "version_normalized": "7.7.0.0",
+            "version": "7.8.0",
+            "version_normalized": "7.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5"
+                "reference": "1110f66a6530a40fe7aea0378fe608ee2b2248f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/fb7566caccf22d74d1ab270de3551f72a58399f5",
-                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/1110f66a6530a40fe7aea0378fe608ee2b2248f9",
+                "reference": "1110f66a6530a40fe7aea0378fe608ee2b2248f9",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5.3 || ^2.0",
-                "guzzlehttp/psr7": "^1.9.1 || ^2.4.5",
+                "guzzlehttp/promises": "^1.5.3 || ^2.0.1",
+                "guzzlehttp/psr7": "^1.9.1 || ^2.5.1",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -173,7 +203,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2023-05-21T14:04:53+00:00",
+            "time": "2023-08-27T10:20:53+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -245,7 +275,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.7.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.8.0"
             },
             "funding": [
                 {
@@ -265,17 +295,17 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "2.0.1",
+            "version_normalized": "2.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6"
+                "reference": "111166291a0f8130081195ac4556a5587d7f1b5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
-                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/111166291a0f8130081195ac4556a5587d7f1b5d",
+                "reference": "111166291a0f8130081195ac4556a5587d7f1b5d",
                 "shasum": ""
             },
             "require": {
@@ -285,7 +315,7 @@
                 "bamarni/composer-bin-plugin": "^1.8.1",
                 "phpunit/phpunit": "^8.5.29 || ^9.5.23"
             },
-            "time": "2023-05-21T13:50:22+00:00",
+            "time": "2023-08-03T15:11:55+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -331,7 +361,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.0"
+                "source": "https://github.com/guzzle/promises/tree/2.0.1"
             },
             "funding": [
                 {
@@ -351,17 +381,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.5.0",
-            "version_normalized": "2.5.0.0",
+            "version": "2.6.1",
+            "version_normalized": "2.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "b635f279edd83fc275f822a1188157ffea568ff6"
+                "reference": "be45764272e8873c72dbe3d2edcfdfcc3bc9f727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/b635f279edd83fc275f822a1188157ffea568ff6",
-                "reference": "b635f279edd83fc275f822a1188157ffea568ff6",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/be45764272e8873c72dbe3d2edcfdfcc3bc9f727",
+                "reference": "be45764272e8873c72dbe3d2edcfdfcc3bc9f727",
                 "shasum": ""
             },
             "require": {
@@ -382,7 +412,7 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2023-04-17T16:11:26+00:00",
+            "time": "2023-08-27T10:13:57+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -450,7 +480,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.5.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.6.1"
             },
             "funding": [
                 {
@@ -522,23 +552,23 @@
         },
         {
             "name": "multiplechain/evm-based-chains",
-            "version": "0.1.2",
-            "version_normalized": "0.1.2.0",
+            "version": "0.1.3",
+            "version_normalized": "0.1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-based-chains-php.git",
-                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68"
+                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
-                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
+                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/d00d6091ba828c851fe4a75e3f4eaa97af87c155",
+                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-06-22T14:24:41+00:00",
+            "time": "2023-08-10T10:29:47+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -554,35 +584,35 @@
             "homepage": "https://github.com/MultipleChain/evm-based-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-based-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.2"
+                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.3"
             },
             "install-path": "../multiplechain/evm-based-chains"
         },
         {
             "name": "multiplechain/evm-chains",
-            "version": "0.1.12",
-            "version_normalized": "0.1.12.0",
+            "version": "0.1.13",
+            "version_normalized": "0.1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-chains-php.git",
-                "reference": "eb1a372a0a04968c0b5355912cddc9e6a3c36ef1"
+                "reference": "80192d37931c2165ab674deb14f90835fbb77c82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/eb1a372a0a04968c0b5355912cddc9e6a3c36ef1",
-                "reference": "eb1a372a0a04968c0b5355912cddc9e6a3c36ef1",
+                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/80192d37931c2165ab674deb14f90835fbb77c82",
+                "reference": "80192d37931c2165ab674deb14f90835fbb77c82",
                 "shasum": ""
             },
             "require": {
                 "beycanpress/http": "^0.1.3",
                 "ext-bcmath": "*",
-                "multiplechain/evm-based-chains": "^0.1.2",
+                "multiplechain/evm-based-chains": "^0.1.3",
                 "multiplechain/utils": "^0.1.0",
                 "php": ">=7.4",
                 "web3p/ethereum-tx": "^0.4.3",
                 "web3p/web3.php": "^0.1.6"
             },
-            "time": "2023-06-23T05:11:47+00:00",
+            "time": "2023-08-10T10:50:16+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -598,7 +628,7 @@
             "homepage": "https://github.com/MultipleChain/evm-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.12"
+                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.13"
             },
             "install-path": "../multiplechain/evm-chains"
         },
@@ -644,17 +674,17 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.42",
-            "version_normalized": "2.0.42.0",
+            "version": "2.0.44",
+            "version_normalized": "2.0.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "665d289f59e646a259ebf13f29be7f6f54cab24b"
+                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/665d289f59e646a259ebf13f29be7f6f54cab24b",
-                "reference": "665d289f59e646a259ebf13f29be7f6f54cab24b",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/149f608243f8133c61926aae26ce67d2b22b37e5",
+                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5",
                 "shasum": ""
             },
             "require": {
@@ -672,7 +702,7 @@
                 "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
                 "ext-xml": "Install the XML extension to load XML formatted public keys."
             },
-            "time": "2023-03-06T12:45:53+00:00",
+            "time": "2023-06-13T08:41:47+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -737,7 +767,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.42"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.44"
             },
             "funding": [
                 {
@@ -1061,17 +1091,17 @@
         },
         {
             "name": "simplito/elliptic-php",
-            "version": "1.0.10",
-            "version_normalized": "1.0.10.0",
+            "version": "1.0.11",
+            "version_normalized": "1.0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplito/elliptic-php.git",
-                "reference": "a6228f480c729cf8efe2650a617c8500e981716d"
+                "reference": "d0957dd6461f19a5ceb94cf3a0a908d8a0485b40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplito/elliptic-php/zipball/a6228f480c729cf8efe2650a617c8500e981716d",
-                "reference": "a6228f480c729cf8efe2650a617c8500e981716d",
+                "url": "https://api.github.com/repos/simplito/elliptic-php/zipball/d0957dd6461f19a5ceb94cf3a0a908d8a0485b40",
+                "reference": "d0957dd6461f19a5ceb94cf3a0a908d8a0485b40",
                 "shasum": ""
             },
             "require": {
@@ -1082,7 +1112,7 @@
                 "phpbench/phpbench": "@dev",
                 "phpunit/phpunit": "*"
             },
-            "time": "2022-08-12T19:00:25+00:00",
+            "time": "2023-08-28T15:27:19+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1123,7 +1153,7 @@
             ],
             "support": {
                 "issues": "https://github.com/simplito/elliptic-php/issues",
-                "source": "https://github.com/simplito/elliptic-php/tree/1.0.10"
+                "source": "https://github.com/simplito/elliptic-php/tree/1.0.11"
             },
             "install-path": "../simplito/elliptic-php"
         },
@@ -1199,17 +1229,17 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.27.0",
-            "version_normalized": "1.27.0.0",
+            "version": "v1.28.0",
+            "version_normalized": "1.28.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+                "reference": "42292d99c55abe617799667f454222c54c60e229"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
-                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/42292d99c55abe617799667f454222c54c60e229",
+                "reference": "42292d99c55abe617799667f454222c54c60e229",
                 "shasum": ""
             },
             "require": {
@@ -1221,11 +1251,11 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2022-11-03T14:55:06+00:00",
+            "time": "2023-07-28T09:04:16+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.27-dev"
+                    "dev-main": "1.28-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -1265,7 +1295,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.27.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.28.0"
             },
             "funding": [
                 {

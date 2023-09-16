@@ -117,42 +117,11 @@ trait Helpers
      * @param string $viewName Directory name within the folder
      * @return string
      */
-    public function addonView(string $viewName, array $args = []) : string
-    {
-        $trace = debug_backtrace();
-        if (DIRECTORY_SEPARATOR == '\\') {
-            $re = '/.*?\\\\plugins\\\\.*(app\\\\|index\.php)/si';
-        } else {
-            $re = '/.*?\/plugins\/.*(app\/|index\.php)/si';
-        }
-        $addonDir = $trace[1]['function'] == 'addonViewEcho' ? $trace[1]['file'] : $trace[0]['file'];
-        preg_match($re, $addonDir, $matches, PREG_OFFSET_CAPTURE, 0);
-        $viewDir = str_replace(['app\\', 'app/', 'index.php'], 'views/', $matches[0][0]);
-
-        extract($args);
-        ob_start();
-        include $viewDir . $viewName . '.php';
-        return ob_get_clean();
-    }
-
-    /**
-     * @param string $viewName Directory name within the folder
-     * @return void
-     */
-    public function addonViewEcho(string $viewName, array $args = []) : void
-    {
-        print($this->addonView($viewName, $args));
-    }
-
-    /**
-     * @param string $viewName Directory name within the folder
-     * @return string
-     */
     public function view(string $viewName, array $args = []) : string
     {
         extract($args);
         ob_start();
-        include $this->viewDir . $viewName . '.php';
+        include $this->pluginDir . 'views/' . $viewName . '.php';
         return ob_get_clean();
     }
 
@@ -454,10 +423,14 @@ trait Helpers
      */
     public function addScript(string $path, array $deps = []) : string
     {
+        $f = substr($path, 0, 1);
         $key = explode('/', $path);
+        $key = $this->pluginKey . '-addon-' . end($key);
+        $middlePath = $f === '/' ? 'assets/' : 'assets/js/';
+        $url = $this->pluginUrl . $middlePath . $path;
         wp_enqueue_script(
-            $key = $this->pluginKey . '-' . end($key),
-            $this->pluginUrl . 'assets/' . $path,
+            $key,
+            $url,
             $deps,
             $this->pluginVersion,
             true
@@ -473,87 +446,19 @@ trait Helpers
      */
     public function addStyle(string $path, array $deps = []) : string
     {
+        $f = substr($path, 0, 1);
         $key = explode('/', $path);
+        $key = $this->pluginKey . '-addon-' . end($key);
+        $middlePath = $f === '/' ? 'assets/' : 'assets/css/';
+        $url = $this->pluginUrl . $middlePath . $path;
         wp_enqueue_style(
-            $key = $this->pluginKey . '-' . end($key),
-            $this->pluginUrl . 'assets/' . $path,
+            $key,
+            $url,
             $deps,
             $this->pluginVersion
         );
         
         return $key;
-    }
-
-    /**
-     * @param string $path
-     * @param array $deps
-     * @return string
-     */
-    public function addAddonScript(string $path, array $deps = []) : string
-    {
-        $key = explode('/', $path);
-        wp_enqueue_script(
-            $key = $this->pluginKey . '-addon-' . end($key),
-            $this->getAddonUrl() . 'assets/' . $path,
-            $deps,
-            $this->pluginVersion,
-            true
-        );
-        
-        return $key;
-    }
-
-    /**
-     * @param string $path
-     * @param array $deps
-     * @return string
-     */
-    public function addAddonStyle(string $path, array $deps = []) : string
-    {
-        $key = explode('/', $path);
-        wp_enqueue_style(
-            $key = $this->pluginKey . '-addon-' . end($key),
-            $this->getAddonUrl() . 'assets/' . $path,
-            $deps,
-            $this->pluginVersion
-        );
-        
-        return $key;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddonUrl() : string
-    {
-        $trace = debug_backtrace();
-        if (DIRECTORY_SEPARATOR == '\\') {
-            $re = '/plugins\\\\(.*)(app\\\\|index\.php)/m';
-        } else {
-            $re = '/plugins\/(.*)(app\/|index\.php)/m';
-        }
-        
-        preg_match($re, $trace[1]['file'], $matches, PREG_OFFSET_CAPTURE, 0);
-        
-        $changeVal = 'plugins/'.str_replace(DIRECTORY_SEPARATOR, '/', $matches[1][0]);
-        return preg_replace(['/plugins(\/.*|.*)/m'], [$changeVal], $this->pluginUrl);
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddonDir() : string
-    {
-        $trace = debug_backtrace();
-        if (DIRECTORY_SEPARATOR == '\\') {
-            $re = '/plugins\\\\(.*)(app\\\\|index\.php)/m';
-        } else {
-            $re = '/plugins\/(.*)(app\/|index\.php)/m';
-        }
-        
-        preg_match($re, $trace[1]['file'], $matches, PREG_OFFSET_CAPTURE, 0);
-
-        return preg_replace(['/plugins(\/.*|.*)/m'], ['plugins\\'.$matches[1][0]], $this->pluginDir);
     }
 
     /**
@@ -579,7 +484,7 @@ trait Helpers
      * @param array $params
      * @return void
      */
-    public function registerPageTemplate(string $templateName, string $templateFile, array $params) : void
+    public function registerPageTemplate(string $templateName, string $templateFile, array $params = []) : void
     {
         add_filter('theme_page_templates', function($templates) use ($templateName, $templateFile){
             $templateFile = $this->pluginKey . $templateFile;
@@ -609,7 +514,7 @@ trait Helpers
      */
     public function cache(callable $function, string $name, int $time = 600) : object
     {
-        $path = $this->viewDir . 'cache/';
+        $path = $this->pluginDir . 'cache/';
 
         if (!file_exists($path)) {
             mkdir($path);       
@@ -640,7 +545,7 @@ trait Helpers
      */
     public function deleteCache(string $name) : bool
     {
-        $path = $this->viewDir . 'cache/';
+        $path = $this->pluginDir . 'cache/';
         $file = $path . $name . '.html';
         if (file_exists($file)) {
             return unlink($file);
@@ -872,7 +777,7 @@ trait Helpers
             try {
                 $this->_sendDeactivationInfo([
                     'reason' =>  isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : null,
-                    'email' => isset($_POST['email']) ? sanitize_text_field($_POST['email']) : null,
+                    'email' => isset($_POST['email']) ? sanitize_email($_POST['email']) : null,
                 ]);
             } catch (\Exception $e) {
                 wp_send_json_success($e->getMessage());
@@ -892,18 +797,14 @@ trait Helpers
     {
         if (function_exists('curl_version')) {
             try {
-                $curl = curl_init($this->bpApiUrl . 'plugin-feedbacks');
 
                 $data = array_merge([
                     'message' => 'message',
                 ], $this->getSiteInfos());
-
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                curl_exec($curl);
-                curl_close($curl);
+                
+                wp_remote_post($this->bpApiUrl . 'plugin-feedbacks', [
+                    'body' => $data
+                ]);
 
                 return true;
             } catch (\Exception $th) {
@@ -921,18 +822,14 @@ trait Helpers
     {
         if (function_exists('curl_version')) {
             try {
-                $curl = curl_init($this->bpApiUrl . 'active-plugins');
 
                 $data = array_merge([
                     'process' => 'activation',
                 ], $this->getSiteInfos());
 
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                curl_exec($curl);
-                curl_close($curl);
+                wp_remote_post($this->bpApiUrl . 'active-plugins', [
+                    'body' => $data
+                ]);
 
                 return true;
             } catch (\Exception $th) {
@@ -952,7 +849,6 @@ trait Helpers
     {
         if (function_exists('curl_version')) {
             try {
-                $curl = curl_init($this->bpApiUrl . 'active-plugins');
 
                 $data = array_merge([
                     'process' => 'deactivation',
@@ -961,12 +857,9 @@ trait Helpers
                     $params
                 ));
 
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                curl_exec($curl);
-                curl_close($curl);
+                wp_remote_post($this->bpApiUrl . 'active-plugins', [
+                    'body' => $data
+                ]);
 
                 return true;
             } catch (\Exception $e) {
@@ -977,4 +870,21 @@ trait Helpers
         return false;
     }
     
+    /**
+     * @param string $key
+     * @param string $file
+     * @return void
+     */
+    public function registerAddon(string $key, string $file) : void
+    {
+        if (!isset(Plugin::$properties->addons)) {
+            Plugin::$properties->addons = (object) [];
+        }
+        
+        if (!isset(Plugin::$properties->addons->$key)) {
+            Plugin::$properties->addons->$key = new Addon($key, $file);
+        } else {
+            throw new \Exception('Addon already registered');
+        }
+    }
 }

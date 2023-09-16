@@ -147,20 +147,6 @@ abstract class AbstractTransaction extends AbstractModel
     }
 
     /**
-     * @param string $code
-     * @return array
-     */
-    public function getOldTransactionByCode(string $code) : array
-    {
-        return $this->getCol(str_ireplace(
-            '%s', 
-            $this->db->esc_like($code), "
-            SELECT hash FROM {$this->tableName} 
-            WHERE code = '%s' 
-        "));
-    }
-
-    /**
      * @return array
      */
     public function getCodes() : array

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d9026e5dbfb4604f4a3c070d1dd38b1",
+    "content-hash": "42b93c5b8bc12209222033e45bf4e15a",
     "packages": [
         {
             "name": "beycanpress/http",
@@ -415,16 +415,16 @@
         },
         {
             "name": "multiplechain/evm-based-chains",
-            "version": "0.1.2",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-based-chains-php.git",
-                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68"
+                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
-                "reference": "5e323d47e1d92092b56cac1e69dfd9a0c4863e68",
+                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/d00d6091ba828c851fe4a75e3f4eaa97af87c155",
+                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155",
                 "shasum": ""
             },
             "require": {
@@ -444,9 +444,9 @@
             "homepage": "https://github.com/MultipleChain/evm-based-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-based-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.2"
+                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.3"
             },
-            "time": "2023-06-22T14:24:41+00:00"
+            "time": "2023-08-10T10:29:47+00:00"
         },
         {
             "name": "multiplechain/utils",
