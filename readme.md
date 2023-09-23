@@ -102,4 +102,5 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 
 Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
+
 Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payments for WooCommerce</a>**
