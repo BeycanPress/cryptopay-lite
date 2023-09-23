@@ -15,7 +15,7 @@ WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept crypto payments
 
 ### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-**<a href="https://beycanpress.com/cryptopay">WooCommerce Cryptocurrency Payment Gateway for WordPress</a>** by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay">WordPress cryptocurrency payments</a>** from mobile devices.
+**<a href="https://beycanpress.com/cryptopay">WooCommerce Cryptocurrency Payment Gateway</a>** for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
 **Review WooCommerce crypto payment gateway with video**
