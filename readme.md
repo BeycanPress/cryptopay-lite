@@ -1,9 +1,9 @@
-## MetaMask & WooCommerce Cryptocurrency Payment Gateway
+## WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-MetaMask & WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
+**<a href="https://beycanpress.com/cryptopay">WooCommerce Cryptocurrency Payment Gateway </a>** for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
-**Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress review with video (Click and watch video)** 
+**Review WooCommerce crypto payment gateway with video (Click and watch video)** 
 
 [![Cryptocurrency payment gateway for WordPress](https://img.youtube.com/vi/3vaoFL4XG10/0.jpg)](https://www.youtube.com/watch?v=3vaoFL4XG10)
 
@@ -99,3 +99,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Dark theme mode is available for your dark themes.
 * With Loco Translate, you can easily translate into any language you want.
 * You can easily move your settings with the backup system.
+
+
+Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
+Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payments for WooCommerce</a>**

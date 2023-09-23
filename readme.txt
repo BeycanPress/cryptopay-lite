@@ -1,4 +1,4 @@
-=== MetaMask & WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
+=== WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, MetaMask, TrustWallet, WalletConnect, Phantom, BTC, ETH, BNB, SOL, TRX
 Requires at least: 5.0
@@ -9,16 +9,16 @@ Version: 1.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-MetaMask & WooCommerce cryptocurrency payment gateway for WordPress. Accept crypto payments Bitcoin, Ethereum, Solana, USDT, BNB, BUSD, TRX, SOL, BTC, ETH
+WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept crypto payments Bitcoin, Ethereum, Solana, USDT, BNB, BUSD, TRX, SOL, BTC, ETH
 
 == Description ==
 
-### MetaMask & WooCommerce Cryptocurrency Payment Gateway
+### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-MetaMask & WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. In addition to built-in WooCommerce support, it can be integrated with other plugins thanks to its API.. You can also receive payments directly with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom.
+**<a href="https://beycanpress.com/cryptopay">WooCommerce Cryptocurrency Payment Gateway for WordPress</a>** by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
-**Bitcoin, Ethereum cryptocurrency payment gateway for WooCommerce & WordPress review with video**
+**Review WooCommerce crypto payment gateway with video**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **What advantages does CryptoPay provide you?**
@@ -125,8 +125,8 @@ With the default configuration, this plugin, in itself, does not:
 
 You can easily translate with Loco translate.
 
-See **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
-See **<a href="https://beycanpress.com/cryptopay/" target="_blank">Review & buy</a>**
+Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
+Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payments for WooCommerce</a>**
 
 == Screenshots ==
 
@@ -152,6 +152,25 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.6.0 =
+* Added: Fantom network added to the list of EVM-based networks that come by default.
+* Added: opBNB Mainnet and Testnet added to the list of EVM Based networks.
+* Added: EVM Based testnet networks list is sorted according to the mainnet list set on the panel.
+* Added: Binance Wallet Support for Ethereum Mainnet.
+* Added: WalletConnect support for Solana network.
+* Added: Default Solana RPC address to RPC address section.
+* Added: Free RPCs that you can use as an alternative to the Official Solana RPC address
+* Improved: When there is a single network, we send data on upload instead of receiving dynamic data via API request.
+* Improved: Available in wallet listing wallets are listed at the primary.
+* Improved: The verification API with address transfer (QR Code) has been redesigned.
+* Improved: Debug menu appears when there is any log.
+* Fixed: Warning in save settings process if WP_DEBUG enabled.
+* Fixed: WooCommerce subscriptions not being created for payments on the Checkout page.
+* Fixed: Closed networks appearing in the testnet list.
+* Fixed: Problem appearing in "Network sorting" field when you turn off networks.
+* Fixed: The issue where the title appears even if the ENS Domain is not entered.
+* Removed: The rule that a wallet must remain active.
 
 = 1.5.0 =
 * Added: The feature of appearing at the top of the detected wallets
