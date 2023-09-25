@@ -9,13 +9,13 @@ Version: 1.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept crypto payments Bitcoin, Ethereum, Solana, USDT, BNB, BUSD, TRX, SOL, BTC, ETH
+WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept crypto payments, Bitcoin, Ethereum, Solana, USDT, BNB, BUSD, TRX, SOL, BTC, ETH
 
 == Description ==
 
 ### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-**<a href="https://beycanpress.com/cryptopay">WooCommerce Cryptocurrency Payment Gateway</a>** for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay">WordPress cryptocurrency payments</a>** from mobile devices.
+**<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WooCommerce Cryptocurrency Payment Gateway</a>** for WordPress by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports cryptocurrency payments for WooCommerce, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
 **Review WooCommerce crypto payment gateway with video**
@@ -126,7 +126,7 @@ With the default configuration, this plugin, in itself, does not:
 You can easily translate with Loco translate.
 
 Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
-Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay">Cryptocurrency payments for WooCommerce</a>**
+Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">Cryptocurrency payments for WooCommerce</a>**
 
 == Screenshots ==
 

@@ -50,6 +50,10 @@ class Addon
      */
     public function __construct(string $key, string $file)
     {
+		if (!function_exists('get_plugin_data')) {
+			require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+		}
+        
         $data = (object) get_plugin_data($file);
 
         $this->key = $key;
