@@ -20,40 +20,42 @@
         <ul class="bp-feedback-modal-body" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-body">
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_not_working">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_not_working" value="The plugin didn't work"> The plugin didn't work
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_not_working" value="The plugin didn't work" data-reason-code="not-working"> The plugin didn't work
                 </label>
             </li>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_better_plugin">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_better_plugin" value="I found a better plugin"> I found a better plugin
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_better_plugin" value="I found a better plugin" data-reason-code="better-plugin"> I found a better plugin
                 </label>
             </li>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_insufficient_feature">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_insufficient_feature" value="Insufficient add-on feature"> Insufficient add-on feature
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_insufficient_feature" value="Insufficient add-on feature" data-reason-code="insufficient-feature"> Insufficient add-on feature
                 </label>
             </li>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_premium_version">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_premium_version" value="I will buy the premium version"> I will buy the premium version
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_premium_version" value="I will buy the premium version" data-reason-code="premium-version"> I will buy the premium version
                 </label>
             </li>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu"> It's a temporary deactivation - I'm troubleshooting an issue
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu" data-reason-code="temporary-deactivation"> It's a temporary deactivation - I'm troubleshooting an issue
                 </label>
             </li>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_other">
-                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_other" value="Other"> Other
+                    <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_other" value="Other" data-reason-code="other"> Other
                 </label>
             </li>
         </ul>
         <div class="bp-feedback-modal-footer" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal-footer"> 
-            <a class="button-primary" href="https://wordpress.org/support/plugin/<?php echo esc_url(basename(urlencode($this->pluginFile))); ?>/" target="_blank">
-				<span class="dashicons dashicons-external" style="margin-top:3px;"></span>
-				Go to support
-            </a>
+            <?php if ($wpOrgSlug) : ?>
+                <a class="button-primary" href="https://wordpress.org/support/plugin/<?php echo esc_attr($wpOrgSlug); ?>/" target="_blank">
+                    <span class="dashicons dashicons-external" style="margin-top:3px;"></span>
+                    Go to support
+                </a>
+            <?php endif; ?>
             <a href="#" class="button button-primary <?php echo $pluginKey; ?>-feedback-button-deactivate">Deactivate</a>
             <a href="#" class="button button-secondary <?php echo esc_attr($pluginKey); ?>-feedback-button-cancel">Cancel</a>		
 
@@ -88,12 +90,14 @@
             ];
 
             function deactivateProcess(reason) {
+                let reasonCode = $('.'+pluginKey+'_deactivation_reason:checked').data('reason-code');
                 try {
                     $.ajax({
                         url: "<?php echo home_url('wp-json/' . $pluginKey . '-deactivation/deactivate'); ?>",
                         type: 'POST',
                         data: {
                             reason,
+                            reasonCode,
                             pluginKey,
                             email: '<?php echo $email; ?>',
                             pluginVersion: '<?php echo $pluginVersion; ?>',

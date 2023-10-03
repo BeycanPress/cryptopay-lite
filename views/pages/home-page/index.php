@@ -6,8 +6,8 @@
                 <div class="postbox-header">
                     <h2 class="buy-title" style="padding-left: 20px; box-sizing: border-box">
                         Watch preview
-                        <a href="https://bit.ly/cplitebuynow" target="_blank" class="button buy-button"><?php echo __('Buy premium', 'cryptopay_lite'); ?></a>
-                        <a href="https://bit.ly/3pOiY25" target="_blank" class="button buy-button"><?php echo __('Review now', 'cryptopay_lite'); ?></a>
+                        <a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Buy premium', 'cryptopay_lite'); ?></a>
+                        <a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Review now', 'cryptopay_lite'); ?></a>
                     </h2>
                 </div>
                 

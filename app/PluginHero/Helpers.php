@@ -727,18 +727,21 @@ trait Helpers
 
     /**
      * @param bool $form
+     * @param string|null $wpOrgSlug
      * 
      * @return void
      */
-    public function feedback(bool $form = true) : void
+    public function feedback(bool $form = true, ?string $wpOrgSlug = null) : void
     {
         $this->registerActivation([$this, '_sendActivationInfo']);
 
         if ($form) {
             global $pagenow;
             if ($pagenow === 'plugins.php') {
-                add_action('admin_footer', function() {
-                    echo $this->getTemplate('feedback', $this->getSiteInfos());
+                add_action('admin_footer', function() use ($wpOrgSlug) {
+                    echo $this->getTemplate('feedback', array_merge([
+                        'wpOrgSlug' => $wpOrgSlug
+                    ], $this->getSiteInfos()));
                 });
             }
 
@@ -776,8 +779,9 @@ trait Helpers
         if (function_exists('curl_version')) {
             try {
                 $this->_sendDeactivationInfo([
-                    'reason' =>  isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : null,
                     'email' => isset($_POST['email']) ? sanitize_email($_POST['email']) : null,
+                    'reason' =>  isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : null,
+                    'reasonCode' =>  isset($_POST['reasonCode']) ? sanitize_text_field($_POST['reasonCode']) : null,
                 ]);
             } catch (\Exception $e) {
                 wp_send_json_success($e->getMessage());

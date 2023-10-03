@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereu
 Requires at least: 5.0
 Tested up to: 6.3.1
 Requires PHP: 7.4
-Stable Tag: 1.6.0
-Version: 1.6.0
+Stable Tag: 1.6.1
+Version: 1.6.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,12 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
 == Changelog ==
+
+= 1.6.1 =
+* Fixed: Download text looked bad in black theme
+* Fixed: In some cases, the get_plugin_data function is not defined
+* Fixed: The issue where the wallet selection page if exists QR option does not open on mobile devices 
+* Fixed: The issue where the wallet list appears when a transaction is rejected when there is only one wallet
 
 = 1.6.0 =
 * Added: Fantom network added to the list of EVM-based networks that come by default.

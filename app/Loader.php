@@ -14,11 +14,11 @@ class Loader extends PluginHero\Plugin
             'pluginVersion' => '1.6.0',
         ]);
         
-        $this->feedback();
+        $this->feedback(true, 'cryptopay-wc-lite');
 
         add_filter('plugin_row_meta', function(array $links, string $file) {
             if ($file === plugin_basename($this->pluginFile)) {
-                $links[] = '<b><a href="https://bit.ly/cplitebuynow" target="_blank">' . __('Buy premium', 'cryptopay_lite') . '</a></b>';
+                $links[] = '<b><a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=lite_version&utm_medium=plugins_list" target="_blank">' . __('Buy premium', 'cryptopay_lite') . '</a></b>';
             }
             return $links;
         }, 10, 2);

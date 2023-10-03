@@ -2,8 +2,8 @@
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     1.6.0
- * Plugin URI:  https://beycanpress.com/cryptopay
+ * Version:     1.6.1
+ * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress
  * Author URI:  https://beycanpress.com
@@ -46,8 +46,8 @@ add_action('admin_footer', function() {
                     
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <div class="buttons">
-                        <a href="https://bit.ly/cplitebuynow" target="_blank" class="button"><?php echo __('Buy premium', 'cryptopay_lite'); ?></a>
-                        <a href="https://bit.ly/3pOiY25" target="_blank" class="button"><?php echo __('Review now', 'cryptopay_lite'); ?></a>
+                        <a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=lite_version&utm_medium=popup" target="_blank" class="button"><?php echo __('Buy premium', 'cryptopay_lite'); ?></a>
+                        <a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=popup" target="_blank" class="button"><?php echo __('Review now', 'cryptopay_lite'); ?></a>
                     </div>
                 </div>
             </div>
