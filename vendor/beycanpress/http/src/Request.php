@@ -308,7 +308,7 @@ final class Request
      */
     private function xmlParse() : array
     {
-        if (function_exists('libxml_use_internal_errors') === false) {
+        if (!function_exists('libxml_use_internal_errors')) {
             $this->errors[] = array(
                 'XML Error' => 'libxml_use_internal_errors function not found.'
             );
