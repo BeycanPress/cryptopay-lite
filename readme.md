@@ -1,6 +1,6 @@
 ## WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
+WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=github&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
 **Review WooCommerce crypto payment gateway with video (Click and watch video)** 
@@ -66,7 +66,9 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Unlimited coin payments support
 * Lots of extra feature add-ons
 * Lots of network support add-ons
-* Bitcoin, Solana, Tron, Others
+* Bitcoin Payments
+* Solana Payments
+* Tron Payments
 * Lots of converter API support add-ons
 * Custom token support & prices support
 * Payment feature on the "Checkout" page
@@ -82,7 +84,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Highlights:**
 
-* Pay with multiple Blockchain network, Ethereum and all EVM based blockchain networks, Bitcoin Solana, Tron Etc.
+* Pay with multiple Blockchain network, Ethereum and all EVM based blockchain networks, Bitcoin, Solana, Tron Etc.
 * You can receive payments via crypto wallets supported by the plugin and all blockchain networks supported by these wallets. (Currently, EVM Bases networks, Solana, Tron and Bitcoin support are available.) Payment support for many networks will be introduced over time.
 * You can get pay with native money of blockchain networks or with tokens under these networks.
 * You can receive payments in your own special currencies (tokens). It is enough to have a price list in one of the APIs you will see in the next article. For example Coin Market Cap and Coin Gecko
