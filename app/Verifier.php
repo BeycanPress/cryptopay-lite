@@ -2,9 +2,7 @@
 
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\CryptoPayLite\PluginHero\Hook;
 use \BeycanPress\CryptoPayLite\PluginHero\Helpers;
-use \BeycanPress\CryptoPayLite\Interfaces\TransactionInterface;
 
 class Verifier
 {
@@ -44,6 +42,7 @@ class Verifier
                 return null;
             }
         }
+
         
         $tokenAddress = isset($currency->address) ? $currency->address : null;
         return $transaction->verifyTransferWithData((object) [
