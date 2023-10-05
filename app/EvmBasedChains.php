@@ -69,7 +69,6 @@ class EvmBasedChains {
             "mainnetId" => 1,
             "name" => "Ethereum Goerli Testnet",
             "rpcUrl" => "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-            "wsUrl" => "wss://goerli.infura.io/ws/v3/9aa3d95b3bc440fa88ea12eaa4456161",
             "explorerUrl" => "https://goerli.etherscan.io/",
             "nativeCurrency" => [
                 "symbol" => "ETH",
