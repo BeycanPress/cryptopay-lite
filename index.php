@@ -5,7 +5,7 @@
  * Version:     1.6.1
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
- * Author:      BeycanPress
+ * Author:      BeycanPress LLC
  * Author URI:  https://beycanpress.com
  * License:     GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
