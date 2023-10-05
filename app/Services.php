@@ -135,7 +135,9 @@ class Services
             return esc_html__('There was a problem getting wallet address!', 'cryptopay_lite');
         }
 
+        $receiver = Hook::callFilter('receiver', $receiver, $data);
         $receiver = Hook::callFilter('receiver_' . $addon, $receiver, $data);
+        $receiver = Hook::callFilter('receiver_' . $network->code, $receiver, $data);
 
         return  [
             'receiver' => $receiver,

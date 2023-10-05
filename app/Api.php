@@ -134,7 +134,9 @@ class Api extends AbstractApi
             Response::error(esc_html__('There was a problem getting wallet address!', 'cryptopay_lite'), 'INIT102');
         }
 
+        $receiver = Hook::callFilter('receiver', $receiver, $this->data);
         $receiver = Hook::callFilter('receiver_' . $this->addon, $receiver, $this->data);
+        $receiver = Hook::callFilter('receiver_' . $this->data->network->code, $receiver, $this->data);
 
         Response::success(null, [
             'receiver' => $receiver,
