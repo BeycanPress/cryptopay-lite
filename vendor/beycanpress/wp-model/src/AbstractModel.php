@@ -92,6 +92,14 @@ class AbstractModel
     }
 
     /**
+     * @return string
+     */
+    public function getError() : string
+    {
+        return $this->db->last_error;
+    }
+
+    /**
      * A method of preparing SQL queries before executing them to make them more secure and desirable. It uses wpdb->prepare.
      * 
      * @param string $query
@@ -128,7 +136,7 @@ class AbstractModel
      * @param int $x
      * @param int $y
      * 
-     * @return array|object|null
+     * @return mixed
      */
     protected function getVar(string $query, $x = 0, $y = 0) 
     {
@@ -155,7 +163,7 @@ class AbstractModel
      * @param string $query
      * @param int $x
      * 
-     * @return array|object|null
+     * @return mixed
      */
     protected function getCol(string $query, $x = 0)
     {

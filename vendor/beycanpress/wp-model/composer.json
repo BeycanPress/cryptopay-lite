@@ -1,6 +1,6 @@
 {
     "name": "beycanpress/wp-model",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Easily create and manage databases in WordPress plugins and themes. It allows you to model your WordPress databases with PHP classes and do your operations from these models.",
     "keywords": ["wordpress", "wpdb", "orm", "model", "query", "modeler", "db", "database", "table"],
     "type": "library",

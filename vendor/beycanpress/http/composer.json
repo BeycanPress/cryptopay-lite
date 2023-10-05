@@ -1,6 +1,6 @@
 {
     "name": "beycanpress/http",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "A simple and useful library for HTTP requests, response and client.",
     "type": "library",
     "license": "MIT",

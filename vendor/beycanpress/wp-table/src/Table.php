@@ -2,6 +2,8 @@
 
 namespace BeycanPress\WPTable;
 
+use BeycanPress\WPModel\AbstractModel;
+
 defined('ABSPATH') || die('You can use the WordPress Table Creator package only one WordPress in!');
 
 // WP_List_Table is not loaded automatically so we need to load it in our application
@@ -28,6 +30,11 @@ class Table extends \WP_List_Table
      * @var array
      */
     private $sortableColumns = [];
+
+    /**
+     * @var AbstractModel|array $entry
+     */
+    private $entry;
 
     /**
      * @var object
@@ -71,15 +78,22 @@ class Table extends \WP_List_Table
 
     /**
      *
-     * @param object $model
+     * @param AbstractModel|array $entry
      * @param array $params
      * @param array $args
      * @return void
      */
-    public function __construct(object $model, array $params = [], array $args = [])
+    public function __construct($entry, array $params = [], array $args = [])
     {
+        $this->entry = $entry;
         $this->params = $params;
-        $this->setModel($model);
+
+        if ($entry instanceof AbstractModel) {
+            $this->setModel($entry);
+        } else {
+            $this->setDataList($entry);
+        }
+        
         parent::__construct($args);
     }
 
@@ -99,12 +113,15 @@ class Table extends \WP_List_Table
         }
 
         if ($customDataList) {
-            [$dataList, $dataListCount] = $customDataList($this->model, $this->orderQuery, $this->perPage, $offset);
+            [$dataList, $dataListCount] = $customDataList($this->entry, $this->orderQuery, $this->perPage, $offset);
         }
         
-        if (!isset($dataList)) {
+        if (!isset($dataList) && $this->model && !$this->dataList) {
             $dataList = $this->model->findBy($this->params, $this->orderQuery, $this->perPage, $offset);
             $dataListCount = $this->model->getCount($this->params);
+        } elseif (!isset($dataList) && $this->dataList) {
+            $dataList = $this->getDataList();
+            $dataListCount = $this->getDataListCount();
         }
 
         $this->setDataList($dataList);
@@ -273,7 +290,7 @@ class Table extends \WP_List_Table
      * @param int $perPage
      * @return self
      */
-    public function setPerPage(int $perPage): self
+    public function setPerPage(int $perPage) : self
     {
         $this->perPage = $perPage;
         return $this;
@@ -281,11 +298,12 @@ class Table extends \WP_List_Table
 
     /**
      * @param object $model
-     * @return void
+     * @return self
      */
-    private function setModel(object $model) : void
+    public function setModel(object $model) : self
     {
         $this->model = $model;
+        return $this;
     }
 
     /**
@@ -306,6 +324,110 @@ class Table extends \WP_List_Table
     private function setDataList(array $dataList) : void
     {
         $this->dataList = $dataList;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataList() : array
+    {
+        return $this->dataList;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDataListCount() : int
+    {
+        return count($this->dataList);
+    }
+
+    /**
+     * @return bool
+     */
+    public function dataListIsEmpty() : bool
+    {
+        return $this->getDataListCount() == 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPerPage() : int
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalRow() : int
+    {
+        return $this->totalRow;
+    }
+
+    /**
+     * @return object
+     */
+    public function getModel() : object
+    {
+        return $this->model;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams() : array
+    {
+        return $this->params;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions() : array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getColumns() : array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderQuery() : array
+    {
+        return $this->orderQuery;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaderElements() : array
+    {
+        return $this->headerElements;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHooks() : array
+    {
+        return $this->hooks;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSortableColumns() : array
+    {
+        return $this->sortableColumns;
     }
 
     /** Parent class methods */

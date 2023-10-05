@@ -144,9 +144,9 @@ final class Request
     /**
      * Allows you to get request headers.
      * @param string $key
-     * @return string
+     * @return string|null
      */
-    public function getHeaderParam(string $key) : string
+    public function getHeaderParam(string $key) : ?string
     {
         $headers = $this->getAllHeaderParams();
         if ( is_null( $key ) ) {
@@ -158,7 +158,7 @@ final class Request
                 $this->errors[] = array(
                     'HEADERS Error' => 'Key not found in headers'
                 );
-                return false;
+                return null;
             }
         }
     }
