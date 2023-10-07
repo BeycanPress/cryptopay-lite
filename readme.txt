@@ -153,6 +153,11 @@ Some settings are restricted in CryptoPay Lite only. You can install with the sa
 
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
 
+== FREQUENTLY ASKED QUESTIONS ==
+
+=Can I use cryptocurrency payments for WooCommerce?=
+Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
+
 == Changelog ==
 
 = 1.6.1 =
