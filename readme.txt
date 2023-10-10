@@ -97,8 +97,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Highlights:**
 
-* Pay with multiple Blockchain network, Ethereum and all EVM based blockchain networks, Bitcoin Solana, Tron Etc.
-* You can receive payments via crypto wallets supported by the plugin and all blockchain networks supported by these wallets. (Currently, EVM Bases networks, Solana, Tron and Bitcoin support are available.) Payment support for many networks will be introduced over time.
+* By default, EVM-based networks are supported. To receive payments from other networks such as Bitcoin, Solana and Tron, you need to purchase extra add-ons. You can accept payments from many Web3 wallets integrated for these networks. It is also available on networks that support address transfer (QR Code) payments.
 * You can get pay with native money of blockchain networks or with tokens under these networks.
 * You can receive payments in your own special currencies (tokens). It is enough to have a price list in one of the APIs you will see in the next article. For example Coin Market Cap and Coin Gecko
 * The Crypto Compare API is currently provided. In addition, there are Coin Market Cap, Coin Gecko, Moralis and Pancake Swap API add-ons. Pancake Swap only supports BSC network while Moralis supports EVM based networks and Solana. Crypto Compare, Coin Market Cap and Coin Gecko support all currencies listed in it, regardless of network.
