@@ -102,7 +102,7 @@
                     <ul>
                         <li>
                             <strong>
-                                You can receive payments via crypto wallets supported by the plugin and all blockchain networks supported by these wallets. (Currently, EVM Bases networks, Solana, Tron and Bitcoin support are available.) Payment support for many networks will be introduced over time.
+                                By default, EVM-based networks are supported. To receive payments from other networks such as Bitcoin, Solana and Tron, you need to purchase extra add-ons. You can accept payments from many Web3 wallets integrated for these networks. It is also available on networks that support address transfer (QR Code) payments.
                             </strong>
                         </li>
                         <li>
