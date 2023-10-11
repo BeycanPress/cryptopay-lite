@@ -4,6 +4,8 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
 
 class Addon
 {   
+    use Helpers;
+    
     /**
      * @var string
      */
@@ -155,7 +157,7 @@ class Addon
     {
         $f = substr($path, 0, 1);
         $key = explode('/', $path);
-        $key = $this->parentKey . '-addon-' . end($key);
+        $key = $this->parentKey . '-'. $this->key . '-' . str_replace('.js', '', end($key));
         $middlePath = $f === '/' ? 'assets/' : 'assets/js/';
         $url = $this->getUrl() . $middlePath . $path;
         wp_enqueue_script(
@@ -178,7 +180,7 @@ class Addon
     {
         $key = explode('/', $path);
         $f = substr($path, 0, 1);
-        $key = $this->parentKey . '-addon-' . end($key);
+        $key = $this->parentKey . '-'. $this->key . '-' . str_replace('.css', '', end($key));
         $middlePath = $f === '/' ? 'assets/' : 'assets/css/';
         $url = $this->getUrl() . $middlePath . $path;
         wp_enqueue_style(
