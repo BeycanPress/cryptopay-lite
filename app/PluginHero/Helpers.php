@@ -426,7 +426,7 @@ trait Helpers
         $f = substr($path, 0, 1);
         $key = explode('/', $path);
         $key = $this->pluginKey . '-addon-' . end($key);
-        $middlePath = $f === '/' ? 'assets/' : 'assets/js/';
+        $middlePath = $f === '/' ? 'assets' : 'assets/js/';
         $url = $this->pluginUrl . $middlePath . $path;
         wp_enqueue_script(
             $key,
@@ -449,7 +449,7 @@ trait Helpers
         $f = substr($path, 0, 1);
         $key = explode('/', $path);
         $key = $this->pluginKey . '-addon-' . end($key);
-        $middlePath = $f === '/' ? 'assets/' : 'assets/css/';
+        $middlePath = $f === '/' ? 'assets' : 'assets/css/';
         $url = $this->pluginUrl . $middlePath . $path;
         wp_enqueue_style(
             $key,
