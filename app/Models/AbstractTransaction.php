@@ -88,12 +88,10 @@ abstract class AbstractTransaction extends AbstractModel
                 $pleaceholders, 
                 $parameters, "
                 SELECT * FROM {$this->tableName} 
-                WHERE hash LIKE '%s' 
+                WHERE (hash LIKE '%s' 
                 OR orderId LIKE '%s'
                 OR userId LIKE '%s' 
-                OR network LIKE '%s'
-                OR code LIKE '%s' 
-                OR status LIKE '%s'
+                OR network LIKE '%s')
                 ". $predicates . "
                 ORDER BY id DESC
             ")),
@@ -101,12 +99,10 @@ abstract class AbstractTransaction extends AbstractModel
                 $pleaceholders, 
                 $parameters, "
                 SELECT COUNT(id) FROM {$this->tableName} 
-                WHERE hash LIKE '%s' 
+                WHERE (hash LIKE '%s' 
                 OR orderId LIKE '%s'
                 OR userId LIKE '%s' 
-                OR network LIKE '%s'
-                OR code LIKE '%s' 
-                OR status LIKE '%s'
+                OR network LIKE '%s')
                 ". $predicates . "
                 ORDER BY id DESC
             ")) ?? 0
