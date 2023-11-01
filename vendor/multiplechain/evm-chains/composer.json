@@ -1,6 +1,6 @@
 {
     "name": "multiplechain/evm-chains",
-    "version": "0.1.13",
+    "version": "0.1.15",
     "description": "Ready node library for transacting on many EVM based chains.",
     "type": "library",
     "license": "MIT",
@@ -14,9 +14,8 @@
         "web3p/ethereum-tx": "^0.4.3",
         "ext-bcmath": "*",
         "web3p/web3.php": "^0.1.6",
-        "multiplechain/evm-based-chains": "^0.1.3",
-        "multiplechain/utils": "^0.1.0",
-        "beycanpress/http": "^0.1.3"
+        "multiplechain/evm-based-chains": "^0.1.4",
+        "multiplechain/utils": "^0.1.1"
     },
     "autoload": {
         "psr-4": {

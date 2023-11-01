@@ -45,6 +45,26 @@ class Utils
     }
 
     /**
+     * Converts a hexadecimal number to a normal number
+     * Hecadecimal number to decimal number
+     * @param string|int|float $amount
+     * @param int $decimals
+     * @return float
+     */
+    public static function toDec(string $amount, int $decimals) : float
+    {
+        $bn = self::toBn($amount);
+        $length = '1' . str_repeat('0', $decimals);
+        $bnt = new BigNumber($length);
+
+        $amount = $bn->divide($bnt)[1]->toString();
+        $result = (float) bcdiv($amount, $length, $decimals);
+        $result += (float) $bn->divide($bnt)[0]->toString();
+
+        return $result;
+    }
+
+    /**
      * @param BigNumber|string|int $number
      * @param int $decimals
      * @return BigNumber
@@ -89,51 +109,10 @@ class Utils
     }
 
     /**
-     * Converts a hexadecimal number to a normal number
-     * Hecadecimal number to decimal number
-     * @param string|int|float $amount
-     * @param int $decimals
-     * @return float
-     */
-    public static function toDec(string $amount, int $decimals) : float
-    {
-        $bn = self::toBn($amount);
-        $length = '1' . str_repeat('0', $decimals);
-        $bnt = new BigNumber($length);
-
-        $amount = $bn->divide($bnt)[1]->toString();
-        $result = (float) bcdiv($amount, $length, $decimals);
-        $result += (float) $bn->divide($bnt)[0]->toString();
-
-        return $result;
-    }
-
-    /**
-     * @param string $amount
-     * @param integer $decimals
-     * @return string
-     */
-    public static function toString(string $amount, int $decimals) : string
-    {
-        $pos1 = stripos((string) $amount, 'E-');
-        $pos2 = stripos((string) $amount, 'E+');
-    
-        if ($pos1 !== false) {
-            $amount = number_format($amount, $decimals, '.', ',');
-        }
-
-        if ($pos2 !== false) {
-            $amount = number_format($amount, $decimals, '.', '');
-        }
-    
-        return $amount > 1 ? $amount : rtrim($amount, '0');
-    }
-
-    /**
      * @param BigNumber|string|int $number
-     * @return BigNumber
+     * @return BigNumber|array
      */
-    public static function toBn($number) : BigNumber
+    public static function toBn($number) 
     {
         if ($number instanceof BigNumber){
             $bn = $number;
@@ -191,6 +170,27 @@ class Utils
             throw new InvalidArgumentException('toBn number must be BigNumber, string or int.');
         }
         return $bn;
+    }
+
+    /**
+     * @param string $amount
+     * @param integer $decimals
+     * @return string
+     */
+    public static function toString(string $amount, int $decimals) : string
+    {
+        $pos1 = stripos((string) $amount, 'E-');
+        $pos2 = stripos((string) $amount, 'E+');
+    
+        if ($pos1 !== false) {
+            $amount = number_format($amount, $decimals, '.', ',');
+        }
+
+        if ($pos2 !== false) {
+            $amount = number_format($amount, $decimals, '.', '');
+        }
+    
+        return $amount > 1 ? $amount : rtrim($amount, '0');
     }
 
     /**

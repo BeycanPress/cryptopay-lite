@@ -2449,6 +2449,7 @@
 
             })
             .fail( function( response ) {
+              response = JSON.parse( response );
               alert( response.error );
             });
 

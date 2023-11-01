@@ -8,7 +8,7 @@ class EvmBasedChains {
         "ethereum" => [
             "id" => 1,
             "hexId" => "0x1",
-            "name" => "Ethereum",
+            "name" => "Ethereum Mainnet",
             "rpcUrl" => "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
             "explorerUrl" => "https://etherscan.io/",
             "nativeCurrency" => [
@@ -19,7 +19,7 @@ class EvmBasedChains {
         "bsc" => [
             "id" => 56,
             "hexId" => "0x38",
-            "name" => "BNB Smart Chain",
+            "name" => "BNB Chain Mainnet",
             "rpcUrl" => "https://bsc-dataseed.binance.org/",
             "explorerUrl" => "https://bscscan.com/",
             "nativeCurrency" => [
@@ -41,7 +41,7 @@ class EvmBasedChains {
         "polygon" => [
             "id" => 137,
             "hexId" => "0x89",
-            "name" => "Polygon",
+            "name" => "Polygon Mainnet",
             "rpcUrl" => "https://polygon-rpc.com/",
             "explorerUrl" => "https://polygonscan.com/",
             "nativeCurrency" => [
@@ -52,7 +52,7 @@ class EvmBasedChains {
         "fantom" => [
             "id" => 250,
             "hexId" => "0xfa",
-            "name" => "Fantom",
+            "name" => "Fantom Opera",
             "rpcUrl" => "https://rpc.fantom.network",
             "explorerUrl" => "https://ftmscan.com/",
             "nativeCurrency" => [
@@ -66,7 +66,6 @@ class EvmBasedChains {
         "ethereum" => [
             "id" => 5,
             "hexId" => "0x5",
-            "mainnetId" => 1,
             "name" => "Ethereum Goerli Testnet",
             "rpcUrl" => "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
             "wsUrl" => "wss://goerli.infura.io/ws/v3/9aa3d95b3bc440fa88ea12eaa4456161",
@@ -79,8 +78,7 @@ class EvmBasedChains {
         "bsc" => [
             "id" => 97,
             "hexId" => "0x61",
-            "mainnetId" => 56,
-            "name" => "BNB Smart Chain Testnet",
+            "name" => "BNB Chain Testnet",
             "rpcUrl" => "https://bsc-testnet.publicnode.com",
             "explorerUrl" => "https://testnet.bscscan.com/",
             "nativeCurrency" => [
@@ -91,7 +89,6 @@ class EvmBasedChains {
         "avalanche" => [
             "id" => 43113,
             "hexId" => "0xa869",
-            "mainnetId" => 43114,
             "name" => "Avalanche FUJI C-Chain Testnet",
             "rpcUrl" => "https://api.avax-test.network/ext/bc/C/rpc",
             "explorerUrl" => "https://cchain.explorer.avax-test.network",
@@ -103,7 +100,6 @@ class EvmBasedChains {
         "polygon" => [
             "id" => 80001,
             "hexId" => "0x13881",
-            "mainnetId" => 137,
             "name" => "Polygon Mumbai Testnet",
             "rpcUrl" => "https://rpc-mumbai.maticvigil.com/",
             "explorerUrl" => "https://mumbai.polygonscan.com/",
@@ -115,7 +111,6 @@ class EvmBasedChains {
         "fantom" => [
             "id" => 4002,
             "hexId" => "0xfa2",
-            "mainnetId" => 250,
             "name" => "Fantom Testnet",
             "rpcUrl" => "https://rpc.testnet.fantom.network/",
             "explorerUrl" => "https://testnet.ftmscan.com/",

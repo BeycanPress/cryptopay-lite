@@ -18,7 +18,7 @@ class Gateway extends \WC_Payment_Gateway
 
         // gateways can support subscriptions, refunds, saved payment methods,
         // but in this tutorial we begin with simple payments
-        $this->supports = ['products', 'subscriptions'];
+        $this->supports = ['products'];
 
         // Method with all the options fields
         $this->init_form_fields();

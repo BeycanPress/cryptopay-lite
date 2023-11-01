@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e85eb37ef9e479612d01d1e9599560d4",
+    "content-hash": "fa9d97420b22fbd06a68156f0be81a2b",
     "packages": [
         {
             "name": "beycanpress/csf",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/csf.git",
-                "reference": "7f97b21df15b572dfd17186c4bc79bb4efd7f1d2"
+                "reference": "acd7bd2feae1861f56c7669dadec629b22fae582"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/7f97b21df15b572dfd17186c4bc79bb4efd7f1d2",
-                "reference": "7f97b21df15b572dfd17186c4bc79bb4efd7f1d2",
+                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/acd7bd2feae1861f56c7669dadec629b22fae582",
+                "reference": "acd7bd2feae1861f56c7669dadec629b22fae582",
                 "shasum": ""
             },
             "type": "library",
@@ -29,9 +29,9 @@
             "homepage": "https://github.com/BeycanPress/csf",
             "support": {
                 "issues": "https://github.com/BeycanPress/csf/issues",
-                "source": "https://github.com/BeycanPress/csf/tree/2.3.1"
+                "source": "https://github.com/BeycanPress/csf/tree/2.3.2"
             },
-            "time": "2023-09-16T07:02:59+00:00"
+            "time": "2023-10-11T17:19:44+00:00"
         },
         {
             "name": "beycanpress/http",
@@ -535,16 +535,16 @@
         },
         {
             "name": "multiplechain/evm-based-chains",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-based-chains-php.git",
-                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155"
+                "reference": "f08b6e3f897b00567f5d136db3fa0b50acc6b722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/d00d6091ba828c851fe4a75e3f4eaa97af87c155",
-                "reference": "d00d6091ba828c851fe4a75e3f4eaa97af87c155",
+                "url": "https://api.github.com/repos/MultipleChain/evm-based-chains-php/zipball/f08b6e3f897b00567f5d136db3fa0b50acc6b722",
+                "reference": "f08b6e3f897b00567f5d136db3fa0b50acc6b722",
                 "shasum": ""
             },
             "require": {
@@ -564,29 +564,28 @@
             "homepage": "https://github.com/MultipleChain/evm-based-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-based-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.3"
+                "source": "https://github.com/MultipleChain/evm-based-chains-php/tree/0.1.4"
             },
-            "time": "2023-08-10T10:29:47+00:00"
+            "time": "2023-10-05T12:07:23+00:00"
         },
         {
             "name": "multiplechain/evm-chains",
-            "version": "0.1.13",
+            "version": "0.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-chains-php.git",
-                "reference": "80192d37931c2165ab674deb14f90835fbb77c82"
+                "reference": "48110a4b877d42ab79111ec509154b77716e4202"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/80192d37931c2165ab674deb14f90835fbb77c82",
-                "reference": "80192d37931c2165ab674deb14f90835fbb77c82",
+                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/48110a4b877d42ab79111ec509154b77716e4202",
+                "reference": "48110a4b877d42ab79111ec509154b77716e4202",
                 "shasum": ""
             },
             "require": {
-                "beycanpress/http": "^0.1.3",
                 "ext-bcmath": "*",
-                "multiplechain/evm-based-chains": "^0.1.3",
-                "multiplechain/utils": "^0.1.0",
+                "multiplechain/evm-based-chains": "^0.1.4",
+                "multiplechain/utils": "^0.1.1",
                 "php": ">=7.4",
                 "web3p/ethereum-tx": "^0.4.3",
                 "web3p/web3.php": "^0.1.6"
@@ -605,25 +604,26 @@
             "homepage": "https://github.com/MultipleChain/evm-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.13"
+                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.15"
             },
-            "time": "2023-08-10T10:50:16+00:00"
+            "time": "2023-11-01T06:03:20+00:00"
         },
         {
             "name": "multiplechain/utils",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/utils-php.git",
-                "reference": "b58832b0b412e310c357944ba98d55c99677e5ee"
+                "reference": "437ff2680dae51eaace076abcd44d1c32bd40fef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/utils-php/zipball/b58832b0b412e310c357944ba98d55c99677e5ee",
-                "reference": "b58832b0b412e310c357944ba98d55c99677e5ee",
+                "url": "https://api.github.com/repos/MultipleChain/utils-php/zipball/437ff2680dae51eaace076abcd44d1c32bd40fef",
+                "reference": "437ff2680dae51eaace076abcd44d1c32bd40fef",
                 "shasum": ""
             },
             "require": {
+                "ext-bcmath": "*",
                 "ext-mbstring": "*",
                 "php": ">=7.4",
                 "phpseclib/phpseclib": "~2.0.11"
@@ -642,22 +642,22 @@
             "homepage": "https://github.com/MultipleChain/utils-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/utils-php/issues",
-                "source": "https://github.com/MultipleChain/utils-php/tree/0.1.0"
+                "source": "https://github.com/MultipleChain/utils-php/tree/0.1.1"
             },
-            "time": "2023-03-22T08:30:14+00:00"
+            "time": "2023-11-01T06:01:06+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.44",
+            "version": "2.0.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5"
+                "reference": "28d8f438a0064c9de80857e3270d071495544640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/149f608243f8133c61926aae26ce67d2b22b37e5",
-                "reference": "149f608243f8133c61926aae26ce67d2b22b37e5",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/28d8f438a0064c9de80857e3270d071495544640",
+                "reference": "28d8f438a0064c9de80857e3270d071495544640",
                 "shasum": ""
             },
             "require": {
@@ -738,7 +738,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.44"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.45"
             },
             "funding": [
                 {
@@ -754,20 +754,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-13T08:41:47+00:00"
+            "time": "2023-09-15T20:55:47+00:00"
         },
         {
             "name": "psr/http-client",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31"
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-client/zipball/0955afe48220520692d2d09f7ab7e0f93ffd6a31",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
                 "shasum": ""
             },
             "require": {
@@ -804,9 +804,9 @@
                 "psr-18"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-client/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-client"
             },
-            "time": "2023-04-10T20:12:12+00:00"
+            "time": "2023-09-23T14:17:50+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -1448,7 +1448,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-bcmath": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

@@ -1,6 +1,6 @@
 {
     "name": "multiplechain/utils",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Blockchain general utils",
     "type": "library",
     "license": "MIT",
@@ -12,7 +12,8 @@
     "require": {
         "php": ">=7.4",
         "phpseclib/phpseclib": "~2.0.11",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-bcmath": "*"
     },
     "autoload": {
         "psr-4": {

@@ -5,7 +5,6 @@ namespace MultipleChain\EvmChains;
 use Web3\Web3;
 use Web3\Eth;
 use Exception;
-use BeycanPress\Http\Client;
 use Web3\Providers\HttpProvider;
 use MultipleChain\EvmBasedChains;
 use Web3\RequestManagers\HttpRequestManager;
