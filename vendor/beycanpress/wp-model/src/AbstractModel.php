@@ -64,7 +64,7 @@ class AbstractModel
     protected function __construct(array $columns = [])
     {
         $this->initWPDB();
-        $this->addColumns($columns);
+        $this->setColumns($columns);
         $this->createTable();
     }
 
@@ -243,10 +243,19 @@ class AbstractModel
     }
 
     /**
+     * @param string $columnName
+     */
+    public function deleteColumn(string $columnName)
+    {
+        if (!$this->existColumn($columnName)) return;
+        $this->getVar("ALTER TABLE `{$this->tableName}` DROP COLUMN `{$columnName}`");
+    }
+
+    /**
      * @param array $columns
      * @return void
      */
-    public function addColumns(array $columns)
+    public function setColumns(array $columns)
     {
         $this->columns = array_merge($this->columns, $columns);
     }
@@ -321,6 +330,31 @@ class AbstractModel
     {
         $qb = $this->createQuery()->select('COUNT(*)')->parsePredicates($predicates);
         return (int) $this->getVar($this->prepare($qb->getQuery(), $qb->getParameters())); 
+    }
+
+    /**
+     * @param string $text
+     * @param array $predicates
+     * @return array
+     */
+    public function search(string $text, array $predicates = []) : array
+    {
+        $columns = array_keys($this->columns);
+
+        $first = true;
+        foreach ($columns as $key) {
+            if ($first && !empty($predicates)) {
+                $first = false;
+                $predicates[] = [$key, 'LIKE', $text, 'AND'];
+            } else {
+                $predicates[] = [$key, 'LIKE', $text, 'OR'];
+            }
+        }
+
+        return [
+            'data' => $this->findBy($predicates, ['id', 'desc']),
+            'count' => $this->getCount($predicates) ?? 0
+        ];
     }
 
     /**

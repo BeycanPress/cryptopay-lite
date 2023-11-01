@@ -184,8 +184,9 @@ class Table extends \WP_List_Table
 
             if (!empty($this->hooks)) {
                 array_map(function($hooks) use (&$item) {
+                    $itemPlaceHolder = $item;
                     foreach($hooks as $key => $func) {
-                        $item[$key] = call_user_func($func, (object) $item);
+                        $item[$key] = call_user_func($func, (object) $itemPlaceHolder);
                     }
                 }, $this->hooks);
             }

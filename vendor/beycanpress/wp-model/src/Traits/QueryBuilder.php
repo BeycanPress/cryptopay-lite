@@ -128,6 +128,7 @@ trait QueryBuilder
      */
     protected function parsePredicates(array $predicates) : self
     {
+        $type = 'AND';
         if (empty($predicates)) {
             return $this;
         }
@@ -138,6 +139,7 @@ trait QueryBuilder
                 $columnName = $predicate[0];
                 $condition = mb_strtoupper($predicate[1], 'UTF-8');
                 $parameter = $predicate[2];
+                $type = isset($predicate[3]) ? mb_strtoupper($predicate[3], 'UTF-8') : $type;
                 $parameterType = $this->getParameterType($parameter);
                 if ($condition == 'IN') {
                     $parameter = array_map(function ($parameter) {
@@ -145,14 +147,16 @@ trait QueryBuilder
                     }, $parameter);
                     $parameterType = '('.implode(',', $parameter).')';
                 } elseif ($condition == 'LIKE') {
-                    $parameterType = $this->getParameterType($parameter);
+                    $parameterType = "'%".$this->db->esc_like($parameter)."%'";
+                    $parameter = null;
                 }
                 $predicate = "`$columnName` $condition $parameterType";
             } else {
+                $type = 'AND';
                 $parameterType = $this->getParameterType($parameter);
                 $predicate = "`$columnName` = $parameterType";
             }
-            $this->addWhere($predicate, $parameter, 'AND');
+            $this->addWhere($predicate, $parameter, $type);
         }
 
         return $this;

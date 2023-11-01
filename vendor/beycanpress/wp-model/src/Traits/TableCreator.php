@@ -72,6 +72,14 @@ trait TableCreator
                 $this->addColumn($columnName, $properties, $after);
                 $i++;
             }
+
+            $oldColumns = get_option($this->tableName . '_old_columns', []);
+            $removedColumns = array_diff_key($oldColumns, $this->columns);
+            foreach ($removedColumns as $columnName => $properties) {
+                $this->deleteColumn($columnName);
+            }
+            
+            update_option($this->tableName . '_old_columns', $this->columns);
         } 
     }
 

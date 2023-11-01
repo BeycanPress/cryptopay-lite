@@ -70,23 +70,23 @@
         },
         {
             "name": "beycanpress/wp-model",
-            "version": "0.1.2",
-            "version_normalized": "0.1.2.0",
+            "version": "0.1.3",
+            "version_normalized": "0.1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/wp-model.git",
-                "reference": "fdf6110e8fbd12571ea1a631448b31898b47f6d5"
+                "reference": "23fb4f6289b4d6fe0f3103d493b7d241265b5cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/wp-model/zipball/fdf6110e8fbd12571ea1a631448b31898b47f6d5",
-                "reference": "fdf6110e8fbd12571ea1a631448b31898b47f6d5",
+                "url": "https://api.github.com/repos/BeycanPress/wp-model/zipball/23fb4f6289b4d6fe0f3103d493b7d241265b5cd7",
+                "reference": "23fb4f6289b4d6fe0f3103d493b7d241265b5cd7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-10-01T14:40:31+00:00",
+            "time": "2023-11-01T11:32:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -113,30 +113,30 @@
             ],
             "support": {
                 "issues": "https://github.com/BeycanPress/wp-model/issues",
-                "source": "https://github.com/BeycanPress/wp-model/tree/0.1.2"
+                "source": "https://github.com/BeycanPress/wp-model/tree/0.1.3"
             },
             "install-path": "../beycanpress/wp-model"
         },
         {
             "name": "beycanpress/wp-table",
-            "version": "0.1.3",
-            "version_normalized": "0.1.3.0",
+            "version": "0.1.4",
+            "version_normalized": "0.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/wp-table.git",
-                "reference": "7feadb3b85e0608ea35f407a1581e7d9cc9edddf"
+                "reference": "d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/wp-table/zipball/7feadb3b85e0608ea35f407a1581e7d9cc9edddf",
-                "reference": "7feadb3b85e0608ea35f407a1581e7d9cc9edddf",
+                "url": "https://api.github.com/repos/BeycanPress/wp-table/zipball/d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8",
+                "reference": "d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8",
                 "shasum": ""
             },
             "require": {
                 "beycanpress/wp-model": "^0.1.1",
                 "php": ">=7.4"
             },
-            "time": "2023-10-01T14:36:52+00:00",
+            "time": "2023-11-01T10:27:40+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -161,7 +161,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BeycanPress/wp-table/issues",
-                "source": "https://github.com/BeycanPress/wp-table/tree/0.1.3"
+                "source": "https://github.com/BeycanPress/wp-table/tree/0.1.4"
             },
             "install-path": "../beycanpress/wp-table"
         },
