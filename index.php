@@ -136,5 +136,13 @@ add_action('admin_footer', function() {
 	}
 });
 
-require __DIR__ . '/vendor/autoload.php';
-new \BeycanPress\CryptoPayLite\Loader(__FILE__);
+if (extension_loaded('bcmath')) {
+    require __DIR__ . '/vendor/autoload.php';
+    new \BeycanPress\CryptoPayLite\Loader(__FILE__);
+} else {
+    add_action('admin_notices', function() {
+        $class = 'notice notice-error';
+        $message = 'CryptoPay Lite: the BCMath PHP extension is not installed. This is a widely used PHP extension for arbitrary precision mathematics which is required by CryptoPay Lite. Please visit <a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a> for install assistance. You can ask your server service provider to install BCMath.';
+        printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+    });
+}
