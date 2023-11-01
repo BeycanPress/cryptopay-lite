@@ -34,7 +34,7 @@ abstract class Plugin
             'phDir'     => trailingslashit(__DIR__),
             'pluginUrl' => plugin_dir_url($properties['pluginFile']),
             'pluginDir' => plugin_dir_path($properties['pluginFile']),
-        ]);
+        ], (array) $this->getPluginData($properties['pluginFile']));
         
         if (file_exists($this->pluginDir . 'vendor/beycanpress/csf/csf.php')) {
             require_once $this->pluginDir . 'vendor/beycanpress/csf/csf.php';

@@ -28,31 +28,31 @@ class Hook
      * @param mixed ...$args
      * @return mixed
      */
-    public static function callFilter(string $name, $value = null, ...$args)
+    public static function callFilter(string $name, $value, ...$args)
     {
         return apply_filters(self::getPrefix() . $name, $value, ...$args);
     }
 
     /**
      * @param string $name
-     * @param \Closure $callback
+     * @param mixed $callback
      * @param integer $priority
      * @param integer $acceptedArgs
      * @return void
      */
-    public static function addAction(string $name, \Closure $callback, int $priority = 10, int $acceptedArgs = 1) : void
+    public static function addAction(string $name, $callback, int $priority = 10, int $acceptedArgs = 1) : void
     {
         add_action(self::getPrefix() . $name, $callback, $priority, $acceptedArgs);
     }
 
     /**
      * @param string $name
-     * @param \Closure $callback
+     * @param mixed $callback
      * @param integer $priority
      * @param integer $acceptedArgs
      * @return mixed
      */
-    public static function addFilter(string $name, \Closure $callback, int $priority = 10, int $acceptedArgs = 1)
+    public static function addFilter(string $name, $callback, int $priority = 10, int $acceptedArgs = 1)
     {
         return add_filter(self::getPrefix() . $name, $callback, $priority, $acceptedArgs);
     }

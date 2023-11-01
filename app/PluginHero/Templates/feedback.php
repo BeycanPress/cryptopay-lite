@@ -89,20 +89,22 @@
                 pluginKey+'_premium_version',
             ];
 
-            function deactivateProcess(reason) {
-                let reasonCode = $('.'+pluginKey+'_deactivation_reason:checked').data('reason-code');
+            function deactivateProcess(reason, reasonCode) {
+                if (!reasonCode) {
+                    reasonCode = $('.'+pluginKey+'_deactivation_reason:checked').data('reason-code');
+                }
                 try {
                     $.ajax({
-                        url: "<?php echo home_url('wp-json/' . $pluginKey . '-deactivation/deactivate'); ?>",
+                        url: "<?php echo esc_url(home_url('wp-json/' . $pluginKey . '-deactivation/deactivate')); ?>",
                         type: 'POST',
                         data: {
                             reason,
                             reasonCode,
                             pluginKey,
-                            email: '<?php echo $email; ?>',
-                            pluginVersion: '<?php echo $pluginVersion; ?>',
-                            siteUrl: '<?php echo $siteUrl; ?>',
-                            siteName: '<?php echo $siteName; ?>',
+                            email: '<?php echo esc_js($email); ?>',
+                            pluginVersion: '<?php echo esc_js($pluginVersion); ?>',
+                            siteUrl: '<?php echo esc_js($siteUrl); ?>',
+                            siteName: '<?php echo esc_js($siteName); ?>',
                         },
                         beforeSend: function() {
                             $('#'+pluginKey+'-feedback-modal-loading').show();
@@ -124,7 +126,7 @@
             
             $(document).on('click', '.'+pluginKey+'-feedback-skip', function(e){
                 e.preventDefault();
-                deactivateProcess("I rather wouldn't say");
+                deactivateProcess("I rather wouldn't say", 'rather-wouldnt-say');
             });
 
             $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e){
@@ -140,8 +142,6 @@
                 if (!detail && !exlcludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
                     alert('Please provide more information!');
                     return false;
-                } else {
-                    
                 }
 
                 if (detail) {

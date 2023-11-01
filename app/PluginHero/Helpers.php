@@ -448,7 +448,7 @@ trait Helpers
     {
         $f = substr($path, 0, 1);
         $key = explode('/', $path);
-        $key = $this->pluginKey . '-addon-' . str_replace('.css', '', end($key));
+        $key = $this->pluginKey . '-' . str_replace('.css', '', end($key));
         $middlePath = $f === '/' ? 'assets' : 'assets/css/';
         $url = $this->pluginUrl . $middlePath . $path;
         wp_enqueue_style(
@@ -468,7 +468,7 @@ trait Helpers
     {
         $ip = null;
 		if (isset($_SERVER['REMOTE_ADDR'])) {
-			$ip = wp_unslash($_SERVER['REMOTE_ADDR']);
+			$ip = sanitize_text_field($_SERVER['REMOTE_ADDR']);
 			$ip = rest_is_ip_address($ip);
 			if (false === $ip) {
 				$ip = null;
@@ -508,20 +508,12 @@ trait Helpers
 
     /**
      * @param callable $function
-     * @param string $name
+     * @param string $file
      * @param int $time
      * @return object
      */
-    public function cache(callable $function, string $name, int $time = 600) : object
+    public function cache(callable $function, string $file, int $time = 600) : object
     {
-        $path = $this->pluginDir . 'cache/';
-
-        if (!file_exists($path)) {
-            mkdir($path);       
-        } 
-
-        $file = $path . $name . '.html';
-
         if (file_exists($file) && time() - $time < filemtime($file)) {
             $content = file_get_contents($file);
         } else {
@@ -890,5 +882,18 @@ trait Helpers
         } else {
             throw new \Exception('Addon already registered');
         }
+    }
+
+    /**
+     * @param string $file
+     * @return object
+     */
+    public function getPluginData(string $file) : object
+    {
+        if (!function_exists('get_plugin_data')) {
+            require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        }
+
+        return (object) get_plugin_data($file);
     }
 }

@@ -4,10 +4,12 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
 
 class Entity
 {
+    use Helpers;
+    
     /**
      * @var object
      */
-    private $entity;
+    public $entity;
 
     /**
      * @param int|null $entityId

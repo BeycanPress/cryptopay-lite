@@ -1,9 +1,12 @@
 <?php
-echo "Log date: $date" . "<br>";
-echo "File: $file" . "<br>";
-echo "Class: $class" . "<br>";
-echo "Function: $function" . "<br>";
-echo "Level: $level" . "<br>";
-echo "Message: $message" . "<br>";
-echo "Context: $context" . "<br>";
-echo '----------------------------------------' . "<br>";
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+echo "Log date: " . esc_html($date) . "<br>";
+echo "File: " . esc_html($file) . "<br>";
+echo "Class: " . esc_html($class) . "<br>";
+echo "Function: " . esc_html($function) . "<br>";
+echo "Level: " . esc_html($level) . "<br>";
+echo "Message: " . esc_html($message) . "<br>";
+echo "Context: " . esc_html($context) . "<br>";
+echo "----------------------------------------<br>";

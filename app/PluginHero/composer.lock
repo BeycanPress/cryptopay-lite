@@ -4,50 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1fe3cd4ce7013ccc18a76f9d7633bf6",
-    "packages": [
-        {
-            "name": "beycan/license-verifier",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BeycanDeveloper/license-verifier.git",
-                "reference": "649fd97da48bdfd37c93da99fdd57306fa2b6f34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BeycanDeveloper/license-verifier/zipball/649fd97da48bdfd37c93da99fdd57306fa2b6f34",
-                "reference": "649fd97da48bdfd37c93da99fdd57306fa2b6f34",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Beycan\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Halil Beycan",
-                    "email": "halilbeycan0@gmail.com"
-                }
-            ],
-            "description": "Product license verifier",
-            "homepage": "https://github.com/BeycanDeveloper/license-verifier",
-            "support": {
-                "issues": "https://github.com/BeycanDeveloper/license-verifier/issues",
-                "source": "https://github.com/BeycanDeveloper/license-verifier/tree/1.1.2"
-            },
-            "time": "2022-12-24T09:38:11+00:00"
-        }
-    ],
+    "content-hash": "3afe57830c577061cdc0907cce729466",
+    "packages": [],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
@@ -55,8 +13,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=7.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

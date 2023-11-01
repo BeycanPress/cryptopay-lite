@@ -94,5 +94,4 @@ abstract class Setting
     {
         return Plugin::$instance->setting($key);
     }
-
 }
