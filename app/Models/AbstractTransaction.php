@@ -71,14 +71,14 @@ abstract class AbstractTransaction extends AbstractModel
     {
         $predicates = '';
         $pleaceholders = ['%s'];
-        $parampeters = ['%' . $this->db->esc_like($text) . '%'];
+        $parameters = ['%' . $this->db->esc_like($text) . '%'];
         if (!empty($params)) {
             $i = 1;
             foreach ($params as $key => $value) {
-                $pleaceholder = '%s' . $i;
-                $predicates .= "AND {$key} = $pleaceholder";
+                $pleaceholder = '%' . $i . '$s';
+                $predicates .= "AND {$key} = '$pleaceholder'";
                 $pleaceholders[] = $pleaceholder;
-                $parampeters[] = $value;
+                $parameters[] = $value;
                 $i++;
             }
         }
@@ -86,7 +86,7 @@ abstract class AbstractTransaction extends AbstractModel
         return [
             'data' => $this->getResults(str_ireplace(
                 $pleaceholders, 
-                $parampeters, "
+                $parameters, "
                 SELECT * FROM {$this->tableName} 
                 WHERE hash LIKE '%s' 
                 OR orderId LIKE '%s'
@@ -99,7 +99,7 @@ abstract class AbstractTransaction extends AbstractModel
             ")),
             'count' => $this->getVar(str_ireplace(
                 $pleaceholders, 
-                $parampeters, "
+                $parameters, "
                 SELECT COUNT(id) FROM {$this->tableName} 
                 WHERE hash LIKE '%s' 
                 OR orderId LIKE '%s'
