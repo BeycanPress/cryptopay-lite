@@ -136,6 +136,28 @@ add_action('admin_footer', function() {
 	}
 });
 
+function getCryptoLitePayVersion() {
+    if (!function_exists('get_plugin_data')) {
+        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    }
+
+    return get_plugin_data(__FILE__)['Version'];
+}
+
+function cryptoPayLiteGetPHPMajorVersion() {
+    $version = explode('.', PHP_VERSION);
+    return $version[0] . '.' . $version[1];
+}
+
+$cryptoPayLiteTestedPHPVersions = array('7.4', '8.1');
+if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
+    add_action('admin_notices', function() use ($cryptoPayLiteTestedPHPVersions) {
+        $class = 'notice notice-error';
+        $message = 'CryptoPay Lite: has not been tested with your current PHP version ('.cryptoPayLiteGetPHPMajorVersion().'). This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version.';
+        printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+    });
+}
+
 if (extension_loaded('bcmath')) {
     require __DIR__ . '/vendor/autoload.php';
     new \BeycanPress\CryptoPayLite\Loader(__FILE__);
