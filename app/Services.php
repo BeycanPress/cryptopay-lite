@@ -105,6 +105,8 @@ class Services
         Plugin::$instance->addStyle('/cryptopay/css/app.css');
         
         $key = Plugin::$instance->addScript('main.js');
+        Plugin::$instance->mainJsKey = $key;
+
         wp_localize_script($key, 'CryptoPayLite', $data);
 
         $html = Hook::callAction('before_html', $data);
