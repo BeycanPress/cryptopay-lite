@@ -43,6 +43,7 @@ class Lang
             "download" => esc_html__('Download', 'cryptopay_lite'),
             "openInApp" => esc_html__('Open In App', 'cryptopay_lite'),
             "rpcConnectionError" => esc_html__('This is an RPC connection error. The relevant RPC address may have been entered incorrectly, or if it is a public RPC, your IP address may have been banned. So please make sure everything is OK. Try custom RPC providers. Please report the situation to the site administrator.', 'cryptopay_lite'),
+            "processing" => esc_html__('Processing...', 'cryptopay_lite'),
         ];
     }
 
