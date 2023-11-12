@@ -203,9 +203,12 @@ class Api extends AbstractApi
                 Response::error(esc_html__('Transaction record not found!', 'cryptopay_lite'), 'PAYF101');
             }
 
+            $failedMessage = esc_html__('Payment not verified via Blockchain', 'cryptopay_lite');
+
             try {
                 $this->data->status = (new Verifier($this->model))->verifyTransaction($transaction);
             } catch (\Exception $e) {
+                $failedMessage = sprintf(esc_html__('Payment not verified via Blockchain - Because reason: %s', 'cryptopay_lite'), $e->getMessage());
                 $this->data->status = false;
             }
 
@@ -233,7 +236,7 @@ class Api extends AbstractApi
 
                 Response::error(Hook::callFilter(
                     'payment_failed_message_' . $this->addon, 
-                    esc_html__('Payment not verified via Blockchain', 'cryptopay_lite')
+                    $failedMessage
                 ), 'PAYF102', [
                     'redirect' => $urls['failed']
                 ]);

@@ -134,7 +134,7 @@ class Services
         );
 
         if (is_null($paymentAmount)) {
-            return esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay');
+            return esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay_lite');
         }
 
         if (!$receiver = Settings::get('evmBasedWalletAddress')) {

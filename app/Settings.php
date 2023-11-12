@@ -146,7 +146,7 @@ class Settings extends Setting
 
         Settings::createSection(array(
             'id'     => 'bitcoin', 
-            'title'  => esc_html__('Bitcoin settings', 'cryptopay'),
+            'title'  => esc_html__('Bitcoin settings', 'cryptopay_lite'),
             'icon'   => 'fab fa-bitcoin',
             'fields' => array(
                 array(
@@ -160,7 +160,7 @@ class Settings extends Setting
 
         Settings::createSection(array(
             'id'     => 'solana', 
-            'title'  => esc_html__('Solana settings', 'cryptopay'),
+            'title'  => esc_html__('Solana settings', 'cryptopay_lite'),
             'icon'   => 'fas fa-project-diagram',
             'fields' => array(
                 array(
@@ -174,7 +174,7 @@ class Settings extends Setting
 
         Settings::createSection(array(
             'id'     => 'stron', 
-            'title'  => esc_html__('Tron settings', 'cryptopay'),
+            'title'  => esc_html__('Tron settings', 'cryptopay_lite'),
             'icon'   => 'fas fa-project-diagram',
             'fields' => array(
                 array(

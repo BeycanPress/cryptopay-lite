@@ -34,14 +34,15 @@ class Lang
             "paymentTimedOut" => esc_html__('Payment timed out!', 'cryptopay_lite'),
             "connectionRejected" => esc_html__('Connection rejected!', 'cryptopay_lite'),
             "pleaseWait" => esc_html__('Please wait...', 'cryptopay_lite'),
-            "convertingError" => esc_html__('There was a problem converting currency!', 'cryptopay_lite'),
+            "convertingError" => esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API!', 'cryptopay_lite'),
             "transactionSent" => esc_html__('Transaction sent', 'cryptopay_lite'),
             "notFoundAnyWallet" => esc_html__('No working wallets were found on this network. Please make sure you have a {networkName} wallet.', 'cryptopay_lite'),
             "alreadyProcessing" => esc_html__('There is currently a process on the wallet. Please try again after completing the relevant process.', 'cryptopay_lite'),
             "wallet-not-found" => esc_html__('Wallet not found!', 'cryptopay_lite'),
-            "detected" => esc_html__('Detected', 'cryptopay'),
-            "download" => esc_html__('Download', 'cryptopay'),
-            "openInApp" => esc_html__('Open In App', 'cryptopay'),
+            "detected" => esc_html__('Detected', 'cryptopay_lite'),
+            "download" => esc_html__('Download', 'cryptopay_lite'),
+            "openInApp" => esc_html__('Open In App', 'cryptopay_lite'),
+            "rpcConnectionError" => esc_html__('This is an RPC connection error. The relevant RPC address may have been entered incorrectly, or if it is a public RPC, your IP address may have been banned. So please make sure everything is OK. Try custom RPC providers. Please report the situation to the site administrator.', 'cryptopay_lite'),
         ];
     }
 
