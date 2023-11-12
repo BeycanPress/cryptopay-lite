@@ -25,7 +25,7 @@
         return window.CryptoPayLiteApp = initCryptoPayLite('cryptopay', Object.assign(CryptoPayLite, {order, params}));
     }
 
-    if (CryptoPayLite.autoInit) {
+    if (CryptoPayLite.autoLoad) {
         window.CryptoPayLiteApp = initCryptoPayLite('cryptopay', CryptoPayLite);
     }
 

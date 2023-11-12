@@ -47,7 +47,7 @@ class Services
         return self::preparePaymentProcess($addon, $confirmation, [
             'order' => $order,
             'params' => $params,
-            'autoInit' => true
+            'autoLoad' => true
         ]);
     }
 
@@ -61,7 +61,7 @@ class Services
         string $addon, bool $confirmation = true, array $data = []
     ) : string
     {
-        $autoInit = isset($data['autoInit']) ? $data['autoInit'] : false;
+        $autoLoad = isset($data['autoLoad']) ? $data['autoLoad'] : false;
         $pluginUrl = Plugin::$instance->pluginUrl;
 
         $walletImages = [];
@@ -89,7 +89,7 @@ class Services
             'providers' => [],
             'callbacks' => [],
             'addon' => $addon,
-            'autoInit'=> $autoInit,
+            'autoLoad'=> $autoLoad,
             'networks' => $networks,
             'walletImages' => $walletImages,
             'confirmation' => $confirmation,
@@ -107,7 +107,13 @@ class Services
         $key = Plugin::$instance->addScript('main.js');
         wp_localize_script($key, 'CryptoPayLite', $data);
 
-        return Plugin::$instance->view('checkout', compact('autoInit'));
+        $html = Hook::callAction('before_html', $data);
+
+        $html .= Plugin::$instance->view('checkout', compact('autoLoad'));
+
+        $html .= Hook::callAction('after_html', $data);
+
+        return $html;
     }
 
     /**
