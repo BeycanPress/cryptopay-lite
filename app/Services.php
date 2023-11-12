@@ -380,6 +380,14 @@ class Services
                     'symbol' => 'FTM',
                 ]
             ];
+        } elseif ($id == 17000) {
+            return [
+                [
+                    'symbol' => 'ETH',
+                ],
+            ];
+        } else {
+            return [];
         }
     }
 
