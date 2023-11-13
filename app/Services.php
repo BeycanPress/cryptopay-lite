@@ -61,8 +61,17 @@ class Services
         string $addon, bool $confirmation = true, array $data = []
     ) : string
     {
-        $autoLoad = isset($data['autoLoad']) ? $data['autoLoad'] : false;
         $pluginUrl = Plugin::$instance->pluginUrl;
+
+        if (isset($data['autoLoad'])) {
+            unset($data['autoLoad']);
+        }
+
+        // Set autoLoad param if order already set
+        $autoLoad = false;
+        if (!empty($data['order']) && $data['order']['amount']) {
+            $autoLoad = true;
+        }
 
         $walletImages = [];
         array_map(function($wallet) use ($pluginUrl, &$walletImages) {
@@ -79,7 +88,7 @@ class Services
             return esc_html__('No network is active, please activate at least one network!', 'cryptopay_lite');
         }
 
-        if (count($networks) == 1) {
+        if (count($networks) == 1 && !empty($data['order'])) {
             $init = self::autoInitalize($addon, $data, $networks[0]);
             if (is_string($init)) return $init;
             $data['init'] = $init;
@@ -129,11 +138,15 @@ class Services
         $network = json_decode(json_encode($network));
         $paymentCurrency = $network->currencies[0];
 
-        $paymentAmount = self::calculatePaymentAmount(
-            $data['order']['currency'], 
-            (object) $paymentCurrency, 
-            $data['order']['amount']
-        );
+        if ($data['order']['amount']) {
+            $paymentAmount = self::calculatePaymentAmount(
+                $data['order']['currency'], 
+                (object) $paymentCurrency, 
+                $data['order']['amount']
+            );
+        } else {
+            $paymentAmount = 0;
+        }
 
         if (is_null($paymentAmount)) {
             return esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay_lite');

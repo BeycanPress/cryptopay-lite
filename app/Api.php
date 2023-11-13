@@ -72,6 +72,10 @@ class Api extends AbstractApi
         $this->userId = get_current_user_id();
         $this->addon = $this->request->getParam('cp_lite_addon');
         if ($this->addon) {
+            $dynamicData = $this->request->getParam('dynamicData');
+            if (!$dynamicData) {
+                $dynamicData = (object) [];
+            }
             $this->model = Services::getModelByAddon($this->addon);
             $this->hash = $this->request->getParam('hash');
             $this->order = $this->request->getParam('order');
@@ -84,7 +88,7 @@ class Api extends AbstractApi
                 'model' => $this->model,
                 'status' => 'pending',
                 'params' => $this->request->getParam('params'),
-                'dynamicData' => $this->request->getParam('dynamicData'),
+                'dynamicData' => $dynamicData,
             ];
 
         }
