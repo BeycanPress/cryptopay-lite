@@ -153,7 +153,7 @@ class Settings extends Setting
                     'id'      => 'bitcoinPayments',
                     'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => $proMsg .  esc_html__(' With the Bitcoin Network Support add-on, you can receive Bitcoin payments in the CryptoPay add-on.', 'cryptopay_lite')
+                    'content' => $proMsg .  esc_html__(' With the Bitcoin Network Support add-on, you can receive Bitcoin payments in the CryptoPay. Network support add-ons only working with premium version.', 'cryptopay_lite')
                 ),
             )
         ));
@@ -167,13 +167,13 @@ class Settings extends Setting
                     'id'      => 'solanaPayments',
                     'title'   => esc_html__('Solana payments', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => $proMsg .  esc_html__(' With the Solana Network Support add-on, you can receive Solana payments in the CryptoPay add-on.', 'cryptopay_lite')
+                    'content' => $proMsg .  esc_html__(' With the Solana Network Support add-on, you can receive Solana payments in the CryptoPay. Network support add-ons only working with premium version.', 'cryptopay_lite')
                 ),
             )
         ));
 
         Settings::createSection(array(
-            'id'     => 'stron', 
+            'id'     => 'tron', 
             'title'  => esc_html__('Tron settings', 'cryptopay_lite'),
             'icon'   => 'fas fa-project-diagram',
             'fields' => array(
@@ -181,7 +181,7 @@ class Settings extends Setting
                     'id'      => 'tronPayments',
                     'title'   => esc_html__('Tron payments', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => $proMsg .  esc_html__(' With the Tron Network Support add-on, you can receive Tron payments in the CryptoPay add-on.', 'cryptopay_lite')
+                    'content' => $proMsg .  esc_html__(' With the Tron Network Support add-on, you can receive Tron payments in the CryptoPay. Network support add-ons only working with premium version.', 'cryptopay_lite')
                 ),
             )
         ));
