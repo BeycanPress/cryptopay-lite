@@ -14,15 +14,20 @@
     });
 
     CryptoPayLite.startPayment = (order, params) => {
-        if (!order.amount) {
+        
+        if (!CryptoPayLite.order.amount && !order.amount) {
             throw new Error('Order amount is required');
         }
 
-        if (!order.currency) {
+        if (!CryptoPayLite.order.currency && !order.currency) {
             throw new Error('Order currency is required');
         }
 
-        return window.CryptoPayLiteApp = initCryptoPayLite('cryptopay', Object.assign(CryptoPayLite, {order, params}));
+        CryptoPayLite.order = Object.assign(CryptoPayLite.order, order);
+
+        CryptoPayLite.params = Object.assign(CryptoPayLite.params, params);
+
+        return window.CryptoPayLiteApp = initCryptoPay('cryptopay', CryptoPayLite);
     }
 
     if (CryptoPayLite.autoLoad) {
