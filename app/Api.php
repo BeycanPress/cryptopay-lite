@@ -179,7 +179,7 @@ class Api extends AbstractApi
 
             Hook::callAction('payment_started_' . $this->addon, $this->data);
 
-            Response::success(esc_html__('Success'), $this->data->response || []);
+            Response::success(esc_html__('Success'), isset($this->data->dynamicData) ? $this->data->dynamicData : null);
         }
 
         Response::error(esc_html__('Model not found!', 'cryptopay_lite'), 'MOD103', [
