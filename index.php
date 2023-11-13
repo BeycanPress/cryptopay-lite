@@ -149,12 +149,6 @@ function cryptoPayLiteGetPHPMajorVersion() {
     return $version[0] . '.' . $version[1];
 }
 
-add_action('before_woocommerce_init', function() {
-    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-    }
-});
-
 $cryptoPayLiteTestedPHPVersions = array('7.4', '8.1');
 if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
     add_action('admin_notices', function() use ($cryptoPayLiteTestedPHPVersions) {
@@ -164,13 +158,37 @@ if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions
     });
 }
 
-if (extension_loaded('bcmath')) {
+function cryptoLitPayCheckRequirements() {
+    $status = true;
+
+    if (!extension_loaded('bcmath')) {
+        $status = false;
+        add_action('admin_notices', function() {
+            $class = 'notice notice-error';
+            $message = 'CryptoPay Lite: BCMath PHP extension is not installed. So CryptoPay Lite has been disabled BCMath is a mathematical library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit <a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a> for install assistance. You can ask your server service provider to install BCMath.';
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+        });
+    }
+
+    if (!extension_loaded('curl')) {
+        $status = false;
+        add_action('admin_notices', function() {
+            $class = 'notice notice-error';
+            $message = 'CryptoPay Lite: cURL PHP extension is not installed. So CryptoPay Lite has been disabled cURL is a HTTP request library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit "'.(php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>').'" for install assistance. You can ask your server service provider to install cURL.';
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+        });
+    }
+
+    return $status;
+}
+
+add_action('before_woocommerce_init', function() {
+    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+    }
+});
+
+if (cryptoLitPayCheckRequirements()) {
     require __DIR__ . '/vendor/autoload.php';
     new \BeycanPress\CryptoPayLite\Loader(__FILE__);
-} else {
-    add_action('admin_notices', function() {
-        $class = 'notice notice-error';
-        $message = 'CryptoPay Lite: the BCMath PHP extension is not installed. This is a widely used PHP extension for arbitrary precision mathematics which is required by CryptoPay Lite. Please visit <a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a> for install assistance. You can ask your server service provider to install BCMath.';
-        printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
-    });
 }
