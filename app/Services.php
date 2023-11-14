@@ -138,6 +138,11 @@ class Services
     private static function autoInitalize(string $addon, array $data, array $network)
     {
         $network = json_decode(json_encode($network));
+        
+        if (!isset($network->currencies[0])) {
+            return esc_html__('No active currencies were found on this network. Please report this to the administrator.', 'cryptopay_lite');
+        }
+
         $paymentCurrency = $network->currencies[0];
 
         if ($data['order']['amount']) {
