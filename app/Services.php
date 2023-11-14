@@ -98,6 +98,7 @@ class Services
             'hooks' => [],
             'providers' => [],
             'addon' => $addon,
+            'theme' => 'light',
             'autoLoad'=> $autoLoad,
             'networks' => $networks,
             'walletImages' => $walletImages,
@@ -106,6 +107,7 @@ class Services
             'imagesUrl' => $pluginUrl . 'assets/images/',
             'testnet' => boolval(Settings::get('testnet')),
             'lang' => Hook::callFilter('lang', Lang::get()),
+            'createTransaction' => Services::getModelByAddon($addon) ? true : false,
         ], $data);
 
         Plugin::$instance->addScript('/cryptopay/js/chunk-vendors.js');
