@@ -525,6 +525,9 @@
             window.location.reload(true);
           })
           .fail( function( response ) {
+            if (typeof response != 'object') {
+              response = JSON.parse( response );
+            }
             alert( response.error );
             wp.customize.notifications.remove('csf_field_backup_notification');
           });
@@ -548,6 +551,9 @@
           }).done( function( response ) {
             window.location.reload(true);
           }).fail( function( response ) {
+            if (typeof response != 'object') {
+              response = JSON.parse( response );
+            }
             alert( response.error );
             wp.customize.notifications.remove('csf_field_backup_notification');
           });
@@ -2449,7 +2455,9 @@
 
             })
             .fail( function( response ) {
-              response = JSON.parse( response );
+              if (typeof response != 'object') {
+                response = JSON.parse( response );
+              }
               alert( response.error );
             });
 
