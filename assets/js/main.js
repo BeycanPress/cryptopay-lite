@@ -1,6 +1,6 @@
 (async() => {
     
-    if (typeof CryptoPayLite.params.length !== 'undefined') {
+    if (typeof CryptoPayLite?.params?.length !== 'undefined') {
         CryptoPayLite.params = {};
     }
 
