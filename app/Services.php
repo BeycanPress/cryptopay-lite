@@ -341,19 +341,11 @@ class Services
      */
     public static function getTestnetsCurrencies(int $id = null) : array 
     {
-        if ($id == 5) {
+        if ($id == 11155111) {
             return [
                 [
                     'symbol' => "ETH",
                 ],
-                [
-                    'symbol' => "USDT",
-                    'address' => "0x5ab6f31b29fc2021436b3be57de83ead3286fdc7"
-                ],
-                [
-                    'symbol' => "USDC",
-                    'address' => "0x466595626333c55fa7d7ad6265d46ba5fdbbdd99"
-                ]
             ];
         } elseif ($id == 97) {
             return [
@@ -395,14 +387,6 @@ class Services
                     'symbol' => 'FTM',
                 ]
             ];
-        } elseif ($id == 17000) {
-            return [
-                [
-                    'symbol' => 'ETH',
-                ],
-            ];
-        } else {
-            return [];
         }
     }
 
