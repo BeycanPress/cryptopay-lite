@@ -95,8 +95,8 @@ class Services
         }
 
         $data = array_merge([
+            'hooks' => [],
             'providers' => [],
-            'callbacks' => [],
             'addon' => $addon,
             'autoLoad'=> $autoLoad,
             'networks' => $networks,

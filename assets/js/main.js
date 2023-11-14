@@ -13,21 +13,21 @@
         }
     });
 
-    CryptoPayLite.startPayment = (order, params) => {
+    CryptoPayLite.startPayment = (order = {}, params = {}) => {
         
-        if (!CryptoPayLite.order.amount && !order.amount) {
+        if (!CryptoPayLite?.order?.amount && !order.amount) {
             throw new Error('Order amount is required');
         }
 
-        if (!CryptoPayLite.order.currency && !order.currency) {
+        if (!CryptoPayLite?.order?.currency && !order.currency) {
             throw new Error('Order currency is required');
         }
 
-        CryptoPayLite.order = Object.assign(CryptoPayLite.order, order);
+        CryptoPayLite.order = Object.assign(CryptoPayLite.order || {}, order);
 
-        CryptoPayLite.params = Object.assign(CryptoPayLite.params, params);
+        CryptoPayLite.params = Object.assign(CryptoPayLite.params || {}, params);
 
-        return window.CryptoPayLiteApp = initCryptoPay('cryptopay', CryptoPayLite);
+        return window.CryptoPayLiteApp = initCryptoPayLite('cryptopay', CryptoPayLite);
     }
 
     if (CryptoPayLite.autoLoad) {
