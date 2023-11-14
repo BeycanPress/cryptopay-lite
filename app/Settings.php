@@ -187,29 +187,34 @@ class Settings extends Setting
         ));
 
         self::createSection(array(
-            'id'     => 'customPricesOptions', 
-            'title'  => esc_html__('Custom token prices', 'cryptopay_lite'),
-            'icon'   => 'fa fa-money',
+            'id'     => 'currencyConverter', 
+            'title'  => esc_html__('Currency converter', 'cryptopay_lite'),
+            'icon'   => 'fas fa-dollar-sign',
             'fields' => array(
+                array(
+                    'id' => 'otherConverterLinks',
+                    'type' => 'content',
+                    'content' => 'Currently, in crypto payments, most people list prices in FIAT currencies, i.e. currencies such as USD, EUR. With the currency converter, we convert these currencies into the currency chosen by the user. By default the CryptoCompare API is available. If your token is listed on Coin Market Cap, Coin Gecko or DEXs. You can get suitable currency converter add-ons to get the price value of your token.
+                    <br><br>
+                    <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-converter" target="_blank">'.esc_html__('Click for more information', 'cryptopay_lite').'</a>
+                    <br><br><a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=lite_plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters" target="_blank">'.esc_html__('Buy custom converters', 'cryptopay_lite').'</a>',
+                    'title' => esc_html__('What is a currency converter?', 'cryptopay_lite')
+                ),
+                array(
+                    'id' => 'autoPriceUpdateMin',
+                    'type' => 'content',
+                    'title' => esc_html__('Auto price update (Min)', 'cryptopay_lite'),
+                    'content' =>  $proMsg . esc_html__(' The setting where you specify how long the price will be updated after the network and cryptocurrency has been selected.', 'cryptopay_lite'),
+                    'default' => 0.5,
+                    'sanitize' => function($val) {
+                        return floatval($val);
+                    }
+                ),
                 array(
                     'id'      => 'customPrices',
                     'title'   => esc_html__('Custom prices', 'cryptopay_lite'),
                     'type'    => 'content',
                     'content' => $proMsg .  esc_html__('You can assign prices corresponding to fiat currencies to your own custom tokens.', 'cryptopay_lite')
-                ),
-            ) 
-        ));
-
-        self::createSection(array(
-            'id'     => 'apis', 
-            'title'  => esc_html__('API\'s', 'cryptopay_lite'),
-            'icon'   => 'fas fa-project-diagram',
-            'fields' => array(
-                array(
-                    'id' => 'otherConverterLinks',
-                    'type' => 'content',
-                    'content' => '<a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=lite_version&utm_medium=plugin_settings" target="_blank">'.esc_html__('Buy custom converter API\'s', 'cryptopay_lite').'</a>',
-                    'title' => esc_html__('Buy custom converter API\'s', 'cryptopay_lite')
                 ),
                 array(
                     'id'      => 'converter',

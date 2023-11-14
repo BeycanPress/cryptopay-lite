@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     1.6.1
+ * Version:     2.0.0
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress LLC
@@ -13,10 +13,8 @@
  * Domain Path: /languages
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
  * Requires at least: 5.0
- * Tested up to: 6.3
+ * Tested up to: 6.4.1
  * Requires PHP: 7.4
- * WC requires at least: 4.4
- * WC tested up to: 8.0
 */
 
 add_action('admin_footer', function() {
@@ -153,7 +151,7 @@ $cryptoPayLiteTestedPHPVersions = array('7.4', '8.1');
 if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
     add_action('admin_notices', function() use ($cryptoPayLiteTestedPHPVersions) {
         $class = 'notice notice-error';
-        $message = 'CryptoPay Lite: has not been tested with your current PHP version ('.cryptoPayLiteGetPHPMajorVersion().'). This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version.';
+        $message = 'CryptoPay Lite: has not been tested with your current PHP version ('.cryptoPayLiteGetPHPMajorVersion().'). This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version. Or if you encounter a problem, you can get support from us.';
         printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
     });
 }
