@@ -67,6 +67,10 @@ class Services
             unset($data['autoLoad']);
         }
 
+        if (isset($data['params']) && !is_object($data['params'])) {
+            $data['params'] = (object) $data['params'];
+        }
+
         // Set autoLoad param if order already set
         $autoLoad = false;
         if (!empty($data['order']) && $data['order']['amount']) {
