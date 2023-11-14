@@ -1,4 +1,8 @@
 (async() => {
+    
+    if (typeof CryptoPayLite.params.length !== 'undefined') {
+        CryptoPayLite.params = {};
+    }
 
     await new Promise((resolve) => {
         if (CryptoPayLite.providers.length > 0) {
