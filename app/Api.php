@@ -124,8 +124,10 @@ class Api extends AbstractApi
      */
     public function init() : void
     {   
-        Hook::callAction('init_' . $this->addon, $this->data);
-        Hook::callAction('check_order_' . $this->addon, $this->order);
+        // data customizer
+        $this->data = Hook::callFilter('init_' . $this->addon, $this->data);
+        // Check order or update
+        $this->data->order = $this->order = Hook::callFilter('check_order_' . $this->addon, $this->order);
 
         $paymentAmount = Services::calculatePaymentAmount(
             $this->order->currency, $this->order->paymentCurrency, $this->order->amount
@@ -156,13 +158,18 @@ class Api extends AbstractApi
     public function createTransaction() : void
     {
         if ($this->model) {
-            Hook::callAction('check_order_' . $this->addon, $this->order);
-            Hook::callAction('before_payment_started_' . $this->addon, $this->data);
-
-            if (!$this->hash) {
-                Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'CT101');
-            }
             
+            if (!$this->hash) {
+                Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'CT101', [
+                    'redirect' => 'reload'
+                ]);
+            }
+
+            // Check order or update
+            $this->data->order = $this->order = Hook::callFilter('check_order_' . $this->addon, $this->order);
+            // data customizer
+            $this->data = Hook::callFilter('before_payment_started_' . $this->addon, $this->data);
+
             $date = date('Y-m-d H:i:s', $this->getUTCTime()->getTimestamp());
             if ($this->model->findOneBy(['hash' => $this->hash])) {
                 Response::error(esc_html__('Transaction already exists!', 'cryptopay_lite'), 'CT102');
@@ -197,12 +204,14 @@ class Api extends AbstractApi
     public function paymentFinished() : void
     {   
         if ($this->model) {
-            Hook::callAction('check_order_' . $this->addon, $this->order);
-            Hook::callAction('before_payment_finished_' . $this->addon, $this->data);
-            
             if (!$this->hash) {
                 Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'GNR101');
             }
+
+            // Check order or update
+            $this->data->order = $this->order = Hook::callFilter('check_order_' . $this->addon, $this->order);
+            // data customizer
+            $this->data = Hook::callFilter('before_payment_finished_' . $this->addon, $this->data);
 
             if (!$transaction = $this->model->findOneBy(['hash' => $this->hash])) {
                 Response::error(esc_html__('Transaction record not found!', 'cryptopay_lite'), 'PAYF101');
