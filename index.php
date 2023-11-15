@@ -151,7 +151,7 @@ $cryptoPayLiteTestedPHPVersions = array('7.4', '8.1');
 if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
     add_action('admin_notices', function() use ($cryptoPayLiteTestedPHPVersions) {
         $class = 'notice notice-error';
-        $message = 'CryptoPay Lite: has not been tested with your current PHP version ('.cryptoPayLiteGetPHPMajorVersion().'). This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version.';
+        $message = 'CryptoPay Lite: has not been tested with your current PHP version '.cryptoPayLiteGetPHPMajorVersion().'. This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version.';
         printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
     });
 }
