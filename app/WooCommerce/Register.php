@@ -40,10 +40,12 @@ class Register
                 );
             }
 
-            Hook::addAction('check_order_woocommerce', function(object $order) {
+            Hook::addFilter('check_order_woocommerce', function(object $order) {
                 if (!wc_get_order($order->id)) {
                     Response::error(esc_html__('The relevant order was not found!', 'cryptopay_lite'), 'ORDER_NOT_FOUND');
                 }
+
+                return $order;
             });
 
             Hook::addAction('payment_started_woocommerce', function(object $data) {
