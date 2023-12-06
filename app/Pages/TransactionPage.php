@@ -48,7 +48,6 @@ class TransactionPage extends Page
      */
     public function __construct(
         string $name, 
-        string $slug, 
         string $addon, 
         int $priority = 10,
         array $hooks = [], 
@@ -56,7 +55,7 @@ class TransactionPage extends Page
         array $excludeColumns = []
     )
     {
-        $slug = $this->pluginKey . '_' . sanitize_title($slug);
+        $slug = $this->pluginKey . '_' . sanitize_title($addon) . '_transactions';
         
         if (in_array($slug, self::$slugs)) {
             throw new \Exception('This slug is already registered, please choose another slug!');
