@@ -2,7 +2,7 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, MetaMask, TrustWallet, WalletConnect, Phantom, BTC, ETH, BNB, SOL, TRX
 Requires at least: 5.0
-Tested up to: 6.3.1
+Tested up to: 6.4.2
 Requires PHP: 7.4
 Stable Tag: 1.6.1
 Version: 1.6.1
