@@ -159,6 +159,37 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 
 == Changelog ==
 
+= 2.0.0 =
+* Added: Payment class for developers.
+* Added: WooCommerce HPOS compatibility.
+* Added: Web3Modal support (supporting 300+ wallets).
+* Added: Bitget and Okx wallet support for EVM Based networks.
+* Added: Message to application redirects with Deep Link.
+* Added: Polygon zkEVM and zkSync Era between Default networks list and Testnets.
+* Added: Wallets are not hidden on any platform, instead they provide information about the wallet.
+* Added: If it is in a Webview browser, that is, a wallet application, all other options are removed when the relevant wallet is detected.
+* Added: Instant purchase option with CryptoPay on WooCommerce product pages.
+* Added: Email reminder feature for networks that have been approved for a long time, such as Bitcoin.
+* Added: WordPress Cron settings and informations for Server cron.
+* Added: The ability to choose the payment process you want with network and currency-based listing modes.
+* Added: Timeout feature for wallets that do not send an event when the connection is rejected. And if you close the waiting section directly. The wallet connection process is reset.
+* Added: The ability to add special discounts for payments in certain currencies.
+* Added: Refund via CryptoPay option has been to orders.
+* Added: With the Sanctions method and the first sanctions API Coinfirm, the feature of rejecting the payment or showing it in the transaction list if there is a sanction in the wallet addresses has been added.
+* Added: Transaction sender & receiver address to the Transactions list.
+* Updated: Ethereum Goerli Testnet to Sepolia Testnet.
+* Updated: ENS Domain issue has been removed and instead, special domains that you can add for each network have been introduced.
+* Improved: Optimization improvements regarding provider installations have been made.
+* Improved: In the Checkout section, initialization data started to be given together with the form control, thus reducing two consecutive requests to a single request.
+* Improved: For users who do not have the network in the wallet they want to connect to, open RPC addresses provided by wagmi are added instead of adding your RPC URLs.
+* Fixed: Issue with auto-updater not resetting after changing currency.
+* Fixed: The issue of not receiving specially added field data in the payment feature on the WooCommerce checkout page.
+* Fixed: Error when Phantom option is active and Phantom cannot be detected.
+* Fixed: Trust Wallet Browser plugin not being detected or it interferes with MetaMask.
+* Fixed: the issue where page refresh was required in critical errors but could not be refreshed due to incorrect parameters.
+* Removed: BUSD from default settings because Binance ended support
+Depracted: startPaymentProcess, preparePaymentProcess methods in Services.
+
 = 1.6.1 =
 * Fixed: Download text looked bad in black theme
 * Fixed: In some cases, the get_plugin_data function is not defined
