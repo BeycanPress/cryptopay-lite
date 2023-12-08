@@ -188,7 +188,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Fixed: Trust Wallet Browser plugin not being detected or it interferes with MetaMask.
 * Fixed: the issue where page refresh was required in critical errors but could not be refreshed due to incorrect parameters.
 * Removed: BUSD from default settings because Binance ended support
-Depracted: startPaymentProcess, preparePaymentProcess methods in Services.
+* Depracted: startPaymentProcess, preparePaymentProcess methods in Services.
 
 = 1.6.1 =
 * Fixed: Download text looked bad in black theme
