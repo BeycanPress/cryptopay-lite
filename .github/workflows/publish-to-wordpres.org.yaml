@@ -6,11 +6,6 @@ on:
       - Create auto release
     types:
       - completed
-  release:
-    types:
-      - published
-    branches:
-      - master
 
 env:
   PLUGIN_SLUG: cryptopay-wc-lite
@@ -19,7 +14,7 @@ jobs:
   deploy_to_wp_org:
     permissions: write-all
     name: WordPress.org Plugin Deploy
-    if: ${{ github.event.workflow.name != 'Create auto release' || ( github.event.workflow.name == 'Create auto release' && github.event.workflow_run.conclusion == 'success' ) }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
