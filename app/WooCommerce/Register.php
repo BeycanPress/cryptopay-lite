@@ -23,6 +23,14 @@ class Register
                 $gateways[] = Gateway::class;
                 return $gateways;
             });
+
+            add_action('woocommerce_blocks_loaded', function () {
+                if (class_exists('Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType')) {
+                    add_action('woocommerce_blocks_payment_method_type_registration', function ($registry) {
+                        $registry->register(new BlocksGateway());
+                    });
+                }
+            });
             
             if (!is_admin()) {
                 new Checkout();

@@ -8,11 +8,16 @@ use \BeycanPress\CryptoPayLite\PluginHero\Plugin;
 class Gateway extends \WC_Payment_Gateway
 {   
     /**
+     * @var string
+     */
+    public const ID = 'cryptopay_lite';
+
+    /**
      * @return void
      */
     public function __construct()
     {
-        $this->id = 'cryptopay_lite';
+        $this->id = self::ID;
         $this->method_title = esc_html__('CryptoPay Lite', 'cryptopay_lite');
         $this->method_description = esc_html__('With CryptoPay, your customers can easily pay with their cryptocurrencies.', 'cryptopay_lite');
 
