@@ -2,20 +2,20 @@
     "packages": [
         {
             "name": "beycanpress/csf",
-            "version": "2.3.3",
-            "version_normalized": "2.3.3.0",
+            "version": "2.3.4",
+            "version_normalized": "2.3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/csf.git",
-                "reference": "5a3fd30f23ebcae9283dc8d3167996d0abb9dba3"
+                "reference": "f8db82b6339e69cbb765496d623789e7f472977e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/5a3fd30f23ebcae9283dc8d3167996d0abb9dba3",
-                "reference": "5a3fd30f23ebcae9283dc8d3167996d0abb9dba3",
+                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/f8db82b6339e69cbb765496d623789e7f472977e",
+                "reference": "f8db82b6339e69cbb765496d623789e7f472977e",
                 "shasum": ""
             },
-            "time": "2023-11-14T05:01:17+00:00",
+            "time": "2023-12-06T04:35:59+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -26,7 +26,7 @@
             "homepage": "https://github.com/BeycanPress/csf",
             "support": {
                 "issues": "https://github.com/BeycanPress/csf/issues",
-                "source": "https://github.com/BeycanPress/csf/tree/2.3.3"
+                "source": "https://github.com/BeycanPress/csf/tree/2.3.4"
             },
             "install-path": "../beycanpress/csf"
         },
