@@ -161,7 +161,7 @@ class Services
             $paymentAmount = self::calculatePaymentAmount(
                 $data['order']['currency'],
                 (object) $paymentCurrency,
-                $data['order']['amount']
+                floatval($data['order']['amount'])
             );
         } else {
             $paymentAmount = 0;
@@ -494,6 +494,6 @@ class Services
             $amount = number_format($amount, $decimals, '.', '');
         }
 
-        return $amount > 1 ? $amount : rtrim($amount, '0');
+        return strval($amount > 1 ? $amount : rtrim(strval($amount), '0'));
     }
 }

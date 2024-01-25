@@ -25,9 +25,9 @@ class Api extends AbstractApi
     private Request $request;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $addon;
+    private ?string $addon;
 
     /**
      * @var AbstractTransaction
@@ -35,9 +35,9 @@ class Api extends AbstractApi
     private AbstractTransaction $model;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $hash;
+    private ?string $hash;
 
     /**
      * @var object
@@ -123,7 +123,7 @@ class Api extends AbstractApi
         $paymentAmount = Services::calculatePaymentAmount(
             $this->order->currency,
             $this->order->paymentCurrency,
-            $this->order->amount
+            floatval($this->order->amount)
         );
 
         if (is_null($paymentAmount)) {
@@ -263,7 +263,7 @@ class Api extends AbstractApi
         $paymentAmount = Services::calculatePaymentAmount(
             $this->order->currency,
             $this->order->paymentCurrency,
-            $this->order->amount,
+            floatval($this->order->amount),
             $this->network
         );
 

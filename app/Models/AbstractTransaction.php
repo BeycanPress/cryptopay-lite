@@ -118,7 +118,7 @@ abstract class AbstractTransaction extends AbstractModel
      */
     public function updateStatusByHash(string $hash, string $status): ?bool
     {
-        return $this->update([
+        return (bool) $this->update([
             'status' => $status,
             'updatedAt' => date('Y-m-d H:i:s', $this->getUTCTime()->getTimestamp())
         ], [
