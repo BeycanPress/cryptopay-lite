@@ -30,9 +30,9 @@ class Api extends AbstractApi
     private ?string $addon;
 
     /**
-     * @var AbstractTransaction
+     * @var AbstractTransaction|null
      */
-    private AbstractTransaction $model;
+    private ?AbstractTransaction $model;
 
     /**
      * @var string|null
