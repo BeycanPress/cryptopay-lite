@@ -1,4 +1,13 @@
-<?php defined('ABSPATH') || exit;
+<?php
+
+declare(strict_types=1);
+
+defined('ABSPATH') || exit;
+
+// @phpcs:disable PSR1.Files.SideEffects
+// @phpcs:disable PSR12.Files.FileHeader
+// @phpcs:disable Generic.Files.LineLength
+// @phpcs:disable Generic.Files.InlineHTML
 
 /**
  * Plugin Name: CryptoPay Lite
@@ -14,17 +23,17 @@
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
  * Requires at least: 5.0
  * Tested up to: 6.4.2
- * Requires PHP: 7.4
+ * Requires PHP: 8.1
 */
 
-add_action('admin_footer', function() {
+add_action('admin_footer', function (): void {
     $count = get_option('cryptopay_premium_version_promotion');
     $date = get_option('cryptopay_premium_version_promotion_date');
     $count = $count ? $count : 0;
-	if ($count < 3 && $date != date('Y-m-d')) {
+    if ($count < 3 && $date != date('Y-m-d')) {
         $count++;
-    	update_option('cryptopay_premium_version_promotion', $count);
-    	update_option('cryptopay_premium_version_promotion_date', date('Y-m-d'));
+        update_option('cryptopay_premium_version_promotion', $count);
+        update_option('cryptopay_premium_version_promotion_date', date('Y-m-d'));
         ?>
         <div class="cp-video-modal">
             <div class="modal-content">
@@ -131,10 +140,14 @@ add_action('admin_footer', function() {
             });
         </script>
         <?php
-	}
+    }
 });
 
-function getCryptoLitePayVersion() {
+/**
+ * @return string
+ */
+function getCryptoLitePayVersion(): string
+{
     if (!function_exists('get_plugin_data')) {
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
     }
@@ -142,26 +155,34 @@ function getCryptoLitePayVersion() {
     return get_plugin_data(__FILE__)['Version'];
 }
 
-function cryptoPayLiteGetPHPMajorVersion() {
+/**
+ * @return string
+ */
+function cryptoPayLiteGetPHPMajorVersion(): string
+{
     $version = explode('.', PHP_VERSION);
     return $version[0] . '.' . $version[1];
 }
 
-$cryptoPayLiteTestedPHPVersions = array('7.4', '8.1');
+$cryptoPayLiteTestedPHPVersions = array(8.1, 8.2);
 if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
-    add_action('admin_notices', function() use ($cryptoPayLiteTestedPHPVersions) {
+    add_action('admin_notices', function () use ($cryptoPayLiteTestedPHPVersions): void {
         $class = 'notice notice-error';
-        $message = 'CryptoPay Lite: has not been tested with your current PHP version '.cryptoPayLiteGetPHPMajorVersion().'. This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP '.implode(' or ', $cryptoPayLiteTestedPHPVersions).' versions. Please ask your server service provider to update your PHP version.';
+        $message = 'CryptoPay Lite: has not been tested with your current PHP version ' . cryptoPayLiteGetPHPMajorVersion() . '. This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP ' . implode(' or ', $cryptoPayLiteTestedPHPVersions) . ' versions. Please ask your server service provider to update your PHP version.';
         printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
     });
 }
 
-function cryptoLitPayCheckRequirements() {
+/**
+ * @return bool
+ */
+function cryptoLitPayCheckRequirements(): bool
+{
     $status = true;
 
     if (!extension_loaded('bcmath')) {
         $status = false;
-        add_action('admin_notices', function() {
+        add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
             $message = 'CryptoPay Lite: BCMath PHP extension is not installed. So CryptoPay Lite has been disabled BCMath is a mathematical library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit <a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a> for install assistance. You can ask your server service provider to install BCMath.';
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
@@ -170,9 +191,9 @@ function cryptoLitPayCheckRequirements() {
 
     if (!extension_loaded('curl')) {
         $status = false;
-        add_action('admin_notices', function() {
+        add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
-            $message = 'CryptoPay Lite: cURL PHP extension is not installed. So CryptoPay Lite has been disabled cURL is a HTTP request library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit "'.(php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>').'" for install assistance. You can ask your server service provider to install cURL.';
+            $message = 'CryptoPay Lite: cURL PHP extension is not installed. So CryptoPay Lite has been disabled cURL is a HTTP request library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit "' . (php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>') . '" for install assistance. You can ask your server service provider to install cURL.';
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
         });
     }
@@ -180,7 +201,7 @@ function cryptoLitPayCheckRequirements() {
     return $status;
 }
 
-add_action('before_woocommerce_init', function() {
+add_action('before_woocommerce_init', function (): void {
     if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);

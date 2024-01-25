@@ -1,62 +1,61 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\Pages;
 
-use \BeycanPress\WPTable\Table;
-use \BeycanPress\CryptoPayLite\Verifier;
-use \BeycanPress\CryptoPayLite\Services;
-use \BeycanPress\CryptoPayLite\PluginHero\Page;
+use BeycanPress\WPTable\Table;
+use BeycanPress\CryptoPayLite\Services;
+use BeycanPress\CryptoPayLite\PluginHero\Page;
 
 /**
  * Order transactions page
  */
 class TransactionPage extends Page
-{   
+{
     /**
      * @var object
      */
-    private $model;
+    private object $model;
 
     /**
-     * @var array
+     * @var array<string>
      */
-    private $hooks;
+    private array $hooks;
 
     /**
-     * @var array
+     * @var array<string>
      */
-    private static $slugs = [];
+    private static array $slugs = [];
 
     /**
      * @var string
      */
-    public $pageUrl;
+    public string $pageUrl;
 
     /**
-     * @var array
+     * @var array<string>
      */
-    private $excludeColumns = [];
+    private array $excludeColumns = [];
 
     /**
      * @param string $name
-     * @param string $slug
      * @param string $addon
      * @param int $priority
-     * @param string $hooks
+     * @param array<string> $hooks
      * @param bool $confirmation
-     * @param string $excludeColumns
+     * @param array<string> $excludeColumns
      */
     public function __construct(
-        string $name, 
-        string $addon, 
+        string $name,
+        string $addon,
         int $priority = 10,
-        array $hooks = [], 
-        bool $confirmation = true, 
+        array $hooks = [],
+        bool $confirmation = true,
         array $excludeColumns = []
-    )
-    {
+    ) {
         $slug = $this->pluginKey . '_' . sanitize_title($addon) . '_transactions';
-        
+
         if (in_array($slug, self::$slugs)) {
             throw new \Exception('This slug is already registered, please choose another slug!');
         }
@@ -80,7 +79,7 @@ class TransactionPage extends Page
     /**
      * @return void
      */
-    public function page() : void
+    public function page(): void
     {
         $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : null;
 
@@ -107,7 +106,7 @@ class TransactionPage extends Page
             'updatedAt' => esc_html__('Updated at', 'cryptopay_lite'),
             'createdAt' => esc_html__('Created at', 'cryptopay_lite'),
             'delete'    => esc_html__('Delete', 'cryptopay_lite')
-        ], function($key) {
+        ], function ($key) {
             return !in_array($key, $this->excludeColumns);
         }, ARRAY_FILTER_USE_KEY))
         ->setOptions([
@@ -119,19 +118,20 @@ class TransactionPage extends Page
         ->setOrderQuery(['createdAt', 'desc'])
         ->setSortableColumns(['createdAt'])
         ->addHooks(array_merge([
-            'hash' => function($tx) {
-                return '<a href="'.Services::getProviderByTx($tx)->Transaction($tx->hash)->getUrl().'" target="_blank">'.$tx->hash.'</a>';
+            'hash' => function ($tx) {
+                // @phpcs:ignore
+                return '<a href="' . Services::getProviderByTx($tx)->Transaction($tx->hash)->getUrl() . '" target="_blank">' . $tx->hash . '</a>';
             },
-            'network' => function($tx) {
+            'network' => function ($tx) {
                 return json_decode($tx->network)->name;
             },
-            'amount' => function($tx) {
+            'amount' => function ($tx) {
                 $order = json_decode($tx->order);
                 $currency = $order->paymentCurrency;
                 $amount = Services::toString($order->paymentPrice ?? $order->paymentAmount, $currency->decimals);
                 return esc_html($amount . " " . $currency->symbol);
             },
-            'status' => function($tx) {
+            'status' => function ($tx) {
                 if ($tx->status == 'pending') {
                     return esc_html__('Pending', 'cryptopay_lite');
                 } elseif ($tx->status == 'verified') {
@@ -140,20 +140,26 @@ class TransactionPage extends Page
                     return esc_html__('Failed', 'cryptopay_lite');
                 }
             },
-            'createdAt' => function($tx) {
+            'createdAt' => function ($tx) {
+                // @phpcs:ignore
                 return (new \DateTime($tx->createdAt))->setTimezone(new \DateTimeZone(wp_timezone_string()))->format('Y-m-d H:i:s');
             },
-            'updatedAt' => function($tx) {
+            'updatedAt' => function ($tx) {
+                // @phpcs:ignore
                 return (new \DateTime($tx->updatedAt))->setTimezone(new \DateTimeZone(wp_timezone_string()))->format('Y-m-d H:i:s');
             },
-            'delete' => function($tx) {
-                if (strtolower($tx->status) == 'pending') return;
-                return '<a class="button" href="'.$this->getCurrentUrl() . '&id=' . $tx->id.'">'.esc_html__('Delete', 'cryptopay_lite').'</a>';
+            'delete' => function ($tx): string {
+                if (strtolower($tx->status) == 'pending') {
+                    return '';
+                }
+
+                // @phpcs:ignore
+                return '<a class="button" href="' . $this->getCurrentUrl() . '&id=' . $tx->id . '">' . esc_html__('Delete', 'cryptopay_lite') . '</a>';
             }
-        ], $this->hooks))->addHeaderElements(function() {
+        ], $this->hooks))->addHeaderElements(function () {
             return $this->view('pages/transaction-page/form');
         })
-        ->createDataList(function(object $model) use ($params) {
+        ->createDataList(function (object $model) use ($params) {
             if (isset($_GET['s']) && !empty($_GET['s'])) {
                 $s = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : null;
                 return array_values($model->search($s, $params));

@@ -1,71 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\Http\Request;
-use \BeycanPress\Http\Response;
-use \BeycanPress\CryptoPayLite\Services;
-use \BeycanPress\CryptoPayLite\Verifier;
-use \BeycanPress\CryptoPayLite\PluginHero\Hook;
-use \BeycanPress\CryptoPayLite\PluginHero\Api as AbstractApi;
+use BeycanPress\Http\Request;
+use BeycanPress\Http\Response;
+use BeycanPress\CryptoPayLite\Services;
+use BeycanPress\CryptoPayLite\Verifier;
+use BeycanPress\CryptoPayLite\PluginHero\Hook;
+use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
+use BeycanPress\CryptoPayLite\PluginHero\Api as AbstractApi;
 
 class Api extends AbstractApi
 {
     /**
      * @var int
      */
-    private $userId;
+    private int $userId;
 
     /**
      * @var Request
      */
-    private $request;
+    private Request $request;
 
     /**
      * @var string
      */
-    private $addon;
+    private string $addon;
 
     /**
      * @var AbstractTransaction
      */
-    private $model;
+    private AbstractTransaction $model;
 
     /**
      * @var string
      */
-    private $hash;
+    private string $hash;
 
     /**
      * @var object
      */
 
-    private $order;
+    private object $order;
 
     /**
      * @var object
      */
-    private $network;
+    private object $network;
 
     /**
      * @var object
      */
-    private $data;
+    private object $data;
 
     /**
-     * @var array
+     * @return void
      */
-    private $errorMap = [
-        'GNR101' => 'Please enter a valid data!',
-        'INIT101' => 'There was a problem converting currency!',
-        'INIT102' => 'There was a problem getting wallet address!',
-        'CT102' => 'Transaction already exists!',
-        'PAYF101' => 'Transaction record not found!',
-        'PAYF102' => 'Payment not verified via Blockchain',
-        'MOD103' => 'Model not found!',
-        'ORDER_NOT_FOUND' => 'The relevant order was not found!',
-    ];
-
     public function __construct()
     {
         $this->request = new Request();
@@ -90,7 +82,6 @@ class Api extends AbstractApi
                 'params' => $this->request->getParam('params'),
                 'dynamicData' => $dynamicData,
             ];
-
         }
 
         $this->addRoutes([
@@ -122,15 +113,17 @@ class Api extends AbstractApi
     /**
      * @return void
      */
-    public function init() : void
-    {   
+    public function init(): void
+    {
         // data customizer
         $this->data = Hook::callFilter('init_' . $this->addon, $this->data);
         // Check order or update
         $this->data->order = $this->order = Hook::callFilter('check_order_' . $this->addon, $this->order);
 
         $paymentAmount = Services::calculatePaymentAmount(
-            $this->order->currency, $this->order->paymentCurrency, $this->order->amount
+            $this->order->currency,
+            $this->order->paymentCurrency,
+            $this->order->amount
         );
 
         if (is_null($paymentAmount)) {
@@ -155,10 +148,9 @@ class Api extends AbstractApi
     /**
      * @return void
      */
-    public function createTransaction() : void
+    public function createTransaction(): void
     {
         if ($this->model) {
-            
             if (!$this->hash) {
                 Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'CT101', [
                     'redirect' => 'reload'
@@ -174,7 +166,7 @@ class Api extends AbstractApi
             if ($this->model->findOneBy(['hash' => $this->hash])) {
                 Response::error(esc_html__('Transaction already exists!', 'cryptopay_lite'), 'CT102');
             }
-            
+
             $this->model->insert([
                 'hash' => $this->hash,
                 'order' => json_encode($this->order),
@@ -201,8 +193,8 @@ class Api extends AbstractApi
     /**
      * @return void
      */
-    public function paymentFinished() : void
-    {   
+    public function paymentFinished(): void
+    {
         if ($this->model) {
             if (!$this->hash) {
                 Response::badRequest(esc_html__('Please enter a valid data.', 'cryptopay_lite'), 'GNR101');
@@ -222,7 +214,10 @@ class Api extends AbstractApi
             try {
                 $this->data->status = (new Verifier($this->model))->verifyTransaction($transaction);
             } catch (\Exception $e) {
-                $failedMessage = sprintf(esc_html__('Payment not verified via Blockchain - Because reason: %s', 'cryptopay_lite'), $e->getMessage());
+                $failedMessage = sprintf(
+                    esc_html__('Payment not verified via Blockchain - Because reason: %s', 'cryptopay_lite'),
+                    $e->getMessage()
+                );
                 $this->data->status = false;
             }
 
@@ -235,21 +230,19 @@ class Api extends AbstractApi
             }
 
             if ($this->data->status) {
-                
                 $this->model->updateStatusToVerifiedByHash($transaction->hash);
 
                 Response::success(Hook::callFilter(
-                    'payment_success_message_' . $this->addon, 
+                    'payment_success_message_' . $this->addon,
                     esc_html__('Payment completed successfully', 'cryptopay_lite')
                 ), [
                     'redirect' => $urls['success']
                 ]);
             } else {
-                
                 $this->model->updateStatusToFailedByHash($transaction->hash);
 
                 Response::error(Hook::callFilter(
-                    'payment_failed_message_' . $this->addon, 
+                    'payment_failed_message_' . $this->addon,
                     $failedMessage
                 ), 'PAYF102', [
                     'redirect' => $urls['failed']
@@ -265,10 +258,13 @@ class Api extends AbstractApi
     /**
      * @return void
      */
-    public function currencyConverter() : void
-    {   
+    public function currencyConverter(): void
+    {
         $paymentAmount = Services::calculatePaymentAmount(
-            $this->order->currency, $this->order->paymentCurrency, $this->order->amount, $this->network
+            $this->order->currency,
+            $this->order->paymentCurrency,
+            $this->order->amount,
+            $this->network
         );
 
         if (is_null($paymentAmount)) {
@@ -277,5 +273,4 @@ class Api extends AbstractApi
 
         Response::success(null, $paymentAmount);
     }
-
 }

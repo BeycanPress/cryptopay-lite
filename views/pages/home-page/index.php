@@ -1,4 +1,5 @@
 <div class="wrap">
+    <hr class="wp-header-end">
     <br>
     <div class="wrapper">
         <div class="box">

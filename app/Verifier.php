@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\CryptoPayLite\PluginHero\Helpers;
+use BeycanPress\CryptoPayLite\PluginHero\Helpers;
+use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
 
 class Verifier
 {
     use Helpers;
 
-    protected $model;
+    protected AbstractTransaction $model;
 
     /**
-     * @param object $model
+     * @param AbstractTransaction $model
      */
-    public function __construct(object $model)
+    public function __construct(AbstractTransaction $model)
     {
         $this->model = $model;
     }
@@ -22,7 +25,7 @@ class Verifier
      * @param object $transaction
      * @return bool|null
      */
-    public function verifyTransaction(object $transaction) : ?bool
+    public function verifyTransaction(object $transaction): ?bool
     {
         $order = json_decode($transaction->order);
         $amount = $order->paymentAmount;
@@ -43,7 +46,7 @@ class Verifier
             }
         }
 
-        
+
         $tokenAddress = isset($currency->address) ? $currency->address : null;
         return $transaction->verifyTransferWithData((object) [
             'amount' => $amount,
@@ -51,5 +54,4 @@ class Verifier
             'tokenAddress' => $tokenAddress
         ]);
     }
-    
 }

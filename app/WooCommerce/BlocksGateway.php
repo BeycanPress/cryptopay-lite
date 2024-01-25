@@ -1,5 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+// @phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint
+
 namespace BeycanPress\CryptoPayLite\WooCommerce;
 
 use BeycanPress\CryptoPayLite\PluginHero\Plugin;
@@ -10,21 +15,25 @@ class BlocksGateway extends AbstractPaymentMethodType
     /**
      * @var Gateway
      */
+    // @phpcs:ignore
     private $gateway;
 
     /**
      * @var string
      */
+    // @phpcs:ignore
     protected $name;
 
     /**
      * @var array<string,mixed>
      */
+    // @phpcs:ignore
     protected $settings = [];
 
     /**
      * @var string
      */
+    // @phpcs:ignore
     private $scriptId = 'cryptopay-lite-blocks';
 
     /**

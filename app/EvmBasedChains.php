@@ -1,9 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+// @phpcs:disable Generic.Files.LineLength
+
 namespace BeycanPress\CryptoPayLite;
 
-class EvmBasedChains {
-
+class EvmBasedChains
+{
+    /**
+     * @var array<string,mixed>
+     */
     public static array $mainnets = [
         "ethereum" => [
             "id" => 1,
@@ -62,6 +69,9 @@ class EvmBasedChains {
         ]
     ];
 
+    /**
+     * @var array<string,mixed>
+     */
     public static array $testnets = [
         // "ethereum" => [
         //     "id" => 5,

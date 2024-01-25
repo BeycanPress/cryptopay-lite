@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+// @phpcs:disable Generic.Files.LineLength
+
 namespace BeycanPress\CryptoPayLite;
 
 class Lang
 {
-    public static function get() : array
+    /**
+     * @return array<string,string>
+     */
+    public static function get(): array
     {
         return [
             "selectNetwork" => esc_html__('Select network', 'cryptopay_lite'),
@@ -47,5 +54,4 @@ class Lang
             "anyError" => esc_html__('An unexpected error has occurred, please try again or contact the site administrator.', 'cryptopay_lite'),
         ];
     }
-
 }

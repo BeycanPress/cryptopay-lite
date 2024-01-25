@@ -1,23 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
+// @phpcs:disable Generic.Files.LineLength
+
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\CryptoPayLite\PluginHero\Setting;
-use \BeycanPress\CryptoPayLite\PluginHero\Helpers;
+use BeycanPress\CryptoPayLite\PluginHero\Setting;
+use BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
 class Settings extends Setting
 {
     use Helpers;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $parent = $this->pages->HomePage->slug;
         parent::__construct(esc_html__('Settings', 'cryptopay_lite'), $parent);
 
-        $proMsg = '<div style="display:flex;align-items:center">'.sprintf(esc_html__('This is a pro feature => %s', 'cryptopay_lite'), '<a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy pro', 'cryptopay_lite') . '</a>') .'</div><br>';
+        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a pro feature => %s', 'cryptopay_lite'), '<a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy pro', 'cryptopay_lite') . '</a>') . '</div><br>';
 
         self::createSection(array(
-            'id'     => 'generalSettings', 
+            'id'     => 'generalSettings',
             'title'  => esc_html__('General settings', 'cryptopay_lite'),
             'icon'   => 'fa fa-cog',
             'fields' => array(
@@ -45,7 +52,7 @@ class Settings extends Setting
         ));
 
         self::createSection(array(
-            'id'     => 'wooCommerceSettings', 
+            'id'     => 'wooCommerceSettings',
             'title'  => esc_html__('WooCommerce settings', 'cryptopay_lite'),
             'icon'   => 'fa fa-cog',
             'fields' => array(
@@ -76,7 +83,7 @@ class Settings extends Setting
         ));
 
         self::createSection(array(
-            'id'     => 'evmBased', 
+            'id'     => 'evmBased',
             'title'  => esc_html__('EVM Based settings', 'cryptopay_lite'),
             'icon'   => 'fab fa-ethereum',
             'fields' => array(
@@ -85,10 +92,10 @@ class Settings extends Setting
                     'title'   => esc_html__('Wallet address', 'cryptopay_lite'),
                     'type'    => 'text',
                     'help'    => esc_html__('The account address to which the payments will be transferred. (BEP20, ERC20, MetaMask, Trust Wallet, Binance Wallet )', 'cryptopay_lite'),
-                    'sanitize' => function($val) {
-						return sanitize_text_field($val);
-					},
-                    'validate' => function($val) {
+                    'sanitize' => function ($val) {
+                        return sanitize_text_field($val);
+                    },
+                    'validate' => function ($val) {
                         $val = sanitize_text_field($val);
                         if (empty($val)) {
                             return esc_html__('Wallet address cannot be empty.', 'cryptopay_lite');
@@ -141,11 +148,11 @@ class Settings extends Setting
                     'type'    => 'content',
                     'content' => $proMsg . esc_html__('Specify the wallets you want to accept payments from.', 'cryptopay_lite')
                 ),
-            ) 
+            )
         ));
 
         Settings::createSection(array(
-            'id'     => 'bitcoin', 
+            'id'     => 'bitcoin',
             'title'  => esc_html__('Bitcoin settings', 'cryptopay_lite'),
             'icon'   => 'fab fa-bitcoin',
             'fields' => array(
@@ -159,7 +166,7 @@ class Settings extends Setting
         ));
 
         Settings::createSection(array(
-            'id'     => 'solana', 
+            'id'     => 'solana',
             'title'  => esc_html__('Solana settings', 'cryptopay_lite'),
             'icon'   => 'fas fa-project-diagram',
             'fields' => array(
@@ -173,7 +180,7 @@ class Settings extends Setting
         ));
 
         Settings::createSection(array(
-            'id'     => 'tron', 
+            'id'     => 'tron',
             'title'  => esc_html__('Tron settings', 'cryptopay_lite'),
             'icon'   => 'fas fa-project-diagram',
             'fields' => array(
@@ -187,7 +194,7 @@ class Settings extends Setting
         ));
 
         self::createSection(array(
-            'id'     => 'currencyConverter', 
+            'id'     => 'currencyConverter',
             'title'  => esc_html__('Currency converter', 'cryptopay_lite'),
             'icon'   => 'fas fa-dollar-sign',
             'fields' => array(
@@ -196,8 +203,8 @@ class Settings extends Setting
                     'type' => 'content',
                     'content' => 'Currently, in crypto payments, most people list prices in FIAT currencies, i.e. currencies such as USD, EUR. With the currency converter, we convert these currencies into the currency chosen by the user. By default the CryptoCompare API is available. If your token is listed on Coin Market Cap, Coin Gecko or DEXs. You can get suitable currency converter add-ons to get the price value of your token.
                     <br><br>
-                    <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-converter" target="_blank">'.esc_html__('Click for more information', 'cryptopay_lite').'</a>
-                    <br><br><a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=lite_plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters" target="_blank">'.esc_html__('Buy custom converters', 'cryptopay_lite').'</a>',
+                    <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-converter" target="_blank">' . esc_html__('Click for more information', 'cryptopay_lite') . '</a>
+                    <br><br><a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=lite_plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters" target="_blank">' . esc_html__('Buy custom converters', 'cryptopay_lite') . '</a>',
                     'title' => esc_html__('What is a currency converter?', 'cryptopay_lite')
                 ),
                 array(
@@ -206,7 +213,7 @@ class Settings extends Setting
                     'title' => esc_html__('Auto price update (Min)', 'cryptopay_lite'),
                     'content' =>  $proMsg . esc_html__(' The setting where you specify how long the price will be updated after the network and cryptocurrency has been selected.', 'cryptopay_lite'),
                     'default' => 0.5,
-                    'sanitize' => function($val) {
+                    'sanitize' => function ($val) {
                         return floatval($val);
                     }
                 ),
@@ -226,7 +233,7 @@ class Settings extends Setting
         ));
 
         self::createSection(array(
-            'id'     => 'backup', 
+            'id'     => 'backup',
             'title'  => esc_html__('Backup', 'cryptopay_lite'),
             'icon'   => 'fas fa-shield-alt',
             'fields' => array(
@@ -234,10 +241,9 @@ class Settings extends Setting
                     'id'      => 'backup',
                     'title'   => esc_html__('Backup', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => $proMsg 
+                    'content' => $proMsg
                 ),
-            ) 
+            )
         ));
     }
-
 }

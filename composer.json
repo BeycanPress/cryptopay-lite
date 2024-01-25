@@ -1,4 +1,9 @@
 {
+    "scripts": {
+        "phpcs": "phpcs --standard=phpcs.xml .",
+        "phpcbf": "phpcbf --standard=phpcs.xml .",
+        "install-phpcs": "composer config --global --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true && composer global require --dev squizlabs/php_codesniffer=* slevomat/coding-standard"
+    },
     "autoload": {
         "psr-4": {
             "BeycanPress\\CryptoPayLite\\": "app"

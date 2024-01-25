@@ -1,24 +1,30 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite;
 
-use \BeycanPress\CryptoPayLite\Lang;
-use \BeycanPress\CryptoPayLite\Settings;
-use \MultipleChain\EvmChains\Provider;
-use \BeycanPress\CryptoPayLite\PluginHero\Hook;
-use \BeycanPress\CryptoPayLite\PluginHero\Plugin;
-use \BeycanPress\CryptoPayLite\PluginHero\Helpers;
+use BeycanPress\CryptoPayLite\Lang;
+use BeycanPress\CryptoPayLite\Settings;
+use MultipleChain\EvmChains\Provider;
+use BeycanPress\CryptoPayLite\PluginHero\Hook;
+use BeycanPress\CryptoPayLite\PluginHero\Plugin;
+use BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
-class Services 
+class Services
 {
     use Helpers;
 
     /**
-     * @var array
+     * @var array<string>
      */
-    private static $addons = [];
+    private static array $addons = [];
 
-    public static function registerAddon(string $addon) : void
+    /**
+     * @param string $addon
+     * @return void
+     */
+    public static function registerAddon(string $addon): void
     {
         if (in_array($addon, self::$addons)) {
             throw new \Exception('This add-on is already registered, please choose another name!');
@@ -28,16 +34,18 @@ class Services
     }
 
     /**
-     * @param array $order
+     * @param array<mixed> $order
      * @param string $addon
      * @param boolean $confirmation
-     * @param array $params
+     * @param array<mixed> $params
      * @return string
      */
     public static function startPaymentProcess(
-        array $order, string $addon, bool $confirmation = true, array $params = []
-    ) : string
-    {
+        array $order,
+        string $addon,
+        bool $confirmation = true,
+        array $params = []
+    ): string {
         if (!isset($order['amount'])) {
             throw new \Exception('Order amount parameter is required!');
         } elseif (!isset($order['currency'])) {
@@ -54,13 +62,14 @@ class Services
     /**
      * @param string $addon
      * @param boolean $confirmation
-     * @param array $data
+     * @param array<mixed> $data
      * @return string
      */
     public static function preparePaymentProcess(
-        string $addon, bool $confirmation = true, array $data = []
-    ) : string
-    {
+        string $addon,
+        bool $confirmation = true,
+        array $data = []
+    ): string {
         $pluginUrl = Plugin::$instance->pluginUrl;
 
         if (isset($data['autoLoad'])) {
@@ -74,13 +83,13 @@ class Services
         }
 
         $walletImages = [];
-        array_map(function($wallet) use ($pluginUrl, &$walletImages) {
+        array_map(function ($wallet) use ($pluginUrl, &$walletImages): void {
             $walletImages[$wallet] = $pluginUrl . 'assets/images/wallets/' . $wallet . '.png';
         }, [
             'metamask',
             'binancewallet',
             'trustwallet'
-        ]); 
+        ]);
 
         $networks = self::getNetworks();
 
@@ -90,7 +99,9 @@ class Services
 
         if (count($networks) == 1 && !empty($data['order'])) {
             $init = self::autoInitalize($addon, $data, $networks[0]);
-            if (is_string($init)) return $init;
+            if (is_string($init)) {
+                return $init;
+            }
             $data['init'] = $init;
         }
 
@@ -99,7 +110,7 @@ class Services
             'providers' => [],
             'addon' => $addon,
             'theme' => 'light',
-            'autoLoad'=> $autoLoad,
+            'autoLoad' => $autoLoad,
             'networks' => $networks,
             'walletImages' => $walletImages,
             'confirmation' => $confirmation,
@@ -114,7 +125,7 @@ class Services
         Plugin::$instance->addScript('/cryptopay/js/app.js');
         Plugin::$instance->addStyle('/cryptopay/css/chunk-vendors.css');
         Plugin::$instance->addStyle('/cryptopay/css/app.css');
-        
+
         $key = Plugin::$instance->addScript('main.js');
         Plugin::$instance->mainJsKey = $key;
 
@@ -131,15 +142,16 @@ class Services
 
     /**
      * @param string $addon
-     * @param array $data
-     * @param array $network
-     * @return array|string
+     * @param array<mixed> $data
+     * @param array<mixed> $network
+     * @return array<mixed>|string
      */
-    private static function autoInitalize(string $addon, array $data, array $network)
+    private static function autoInitalize(string $addon, array $data, array $network): array|string
     {
         $network = json_decode(json_encode($network));
-        
+
         if (!isset($network->currencies[0])) {
+            // @phpcs:ignore
             return esc_html__('No active currencies were found on this network. Please report this to the administrator.', 'cryptopay_lite');
         }
 
@@ -147,8 +159,8 @@ class Services
 
         if ($data['order']['amount']) {
             $paymentAmount = self::calculatePaymentAmount(
-                $data['order']['currency'], 
-                (object) $paymentCurrency, 
+                $data['order']['currency'],
+                (object) $paymentCurrency,
                 $data['order']['amount']
             );
         } else {
@@ -156,6 +168,7 @@ class Services
         }
 
         if (is_null($paymentAmount)) {
+            // @phpcs:ignore
             return esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay_lite');
         }
 
@@ -176,9 +189,9 @@ class Services
 
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public static function getNetworks() : array
+    public static function getNetworks(): array
     {
         if (Settings::get('testnet') == '1') {
             return self::getTestnetNetworks();
@@ -188,9 +201,9 @@ class Services
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    private static function getMainnetNetworks() : array
+    private static function getMainnetNetworks(): array
     {
         $ids = self::getNetworkIds();
 
@@ -200,31 +213,30 @@ class Services
             'trustwallet' => true
         ];
 
-        return array_map(function($network) use ($wallets) {
-    
+        return array_map(function ($network) use ($wallets) {
             $id = intval($network['id']);
-            
+
             $prepareWallets = $wallets;
 
             if (isset($wallets['binancewallet']) && !in_array($id, [56, 1])) {
                 unset($prepareWallets['binancewallet']);
-            } 
+            }
 
             $network['code'] = 'evmBased';
             $network['paymentType'] = 'wallet';
             $network['wallets'] = array_keys($prepareWallets);
             $network['currencies'] = self::getMainnetCurrencies($id);
-            
+
             return $network;
-        }, array_values(array_filter(EvmBasedChains::$mainnets, function($network) use ($ids) {
+        }, array_values(array_filter(EvmBasedChains::$mainnets, function ($network) use ($ids) {
             return in_array($network['id'], $ids);
         })));
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    private static function getTestnetNetworks() : array
+    private static function getTestnetNetworks(): array
     {
         $ids = self::getNetworkIds();
 
@@ -234,72 +246,73 @@ class Services
             'trustwallet' => true
         ];
 
-        return array_map(function($network) use ($wallets) {
-    
+        return array_map(function ($network) use ($wallets) {
             $id = intval($network['id']);
-            
+
             $prepareWallets = $wallets;
 
             if (isset($wallets['binancewallet']) && !in_array($id, [97])) {
                 unset($prepareWallets['binancewallet']);
-            } 
+            }
 
             $network['code'] = 'evmBased';
             $network['paymentType'] = 'wallet';
             $network['wallets'] = array_keys($prepareWallets);
             $network['currencies'] = self::getTestnetsCurrencies($id);
-            
+
             return $network;
-        }, array_values(array_filter(EvmBasedChains::$testnets, function($network) use ($ids) {
+        }, array_values(array_filter(EvmBasedChains::$testnets, function ($network) use ($ids) {
             return in_array($network['mainnetId'], $ids);
         })));
     }
 
-    private static function getNetworkIds() : array
+    /**
+     * @return array<int>
+     */
+    private static function getNetworkIds(): array
     {
         $ids = Settings::get('evmBasedNetworksx');
         if (!$ids) {
             $ids = [1, 56, 43114, 137, 250];
         }
 
-        return array_map(function($id) {
+        return array_map(function ($id) {
             return intval(str_replace('id_', '', $id));
-        }, array_keys(array_filter($ids, function($state) {
+        }, array_keys(array_filter($ids, function ($state) {
             return boolval($state);
         })));
     }
 
     /**
-     * @param string $code
      * @param integer|null $id
-     * @return array
+     * @return array<mixed>
      */
-    public static function getMainnetCurrencies(int $id = null) : array 
+    public static function getMainnetCurrencies(int $id = null): array
     {
         if ($id == 1) {
             return [
                 [
                     'symbol' => "ETH",
                 ],
-                [ 
+                [
                     'symbol' =>  'USDT',
                     'address' =>  '0xdac17f958d2ee523a2206206994597c13d831ec7',
                 ],
-                [ 
+                [
                     'symbol' =>  'USDC',
                     'address' =>  '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
                 ],
-                [ 
+                [
                     'symbol' =>  'BUSD',
                     'address' =>  '0x4Fabb145d64652a948d72533023f6E7A623C7C53',
                 ]
             ];
         } elseif ($id == 56) {
             return [
-                [ 
+                [
                     'symbol' =>  'BNB',
                 ],
-                [ 
+                [
                     'symbol' =>  'BUSD',
                     'address' =>  '0xe9e7cea3dedca5984780bafc599bd69add087d56',
                 ],
@@ -317,7 +330,7 @@ class Services
                 [
                     'symbol' => "AVAX",
                 ],
-                [ 
+                [
                     'symbol' =>  'USDT',
                     'address' =>  '0xde3a24028580884448a5397872046a019649b084',
                 ]
@@ -327,7 +340,7 @@ class Services
                 [
                     'symbol' => "MATIC",
                 ],
-                [ 
+                [
                     'symbol' =>  'USDT',
                     'address' =>  '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
                 ]
@@ -342,11 +355,10 @@ class Services
     }
 
     /**
-     * @param string $code
      * @param integer|null $id
-     * @return array
+     * @return array<mixed>
      */
-    public static function getTestnetsCurrencies(int $id = null) : array 
+    public static function getTestnetsCurrencies(int $id = null): array
     {
         if ($id == 11155111) {
             return [
@@ -400,8 +412,8 @@ class Services
     /**
      * @param string $addon
      * @return object|null
-     */    
-    public static function getModelByAddon(string $addon) : ?object
+     */
+    public static function getModelByAddon(string $addon): ?object
     {
         $models = Hook::callFilter('models', [
             'woocommerce' => new Models\OrderTransaction()
@@ -414,7 +426,7 @@ class Services
      * @param object $transaction
      * @return object
      */
-    public static function getProviderByTx(object $transaction) : object
+    public static function getProviderByTx(object $transaction): object
     {
         return new Provider([
             "network" => json_decode($transaction->network),
@@ -429,9 +441,10 @@ class Services
      * @return float|null
      */
     public static function calculatePaymentAmount(
-        string $orderCurrency, object $paymentCurrency, float $amount
-    ) : ?float
-    {
+        string $orderCurrency,
+        object $paymentCurrency,
+        float $amount
+    ): ?float {
         $stableCoins = [
             'USDT',
             'USDC',
@@ -464,15 +477,15 @@ class Services
     }
 
     /**
-     * @param string $amount
+     * @param float|int $amount
      * @param integer $decimals
      * @return string
      */
-    public static function toString(string $amount, int $decimals) : string
+    public static function toString(float|int $amount, int $decimals): string
     {
         $pos1 = stripos((string) $amount, 'E-');
         $pos2 = stripos((string) $amount, 'E+');
-    
+
         if ($pos1 !== false) {
             $amount = number_format($amount, $decimals, '.', ',');
         }
@@ -480,7 +493,7 @@ class Services
         if ($pos2 !== false) {
             $amount = number_format($amount, $decimals, '.', '');
         }
-    
+
         return $amount > 1 ? $amount : rtrim($amount, '0');
     }
 }

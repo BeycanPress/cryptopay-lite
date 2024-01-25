@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeycanPress\CryptoPayLite\Models;
 
 use BeycanPress\WPModel\AbstractModel;
@@ -18,7 +20,7 @@ abstract class AbstractTransaction extends AbstractModel
     public function __construct(string $tableName)
     {
         $this->tableName = 'cpl_' . $tableName;
-        
+
         parent::__construct([
             'hash' => [
                 'type' => 'string',
@@ -64,10 +66,10 @@ abstract class AbstractTransaction extends AbstractModel
 
     /**
      * @param string $text
-     * @param array $params
-     * @return array
+     * @param array<mixed> $params
+     * @return array<mixed>
      */
-    public function search(string $text, array $params = []) : array
+    public function search(string $text, array $params = []): array
     {
         $predicates = '';
         $pleaceholders = ['%s'];
@@ -85,27 +87,27 @@ abstract class AbstractTransaction extends AbstractModel
 
         return [
             'data' => $this->getResults(str_ireplace(
-                $pleaceholders, 
-                $parameters, "
-                SELECT * FROM {$this->tableName} 
+                $pleaceholders,
+                $parameters,
+                "SELECT * FROM {$this->tableName} 
                 WHERE (hash LIKE '%s' 
                 OR orderId LIKE '%s'
                 OR userId LIKE '%s' 
                 OR network LIKE '%s')
-                ". $predicates . "
-                ORDER BY id DESC
-            ")),
+                " . $predicates . "
+                ORDER BY id DESC"
+            )),
             'count' => $this->getVar(str_ireplace(
-                $pleaceholders, 
-                $parameters, "
-                SELECT COUNT(id) FROM {$this->tableName} 
+                $pleaceholders,
+                $parameters,
+                "SELECT COUNT(id) FROM {$this->tableName} 
                 WHERE (hash LIKE '%s' 
                 OR orderId LIKE '%s'
                 OR userId LIKE '%s' 
                 OR network LIKE '%s')
-                ". $predicates . "
-                ORDER BY id DESC
-            ")) ?? 0
+                " . $predicates . "
+                ORDER BY id DESC"
+            )) ?? 0
         ];
     }
 
@@ -114,7 +116,7 @@ abstract class AbstractTransaction extends AbstractModel
      * @param string $status
      * @return bool|null
      */
-    public function updateStatusByHash(string $hash, string $status) : ?bool
+    public function updateStatusByHash(string $hash, string $status): ?bool
     {
         return $this->update([
             'status' => $status,
@@ -128,7 +130,7 @@ abstract class AbstractTransaction extends AbstractModel
      * @param string $hash
      * @return bool|null
      */
-    public function updateStatusToVerifiedByHash(string $hash) : ?bool
+    public function updateStatusToVerifiedByHash(string $hash): ?bool
     {
         return $this->updateStatusByHash($hash, 'verified');
     }
@@ -137,17 +139,16 @@ abstract class AbstractTransaction extends AbstractModel
      * @param string $hash
      * @return bool|null
      */
-    public function updateStatusToFailedByHash(string $hash) : ?bool
+    public function updateStatusToFailedByHash(string $hash): ?bool
     {
         return $this->updateStatusByHash($hash, 'failed');
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public function getCodes() : array
+    public function getCodes(): array
     {
         return $this->getCol("SELECT DISTINCT(code) FROM {$this->tableName} WHERE code != ''");
     }
-
 }

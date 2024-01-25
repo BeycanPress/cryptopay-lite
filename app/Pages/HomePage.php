@@ -1,14 +1,16 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\Pages;
 
-use \BeycanPress\CryptoPayLite\PluginHero\Page;
+use BeycanPress\CryptoPayLite\PluginHero\Page;
 
 /**
  * Home page
  */
 class HomePage extends Page
-{   
+{
     /**
      * Class construct
      * @return void
@@ -24,7 +26,7 @@ class HomePage extends Page
             'priority' => 1,
         ]);
 
-        add_action('admin_head', function() {
+        add_action('admin_head', function (): void {
             echo '<style>
             
             .toplevel_page_cryptopay_lite_home .wp-menu-image img {
@@ -37,7 +39,7 @@ class HomePage extends Page
     /**
      * @return void
      */
-    public function page() : void
+    public function page(): void
     {
         $this->viewEcho('pages/home-page/index');
     }

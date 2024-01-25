@@ -1,0 +1,34 @@
+name: PHPCS Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  phpcs:
+    name: PHPCS Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install PHPCS
+        run: |
+          composer config --global --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer require --dev squizlabs/php_codesniffer=* slevomat/coding-standard
+
+      - name: Run PHPCS
+        run: |
+          composer phpcs --standard=phpcs.xml .
+          exit_status=$?
+          if [ $exit_status -ne 0 ]; then
+            echo "PHPCS check failed. Please fix the issues before merging."
+            exit 1
+          fi
