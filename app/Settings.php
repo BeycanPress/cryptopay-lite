@@ -79,6 +79,12 @@ class Settings extends Setting
                     ],
                     'default' => 'wc-completed',
                 ),
+                array(
+                    'id'      => 'activateWooCommercePaymentGateway',
+                    'title'   => esc_html__('Activate WooCommerce payment gateway', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => '<a href=' . esc_url_raw(admin_url('admin.php?page=wc-settings&tab=checkout&section=cryptopay_lite')) . ' target="_blank">' . esc_html__('Click to activate', 'cryptopay_lite') . '</a>'
+                )
             )
         ));
 
