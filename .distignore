@@ -2,3 +2,8 @@
 /.github
 /.wordpress-org
 .distignore
+.gitattributes
+readme.md
+composer.json
+composer.lock
+phpcs.xml
