@@ -159,6 +159,16 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 
 == Changelog ==
 
+= 2.1.0 =
+* Added: Xdefi Wallet Support.
+* Added: Phase 1 integration for WooCommerce Blocks.
+* Added: A visual loading animation instead of the 'Loading...' text.
+* Updated: JS Code side has been updated as shadow root so that there will be no CSS conflicts anymore.
+* Updated: The QR Verifier service running on Heroku was moved to our own server and a stable IP address was provided.
+* Improved: PHP 7.4 support has been completely discontinued, so the codebase has been rewritten for 8.1, 8.2 and later versions.
+* Removed: Built-in provided WalletConnect Project ID for you to add your own Project ID.
+* Fixed: Bug preventing QR Code payments from working properly on some EVM networks.
+
 = 2.0.0 =
 * Added: Payment class for developers.
 * Added: WooCommerce HPOS compatibility.
