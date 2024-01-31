@@ -8,7 +8,6 @@ namespace BeycanPress\CryptoPayLite\Services;
 use BeycanPress\CurrencyConverter;
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
-use BeycanPress\CryptoPayLite\PluginHero\Plugin;
 // Types
 use BeycanPress\CryptoPayLite\Types\Data\PaymentDataType;
 // Exceptions
@@ -33,9 +32,7 @@ class Converter
     {
         /** @var float|null */
         $paymentAmount = null;
-        $addon = $data->getAddon();
         $order = $data->getOrder();
-        $network = $data->getNetwork();
         $amount = $order->getAmount();
         $orderCurrency = $order->getCurrency();
         $paymentCurrency = $order->getPaymentCurrency();
