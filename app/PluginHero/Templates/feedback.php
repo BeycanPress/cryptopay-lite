@@ -1,12 +1,14 @@
-<?php 
-    if ( ! defined( 'ABSPATH' ) ) exit;
-    $pattern = '/(?:plugins\\\\|plugins\/)(.*)/';
-    preg_match($pattern, $this->pluginFile, $matches);
-    $slug = str_replace('\\', '/', $matches[1]);
-    $slug = explode('/', $slug);
-?>
-
-<div class="bp-feedback-modal" id="<?php echo esc_attr($pluginKey); ?>-feedback-modal">
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<div 
+    class="bp-feedback-modal" 
+    id="<?php echo esc_attr($pluginKey); ?>-feedback-modal" 
+    data-slug="<?php echo esc_attr($slug); ?>"
+    data-api-url="<?php echo esc_attr($apiUrl); ?>"
+    data-plugin-key="<?php echo esc_attr($pluginKey); ?>"
+    data-email="<?php echo esc_attr($email); ?>"
+    data-site-url="<?php echo esc_attr($siteUrl); ?>"
+    data-site-name="<?php echo esc_attr($siteName); ?>"
+>
     <div class="bp-feedback-modal-content">
         <div class="bp-feedback-modal-header">
             Quick Feedback
@@ -33,11 +35,13 @@
                     <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_insufficient_feature" value="Insufficient add-on feature" data-reason-code="insufficient-feature"> Insufficient add-on feature
                 </label>
             </li>
+            <?php if (!$hidePremiumVersionReason) : ?>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_premium_version">
                     <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_premium_version" value="I will buy the premium version" data-reason-code="premium-version"> I will buy the premium version
                 </label>
             </li>
+            <?php endif; ?>
             <li>
                 <label for="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation">
                     <input type="radio" class="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" name="<?php echo esc_attr($pluginKey); ?>_deactivation_reason" id="<?php echo esc_attr($pluginKey); ?>_temporary_deactivation" value="It's a temporary deactivation - I'm troubleshooting an issu" data-reason-code="temporary-deactivation"> It's a temporary deactivation - I'm troubleshooting an issue

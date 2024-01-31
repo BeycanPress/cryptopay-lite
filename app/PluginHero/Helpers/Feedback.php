@@ -36,6 +36,7 @@ trait Feedback
             'siteName' => get_bloginfo('name'),
             'pluginKey' => self::getProp('pluginKey'),
             'pluginVersion' => self::getProp('pluginVersion'),
+            'apiUrl' => home_url('?rest_route=/' . self::getProp('pluginKey') . '-deactivation/deactivate'),
         ];
     }
 
@@ -46,7 +47,7 @@ trait Feedback
      */
     public static function feedback(bool $form = true, ?string $wpOrgSlug = null): void
     {
-        self::registerActivation(self::getProp('pluginFile'), [get_called_class(), 'sendActivationInfo']);
+        self::registerActivation(self::getProp('pluginFile'), fn() => self::sendActivationInfo());
 
         if ($form) {
             global $pagenow;
@@ -60,7 +61,7 @@ trait Feedback
                     }
                     file_put_contents(
                         self::getProp('pluginDir') . 'assets/css/feedback.css',
-                        file_get_contents(self::getProp('pluginUrl') . 'app/PluginHero/templates/feedback.css')
+                        file_get_contents(self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.css')
                     );
                 }
                 if (!file_exists(self::getProp('pluginDir') . 'assets/js/feedback.js')) {
@@ -72,7 +73,7 @@ trait Feedback
                     }
                     file_put_contents(
                         self::getProp('pluginDir') . 'assets/js/feedback.js',
-                        file_get_contents(self::getProp('pluginUrl') . 'app/PluginHero/templates/feedback.js')
+                        file_get_contents(self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.js')
                     );
                 }
                 add_action('admin_enqueue_scripts', function (): void {
@@ -90,8 +91,11 @@ trait Feedback
                     );
                 });
                 add_action('admin_footer', function () use ($wpOrgSlug): void {
+                    $slug = self::getPluginSlug(self::getProp('pluginFile'));
                     self::echoTemplate('feedback', array_merge([
-                        'wpOrgSlug' => $wpOrgSlug
+                        'slug' => $slug,
+                        'wpOrgSlug' => $wpOrgSlug,
+                        'hidePremiumVersionReason' => self::getProp('hidePremiumVersionReason', false),
                     ], self::getSiteInfos()));
                 });
             }
@@ -114,7 +118,7 @@ trait Feedback
     {
         add_action('rest_api_init', function (): void {
             register_rest_route(self::getProp('pluginKey') . '-deactivation', 'deactivate', [
-                'callback' => [get_called_class(), 'sendDeactivationInfoApiReal'],
+                'callback' => fn() => self::sendDeactivationInfoApiReal(),
                 'methods' => ['POST'],
                 'permission_callback' => '__return_true'
             ]);
@@ -145,7 +149,7 @@ trait Feedback
     /**
      * @return bool
      */
-    public static function sendDeactivationInfo(): bool
+    public static function sendActivationInfo(): bool
     {
         if (function_exists('curl_version')) {
             try {
@@ -170,7 +174,7 @@ trait Feedback
      * @param array<mixed> $params
      * @return bool
      */
-    public static function sendActivationInfo(array $params = []): bool
+    public static function sendDeactivationInfo(array $params = []): bool
     {
         if (function_exists('curl_version')) {
             try {
