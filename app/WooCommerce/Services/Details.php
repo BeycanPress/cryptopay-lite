@@ -16,7 +16,7 @@ class Details
     public function __construct()
     {
         add_action('woocommerce_view_order', array($this, 'frontend'), 4);
-        add_action('woocommerce_thankyou_cryptopay', array($this, 'frontend'), 1);
+        add_action('woocommerce_thankyou_cryptopay_lite', array($this, 'frontend'), 1);
         add_action('woocommerce_admin_order_data_after_order_details', [$this, 'backend'], 10);
     }
 

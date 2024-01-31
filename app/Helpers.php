@@ -125,49 +125,6 @@ class Helpers extends PhHelpers
     }
 
     /**
-     * @param string $code
-     * @param boolean $keys
-     * @return array<string,boolean>
-     */
-    public static function getWalletsByCode(string $code, bool $keys = true): array
-    {
-        $wallets = self::getSetting($code . 'Wallets') ?? [];
-
-        $wallets = array_filter($wallets, function ($val) {
-            return boolval($val);
-        });
-
-        return $keys ? array_keys($wallets) : $wallets;
-    }
-
-    /**
-     * @param string $code
-     * @return integer
-     */
-    public static function getBlockConfirmationCount(string $code): int
-    {
-        return self::getSetting($code . 'BlockConfirmationCount') ?? 0;
-    }
-
-    /**
-     * @param string $code
-     * @return int
-     */
-    public static function getQrCodeWaitingTime(string $code): int
-    {
-        return self::getSetting($code . 'QrCodeWaitingTime') ?? 30;
-    }
-
-    /**
-     * @param string $code
-     * @return string|null
-     */
-    public static function getWeb3DomainByCode(string $code): ?string
-    {
-        return self::getSetting($code . 'Web3Domain') ?? null;
-    }
-
-    /**
      * @param TransactionType $transaction
      * @return object
      */
@@ -211,22 +168,15 @@ class Helpers extends PhHelpers
     public static function getWalletAddress(NetworkType $network): ?string
     {
         $walletAddress = self::getSetting($network->getCode() . 'WalletAddress') ?? null;
-
-        if ($network->getCode() == 'evmchains') {
-            $evmNetworks = self::getSetting('evmchainsNetworks') ?? [];
-            $evmNetworks = array_filter($evmNetworks, function ($val) use ($network) {
-                return $val['id'] == $network->getMainnetId() ?? $network->getId();
-            });
-
-            if (count($evmNetworks) > 0) {
-                $evmNetwork = array_values($evmNetworks)[0];
-                if (!empty($evmNetwork['walletAddress'])) {
-                    $walletAddress = $evmNetwork['walletAddress'];
-                }
-            }
-        }
-
         return Hook::callFilter('wallet_address_' . $network->getCode(), $walletAddress);
+    }
+
+    /**
+     * @return int
+     */
+    public static function getBlockConfirmationCount(): int
+    {
+        return 10;
     }
 
     /**
@@ -284,67 +234,6 @@ class Helpers extends PhHelpers
     }
 
     /**
-     * @param mixed|null $filter
-     * @return NetworksType
-     */
-    public static function getNetworks(mixed $filter = null): NetworksType
-    {
-        $networkCodes = self::getNetworkCodes();
-        /** @var NetworksType $networks */
-        $networks = Hook::callFilter('networks', new NetworksType());
-
-        $networksArray = [];
-        /** @var NetworkType $network */
-        foreach ($networks->all() as $network) {
-            $networksArray[$network->getCode()] = $network;
-        }
-
-        $orderedNetworks = [];
-        foreach ($networkCodes as $value) {
-            if ($value == 'evmchains') {
-                $evmNetworks = EvmChains::getNetworks()->all();
-                $orderedNetworks = array_merge($orderedNetworks, $evmNetworks);
-            } elseif (isset($networksArray[$value])) {
-                $orderedNetworks[] = $networksArray[$value];
-            }
-        }
-
-        if (!is_null($filter)) {
-            if (is_numeric($filter)) {
-                $orderedNetworks = array_values(array_filter($orderedNetworks, function ($val) use ($filter) {
-                    return $val->getId() == $filter;
-                }));
-            } else {
-                $orderedNetworks = array_values(array_filter($orderedNetworks, function ($val) use ($filter) {
-                    return $val->getCode() == $filter;
-                }));
-            }
-        }
-
-        return new NetworksType($orderedNetworks);
-    }
-
-    /**
-     * @return array<string>
-     */
-    public static function getNetworkCodes(): array
-    {
-        $networks = Hook::callFilter('networks', new NetworksType());
-        $networksKeys = array_column($networks->toArray(), 'code');
-
-        if (self::getSetting('evmchainsActivePassive')) {
-            $networksKeys[] = 'evmchains';
-        }
-
-        $networkSorting = self::getSetting('networkSorting');
-        $networkSorting = $networkSorting ? array_keys($networkSorting) : [];
-        $networkSorting = array_unique(array_merge($networkSorting, $networksKeys));
-        return array_filter($networkSorting, function ($val) use ($networksKeys) {
-            return in_array($val, $networksKeys);
-        });
-    }
-
-    /**
      * @param float $amount
      * @param float $percent
      * @param int $decimals
@@ -387,6 +276,6 @@ class Helpers extends PhHelpers
     public static function networkWillNotWorkMessage(string $networkName): void
     {
         // @phpcs:ignore
-        self::adminNotice(str_replace('{networkName}', $networkName, esc_html__('You did not specify a wallet address in the "CryptoPay {networkName} settings", {networkName} network will not work. Please specify a wallet address first.', 'cryptopay_lite')), 'error');
+        self::adminNotice(str_replace('{networkName}', $networkName, esc_html__('You did not specify a wallet address in the "CryptoPay Lite {networkName} settings", {networkName} network will not work. Please specify a wallet address first.', 'cryptopay_lite')), 'error');
     }
 }

@@ -20,17 +20,7 @@ class Settings extends Setting
         $parent = Helpers::getPage('HomePage')->getSlug();
         parent::__construct(esc_html__('Settings', 'cryptopay_lite'), $parent);
 
-        $networkSorting = [];
-        $networkCodes = Helpers::getNetworkCodes();
-
-        foreach ($networkCodes as $value) {
-            $networkSorting['fields'][] = [
-                'id'    => $value,
-                'type'  => 'text',
-                'title' => $value,
-            ];
-            $networkSorting['default'][$value] = $value;
-        }
+        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a pro feature => %s', 'cryptopay_lite'), '<a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy pro', 'cryptopay_lite') . '</a>') . '</div><br>';
 
         self::createSection(array(
             'id'     => 'generalSettings',
@@ -80,27 +70,6 @@ class Settings extends Setting
                     ],
                     'default' => 'network',
                     'desc'    => esc_html__('You can choose the mode you want to use in the payment process. If you choose the network mode, the user will first choose the network and then the currency and then the wallet. If you choose the currency mode, the user will first choose the currency and then the wallet.', 'cryptopay_lite')
-                ),
-                array(
-                    'id'      => 'wcProjectId',
-                    'title'   => esc_html__('WalletConnect Project ID', 'cryptopay_lite'),
-                    'type'    => 'text',
-                    'desc'    => esc_html__('WalletConnect Project ID is required for WalletConnect and Web3Modal, which are used to connect to mobile wallets on many networks. If you do not have a WalletConnect Project ID, WalletConnect and Web3Modal will not work. You can get your project ID by registering for WalletConnect Cloud at the link below.', 'cryptopay_lite')
-                    . CP_BR2 .
-                    Helpers::view('components/link', [
-                        'text' => esc_html__('WalletConnect Cloud', 'cryptopay_lite'),
-                        'url' => 'https://cloud.walletconnect.com/sign-in'
-                    ])
-                    ,
-                ),
-                array_merge(
-                    array(
-                        'id'        => 'networkSorting',
-                        'type'      => 'sortable',
-                        'title'     => esc_html__('Network sorting', 'cryptopay_lite'),
-                        'no_fields_message' => esc_html__('No active networks found!', 'cryptopay_lite'),
-                    ),
-                    $networkSorting
                 )
             )
         ));
@@ -121,19 +90,15 @@ class Settings extends Setting
                 array(
                     'id'      => 'acceptInstantPayments',
                     'title'   => esc_html__('Accept instant payments', 'cryptopay_lite'),
-                    'type'    => 'switcher',
-                    'desc'    => esc_html__('As with PayPal, a Buy with Crypto Pay button appears directly on the product page, and users can instantly create an order by paying directly with CryptoPay. ', 'cryptopay_lite') . sprintf(esc_html__('If the %s setting is active in WooCommerce settings, non-registered users can use instant payments.', 'cryptopay_lite'), '<a href="' . admin_url('admin.php?page=wc-settings&tab=account') . '" target="_blank">' . esc_html__('"Allow customers to place orders without an account"', 'cryptopay_lite') . '</a>'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('As with PayPal, a Buy with Crypto Pay button appears directly on the product page, and users can instantly create an order by paying directly with CryptoPay. ', 'cryptopay_lite') . sprintf(esc_html__('If the %s setting is active in WooCommerce settings, non-registered users can use instant payments.', 'cryptopay_lite'), '<a href="' . admin_url('admin.php?page=wc-settings&tab=account') . '" target="_blank">' . esc_html__('"Allow customers to place orders without an account"', 'cryptopay_lite') . '</a>'),
                     'default' => false,
                 ),
                 array(
                     'id'      => 'paymentReceivingArea',
                     'title'   => esc_html__('Payment receiving area', 'cryptopay_lite'),
-                    'type'    => 'select',
-                    'options' => [
-                        'checkout' => esc_html__('Checkout', 'cryptopay_lite'),
-                        'orderPay' => esc_html__('Order pay', 'cryptopay_lite')
-                    ],
-                    'help'    => esc_html__('With this setting, you can choose from where the user receives the payment. With the checkout option, payment will be taken directly from the checkout page before the order is created, and then the order will be created. After the order is created with the Order Pay option, payment will be received on the Order Pay page.', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('With this setting, you can choose from where the user receives the payment. With the checkout option, payment will be taken directly from the checkout page before the order is created, and then the order will be created. After the order is created with the Order Pay option, payment will be received on the Order Pay page.', 'cryptopay_lite'),
                     'default' => 'orderPay'
                 ),
                 array(
@@ -163,21 +128,19 @@ class Settings extends Setting
 
         Hook::callAction("settings");
 
-        if (!Helpers::getProp('anyNetworkSupportAddonLoaded', false)) {
-            Settings::createSection(array(
-                'id'     => 'bitcoin',
-                'title'  => esc_html__('Bitcoin settings', 'cryptopay_lite'),
-                'icon'   => 'fab fa-bitcoin',
-                'fields' => array(
-                    array(
-                        'id'      => 'bitcoinPayments',
-                        'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
-                        'type'    => 'content',
-                        'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CP_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>'
-                    ),
-                )
-            ));
-        }
+        Settings::createSection(array(
+            'id'     => 'bitcoin',
+            'title'  => esc_html__('Bitcoin settings', 'cryptopay_lite'),
+            'icon'   => 'fab fa-bitcoin',
+            'fields' => array(
+                array(
+                    'id'      => 'bitcoinPayments',
+                    'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
+                    'type'    => 'content',
+                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CP_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>'
+                ),
+            )
+        ));
 
         self::createSection(array(
             'id'     => 'currencyDiscountsRates',
@@ -194,43 +157,10 @@ class Settings extends Setting
                 ),
                 array(
                     'id'           => 'discountRates',
-                    'type'         => 'group',
+                    'type'         => 'content',
                     'title'        => esc_html__('Currency discounts', 'cryptopay_lite'),
                     'button_title' => esc_html__('Add new', 'cryptopay_lite'),
-                    'help'         => esc_html__('You can define shopping-specific discounts for tokens with the symbols of the currency.', 'cryptopay_lite'),
-                    'sanitize' => function ($val) {
-                        if (is_array($val)) {
-                            foreach ($val as $key => &$value) {
-                                $value['rate'] = floatval($value['rate']);
-                                $value['symbol'] = strtoupper(sanitize_text_field($value['symbol']));
-                            }
-                        }
-
-                        return $val;
-                    },
-                    'validate' => function ($val) {
-                        if (is_array($val)) {
-                            foreach ($val as $key => $value) {
-                                if (empty($value['symbol'])) {
-                                    return esc_html__('Symbol cannot be empty.', 'cryptopay_lite');
-                                } elseif (empty($value['rate'])) {
-                                    return esc_html__('Discount rate cannot be empty.', 'cryptopay_lite');
-                                }
-                            }
-                        }
-                    },
-                    'fields'      => array(
-                        array(
-                            'title' => esc_html__('Symbol', 'cryptopay_lite'),
-                            'id'    => 'symbol',
-                            'type'  => 'text'
-                        ),
-                        array(
-                            'title' => esc_html__('Discount rate (in %)', 'cryptopay_lite'),
-                            'id'    => 'rate',
-                            'type'  => 'number'
-                        ),
-                    ),
+                    'content'      => $proMsg . esc_html__('You can define shopping-specific discounts for tokens with the symbols of the currency.', 'cryptopay_lite'),
                 ),
             )
         ));
@@ -273,78 +203,16 @@ class Settings extends Setting
                 ),
                 array(
                     'id'           => 'customPrices',
-                    'type'         => 'group',
+                    'type'         => 'content',
                     'title'        => esc_html__('Custom prices', 'cryptopay_lite'),
                     'button_title' => esc_html__('Add new', 'cryptopay_lite'),
-                    'help'         => esc_html__('You can assign prices corresponding to fiat currencies to your own custom tokens.', 'cryptopay_lite'),
-                    'desc'         => esc_html__('If your currency is not available in the current API. You can define a special value for it.', 'cryptopay_lite') . ' <a href="https://beycanpress.gitbook.io/cryptopay-docs/how-custom-prices-work" target="_blank">' . esc_html__('Get more info', 'cryptopay_lite') . '</a>',
-                    'sanitize' => function ($val) {
-                        if (is_array($val)) {
-                            foreach ($val as $key => &$value) {
-                                $value['symbol'] = strtoupper(sanitize_text_field($value['symbol']));
-                                if (isset($value['prices'])) {
-                                    foreach ($value['prices'] as $key => &$money) {
-                                        $money['symbol'] = strtoupper(sanitize_text_field($money['symbol']));
-                                        $money['price'] = floatval($money['price']);
-                                    }
-                                }
-                            }
-                        }
-                        return $val;
-                    },
-                    'validate' => function ($val) {
-                        if (is_array($val)) {
-                            foreach ($val as $key => $value) {
-                                if (empty($value['symbol'])) {
-                                    return esc_html__('Symbol cannot be empty.', 'cryptopay_lite');
-                                } elseif (!isset($value['prices'])) {
-                                    return esc_html__('You must add at least one currency price', 'cryptopay_lite');
-                                } elseif (isset($value['prices'])) {
-                                    foreach ($value['prices'] as $key => $money) {
-                                        if (empty($money['symbol'])) {
-                                            return esc_html__('Currency symbol cannot be empty.', 'cryptopay_lite');
-                                        } elseif (empty($money['price'])) {
-                                            return esc_html__('Currency price cannot be empty.', 'cryptopay_lite');
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    'fields' => array(
-                        array(
-                            'title' => esc_html__('Symbol', 'cryptopay_lite'),
-                            'id'    => 'symbol',
-                            'type'  => 'text',
-                            'help'  => esc_html__('Cryptocurrency symbol or fiat money symbol (ISO Code)', 'cryptopay_lite')
-                        ),
-                        array(
-                            'id'           => 'prices',
-                            'type'         => 'group',
-                            'title'        => esc_html__('Prices', 'cryptopay_lite'),
-                            'button_title' => esc_html__('Add new', 'cryptopay_lite'),
-                            'fields'      => array(
-                                array(
-                                    'title' => esc_html__('Symbol', 'cryptopay_lite'),
-                                    'id'    => 'symbol',
-                                    'type'  => 'text',
-                                    'help'  => esc_html__('Cryptocurrency symbol or fiat money symbol (ISO Code)', 'cryptopay_lite')
-                                ),
-                                array(
-                                    'title' => esc_html__('Price', 'cryptopay_lite'),
-                                    'id'    => 'price',
-                                    'type'  => 'number',
-                                ),
-                            ),
-                        ),
-                    ),
+                    'content'      => $proMsg . esc_html__('If your currency is not available in the current API. You can define a special value for it.', 'cryptopay_lite') . ' <a href="https://beycanpress.gitbook.io/cryptopay-docs/how-custom-prices-work" target="_blank">' . esc_html__('Get more info', 'cryptopay_lite') . '</a>',
                 ),
                 array(
                     'id' => 'converter',
-                    'type'  => 'select',
+                    'type'  => 'content',
                     'title' => esc_html__('Converter API', 'cryptopay_lite'),
-                    'options' => $converters,
-                    'default' => 'CryptoCompare'
+                    'content' => $proMsg . esc_html__('You can choose the API you want to use for the currency converter.', 'cryptopay_lite'),
                 ),
             ), $apiOptions)
         ));
@@ -356,41 +224,10 @@ class Settings extends Setting
             'fields' => array(
                 array(
                     'id'      => 'sanctions',
-                    'title'   => esc_html__('Active/Passive', 'cryptopay_lite'),
-                    'type'    => 'switcher',
-                    'default' => false,
-                ),
-                array(
-                    'id'      => 'sanctionsApi',
-                    'title'   => esc_html__('Provider', 'cryptopay_lite'),
-                    'type'    => 'select',
-                    'options' => [
-                        'coinfirm' => esc_html__('Coinfirm', 'cryptopay_lite'),
-                    ],
-                ),
-                array(
-                    'id'      => 'sanctionsMode',
-                    'title'   => esc_html__('Mode', 'cryptopay_lite'),
-                    'type'    => 'select',
-                    'options' => [
-                        "restrict" => esc_html__('Restrict', 'cryptopay_lite'),
-                        "take-note" => esc_html__('Take note', 'cryptopay_lite'),
-                    ],
-                    'default' => 'restrict',
-                    'desc'    => esc_html__('If you choose the restrict mode, the user will not be able to proceed with the payment if the address is in the sanctions list. If you choose the take note mode, the user will be able to proceed with the payment, but a warning will be recored. Restirct mode not working with "Pay by transfer to address (QR Code)" payments', 'cryptopay_lite')
-                ),
-                array(
-                    'id'      => 'sanctionsApiKey',
-                    'title'   => esc_html__('API key', 'cryptopay_lite'),
-                    'type'    => 'text',
-                    'dependency' => array('sanctionsApi', '==', 'coinfirm'),
-                ),
-                array(
-                    'id'      => 'sanctionsApiInfoConfirm',
+                    'title'   => esc_html__('Address sanctions', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => esc_html__('Coinfirm only supports EVM Chains', 'cryptopay_lite') . CP_BR2 . esc_html__('Get Coinfirm api key (token): ', 'cryptopay_lite') . '<a href="https://platform.coinfirm.com/settings/account" target="_blank">https://platform.coinfirm.com/settings/account</a>' . CP_BR2 . esc_html__('You can get an more information from the following link: ', 'cryptopay_lite') . '<a href="https://platform.coinfirm.com/" target="_blank">https://platform.coinfirm.com/</a>',
-                    'dependency' => array('sanctionsApi', '==', 'coinfirm'),
-                )
+                    'content' => $proMsg . esc_html__('With address restrictions, you can see in transactions whether paying addresses have been blacklisted by blockchain data services, or you can directly restrict them in wallet payments.', 'cryptopay_lite'),
+                ),
             )
         ));
 
@@ -402,20 +239,18 @@ class Settings extends Setting
                 array(
                     'id'      => 'reminderEmail',
                     'title'   => esc_html__('Reminder email', 'cryptopay_lite'),
-                    'type'    => 'switcher',
-                    'default' => false,
-                    'help'    => esc_html__('Users see a button called set reminder email during payment, and when they confirm this, the payment process is interrupted there and tells the user that they will receive a notification when the payment is completed. For this, please make sure you have adjusted the cron settings.', 'cryptopay_lite')
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('Users see a button called set reminder email during payment, and when they confirm this, the payment process is interrupted there and tells the user that they will receive a notification when the payment is completed. For this, please make sure you have adjusted the cron settings.', 'cryptopay_lite')
                 ),
                 array(
                     'id'      => 'backendConfirmation',
                     'title'   => esc_html__('Backend confirmation', 'cryptopay_lite'),
-                    'type'    => 'switcher',
-                    'default' => true,
-                    'help'    => esc_html__('If you open this break, let\'s assume that the user left the page during the payment, his internet was lost or his computer was shut down. When this setting is on, when the user comes back to the site and looks at their orders, the payment status of the order is checked while the order page is loaded, and if the transaction is successful, the order is confirmed. It also happens when an admin enters the Order transaction page.', 'cryptopay_lite')
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('If you open this break, let\'s assume that the user left the page during the payment, his internet was lost or his computer was shut down. When this setting is on, when the user comes back to the site and looks at their orders, the payment status of the order is checked while the order page is loaded, and if the transaction is successful, the order is confirmed. It also happens when an admin enters the Order transaction page.', 'cryptopay_lite')
                 ),
                 array(
                     'id'      => 'cronType',
-                    'title'   => esc_html__('Cron type', 'cryptopay_lite'),
+                    'title'   => esc_html__('Cron type (Premium)', 'cryptopay_lite'),
                     'type'    => 'select',
                     'desc'    => esc_html__('CryptoPay uses cron jobs to check the status of transactions and to send reminder emails. If you have not set up cron jobs on your server, you can use the following settings.', 'cryptopay_lite'),
                     'options' => [

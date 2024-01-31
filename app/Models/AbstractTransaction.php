@@ -22,12 +22,12 @@ abstract class AbstractTransaction extends AbstractModel
      * @var string
      * Because abstract class don't have property type, that's from php side giving error
      */
-    public string $version = '1.2.0';
+    public string $version = '1.3.0';
 
     /**
      * @var string
      */
-    public string $updateVersion = '1.2.0';
+    public string $updateVersion = '1.3.0';
 
     /**
      * @var string
@@ -71,11 +71,6 @@ abstract class AbstractTransaction extends AbstractModel
             ],
             'testnet' => [
                 'type' => 'boolean',
-            ],
-            'reminderEmail' => [
-                'type' => 'string',
-                'length' => 250,
-                'nullable' => true,
             ],
             'addresses' => [
                 'type' => 'json',
@@ -344,18 +339,6 @@ abstract class AbstractTransaction extends AbstractModel
         return $this->findOneBy([
             'orderId' => $orderId
         ], ['id', 'DESC']);
-    }
-
-    /**
-     * @param array<mixed> $params
-     * @return TransactionsType
-     */
-    public function getRemindedPendingTransactions(array $params): TransactionsType
-    {
-        return $this->findBy(array_merge($params, [
-            'status' => Status::PENDING->getValue(),
-            ['reminderEmail', 'IS NOT', 'NULL']
-        ]));
     }
 
     /**

@@ -24,16 +24,6 @@ class InitType extends AbstractType
     private string $receiver;
 
     /**
-     * @param string $providerConfig
-     */
-    private object $providerConfig;
-
-    /**
-     * @param string $qrCodeWaitingTime
-     */
-    private int $qrCodeWaitingTime;
-
-    /**
      * @param string $blockConfirmationCount
      */
     private int $blockConfirmationCount;
@@ -41,21 +31,15 @@ class InitType extends AbstractType
     /**
      * @param OrderType $order
      * @param string $receiver
-     * @param object $providerConfig
-     * @param int $qrCodeWaitingTime
      * @param int $blockConfirmationCount
      */
     public function __construct(
         OrderType $order,
         string $receiver,
-        object $providerConfig,
-        int $qrCodeWaitingTime,
         int $blockConfirmationCount
     ) {
         $this->setOrder($order);
         $this->setReceiver($receiver);
-        $this->setProviderConfig($providerConfig);
-        $this->setQrCodeWaitingTime($qrCodeWaitingTime);
         $this->setBlockConfirmationCount($blockConfirmationCount);
     }
 
@@ -76,26 +60,6 @@ class InitType extends AbstractType
     public function setReceiver(string $receiver): self
     {
         $this->receiver = $receiver;
-        return $this;
-    }
-
-    /**
-     * @param object $providerConfig
-     * @return self
-     */
-    public function setProviderConfig(object $providerConfig): self
-    {
-        $this->providerConfig = $providerConfig;
-        return $this;
-    }
-
-    /**
-     * @param int $qrCodeWaitingTime
-     * @return self
-     */
-    public function setQrCodeWaitingTime(int $qrCodeWaitingTime): self
-    {
-        $this->qrCodeWaitingTime = $qrCodeWaitingTime;
         return $this;
     }
 
@@ -123,22 +87,6 @@ class InitType extends AbstractType
     public function getReceiver(): string
     {
         return $this->receiver;
-    }
-
-    /**
-     * @return object
-     */
-    public function getProviderConfig(): object
-    {
-        return $this->providerConfig;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQrCodeWaitingTime(): int
-    {
-        return $this->qrCodeWaitingTime;
     }
 
     /**

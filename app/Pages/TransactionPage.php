@@ -222,7 +222,9 @@ class TransactionPage extends Page
         ->addHeaderElements(function (): void {
             Helpers::viewEcho('pages/transaction-page/form', [
                 'pageUrl' => $this->getUrl(),
-                'codes' => Helpers::getNetworkCodes()
+                'codes' => [
+                    'evmchains',
+                ]
             ]);
         })
         ->createDataList(function () use ($params) {

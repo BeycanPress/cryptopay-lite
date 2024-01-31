@@ -25,7 +25,6 @@ class Loader extends PluginHero\Plugin
 
         add_action('plugins_loaded', function (): void {
             new RestAPI();
-            new Services\Initialize();
             new WooCommerce\Initialize();
         });
         add_filter(

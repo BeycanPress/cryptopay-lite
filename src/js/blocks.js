@@ -1,5 +1,5 @@
 (() => {
-    const settings = wc.wcSettings.getSetting('cryptopay_data', {});
+    const settings = wc.wcSettings.getSetting('cryptopay_lite_data', {});
     const { registerPaymentMethod } = window.wc.wcBlocksRegistry;
     const createElement = window.wp.element.createElement;
     const { decodeEntities } = window.wp.htmlEntities;
@@ -10,7 +10,6 @@
     const button = decodeEntities(settings.button || '');
 
     const Content = () => {
-        // TODO: will update for pay on checkout
         return decodeEntities(settings.content || '');
     }
 

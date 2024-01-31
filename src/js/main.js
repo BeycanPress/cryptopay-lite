@@ -1,37 +1,37 @@
 ;(($) => {
     $(document).ready(() => {
         // set vars
-        window.CryptoPayLang = CryptoPayConfig.lang;
-        window.CryptoPayConfig = window.cpTyping(CryptoPayConfig);
-        window.CryptoPayApp = InitCryptoPay('cryptopay-lite', CryptoPayConfig);
+        window.CryptoPayLang = CryptoPayLiteConfig.lang;
+        window.CryptoPayLiteConfig = window.cplTyping(CryptoPayLiteConfig);
+        window.CryptoPayLiteApp = InitCryptoPayLite('cryptopay-lite', CryptoPayLiteConfig);
 
         // auto start, if order exists and autoStart is true
-        if (Boolean(window.CryptoPayVars?.order && window.CryptoPayVars?.autoStart)) {
-            const params = window.CryptoPayVars?.params || {};
-            window.CryptoPayApp.start(window.CryptoPayVars.order, params);
+        if (Boolean(window.CryptoPayLiteVars?.order && window.CryptoPayLiteVars?.autoStart)) {
+            const params = window.CryptoPayLiteVars?.params || {};
+            window.CryptoPayLiteApp.start(window.CryptoPayLiteVars.order, params);
         }
 
         // methods
-        window.CryptoPayModal = {
+        window.CryptoPayLiteModal = {
             open: ()  => {
                 $(".cpl-modal").css('display', 'flex');
-                $(document).trigger('cpModaOpened');
+                $(document).trigger('cplModaOpened');
             },
             close: () => {
                 $(".cpl-modal").hide();
-                $(document).trigger('cpModalClosed');
+                $(document).trigger('cplModalClosed');
             }
         }
 
         // events
         $(window).on('click', function(e) {
             if (e.target == $(".cpl-modal")[0]) {
-                CryptoPayModal.close();
+                CryptoPayLiteModal.close();
             }
         });
         
         $(document).on('click', '.cpl-modal-close', function() {
-            CryptoPayModal.close();
+            CryptoPayLiteModal.close();
         });
 
         if (!window.customElements.get('cpl-powered-by')) {

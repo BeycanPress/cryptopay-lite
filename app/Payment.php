@@ -7,13 +7,13 @@ namespace BeycanPress\CryptoPayLite;
 // Classes
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\Services\Converter;
+use BeycanPress\CryptoPayLite\Settings\EvmChains;
 // Types
 use BeycanPress\CryptoPayLite\Types\InitType;
 use BeycanPress\CryptoPayLite\Types\Order\OrderType;
 use BeycanPress\CryptoPayLite\Types\Data\ConfigDataType;
 use BeycanPress\CryptoPayLite\Types\Data\PaymentDataType;
 use BeycanPress\CryptoPayLite\Types\Network\NetworkType;
-use BeycanPress\CryptoPayLite\Types\Network\NetworksType;
 use BeycanPress\CryptoPayLite\Types\Transaction\ParamsType;
 // Exceptions
 use BeycanPress\CryptoPayLite\Exceptions\InitializeException;
@@ -117,11 +117,10 @@ class Payment
     public function html(array $deps = [], bool $loading = false): string
     {
         try {
-            $networks = Hook::callFilter('edit_networks', Helpers::getNetworks());
-            $networks = Hook::callFilter('edit_networks_' . $this->addon, $networks);
+            $networks = EvmChains::getNetworks();
 
             // if no have network more than one, throw exception
-            if (is_null($network = $networks->first())) {
+            if (empty($networks)) {
                 throw new NoActiveNetworkException(
                     esc_html__(
                         'No network is active, please activate at least one network!',
@@ -134,16 +133,6 @@ class Payment
             $jsProviders = $this->getJsProviders();
 
             $this->config->setNetworks($networks);
-            $this->config->setProviders($jsProviders->names);
-
-            // if auto init
-            if ($this->checkAutoInit($networks)) {
-                try {
-                    $this->config->setInit($this->init($network));
-                } catch (InitializeException $e) {
-                    throw $e;
-                }
-            }
 
             $appKey = Helpers::addScript('app.min.js');
 
@@ -179,8 +168,8 @@ class Payment
 
             // JS Variables
             $config = $this->config->prepareForJsSide();
-            wp_localize_script($mainJsKey, 'CryptoPayVars', $vars);
-            wp_localize_script($mainJsKey, 'CryptoPayConfig', $config);
+            wp_localize_script($mainJsKey, 'CryptoPayLiteVars', $vars);
+            wp_localize_script($mainJsKey, 'CryptoPayLiteConfig', $config);
 
             $html = Hook::callAction('before_html', $this->config);
 
@@ -208,32 +197,6 @@ class Payment
             'names' => array_keys($providers),
             'keys' => array_values($providers)
         ];
-    }
-
-    /**
-     * @param NetworksType $networks
-     * @return bool
-     */
-    private function checkAutoInit(NetworksType $networks): bool
-    {
-        // if have more than one network
-        if ($networks->count() > 1) {
-            return false;
-        }
-
-        // if order not set
-        if (!$this->data->getOrder()->exists()) {
-            return true;
-        }
-
-        // if mode is currency and have more than one currency
-        $firstNetwork = $networks->first();
-        $currenciesCount = $firstNetwork->getCurrencies()->count();
-        if (Helpers::getMode($this->addon) == 'currency' && $currenciesCount > 1) {
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -285,9 +248,7 @@ class Payment
 
             // init data
             $receiver = Helpers::getReceiver($this->data);
-            $qrCodeWaitingTime = Helpers::getQrCodeWaitingTime($network->getCode());
-            $blockConfirmationCount = Helpers::getBlockConfirmationCount($network->getCode());
-            $providerConfig = (object) Hook::callFilter('provider_config_' . $network->getCode(), []);
+            $blockConfirmationCount = Helpers::getBlockConfirmationCount();
 
             // just for pretty
             $order = $this->data->getOrder();
@@ -295,8 +256,6 @@ class Payment
             return new InitType(
                 $order,
                 $receiver,
-                $providerConfig,
-                $qrCodeWaitingTime,
                 $blockConfirmationCount
             );
         } catch (\Exception $e) {

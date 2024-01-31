@@ -61,11 +61,6 @@ class TransactionType extends AbstractType
     private bool $testnet = false;
 
     /**
-     * @var string|null
-     */
-    private ?string $reminderEmail;
-
-    /**
      * @var AddressesType
      */
     private AddressesType $addresses;
@@ -172,16 +167,6 @@ class TransactionType extends AbstractType
     public function setTestnet(bool $testnet): self
     {
         $this->testnet = $testnet;
-        return $this;
-    }
-
-    /**
-     * @param string|null $reminderEmail
-     * @return self
-     */
-    public function setReminderEmail(?string $reminderEmail): self
-    {
-        $this->reminderEmail = $reminderEmail;
         return $this;
     }
 
@@ -298,14 +283,6 @@ class TransactionType extends AbstractType
     }
 
     /**
-     * @return string|null
-     */
-    public function getReminderEmail(): ?string
-    {
-        return $this->reminderEmail;
-    }
-
-    /**
      * @return AddressesType
      */
     public function getAddresses(): AddressesType
@@ -353,7 +330,6 @@ class TransactionType extends AbstractType
             'params' => $this->getParams()->toArray(),
             'status' => $this->getStatus()->getValue(),
             'network' => $this->getNetwork()->forDebug(),
-            'reminderEmail' => $this->getReminderEmail(),
             'addresses' => $this->getAddresses()->toArray(),
             'updatedAt' => $this->getUpdatedAt()->format('Y-m-d H:i:s'),
             'createdAt' => $this->getCreatedAt()->format('Y-m-d H:i:s')

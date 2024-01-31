@@ -42,6 +42,6 @@ class HomePage extends Page
      */
     public function page(): void
     {
-        $this->viewEcho('pages/home-page/index');
+        Helpers::viewEcho('pages/home-page/index');
     }
 }

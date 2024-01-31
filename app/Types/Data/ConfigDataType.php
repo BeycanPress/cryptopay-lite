@@ -9,9 +9,7 @@ use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Constants;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 // Types
-use BeycanPress\CryptoPayLite\Types\InitType;
 use BeycanPress\CryptoPayLite\Types\AbstractType;
-use BeycanPress\CryptoPayLite\Types\Network\NetworksType;
 
 /**
  * The class where the data to be sent to CryptoPay JS is set
@@ -70,13 +68,6 @@ class ConfigDataType extends AbstractType
     #Class types
 
     #Object types
-
-    /**
-     * If this is defined, CryptoPay JS will not make a request to the API during the init process.
-     * And will directly use the data here.
-     * @var InitType|null
-     */
-    private ?InitType $init = null;
 
     /**
      * It has an imagesUrl, but this imagesUrl is generally used to access all cryptocurrency icons.
@@ -198,7 +189,7 @@ class ConfigDataType extends AbstractType
 
         array_map(function ($wallet) use (&$walletImages, $pluginUrl): void {
             $walletImages[$wallet] = $pluginUrl . 'assets/images/wallets/' . $wallet . '.png';
-        }, Helpers::getWalletsByCode('evmchains'));
+        }, ["metamask","trustwallet","bitget","okx","xdefi", "binancewallet"]);
 
         return (object) Hook::callFilter('wallet_images', $walletImages);
     }
@@ -206,20 +197,10 @@ class ConfigDataType extends AbstractType
     // Set methods for outcoming data
 
     /**
-     * @param InitType $init
+     * @param array<int> $networks
      * @return self
      */
-    public function setInit(InitType $init): self
-    {
-        $this->init = $init;
-        return $this;
-    }
-
-    /**
-     * @param NetworksType $networks
-     * @return self
-     */
-    public function setNetworks(NetworksType $networks): self
+    public function setNetworks(array $networks): self
     {
         $this->networks = $networks;
         return $this;
@@ -258,10 +239,6 @@ class ConfigDataType extends AbstractType
      */
     public function prepareForJsSide(): array
     {
-        return $this->toArray(exclude: [
-            'init' => [
-                'order' => ['discountRate']
-            ],
-        ]);
+        return $this->toArray();
     }
 }
