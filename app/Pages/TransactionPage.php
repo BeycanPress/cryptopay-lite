@@ -59,7 +59,6 @@ class TransactionPage extends Page
         array $hideColumns = []
     ) {
         $slug = Helpers::getProp('pluginKey') . '_' . sanitize_title($addon) . '_transactions';
-        $slug = Helpers::getProp('pluginKey') . '_' . sanitize_title($addon) . '_transactions';
 
         if (in_array($slug, self::$slugs)) {
             throw new \Exception('This slug is already registered, please choose another slug!');

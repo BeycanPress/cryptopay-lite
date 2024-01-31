@@ -29,7 +29,7 @@
         <?php endif; ?>
         <p>
             <strong><?php echo __('Transaction Hash', 'cryptopay_lite'); ?>:</strong>
-            <a href="<?php echo esc_url_raw(admin_url('admin.php?page=cryptopay_lite_order_transactions&s=' . $transactionHash)); ?>">
+            <a href="<?php echo esc_url_raw(admin_url('admin.php?page=cryptopay_lite_woocommerce_transactions&s=' . $transactionHash)); ?>">
                 <?php echo esc_html($transactionHash); ?>
             </a>
         </p>

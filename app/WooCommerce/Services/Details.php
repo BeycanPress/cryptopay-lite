@@ -47,6 +47,9 @@ class Details
     {
         if ($order->get_payment_method() == 'cryptopay_lite') {
             $tx = (new OrderTransaction())->getTransactionByOrderId($order->get_id());
+            if (!$tx) {
+                return;
+            }
 
             $txOrder = $tx->getOrder();
             $amount = $txOrder->getPaymentAmount();
