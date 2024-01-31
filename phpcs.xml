@@ -8,7 +8,7 @@
     <arg name="extensions" value="php"/>
     <exclude-pattern>*/views/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/PluginHero/*</exclude-pattern>
+    <exclude-pattern>*/PluginHero/templates/*</exclude-pattern>
     <arg name="standard" value="PSR12"/>
     <rule ref="Generic.Files.InlineHTML"/>
     <rule ref="Squiz.Commenting.FunctionComment.Missing"/>

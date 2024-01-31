@@ -1,45 +1,46 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
 abstract class Page
 {
-    use Helpers;
-
     /**
      * Current page url
      * @var string
      */
-    public $url;
+    public string $url;
 
     /**
      * Current page url slug
      * @var string
      */
-    public $slug;
+    public string $slug;
 
     /**
      * Current page url name
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * Class construct
-     * @param array $properties
+     * @param array<mixed> $properties
      * @return void
      */
     public function __construct(array $properties)
     {
         $properties = (object) $properties;
 
-        $this->slug = isset($properties->slug) ? $properties->slug : $this->pluginKey . '-' . sanitize_title($properties->pageName);
+        $slug = Helpers::getProp('pluginKey') . '-' . sanitize_title($properties->pageName);
+        $this->slug = isset($properties->slug) ? $properties->slug : $slug;
         $this->url = admin_url('admin.php?page=' . $this->slug);
 
-        add_action('admin_menu', function() use ($properties) {
+        add_action('admin_menu', function () use ($properties): void {
             $menuName = isset($properties->menuName) ? $properties->menuName : $properties->pageName;
             $this->name = $menuName;
-            
+
             if (isset($properties->parent)) {
                 $properties->parent = isset($properties->hidden) ? null : $properties->parent;
                 add_submenu_page(
@@ -51,16 +52,19 @@ abstract class Page
                     [$this, 'page']
                 );
             } else {
-                add_menu_page( 
+                add_menu_page(
                     $properties->pageName,
-                    $menuName, 
-                    'manage_options', 
+                    $menuName,
+                    'manage_options',
                     $this->slug,
-                    [$this, 'page'], 
+                    [$this, 'page'],
                     isset($properties->icon) ? $properties->icon : null
                 );
                 if (isset($properties->subMenu)) {
-                    $subMenuName = isset($properties->subMenuName) ? $properties->subMenuName : $properties->subMenuPageName;
+                    $subMenuName = isset($properties->subMenuName)
+                    ? $properties->subMenuName
+                    : $properties->subMenuPageName;
+
                     add_submenu_page(
                         $this->slug,
                         $properties->subMenuPageName,
@@ -71,9 +75,9 @@ abstract class Page
                     );
                 }
                 if (isset($properties->hidden)) {
-                    add_action('admin_head', function() {
+                    add_action('admin_head', function (): void {
                         echo '<style>
-                        #adminmenu #toplevel_page_'.$this->slug.' { 
+                        #adminmenu #toplevel_page_' . $this->slug . ' { 
                             display: none;
                         }
                         </style>';
@@ -82,13 +86,13 @@ abstract class Page
             }
         }, $properties->priority ?? 10);
 
-        $this->addPage($this);
+        Helpers::addPage($this, $this->slug);
     }
 
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -96,7 +100,7 @@ abstract class Page
     /**
      * @return string
      */
-    public function getSlug() : string
+    public function getSlug(): string
     {
         return $this->slug;
     }
@@ -104,7 +108,7 @@ abstract class Page
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }

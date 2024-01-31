@@ -31,7 +31,7 @@ final class Token
      * @param array $abi
      * @param Provider|null $provider
      */
-    public function __construct(string $contractAddress, array $abi = [], Provider $provider)
+    public function __construct(string $contractAddress,  Provider $provider, array $abi = [])
     {
         if (AddressValidator::validate($contractAddress) === false) {
             throw new \Exception('Invalid token address!', 23000);

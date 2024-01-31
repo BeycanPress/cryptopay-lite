@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9bfc19e8abd1c8bbe60587f86e3ef7a",
+    "content-hash": "f09351f02b4dbc88a17f3d92fe29eaf3",
     "packages": [
         {
             "name": "beycanpress/csf",
@@ -32,132 +32,6 @@
                 "source": "https://github.com/BeycanPress/csf/tree/2.3.4"
             },
             "time": "2023-12-06T04:35:59+00:00"
-        },
-        {
-            "name": "beycanpress/http",
-            "version": "0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BeycanPress/http.git",
-                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/http/zipball/c405b3889cb803f8207184ae7d9f74ed443384f1",
-                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BeycanPress\\Http\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A simple and useful library for HTTP requests, response and client.",
-            "homepage": "https://github.com/BeycanPress/http",
-            "support": {
-                "issues": "https://github.com/BeycanPress/http/issues",
-                "source": "https://github.com/BeycanPress/http/tree/0.1.4"
-            },
-            "time": "2023-09-29T03:37:46+00:00"
-        },
-        {
-            "name": "beycanpress/wp-model",
-            "version": "0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BeycanPress/wp-model.git",
-                "reference": "23fb4f6289b4d6fe0f3103d493b7d241265b5cd7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/wp-model/zipball/23fb4f6289b4d6fe0f3103d493b7d241265b5cd7",
-                "reference": "23fb4f6289b4d6fe0f3103d493b7d241265b5cd7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BeycanPress\\WPModel\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Easily create and manage databases in WordPress plugins and themes. It allows you to model your WordPress databases with PHP classes and do your operations from these models.",
-            "homepage": "https://github.com/BeycanPress/wp-model",
-            "keywords": [
-                "database",
-                "db",
-                "model",
-                "modeler",
-                "orm",
-                "query",
-                "table",
-                "wordpress",
-                "wpdb"
-            ],
-            "support": {
-                "issues": "https://github.com/BeycanPress/wp-model/issues",
-                "source": "https://github.com/BeycanPress/wp-model/tree/0.1.3"
-            },
-            "time": "2023-11-01T11:32:44+00:00"
-        },
-        {
-            "name": "beycanpress/wp-table",
-            "version": "0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BeycanPress/wp-table.git",
-                "reference": "d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/wp-table/zipball/d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8",
-                "reference": "d1a19bf1546a3461a3fd4086be37f24f3ed8d3b8",
-                "shasum": ""
-            },
-            "require": {
-                "beycanpress/wp-model": "^0.1.1",
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BeycanPress\\WPTable\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "description": "Create tables for WordPress very easily. For beycanpress/wp-model",
-            "homepage": "https://github.com/BeycanPress/wp-table",
-            "keywords": [
-                "WP_List_Table",
-                "builder",
-                "creator",
-                "examples",
-                "table",
-                "wordpress",
-                "wp-list-table"
-            ],
-            "support": {
-                "issues": "https://github.com/BeycanPress/wp-table/issues",
-                "source": "https://github.com/BeycanPress/wp-table/tree/0.1.4"
-            },
-            "time": "2023-11-01T10:27:40+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -570,16 +444,16 @@
         },
         {
             "name": "multiplechain/evm-chains",
-            "version": "0.1.15",
+            "version": "0.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain/evm-chains-php.git",
-                "reference": "48110a4b877d42ab79111ec509154b77716e4202"
+                "reference": "b34f42105c7e4feeae615b101be33c2bdbc8de12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/48110a4b877d42ab79111ec509154b77716e4202",
-                "reference": "48110a4b877d42ab79111ec509154b77716e4202",
+                "url": "https://api.github.com/repos/MultipleChain/evm-chains-php/zipball/b34f42105c7e4feeae615b101be33c2bdbc8de12",
+                "reference": "b34f42105c7e4feeae615b101be33c2bdbc8de12",
                 "shasum": ""
             },
             "require": {
@@ -604,9 +478,9 @@
             "homepage": "https://github.com/MultipleChain/evm-chains-php",
             "support": {
                 "issues": "https://github.com/MultipleChain/evm-chains-php/issues",
-                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.15"
+                "source": "https://github.com/MultipleChain/evm-chains-php/tree/0.1.20"
             },
-            "time": "2023-11-01T06:03:20+00:00"
+            "time": "2024-01-23T08:29:46+00:00"
         },
         {
             "name": "multiplechain/utils",

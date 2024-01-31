@@ -26,6 +26,13 @@ defined('ABSPATH') || exit;
  * Requires PHP: 8.1
 */
 
+/**
+ * Define constants
+ */
+define('CPL_NL', "\n");
+define('CPL_BR', '<br>');
+define('CPL_BR2', '<br><br>');
+
 add_action('admin_footer', function (): void {
     $count = get_option('cryptopay_premium_version_promotion');
     $date = get_option('cryptopay_premium_version_promotion_date');
@@ -164,11 +171,12 @@ function cryptoPayLiteGetPHPMajorVersion(): string
     return $version[0] . '.' . $version[1];
 }
 
-$cryptoPayLiteTestedPHPVersions = array(8.1, 8.2);
+$cryptoPayLiteTestedPHPVersions = [8.1, 8.2];
+
 if (!in_array(cryptoPayLiteGetPHPMajorVersion(), $cryptoPayLiteTestedPHPVersions)) {
     add_action('admin_notices', function () use ($cryptoPayLiteTestedPHPVersions): void {
         $class = 'notice notice-error';
-        $message = 'CryptoPay Lite: has not been tested with your current PHP version ' . cryptoPayLiteGetPHPMajorVersion() . '. This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP ' . implode(' or ', $cryptoPayLiteTestedPHPVersions) . ' versions. Please ask your server service provider to update your PHP version.';
+        $message = 'CryptoPay Lite: has not been tested with your current PHP version ' . cryptoPayLiteGetPHPMajorVersion() . '. This means that errors may occur due to incompatibility or other reasons. CryptoPay Lite has been tested with PHP ' . implode(' or ', $cryptoPayLiteTestedPHPVersions) . ' versions. Please ask your server service provider to update or down your PHP version.';
         printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
     });
 }
@@ -198,17 +206,41 @@ function cryptoLitPayCheckRequirements(): bool
         });
     }
 
+    if (!function_exists('file_get_contents')) {
+        $status = false;
+        add_action('admin_notices', function (): void {
+            $class = 'notice notice-error';
+            $message = 'CryptoPay Lite: file_get_contents PHP function is not available. So CryptoPay Lite has been disabled file_get_contents is a PHP function that CryptoPay Lite needs and uses for some process. Please visit "' . (php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/function.file-get-contents.php' : '<a href="https://www.php.net/manual/en/function.file-get-contents.php">https://www.php.net/manual/en/function.file-get-contents.php</a>') . '" for install assistance. You can ask your server service provider to enable file_get_contents.';
+            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+        });
+    }
+
     return $status;
 }
 
+/**
+ * @return void
+ */
 add_action('before_woocommerce_init', function (): void {
-    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
+    if (class_exists(Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+        Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
     }
 });
 
+if (!function_exists('json_validate')) {
+    /**
+     * @param string $string
+     * @return bool
+     */
+    function json_validate(string $string): bool
+    {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+}
+
 if (cryptoLitPayCheckRequirements()) {
     require __DIR__ . '/vendor/autoload.php';
-    new \BeycanPress\CryptoPayLite\Loader(__FILE__);
+    new BeycanPress\CryptoPayLite\Loader(__FILE__);
 }

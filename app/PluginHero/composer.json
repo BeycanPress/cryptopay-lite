@@ -1,6 +1,6 @@
 {
     "name": "beycanpress/plugin-hero",
-    "version": "0.3.1",
+    "version": "0.6.0",
     "description": "A plugin development library for WordPress that contains many utilities.",
     "keywords": ["wordpress", "plugin", "framework", "library"],
     "type": "library",
@@ -10,6 +10,6 @@
     },
     "homepage": "https://github.com/BeycanPress/plugin-hero",
     "require": {
-        "php": ">=7.4"
+        "php": ">=8.1"
     }
 }

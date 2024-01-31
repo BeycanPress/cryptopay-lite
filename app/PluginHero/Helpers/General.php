@@ -1,0 +1,167 @@
+<?php
+
+declare(strict_types=1);
+
+namespace BeycanPress\CryptoPayLite\PluginHero\Helpers;
+
+trait General
+{
+        /**
+     * @return string
+     */
+    public static function getCurrentUrl(): string
+    {
+        $siteURL = explode('/', get_site_url());
+        $requestURL = explode('/', esc_url_raw($_SERVER['REQUEST_URI']));
+        $currentURL = array_unique(array_merge($siteURL, $requestURL));
+        return implode('/', $currentURL);
+    }
+
+    /**
+     * @param string $datetime
+     * @return \DateTime
+     */
+    public static function getTime(string $datetime = 'now'): \DateTime
+    {
+        return new \DateTime($datetime, new \DateTimeZone(wp_timezone_string()));
+    }
+
+    /**
+     * @param string $datetime
+     * @return \DateTime
+     */
+    public static function getUTCTime(string $datetime = 'now'): \DateTime
+    {
+        return new \DateTime($datetime, new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function dateToTimeAgo(string $date): string
+    {
+        return human_time_diff(strtotime(wp_date('Y-m-d H:i:s')), strtotime($date));
+    }
+
+    /**
+     * @param float|int $number
+     * @param int $decimals
+     * @return float
+     */
+    public static function toFixed(float|int $number, int $decimals): float
+    {
+        return floatval(number_format($number, $decimals, '.', ""));
+    }
+
+    /**
+     * @param float|int $amount
+     * @param integer $decimals
+     * @return string
+     */
+    public static function toString(float|int $amount, int $decimals): string
+    {
+        $pos1 = stripos((string) $amount, 'E-');
+        $pos2 = stripos((string) $amount, 'E+');
+
+        if ($pos1 !== false) {
+            $amount = number_format($amount, $decimals, '.', ',');
+        }
+
+        if ($pos2 !== false) {
+            $amount = number_format($amount, $decimals, '.', '');
+        }
+
+        return strval($amount > 1 ? $amount : rtrim(strval($amount), '0'));
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public static function getIp(): ?string
+    {
+        $ip = null;
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = wp_unslash($_SERVER['REMOTE_ADDR']);
+            $ip = rest_is_ip_address($ip);
+            if (false === $ip) {
+                $ip = null;
+            }
+        }
+
+        return $ip;
+    }
+
+    /**
+     * @param callable $function
+     * @param string $file
+     * @param int $time
+     * @return object
+     */
+    public static function cache(callable $function, string $file, int $time = 600): object
+    {
+        if (file_exists($file) && time() - $time < filemtime($file)) {
+            $content = file_get_contents($file);
+        } else {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+
+            $content = $function();
+
+            $fp = fopen($file, 'w+');
+            fwrite($fp, $content);
+            fclose($fp);
+        }
+
+        return (object) compact('file', 'content');
+    }
+
+    /**
+     * @param string $name
+     * @return boolean
+     */
+    public static function deleteCache(string $name): bool
+    {
+        $path = self::getProp('pluginDir') . 'cache/';
+        $file = $path . $name . '.html';
+        if (file_exists($file)) {
+            return unlink($file);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param string|null $address
+     * @return string|null
+     */
+    public static function parseDomain(?string $address): ?string
+    {
+        if (is_null($address)) {
+            return $address;
+        }
+
+        $parseUrl = parse_url(trim($address));
+        if (isset($parseUrl['host'])) {
+            return trim($parseUrl['host']);
+        } else {
+            $domain = explode('/', $parseUrl['path'], 2);
+            return array_shift($domain);
+        }
+    }
+
+    /**
+     * @param string $domain
+     * @return boolean
+     */
+    public static function isValidDomain(string $domain): bool
+    {
+        if (!preg_match('/^[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})+$/', $domain)) {
+            return false;
+        }
+
+        return true;
+    }
+}
