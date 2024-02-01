@@ -31,6 +31,83 @@
             "install-path": "../beycanpress/csf"
         },
         {
+            "name": "beycanpress/currency-converter",
+            "version": "0.1.3",
+            "version_normalized": "0.1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeycanPress/currency-converter-php.git",
+                "reference": "923019912fb41246737ff8faa18945a7c5939889"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeycanPress/currency-converter-php/zipball/923019912fb41246737ff8faa18945a7c5939889",
+                "reference": "923019912fb41246737ff8faa18945a7c5939889",
+                "shasum": ""
+            },
+            "require": {
+                "beycanpress/http": "^0.1.4",
+                "php": ">=7.4"
+            },
+            "time": "2023-11-23T02:57:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "BeycanPress\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "It takes on the task of converting between fiat and cryptocurrencies.",
+            "homepage": "https://github.com/BeycanPress/currency-converter-php",
+            "support": {
+                "issues": "https://github.com/BeycanPress/currency-converter-php/issues",
+                "source": "https://github.com/BeycanPress/currency-converter-php/tree/0.1.3"
+            },
+            "install-path": "../beycanpress/currency-converter"
+        },
+        {
+            "name": "beycanpress/http",
+            "version": "0.1.4",
+            "version_normalized": "0.1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeycanPress/http.git",
+                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeycanPress/http/zipball/c405b3889cb803f8207184ae7d9f74ed443384f1",
+                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-09-29T03:37:46+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "BeycanPress\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A simple and useful library for HTTP requests, response and client.",
+            "homepage": "https://github.com/BeycanPress/http",
+            "support": {
+                "issues": "https://github.com/BeycanPress/http/issues",
+                "source": "https://github.com/BeycanPress/http/tree/0.1.4"
+            },
+            "install-path": "../beycanpress/http"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "7.8.0",
             "version_normalized": "7.8.0.0",

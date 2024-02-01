@@ -135,7 +135,7 @@ class Settings extends Setting
                     'id'      => 'bitcoinPayments',
                     'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CP_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>'
+                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>'
                 ),
             )
         ));
@@ -149,7 +149,7 @@ class Settings extends Setting
                     'id' => 'currencyDiscountsRatesInfo',
                     'type' => 'content',
                     'content' => 'Currency discounts is a feature where you can define special discounts for certain currencies. For example, you have a token specific to your project or you are sponsored by any token project. In this case, you can give percentage discounts to your paying users to encourage them to pay with this token.
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
                     <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-discounts" target="_blank">' . esc_html__('Click for more information', 'cryptopay_lite') . '</a>',
                     'title' => esc_html__('What is a currency discounts?', 'cryptopay_lite')
                 ),
@@ -172,9 +172,9 @@ class Settings extends Setting
                     'id' => 'otherConverterLinks',
                     'type' => 'content',
                     'content' => 'Currently, in crypto payments, most people list prices in FIAT currencies, i.e. currencies such as USD, EUR. With the currency converter, we convert these currencies into the currency chosen by the user. By default the CryptoCompare API is available. If your token is listed on Coin Market Cap, Coin Gecko or DEXs. You can get suitable currency converter add-ons to get the price value of your token.
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
                     <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-converter" target="_blank">' . esc_html__('Click for more information', 'cryptopay_lite') . '</a>
-                    ' . CP_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters" target="_blank">' . esc_html__('Buy custom converters', 'cryptopay_lite') . '</a>',
+                    ' . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters" target="_blank">' . esc_html__('Buy custom converters', 'cryptopay_lite') . '</a>',
                     'title' => esc_html__('What is a currency converter?', 'cryptopay_lite')
                 ),
                 array(
@@ -260,23 +260,23 @@ class Settings extends Setting
                     'content' => '
                     <strong>API 1</strong>: ' . home_url('?rest_route=/cryptopay/verify-pending-transactions') . ' (GET, POST)
                     
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
 
                     This API checks pending transactions and confirms them based on status. If a user has set a reminder email, if a cron setting has not been added for this API but the backend confirmation setting is turned on, he will receive a reminder email when he comes to the site again or when you enter the transactions menu. 
 
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
                     
                     You can decide how many minutes apart it should run. However, we recommend 5 minutes.
 
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
 
                     If you have added a cron setting for this API, you can turn off backend confirmation. Because pending transactions will be checked regularly.
 
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
 
                     To find out whether the cron you added is working or not, you can turn on debugging and wait for the cron running time, then search for "Verify pending transactions process (API)" under the debug logs menu. If you see this message, cron is running.
 
-                    ' . CP_BR2 . '
+                    ' . CPL_BR2 . '
                     <a href="https://www.hivelocity.net/kb/what-is-cron-job/" target="_blank">' . esc_html__('Click for more information', 'cryptopay_lite') . '</a>
                     '
                 ),

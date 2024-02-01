@@ -154,11 +154,11 @@ class TransactionPage extends Page
                 if (isset($realAmount)) {
                     $result = esc_html(
                         __('Discounted amount: ', 'cryptopay_lite') . $amount . " " . $currency->symbol
-                    ) . CP_BR2;
+                    ) . CPL_BR2;
 
                     $result .= esc_html(
                         __('Real amount: ', 'cryptopay_lite') . $realAmount . " " . $currency->symbol
-                    ) . CP_BR2;
+                    ) . CPL_BR2;
 
                     $result .= esc_html(__('Discount rate: ', 'cryptopay_lite') . $tx->order->discountRate . "%");
 
@@ -173,7 +173,7 @@ class TransactionPage extends Page
                 ]);
 
                 if (isset($tx->params->sanction)) {
-                    $result .= CP_BR2 . esc_html__('Sanctions source: ', 'cryptopay_lite');
+                    $result .= CPL_BR2 . esc_html__('Sanctions source: ', 'cryptopay_lite');
                     $result .= $tx->params->sanction->source .  ' with ' . $tx->params->sanction->api . ' API';
                 }
 
@@ -194,7 +194,7 @@ class TransactionPage extends Page
                     $receiver = esc_html__('Receiver: ', 'cryptopay_lite') . esc_html__('Not found!', 'cryptopay_lite');
                 }
 
-                return $sender . CP_BR2 . $receiver;
+                return $sender . CPL_BR2 . $receiver;
             },
             'createdAt' => function ($tx) {
                 return (new \DateTime($tx->createdAt->date))->setTimezone(

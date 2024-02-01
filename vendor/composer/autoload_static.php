@@ -56,7 +56,9 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
         ),
         'B' => 
         array (
+            'BeycanPress\\Http\\' => 17,
             'BeycanPress\\CryptoPayLite\\' => 26,
+            'BeycanPress\\' => 12,
             'BN\\' => 3,
             'BI\\' => 3,
         ),
@@ -125,9 +127,17 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
         array (
             0 => __DIR__ . '/..' . '/simplito/elliptic-php/lib',
         ),
+        'BeycanPress\\Http\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beycanpress/http/src',
+        ),
         'BeycanPress\\CryptoPayLite\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+        'BeycanPress\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beycanpress/currency-converter/src',
         ),
         'BN\\' => 
         array (

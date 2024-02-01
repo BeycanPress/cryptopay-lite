@@ -21,7 +21,9 @@ return array(
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Elliptic\\' => array($vendorDir . '/simplito/elliptic-php/lib'),
+    'BeycanPress\\Http\\' => array($vendorDir . '/beycanpress/http/src'),
     'BeycanPress\\CryptoPayLite\\' => array($baseDir . '/app'),
+    'BeycanPress\\' => array($vendorDir . '/beycanpress/currency-converter/src'),
     'BN\\' => array($vendorDir . '/simplito/bn-php/lib'),
     'BI\\' => array($vendorDir . '/simplito/bigint-wrapper-php/lib'),
 );
