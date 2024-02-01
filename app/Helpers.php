@@ -130,9 +130,9 @@ class Helpers extends PhHelpers
      */
     public static function getProvider(TransactionType $transaction): object
     {
-        $providers = Hook::callFilter('php_providers', [
+        $providers = [
             'evmchains' => Provider::class
-        ]);
+        ];
 
         $provider = $providers[$transaction->getCode()] ?? null;
 
@@ -154,9 +154,9 @@ class Helpers extends PhHelpers
      */
     public static function providerExists(string $code): bool
     {
-        $providers = Hook::callFilter('php_providers', [
+        $providers = [
             'evmchains' => Provider::class
-        ]);
+        ];
 
         return isset($providers[$code]);
     }

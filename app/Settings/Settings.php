@@ -126,8 +126,6 @@ class Settings extends Setting
 
         EvmChains::initSettings();
 
-        Hook::callAction("settings");
-
         Settings::createSection(array(
             'id'     => 'bitcoin',
             'title'  => esc_html__('Bitcoin settings', 'cryptopay_lite'),
@@ -165,23 +163,11 @@ class Settings extends Setting
             )
         ));
 
-        $converters = Hook::callFilter(
-            "converters",
-            [
-                'CryptoCompare' => 'Default (CryptoCompare)',
-            ]
-        );
-
-        $apiOptions = Hook::callFilter(
-            "api_options",
-            []
-        );
-
         self::createSection(array(
             'id'     => 'currencyConverter',
             'title'  => esc_html__('Currency converter', 'cryptopay_lite'),
             'icon'   => 'fas fa-dollar-sign',
-            'fields' => array_merge(array(
+            'fields' => array(
                 array(
                     'id' => 'otherConverterLinks',
                     'type' => 'content',
@@ -214,7 +200,7 @@ class Settings extends Setting
                     'title' => esc_html__('Converter API', 'cryptopay_lite'),
                     'content' => $proMsg . esc_html__('You can choose the API you want to use for the currency converter.', 'cryptopay_lite'),
                 ),
-            ), $apiOptions)
+            )
         ));
 
         self::createSection(array(

@@ -101,8 +101,6 @@ class TransactionPage extends Page
             $params['status'] = $status;
         }
 
-        Hook::callAction('transaction_page', $params, $code, $status);
-
         $table = (new Table([], $params))
         ->setColumns(array_filter([
             'hash'      => esc_html__('Hash', 'cryptopay_lite'),

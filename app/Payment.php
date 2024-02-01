@@ -171,11 +171,11 @@ class Payment
             wp_localize_script($mainJsKey, 'CryptoPayLiteVars', $vars);
             wp_localize_script($mainJsKey, 'CryptoPayLiteConfig', $config);
 
-            $html = Hook::callAction('before_html', $this->config);
+            $html = Hook::callFilter('before_html', '', $this->config);
 
             $html .= Helpers::view('cryptopay', ['loading' => $loading]);
 
-            $html .= Hook::callAction('after_html', $this->config);
+            $html = Hook::callFilter('after_html', $html, $this->config);
 
             return $html;
         } catch (\Exception $e) {

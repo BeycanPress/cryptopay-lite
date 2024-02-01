@@ -191,7 +191,7 @@ class ConfigDataType extends AbstractType
             $walletImages[$wallet] = $pluginUrl . 'assets/images/wallets/' . $wallet . '.png';
         }, ["metamask","trustwallet","bitget","okx","xdefi", "binancewallet"]);
 
-        return (object) Hook::callFilter('wallet_images', $walletImages);
+        return (object) $walletImages;
     }
 
     // Set methods for outcoming data
