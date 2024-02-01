@@ -7,13 +7,9 @@ namespace BeycanPress\CryptoPayLite\Models;
 /**
  * Order transaction table model
  */
-class OrderTransaction extends AbstractTransaction
+final class OrderTransaction extends AbstractTransaction
 {
-    /**
-     * @var string
-     */
-    // @phpcs:ignore
-    public $addon = 'woocommerce';
+    protected string $addon = 'woocommerce';
 
     /**
      * @return void

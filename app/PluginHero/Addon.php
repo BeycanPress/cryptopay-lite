@@ -1,67 +1,78 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
 class Addon
-{   
-    use Helpers;
-    
+{
     /**
      * @var string
      */
-    private $key;
+    private string $key;
 
     /**
      * @var string
      */
-    private $parentKey;
+    private string $parentKey;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $file;
+    private string $file;
 
     /**
      * @var string
      */
-    private $version;
+    private string $slug;
 
     /**
      * @var string
      */
-    private $path;
+    private string $version;
 
     /**
      * @var string
      */
-    private $url;
+    private string $path;
 
     /**
      * @var string
      */
-    private $viewDir;
-    
+    private string $url;
+
+    /**
+     * @var string
+     */
+    private string $viewDir;
+
+    /**
+     * @var object
+     */
+    private object $data;
+
     /**
      * @param string $key
      * @param string $file
      */
     public function __construct(string $key, string $file)
     {
-        $data = $this->getPluginData($file);
+        $this->data = Helpers::getPluginData($file);
 
         $this->key = $key;
         $this->file = $file;
-        
-        $this->name = $data->Name;
-        $this->version = $data->Version;
+
+        $this->name = $this->data->Name;
+        $this->version = $this->data->Version;
 
         $this->path = plugin_dir_path($file);
         $this->url = plugin_dir_url($file);
+        $this->slug = plugin_basename($file);
 
         $this->viewDir = $this->path . 'views/';
 
@@ -71,7 +82,7 @@ class Addon
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -79,7 +90,15 @@ class Addon
     /**
      * @return string
      */
-    public function getName() : string
+    public function getParentKey(): string
+    {
+        return $this->parentKey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->name;
     }
@@ -87,7 +106,7 @@ class Addon
     /**
      * @return string
      */
-    public function getFile() : string
+    public function getFile(): string
     {
         return $this->file;
     }
@@ -95,7 +114,7 @@ class Addon
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -103,7 +122,7 @@ class Addon
     /**
      * @return string
      */
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -111,22 +130,51 @@ class Addon
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    public function getViewDir() : string
+    /**
+     *
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewDir(): string
     {
         return $this->viewDir;
     }
 
     /**
-     * @param string $viewName
-     * @param array $args
+     * @return object
+     */
+    public function getData(): object
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param string $path
      * @return string
      */
-    public function view(string $viewName, array $args = []) : string
+    public function getImageUrl(string $path): string
+    {
+        return $this->url . 'assets/images/' . $path;
+    }
+
+    /**
+     * @param string $viewName
+     * @param array<mixed> $args
+     * @return string
+     */
+    public function view(string $viewName, array $args = []): string
     {
         extract($args);
         ob_start();
@@ -136,26 +184,48 @@ class Addon
 
     /**
      * @param string $viewName
-     * @param array $args
+     * @param array<mixed> $args
+     * @param array<mixed> $allowedHtml
      * @return void
      */
-    public function viewEcho(string $viewName, array $args = []) : void
+    public function viewEcho(string $viewName, array $args = [], array $allowedHtml = []): void
     {
-        print($this->view($viewName, $args));
+        Helpers::ksesEcho($this->view($viewName, $args), $allowedHtml);
     }
 
     /**
      * @param string $path
-     * @param array $deps
+     * @param array<string> $deps
      * @return string
      */
-    public function addScript(string $path, array $deps = []) : string
+    public function registerScript(string $path, array $deps = []): string
     {
-        $f = substr($path, 0, 1);
-        $key = explode('/', $path);
-        $key = $this->parentKey . '-'. $this->key . '-' . str_replace('.js', '', end($key));
-        $middlePath = $f === '/' ? 'assets/' : 'assets/js/';
-        $url = $this->getUrl() . $middlePath . $path;
+        [$key, $url] = Helpers::createAssetParams($path, $this->url, 'js');
+
+        $key = $this->key . '-' . $key;
+
+        wp_register_script(
+            $key,
+            $url,
+            $deps,
+            $this->version,
+            true
+        );
+
+        return $key;
+    }
+
+    /**
+     * @param string $path
+     * @param array<string> $deps
+     * @return string
+     */
+    public function addScript(string $path, array $deps = []): string
+    {
+        [$key, $url] = Helpers::createAssetParams($path, $this->url, 'js');
+
+        $key = $this->key . '-' . $key;
+
         wp_enqueue_script(
             $key,
             $url,
@@ -163,29 +233,49 @@ class Addon
             $this->version,
             true
         );
-        
+
         return $key;
     }
 
     /**
      * @param string $path
-     * @param array $deps
+     * @param array<string> $deps
      * @return string
      */
-    public function addStyle(string $path, array $deps = []) : string
+    public function registerStyle(string $path, array $deps = []): string
     {
-        $key = explode('/', $path);
-        $f = substr($path, 0, 1);
-        $key = $this->parentKey . '-'. $this->key . '-' . str_replace('.css', '', end($key));
-        $middlePath = $f === '/' ? 'assets/' : 'assets/css/';
-        $url = $this->getUrl() . $middlePath . $path;
+        [$key, $url] = Helpers::createAssetParams($path, $this->url, 'css');
+
+        $key = $this->key . '-' . $key;
+
+        wp_register_style(
+            $key,
+            $url,
+            $deps,
+            $this->version
+        );
+
+        return $key;
+    }
+
+    /**
+     * @param string $path
+     * @param array<string> $deps
+     * @return string
+     */
+    public function addStyle(string $path, array $deps = []): string
+    {
+        [$key, $url] = Helpers::createAssetParams($path, $this->url, 'css');
+
+        $key = $this->key . '-' . $key;
+
         wp_enqueue_style(
             $key,
             $url,
             $deps,
             $this->version
         );
-        
+
         return $key;
     }
 }

@@ -80,6 +80,15 @@ final class Transaction
     }
 
     /**
+     * @return string
+     */
+    public function getFrom() : string
+    {
+        $this->getData();
+        return $this->data->from;
+    }
+
+    /**
      * @return object|null
      */
     public function decodeInput() : ?object
@@ -129,15 +138,11 @@ final class Transaction
         $this->getData();
         $result = null;
 
-        if ($this->data == null) {
-            $result = false;
-        } else {
-            if ($this->data->blockNumber !== null) {
-                if ($this->data->status == '0x0') {
-                    $result = false;
-                } else {
-                    $result = true;
-                }
+        if ($this->data && $this->data->blockNumber !== null) {
+            if ($this->data->status == '0x0') {
+                $result = false;
+            } else {
+                $result = true;
             }
         }
         

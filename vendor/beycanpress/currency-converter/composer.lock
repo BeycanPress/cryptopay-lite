@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3fee0553f8d96b2a74838b130b620267",
+    "packages": [
+        {
+            "name": "beycanpress/http",
+            "version": "0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeycanPress/http.git",
+                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeycanPress/http/zipball/c405b3889cb803f8207184ae7d9f74ed443384f1",
+                "reference": "c405b3889cb803f8207184ae7d9f74ed443384f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BeycanPress\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A simple and useful library for HTTP requests, response and client.",
+            "homepage": "https://github.com/BeycanPress/http",
+            "support": {
+                "issues": "https://github.com/BeycanPress/http/issues",
+                "source": "https://github.com/BeycanPress/http/tree/0.1.4"
+            },
+            "time": "2023-09-29T03:37:46+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.4"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

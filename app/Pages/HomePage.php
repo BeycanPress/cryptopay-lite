@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\Pages;
 
+use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\PluginHero\Page;
 
 /**
@@ -21,7 +22,7 @@ class HomePage extends Page
             'pageName' => esc_html__('CryptoPay Lite', 'cryptopay_lite'),
             'subMenuPageName' => esc_html__('Buy premium', 'cryptopay_lite'),
             'slug' => 'cryptopay_lite_home',
-            'icon' => $this->getImageUrl('menu.png'),
+            'icon' => Helpers::getImageUrl('menu.png'),
             'subMenu' => true,
             'priority' => 1,
         ]);
@@ -41,6 +42,6 @@ class HomePage extends Page
      */
     public function page(): void
     {
-        $this->viewEcho('pages/home-page/index');
+        Helpers::viewEcho('pages/home-page/index');
     }
 }

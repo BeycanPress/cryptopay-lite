@@ -150,7 +150,7 @@ final class Provider
     {
         $this->validate($from, $to, $amount, $tokenAddress);
 
-        $this->pendingTransaction = (new Token($tokenAddress, [], $this))->transfer($from, $to, $amount);
+        $this->pendingTransaction = (new Token($tokenAddress, $this))->transfer($from, $to, $amount);
 
         return $this;
     }
@@ -370,11 +370,20 @@ final class Provider
 
     /**
      * @param string $address
+     * @return NFT
+     */
+    public function NFT(string $address, array $abi = []) : NFT
+    {
+        return new NFT($address, $this, $abi);
+    }
+
+    /**
+     * @param string $address
      * @return Token
      */
     public function Token(string $address, array $abi = []) : Token
     {
-        return new Token($address, $abi, $this);
+        return new Token($address, $this, $abi);
     }
 
     /**

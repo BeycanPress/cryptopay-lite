@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
 class Entity
 {
-    use Helpers;
-    
     /**
      * @var object
      */
-    public $entity;
+    public object $entity;
 
     /**
      * @param int|null $entityId
@@ -23,10 +23,12 @@ class Entity
      * @param string $key
      * @return mixed
      */
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
-        if (!$this->entity) return null;
-        
+        if (!$this->entity) {
+            return null;
+        }
+
         if (isset($this->entity->$key)) {
             return $this->entity->$key;
         } else {
@@ -37,7 +39,7 @@ class Entity
     /**
      * @return boolean
      */
-    public function isAvailable() : bool
+    public function isAvailable(): bool
     {
         return $this->entity ? true : false;
     }
@@ -46,7 +48,7 @@ class Entity
      * @param string $key
      * @return mixed
      */
-    public function getMeta(string $key)
+    public function getMeta(string $key): mixed
     {
         return get_post_meta($this->entity->ID, $key, true);
     }
@@ -56,7 +58,7 @@ class Entity
      * @param mixed $data
      * @return mixed
      */
-    public function setMeta(string $key, $data)
+    public function setMeta(string $key, mixed $data): mixed
     {
         return update_post_meta($this->entity->ID, $key, $data);
     }

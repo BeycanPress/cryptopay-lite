@@ -8,30 +8,35 @@ class Loader extends PluginHero\Plugin
 {
     /**
      * @param string $pluginFile
+     * @return void
      */
     public function __construct(string $pluginFile)
     {
         parent::__construct([
             'pluginFile' => $pluginFile,
-            'textDomain' => 'cryptopay_lite',
             'pluginKey' => 'cryptopay_lite',
+            'textDomain' => 'cryptopay_lite',
             'settingKey' => 'cryptopay_lite_settings',
-            'pluginVersion' => getCryptoLitePayVersion(),
         ]);
 
-        $this->feedback(true, 'cryptopay-wc-lite');
+        Helpers::feedback(true, 'cryptopay-wc-lite');
 
-        add_filter('plugin_action_links_' . plugin_basename($this->pluginFile), [$this, 'pluginActionLinks']);
+        Helpers::setProp('debugging', boolval(Helpers::getSetting('debugging')));
 
         add_action('plugins_loaded', function (): void {
-            $this->apiUrl = (new Api())->getUrl();
-            new WooCommerce\Register();
+            new RestAPI();
+            new WooCommerce\Initialize();
         });
+
+        add_filter(
+            'plugin_action_links_' . plugin_basename(Helpers::getProp('pluginFile')),
+            [$this, 'pluginActionLinks']
+        );
     }
 
     /**
-     * @param array<string> $links
-     * @return array<string>
+     * @param array<string,string> $links
+     * @return array<string,string>
      */
     public function pluginActionLinks(array $links): array
     {
@@ -50,8 +55,13 @@ class Loader extends PluginHero\Plugin
     public function adminProcess(): void
     {
         new Pages\HomePage();
+
+        if (file_exists(Helpers::getProp('pluginDir') . '/debug.log')) {
+            new Pages\DebugLogs();
+        }
+
         add_action('init', function (): void {
-            new Settings();
+            new Settings\Settings();
         }, 9);
     }
 
@@ -60,7 +70,11 @@ class Loader extends PluginHero\Plugin
      */
     public static function activation(): void
     {
-        (new Models\OrderTransaction())->createTable();
+        try {
+            (new Models\OrderTransaction())->createTable();
+        } catch (\Throwable $th) {
+            Helpers::debug($th->getMessage(), 'ERROR', $th);
+        }
     }
 
     /**
@@ -68,9 +82,8 @@ class Loader extends PluginHero\Plugin
      */
     public static function uninstall(): void
     {
-        $settings = get_option(self::$instance->settingKey);
-        if (isset($settings['dds']) && $settings['dds']) {
-            delete_option(self::$instance->settingKey);
+        if (Helpers::getSetting('dds')) {
+            delete_option(Helpers::getProp('settingKey'));
             delete_option('woocommerce_cryptopay_lite_settings');
             (new Models\OrderTransaction())->drop();
         }

@@ -1,9 +1,14 @@
 /.git
 /.github
 /.wordpress-org
+.gitignore
 .distignore
 .gitattributes
 readme.md
 composer.json
 composer.lock
 phpcs.xml
+gulpfile.mjs
+package.json
+package-lock.json
+/src/
