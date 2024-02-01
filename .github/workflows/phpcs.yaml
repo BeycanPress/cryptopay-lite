@@ -1,8 +1,10 @@
 name: PHPCS Check
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
     branches:
+      - alpha
       - master
 
 jobs:
