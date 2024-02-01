@@ -65,9 +65,9 @@ class PaymentDataType extends AbstractType
     private ?AbstractTransaction $model;
 
     /**
-     * @var DynamicDataType|null
+     * @var DynamicDataType
      */
-    private ?DynamicDataType $dynamicData = null;
+    private DynamicDataType $dynamicData;
 
     /**
      * @param string $addon
@@ -75,6 +75,7 @@ class PaymentDataType extends AbstractType
     public function __construct(string $addon)
     {
         $this->addon = $addon;
+        $this->dynamicData = new DynamicDataType();
         $this->model = Helpers::getModelByAddon($this->addon);
     }
 
