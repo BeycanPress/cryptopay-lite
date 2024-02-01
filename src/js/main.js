@@ -1,7 +1,7 @@
 ;(($) => {
     $(document).ready(() => {
         // set vars
-        window.CryptoPayLang = CryptoPayLiteConfig.lang;
+        window.CryptoPayLiteLang = CryptoPayLiteConfig.lang;
         window.CryptoPayLiteConfig = window.cplTyping(CryptoPayLiteConfig);
         window.CryptoPayLiteApp = InitCryptoPayLite('cryptopay-lite', CryptoPayLiteConfig);
 
