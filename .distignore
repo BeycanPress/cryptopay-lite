@@ -11,3 +11,4 @@ phpcs.xml
 gulpfile.mjs
 package.json
 package-lock.json
+/src/
