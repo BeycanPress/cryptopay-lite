@@ -9,7 +9,6 @@ use BeycanPress\CryptoPayLite\Payment;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\Services\Verifier;
 use BeycanPress\CryptoPayLite\Services\Converter;
-use BeycanPress\CryptoPayLite\Services\Sanctions;
 use BeycanPress\CryptoPayLite\PluginHero\BaseAPI;
 use BeycanPress\CryptoPayLite\PluginHero\Http\Request;
 use BeycanPress\CryptoPayLite\PluginHero\Http\Response;

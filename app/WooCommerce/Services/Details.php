@@ -61,7 +61,6 @@ class Details
                 $realAmount = null;
             }
 
-
             Helpers::viewEcho('woocommerce/details', [
                 'order' => $txOrder,
                 'realAmount' => $realAmount,

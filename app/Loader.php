@@ -27,6 +27,7 @@ class Loader extends PluginHero\Plugin
             new RestAPI();
             new WooCommerce\Initialize();
         });
+
         add_filter(
             'plugin_action_links_' . plugin_basename(Helpers::getProp('pluginFile')),
             [$this, 'pluginActionLinks']

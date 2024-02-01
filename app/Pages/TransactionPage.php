@@ -7,7 +7,6 @@ namespace BeycanPress\CryptoPayLite\Pages;
 //Classes
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\PluginHero\Page;
-use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\PluginHero\Table;
 use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
 // Types

@@ -7,7 +7,6 @@ namespace BeycanPress\CryptoPayLite\Services;
 // Classes
 use BeycanPress\CurrencyConverter;
 use BeycanPress\CryptoPayLite\Helpers;
-use BeycanPress\CryptoPayLite\PluginHero\Hook;
 // Types
 use BeycanPress\CryptoPayLite\Types\Data\PaymentDataType;
 // Exceptions
