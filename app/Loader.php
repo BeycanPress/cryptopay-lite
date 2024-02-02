@@ -23,10 +23,20 @@ class Loader extends PluginHero\Plugin
 
         Helpers::setProp('debugging', boolval(Helpers::getSetting('debugging')));
 
-        add_action('plugins_loaded', function (): void {
-            new RestAPI();
-            new WooCommerce\Initialize();
-        });
+        if (Helpers::getSetting('evmchainsWalletAddress')) {
+            add_action('plugins_loaded', function (): void {
+                new RestAPI();
+                new WooCommerce\Initialize();
+            });
+        } else {
+            Helpers::adminNotice(
+                __(
+                    'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.',
+                    'cryptopay_lite'
+                ),
+                'error'
+            );
+        }
 
         add_filter(
             'plugin_action_links_' . plugin_basename(Helpers::getProp('pluginFile')),

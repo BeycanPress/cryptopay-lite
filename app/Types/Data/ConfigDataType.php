@@ -172,7 +172,7 @@ class ConfigDataType extends AbstractType
      */
     private function getTheme(string $addon): string
     {
-        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme')));
+        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme', 'light')));
     }
 
     /**
