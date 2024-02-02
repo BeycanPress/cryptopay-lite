@@ -55,6 +55,16 @@ trait General
     }
 
     /**
+     * @param float|int $number
+     * @param int $decimals
+     * @return string
+     */
+    public static function numberFormat(float|int $number, int $decimals = 2): string
+    {
+        return preg_replace('/(\.0*|0+)$/', '', number_format($number, $decimals, '.', ','));
+    }
+
+    /**
      * @param float|int $amount
      * @param integer $decimals
      * @return string

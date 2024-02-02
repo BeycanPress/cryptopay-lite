@@ -7,9 +7,9 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
 class Entity
 {
     /**
-     * @var object
+     * @var object|null
      */
-    public object $entity;
+    public ?object $entity;
 
     /**
      * @param int|null $entityId

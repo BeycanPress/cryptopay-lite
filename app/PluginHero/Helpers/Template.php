@@ -144,7 +144,7 @@ trait Template
 
             $result = [
                 'style' => true,
-                'script' => true,
+                'script' => true
             ];
 
             foreach ($dom->getElementsByTagName('*') as $element) {

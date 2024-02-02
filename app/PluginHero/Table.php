@@ -465,6 +465,10 @@ class Table extends \WP_List_Table
         wp_enqueue_script('bwptable-vfs-font', 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js', [], null, true);
         wp_enqueue_script('bwptable-data-table', 'https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/r-2.3.0/sb-1.3.4/datatables.min.js', ['jquery'], null, true);
         // @phpcs:enable
-        return include dirname(__DIR__) . '/views/data-table.php';
+
+        return self::getTemplate('data-table', [
+            'id' => $id,
+            'options' => $options
+        ]);
     }
 }
