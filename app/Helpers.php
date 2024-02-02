@@ -8,14 +8,12 @@ namespace BeycanPress\CryptoPayLite;
 use MultipleChain\EvmChains\Provider;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\Settings\Settings;
-use BeycanPress\CryptoPayLite\Settings\EvmChains;
 use BeycanPress\CryptoPayLite\Models\OrderTransaction;
 use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
 use BeycanPress\CryptoPayLite\PluginHero\Helpers as PhHelpers;
 // Types
 use BeycanPress\CryptoPayLite\Types\Network\CurrencyType;
 use BeycanPress\CryptoPayLite\Types\Network\NetworkType;
-use BeycanPress\CryptoPayLite\Types\Network\NetworksType;
 use BeycanPress\CryptoPayLite\Types\Data\PaymentDataType;
 use BeycanPress\CryptoPayLite\Types\Transaction\TransactionType;
 // Exceptions
