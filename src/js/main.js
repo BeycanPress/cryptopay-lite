@@ -15,7 +15,7 @@
         window.CryptoPayLiteModal = {
             open: ()  => {
                 $(".cpl-modal").css('display', 'flex');
-                $(document).trigger('cplModaOpened');
+                $(document).trigger('cplModalOpened');
             },
             close: () => {
                 $(".cpl-modal").hide();
