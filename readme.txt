@@ -1,6 +1,6 @@
 === WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
 Contributors: BeycanPress
-Tags: WooCommerce, Cryptocurrency, Payment, Gateway, WordPress, Bitcoin, Ethereum, Binance Smart Chain, Blockchain, Networks, MetaMask, TrustWallet, WalletConnect, Phantom, BTC, ETH, BNB, SOL, TRX
+Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 6.4.3
 Requires PHP: 8.1
