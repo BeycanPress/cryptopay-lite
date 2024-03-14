@@ -15,8 +15,8 @@ class Details
      */
     public function __construct()
     {
-        add_action('woocommerce_view_order', array($this, 'frontend'), 4);
-        add_action('woocommerce_thankyou_cryptopay_lite', array($this, 'frontend'), 1);
+        add_action('woocommerce_view_order', [$this, 'frontend'], 4);
+        add_action('woocommerce_thankyou_cryptopay_lite', [$this, 'frontend'], 1);
         add_action('woocommerce_admin_order_data_after_order_details', [$this, 'backend'], 10);
     }
 
@@ -45,7 +45,7 @@ class Details
      */
     public function backend(\WC_Order $order): void
     {
-        if ($order->get_payment_method() == 'cryptopay_lite') {
+        if ('cryptopay_lite' == $order->get_payment_method()) {
             $tx = (new OrderTransaction())->getTransactionByOrderId($order->get_id());
             if (!$tx) {
                 return;

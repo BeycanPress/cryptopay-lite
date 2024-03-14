@@ -101,7 +101,7 @@ class AbstractModel
 
     /**
      * @param string $query
-     * @return string
+     * @return void
      */
     protected function query(string $query): void
     {
@@ -305,7 +305,7 @@ class AbstractModel
      * A method where we can get the number of data returned
      * as a result of the query by sending the where operations as an array.
      * @param array<mixed> $predicates
-     * @return array<mixed>|object|null
+     * @return int
      */
     public function getCount(array $predicates = []): int
     {
@@ -334,7 +334,7 @@ class AbstractModel
 
         return [
             'data' => $this->findBy($predicates, ['id', 'desc']),
-            'count' => $this->getCount($predicates) ?? 0
+            'count' => $this->getCount($predicates)
         ];
     }
 

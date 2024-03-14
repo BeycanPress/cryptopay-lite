@@ -16,7 +16,7 @@ trait Debug
     {
         if (self::getProp('debugging', false)) {
             $debugLevel = self::getProp('debugLevel', 'ALL');
-            if ($debugLevel !== 'ALL' && $debugLevel !== $level) {
+            if ('ALL' !== $debugLevel && $debugLevel !== $level) {
                 return;
             }
 

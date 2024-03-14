@@ -104,7 +104,7 @@ class CryptoPay extends \WC_Payment_Gateway
         $this->order_button_text = $this->get_option('order_button_text');
 
         // This action hook saves the settings
-        add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
+        add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
     }
 
     /**
@@ -127,14 +127,14 @@ class CryptoPay extends \WC_Payment_Gateway
      */
     public function init_form_fields(): void
     {
-        $this->form_fields = array(
-            'enabled' => array(
+        $this->form_fields = [
+            'enabled' => [
                 'title'       => esc_html__('Enable/Disable', 'cryptopay_lite'),
                 'label'       => esc_html__('Enable', 'cryptopay_lite'),
                 'type'        => 'checkbox',
                 'default'     => 'no'
-            ),
-            'title' => array(
+            ],
+            'title' => [
                 'title'       => esc_html__('Title', 'cryptopay_lite'),
                 'type'        => 'text',
                 'description' => esc_html__(
@@ -142,8 +142,8 @@ class CryptoPay extends \WC_Payment_Gateway
                     'cryptopay_lite'
                 ),
                 'default'     => esc_html__('CryptoPay Lite', 'cryptopay_lite')
-            ),
-            'description' => array(
+            ],
+            'description' => [
                 'title'       => esc_html__('Description', 'cryptopay_lite'),
                 'type'        => 'textarea',
                 'description' => esc_html__(
@@ -154,14 +154,14 @@ class CryptoPay extends \WC_Payment_Gateway
                     'You can pay with supported networks and cryptocurrencies.',
                     'cryptopay_lite'
                 ),
-            ),
-            'order_button_text' => array(
+            ],
+            'order_button_text' => [
                 'title'       => esc_html__('Order button text', 'cryptopay_lite'),
                 'type'        => 'text',
                 'description' => esc_html__('Pay button on the checkout page', 'cryptopay_lite'),
                 'default'     => esc_html__('Proceed to CryptoPay Lite', 'cryptopay_lite'),
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -193,8 +193,8 @@ class CryptoPay extends \WC_Payment_Gateway
         global $woocommerce;
         $order = new \WC_Order($orderId);
 
-        if ($order->get_total() == 0) {
-            if (Helpers::getSetting('paymentCompleteOrderStatus') == 'wc-completed') {
+        if (0 == $order->get_total()) {
+            if ('wc-completed' == Helpers::getSetting('paymentCompleteOrderStatus')) {
                 $note = esc_html__('Your order is complete.', 'cryptopay_lite');
             } else {
                 $note = esc_html__('Your order is processing.', 'cryptopay_lite');
@@ -224,9 +224,9 @@ class CryptoPay extends \WC_Payment_Gateway
         $woocommerce->cart->empty_cart();
 
         // Return thankyou redirect
-        return array(
+        return [
             'result' => 'success',
             'redirect' => $url
-        );
+        ];
     }
 }

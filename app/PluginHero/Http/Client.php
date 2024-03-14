@@ -179,7 +179,7 @@ final class Client
     private function ifIsJson(string $string): mixed
     {
         $json = json_decode($string);
-        if (json_last_error() === JSON_ERROR_NONE) {
+        if (JSON_ERROR_NONE === json_last_error()) {
             return $json;
         } else {
             return $string;

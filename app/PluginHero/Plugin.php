@@ -43,6 +43,8 @@ abstract class Plugin
 
         if (file_exists(Helpers::getProp('pluginDir') . 'vendor/beycanpress/csf/csf.php')) {
             require_once Helpers::getProp('pluginDir') . 'vendor/beycanpress/csf/csf.php';
+        } elseif (file_exists(__DIR__ . '/vendor/beycanpress/csf/csf.php')) {
+            require_once __DIR__ . '/vendor/beycanpress/csf/csf.php';
         }
 
         $this->localization();
@@ -75,6 +77,25 @@ abstract class Plugin
         if (method_exists($this, 'uninstall')) {
             register_uninstall_hook(Helpers::getProp('pluginFile'), [get_called_class(), 'uninstall']);
         }
+
+        Helpers::ajaxAction($this, 'bpDismissNotice');
+
+        if (is_admin()) {
+            new Plugins();
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function bpDismissNotice(): void
+    {
+        if (isset($_POST['id'])) {
+            $dismissed = get_option('bp_dismissed_notices', []);
+            $dismissed[] = sanitize_text_field($_POST['id']);
+            update_option('bp_dismissed_notices', array_unique($dismissed));
+        }
+        wp_die();
     }
 
     /**

@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     2.1.1
+ * Version:     2.1.2
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress LLC
@@ -22,7 +22,7 @@ defined('ABSPATH') || exit;
  * Domain Path: /languages
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
  * Requires at least: 5.0
- * Tested up to: 6.4.2
+ * Tested up to: 6.4.3
  * Requires PHP: 8.1
 */
 
@@ -201,7 +201,7 @@ function cryptoLitPayCheckRequirements(): bool
         $status = false;
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
-            $message = 'CryptoPay Lite: cURL PHP extension is not installed. So CryptoPay Lite has been disabled cURL is a HTTP request library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit "' . (php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>') . '" for install assistance. You can ask your server service provider to install cURL.';
+            $message = 'CryptoPay Lite: cURL PHP extension is not installed. So CryptoPay Lite has been disabled cURL is a HTTP request library that CryptoPay Lite needs and uses to verify blockchain transactions. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>') . '" for install assistance. You can ask your server service provider to install cURL.';
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
         });
     }
@@ -210,7 +210,7 @@ function cryptoLitPayCheckRequirements(): bool
         $status = false;
         add_action('admin_notices', function (): void {
             $class = 'notice notice-error';
-            $message = 'CryptoPay Lite: file_get_contents PHP function is not available. So CryptoPay Lite has been disabled file_get_contents is a PHP function that CryptoPay Lite needs and uses for some process. Please visit "' . (php_sapi_name() == 'cli' ? 'https://www.php.net/manual/en/function.file-get-contents.php' : '<a href="https://www.php.net/manual/en/function.file-get-contents.php">https://www.php.net/manual/en/function.file-get-contents.php</a>') . '" for install assistance. You can ask your server service provider to enable file_get_contents.';
+            $message = 'CryptoPay Lite: file_get_contents PHP function is not available. So CryptoPay Lite has been disabled file_get_contents is a PHP function that CryptoPay Lite needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/function.file-get-contents.php' : '<a href="https://www.php.net/manual/en/function.file-get-contents.php">https://www.php.net/manual/en/function.file-get-contents.php</a>') . '" for install assistance. You can ask your server service provider to enable file_get_contents.';
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
         });
     }
@@ -236,7 +236,7 @@ if (!function_exists('json_validate')) {
     function json_validate(string $string): bool
     {
         json_decode($string);
-        return json_last_error() === JSON_ERROR_NONE;
+        return JSON_ERROR_NONE === json_last_error();
     }
 }
 

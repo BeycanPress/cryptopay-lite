@@ -69,7 +69,7 @@ trait TableCreator
             $i = 1;
             $keys = array_keys($this->columns);
             foreach ($this->columns as $columnName => $properties) {
-                if ($columnName == 'id') {
+                if ('id' == $columnName) {
                     continue;
                 }
 
@@ -101,7 +101,7 @@ trait TableCreator
     /**
      *
      * @param array<string,array<mixed>> $columns
-     * @return void
+     * @return string
      */
     private function arrayToSqlQuery(array $columns): string
     {
@@ -117,7 +117,7 @@ trait TableCreator
                 throw new \Exception('An invalid data type was entered!');
             }
 
-            if ($properties['type'] == 'string' && isset($properties['length'])) {
+            if ('string' == $properties['type'] && isset($properties['length'])) {
                 $this->columnTypes['string'] = "VARCHAR(" . $properties['length'] . ")";
             }
 

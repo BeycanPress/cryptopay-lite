@@ -255,7 +255,7 @@ class Helpers extends PhHelpers
             $currencies = array_merge($currencies, $testnetCurrencies);
         } else {
             foreach ($mainnetCurrencies as $currency) {
-                if (isset($currency['active']) && $currency['active'] == '1') {
+                if (isset($currency['active']) && '1' == $currency['active']) {
                     $address = trim($currency['address']);
                     $symbol = trim(strtoupper($currency['symbol']));
                     $imageUrl = sanitize_text_field($currency['image']);
