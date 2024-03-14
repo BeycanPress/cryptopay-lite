@@ -146,22 +146,18 @@ final class Request
     /**
      * Allows you to get request headers.
      * @param string $key
-     * @return string|null
+     * @return string
      */
     public function getHeaderParam(string $key): ?string
     {
         $headers = $this->getAllHeaderParams();
-        if (is_null($key)) {
-            return $headers;
+        if (isset($headers[$key])) {
+            return $headers[$key];
         } else {
-            if (isset($headers)) {
-                $headers[$key];
-            } else {
-                $this->errors[] = array(
-                    'HEADERS Error' => 'Key not found in headers'
-                );
-                return null;
-            }
+            $this->errors[] = [
+                'HEADERS Error' => 'Key not found in headers'
+            ];
+            return null;
         }
     }
 
@@ -185,9 +181,9 @@ final class Request
             $this->params = json_decode($this->getContent(), true);
             return $this->getWithKey($key);
         } else {
-            $this->errors[] = array(
+            $this->errors[] = [
                 'JSON Error' => json_last_error_msg()
-            );
+            ];
             return false;
         }
     }
@@ -231,18 +227,18 @@ final class Request
                 if (isset($this->params[$key])) {
                     return $this->params[$key];
                 } else {
-                    $this->errors[] = array(
+                    $this->errors[] = [
                         'GENERAL Error' => 'There is no data with the key value you entered.'
-                    );
+                    ];
                     return null;
                 }
             } else {
                 if (isset($this->params->$key)) {
                     return $this->params->$key;
                 } else {
-                    $this->errors[] = array(
-                        'GEENERAL Error' => 'There is no data with the key value you entered.'
-                    );
+                    $this->errors[] = [
+                        'GENERAL Error' => 'There is no data with the key value you entered.'
+                    ];
                     return null;
                 }
             }
@@ -258,7 +254,7 @@ final class Request
     private function isJson(): bool
     {
         json_decode($this->getContent());
-        return (json_last_error() === 0 ? true : false);
+        return (0 === json_last_error() ? true : false);
     }
 
     /**
@@ -277,7 +273,7 @@ final class Request
      */
     private function isFormData(): bool
     {
-        return strpos($this->getContent(), 'form-data') !== false ? true : false;
+        return false !== strpos($this->getContent(), 'form-data') ? true : false;
     }
 
     /**
@@ -312,9 +308,9 @@ final class Request
             $json = json_encode($xml);
             return json_decode($json, true);
         } else {
-            $this->errors[] = array(
+            $this->errors[] = [
                 'XML Error' => libxml_get_errors()
-            );
+            ];
             libxml_use_internal_errors($saved);
             return [];
         }

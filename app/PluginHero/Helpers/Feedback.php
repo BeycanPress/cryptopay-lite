@@ -51,7 +51,7 @@ trait Feedback
 
         if ($form) {
             global $pagenow;
-            if ($pagenow === 'plugins.php') {
+            if ('plugins.php' === $pagenow) {
                 if (!file_exists(self::getProp('pluginDir') . 'assets/css/feedback.css')) {
                     if (!is_dir(self::getProp('pluginDir') . 'assets')) {
                         mkdir(self::getProp('pluginDir') . 'assets');
@@ -139,7 +139,6 @@ trait Feedback
                 ]);
             } catch (\Exception $e) {
                 wp_send_json_success($e->getMessage());
-                return;
             }
         }
 

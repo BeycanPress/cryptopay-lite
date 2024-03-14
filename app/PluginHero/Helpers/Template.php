@@ -57,6 +57,8 @@ trait Template
     {
         extract($args);
         ob_start();
+        // for use in templates
+        $ksesEcho = fn($html, $allowedHtml = []) => self::ksesEcho($html, $allowedHtml);
         include self::getProp('phDir') . 'templates/' . $templateName . '.php';
         return ob_get_clean();
     }
@@ -91,11 +93,12 @@ trait Template
             if ($post && is_page()) {
                 $pageTemplate = get_page_template_slug($post->ID);
 
-                if (strpos($pageTemplate, elf::getProp('pluginKey')) !== false) {
-                    exit(self::viewEcho(
+                if (false !== strpos($pageTemplate, self::getProp('pluginKey'))) {
+                    self::viewEcho(
                         'page-templates/' . str_replace(self::getProp('pluginKey'), '', $pageTemplate),
                         $params
-                    ));
+                    );
+                    exit();
                 }
             }
 
@@ -121,11 +124,11 @@ trait Template
     public static function catchShortcode(string $content): string
     {
         global $shortcode_tags;
-        $tagnames = array_keys($shortcode_tags);
-        $tagregexp = join('|', array_map('preg_quote', $tagnames));
+        $tagNames = array_keys($shortcode_tags);
+        $tagRegexp = join('|', array_map('preg_quote', $tagNames));
 
         // WARNING! Do not change this regex without changing do_shortcode_tag() and strip_shortcodes()
-        $pattern = '(.?)\[(' . $tagregexp . ')\b(.*?)(?:(\/))?\](?:(.+?)\[\/\2\])?(.?)';
+        $pattern = '(.?)\[(' . $tagRegexp . ')\b(.*?)(?:(\/))?\](?:(.+?)\[\/\2\])?(.?)';
 
         return preg_replace_callback('/' . $pattern . '/s', 'do_shortcode_tag', $content);
     }
@@ -201,7 +204,16 @@ trait Template
      */
     public static function notice(string $notice, string $type = 'success', bool $dismissible = false): void
     {
-        echo wp_kses_post(self::getTemplate('notice', [
+        $id = md5($notice . $type . $dismissible);
+
+        $dismissed = get_option('bp_dismissed_notices', []);
+
+        if (in_array($id, $dismissed)) {
+            return;
+        }
+
+        self::ksesEcho(self::getTemplate('notice', [
+            'id' => $id,
             'type' => $type,
             'notice' => $notice,
             'dismissible' => $dismissible

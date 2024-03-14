@@ -92,7 +92,7 @@ class TransactionPage extends Page
 
         $params = [];
 
-        if ($code != 'all') {
+        if ('all' != $code) {
             $params['code'] = $code;
         }
 

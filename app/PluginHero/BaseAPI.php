@@ -7,7 +7,7 @@ namespace BeycanPress\CryptoPayLite\PluginHero;
 abstract class BaseAPI
 {
     /**
-     * @var string<rest|ajax>
+     * @var string rest|ajax
      */
     protected string $type = 'rest';
 
@@ -26,7 +26,7 @@ abstract class BaseAPI
             return;
         }
 
-        if ($this->type == 'rest') {
+        if ('rest' == $this->type) {
             $this->nameSpaces = array_keys($routeList);
             add_action('rest_api_init', function () use ($routeList): void {
                 foreach ($routeList as $nameSpace => $routes) {
@@ -41,7 +41,7 @@ abstract class BaseAPI
                     }
                 }
             });
-        } elseif ($this->type == 'ajax') {
+        } elseif ('ajax' == $this->type) {
             foreach ($routeList as $nameSpace => $routes) {
                 foreach ($routes as $route => $config) {
                     $callback = is_array($config) ? $config['callback'] : $config;
@@ -62,7 +62,7 @@ abstract class BaseAPI
      */
     public function getUrl(?string $nameSpace = null): string
     {
-        if ($this->type == 'rest') {
+        if ('rest' == $this->type) {
             $nameSpace = isset($this->nameSpaces[$nameSpace])
             ? $this->nameSpaces[$nameSpace]
             : array_values($this->nameSpaces)[0];

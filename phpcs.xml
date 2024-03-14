@@ -11,12 +11,14 @@
     <exclude-pattern>*/PluginHero/templates/*</exclude-pattern>
     <arg name="standard" value="PSR12"/>
     <rule ref="Generic.Files.InlineHTML"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="Squiz.Commenting.FunctionComment.Missing"/>
     <rule ref="Squiz.Commenting.FunctionComment.MissingParamTag"/>
     <rule ref="Squiz.Commenting.FunctionComment.MissingParamName"/>
     <rule ref="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
     <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
     <rule ref="Squiz.Commenting.FunctionComment.MissingReturn"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectStrictTypesFormat" />
     </rule>

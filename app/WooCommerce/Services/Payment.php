@@ -64,10 +64,10 @@ class Payment
     public function orderProcessed(int $orderId, array $data, object $order): void
     {
         /** @var \WC_Order $order */
-        if ($order->get_payment_method() == 'cryptopay_lite' && function_exists('wcs_get_subscriptions_for_order')) {
+        if ('cryptopay_lite' == $order->get_payment_method() && function_exists('wcs_get_subscriptions_for_order')) {
             /** @var \WC_Order_Item $item */
             foreach ($order->get_items() as $item) {
-                $subs = wcs_get_subscriptions_for_order($item->get_order_id(), array('order_type' => 'any'));
+                $subs = wcs_get_subscriptions_for_order($item->get_order_id(), ['order_type' => 'any']);
                 if (!empty($subs)) {
                     /** @var \WC_Subscription $sub */
                     foreach ($subs as $sub) {
@@ -124,7 +124,7 @@ class Payment
             $order->save();
 
             if ($data->getStatus()) {
-                if (Helpers::getSetting('paymentCompleteOrderStatus') == 'wc-completed') {
+                if ('wc-completed' == Helpers::getSetting('paymentCompleteOrderStatus')) {
                     $note = esc_html__('Your order is complete.', 'cryptopay_lite');
                 } else {
                     $note = esc_html__('Your order is processing.', 'cryptopay_lite');

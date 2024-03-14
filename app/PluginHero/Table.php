@@ -39,7 +39,7 @@ class Table extends \WP_List_Table
     private AbstractModel|null $model = null;
 
     /**
-     * @var array<string,Closure>
+     * @var array<array<string,\Closure>>
      */
     private array $hooks = [];
 
@@ -69,9 +69,20 @@ class Table extends \WP_List_Table
     private array $orderQuery = [];
 
     /**
-     * @var array<Closure>
+     * @var array<\Closure>
      */
     private array $headerElements = [];
+
+    /**
+     * @var array<mixed>
+     */
+    // @phpcs:ignore
+    public $items = [];
+    /**
+     * @var array<int,array<string>>
+     */
+    // @phpcs:ignore
+    protected $_column_headers = [];
 
     /**
      *
@@ -100,6 +111,9 @@ class Table extends \WP_List_Table
      */
     public function createDataList(?\Closure $customDataList = null): self
     {
+        $dataList = [];
+        $dataListCount = 0;
+
         $paged = isset($_GET['paged']) ? absint($_GET['paged']) : 1;
         $offset = (($paged - 1) * $this->perPage);
 
@@ -171,6 +185,7 @@ class Table extends \WP_List_Table
             if (!empty($this->hooks)) {
                 array_map(function ($hooks) use (&$item): void {
                     $itemPlaceHolder = $item;
+                    /** @var \Closure $func */
                     foreach ($hooks as $key => $func) {
                         $item[$key] = call_user_func($func, (object) $itemPlaceHolder);
                     }
@@ -202,11 +217,11 @@ class Table extends \WP_List_Table
 
         $this->items = array_slice($this->dataList, 0, $this->perPage);
 
-        $this->_column_headers = array($this->columns, [], $this->sortableColumns);
+        $this->_column_headers = [$this->columns, [], $this->sortableColumns];
     }
 
     /**
-     * @param array<string,Closure> $hooks
+     * @param array<string,\Closure> $hooks
      * @return self
      */
     public function addHooks(array $hooks): self
@@ -329,7 +344,7 @@ class Table extends \WP_List_Table
      */
     public function dataListIsEmpty(): bool
     {
-        return $this->getDataListCount() == 0;
+        return 0 == $this->getDataListCount();
     }
 
     /**
@@ -389,7 +404,7 @@ class Table extends \WP_List_Table
     }
 
     /**
-     * @return array<Closure>
+     * @return array<\Closure>
      */
     public function getHeaderElements(): array
     {
@@ -397,7 +412,7 @@ class Table extends \WP_List_Table
     }
 
     /**
-     * @return array<string,Closure>
+     * @return array<array<string,\Closure>>
      */
     public function getHooks(): array
     {
@@ -466,7 +481,7 @@ class Table extends \WP_List_Table
         wp_enqueue_script('bwptable-data-table', 'https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/r-2.3.0/sb-1.3.4/datatables.min.js', ['jquery'], null, true);
         // @phpcs:enable
 
-        return self::getTemplate('data-table', [
+        return Helpers::getTemplate('data-table', [
             'id' => $id,
             'options' => $options
         ]);

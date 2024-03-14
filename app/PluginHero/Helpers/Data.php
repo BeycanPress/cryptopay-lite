@@ -22,7 +22,7 @@ trait Data
     private static array $pages = [];
 
     /**
-     * @var array<string,Closure>
+     * @var array<string,\Closure>
      */
     private static array $funcs = [];
 
@@ -48,7 +48,7 @@ trait Data
     {
         if (isset(Plugin::$properties->$property)) {
             return Plugin::$properties->$property;
-        } elseif ($default !== 'no-default') {
+        } elseif ('no-default' !== $default) {
             return $default;
         } else {
             throw new \Exception('Property not found: ' . $property);
@@ -150,7 +150,7 @@ trait Data
     {
         if (isset(self::$pages[$name])) {
             if (is_array(self::$pages[$name])) {
-                if (count(self::$pages[$name]) == 1) {
+                if (1 == count(self::$pages[$name])) {
                     return array_values(self::$pages[$name])[0];
                 }
 
@@ -250,10 +250,10 @@ trait Data
 
     /**
      * @param string $field
-     * @param array<mixed> $value
+     * @param mixed $value
      * @return object|null
      */
-    public static function getUserBy(string $field, array $value): ?object
+    public static function getUserBy(string $field, mixed $value): ?object
     {
         global $wpdb;
         return $wpdb->get_row("SELECT * FROM $wpdb->users WHERE $field = '$value'");

@@ -143,15 +143,15 @@ trait QueryBuilder
                 $parameter = $predicate[2];
                 $type = isset($predicate[3]) ? mb_strtoupper($predicate[3], 'UTF-8') : $type;
                 $parameterType = $this->getParameterType($parameter);
-                if ($condition == 'IN') {
+                if ('IN' == $condition) {
                     $parameter = array_map(function ($parameter) {
                         return "'$parameter'";
                     }, $parameter);
                     $parameterType = '(' . implode(',', $parameter) . ')';
-                } elseif ($condition == 'LIKE') {
+                } elseif ('LIKE' == $condition) {
                     $parameterType = "'%" . $this->db->esc_like($parameter) . "%'";
                     $parameter = null;
-                } elseif ($parameterType == 'NULL') {
+                } elseif ('NULL' == $parameterType) {
                     $parameter = null;
                 }
                 $predicate = "`$columnName` $condition $parameterType";
@@ -175,8 +175,7 @@ trait QueryBuilder
      */
     protected function addJoin(string $tableName, string $alias, string $operator, string $type): void
     {
-        $tableName = $this->addPrefix($tableName);
-        $this->queryText .= " $type JOIN $tableName AS $alias ON $predicate ";
+        $this->queryText .= " $type JOIN $tableName AS $alias ON $operator ";
     }
 
     /**
@@ -191,7 +190,7 @@ trait QueryBuilder
             $this->setParameter($parameter);
         }
 
-        if (strpos($this->queryText, 'WHERE') === false) {
+        if (false === strpos($this->queryText, 'WHERE')) {
             $type = 'WHERE';
         }
 
@@ -219,7 +218,7 @@ trait QueryBuilder
      */
     protected function getParameterType(mixed $parameter): string
     {
-        if ($parameter == 'NULL') {
+        if ('NULL' == $parameter) {
             return 'NULL';
         }
 
@@ -276,15 +275,6 @@ trait QueryBuilder
         $predicate = strtoupper($predicate);
         $this->queryText .= " ORDER BY $column $predicate ";
         return $this;
-    }
-
-    /**
-     * @param string $table
-     * @return string
-     */
-    protected function addPrefix(string $table): string
-    {
-        return $this->prefix . $table;
     }
 
     /**

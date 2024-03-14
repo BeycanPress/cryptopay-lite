@@ -18,7 +18,7 @@ trait Assets
         $key = str_replace('/', '-', $path);
         $ver = self::getProp('pluginVersion');
         $subAsset = 'assets/' . $subAsset . '/';
-        $url = $baseUrl . ($f === '/' ? 'assets' : $subAsset) . $path;
+        $url = $baseUrl . ('/' === $f ? 'assets' : $subAsset) . $path;
         $key = self::getProp('pluginKey') . '-' . preg_replace('/\..*$/', '', $key);
 
         return [$key, $url, $ver];

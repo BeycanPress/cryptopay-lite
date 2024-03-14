@@ -74,11 +74,11 @@ trait General
         $pos1 = stripos((string) $amount, 'E-');
         $pos2 = stripos((string) $amount, 'E+');
 
-        if ($pos1 !== false) {
+        if (false !== $pos1) {
             $amount = number_format($amount, $decimals, '.', ',');
         }
 
-        if ($pos2 !== false) {
+        if (false !== $pos2) {
             $amount = number_format($amount, $decimals, '.', '');
         }
 
@@ -155,11 +155,13 @@ trait General
 
         $parseUrl = parse_url(trim($address));
         if (isset($parseUrl['host'])) {
-            return trim($parseUrl['host']);
+            $domain = trim($parseUrl['host']);
         } else {
             $domain = explode('/', $parseUrl['path'], 2);
-            return array_shift($domain);
+            $domain = array_shift($domain);
         }
+
+        return str_replace(['www.'], '', $domain);
     }
 
     /**

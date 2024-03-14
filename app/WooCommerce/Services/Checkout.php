@@ -17,7 +17,7 @@ class Checkout extends \WC_Checkout
      */
     public function __construct()
     {
-        add_action('woocommerce_receipt_cryptopay_lite', array($this, 'init'), 1);
+        add_action('woocommerce_receipt_cryptopay_lite', [$this, 'init'], 1);
     }
 
     /**

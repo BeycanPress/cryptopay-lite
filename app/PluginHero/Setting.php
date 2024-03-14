@@ -62,7 +62,7 @@ abstract class Setting
             'transient_time'          => 0,
 
             // contextual help
-            'contextual_help'         => array(),
+            'contextual_help'         => [],
 
             // typography options
             'enqueue_webfont'         => false,
@@ -75,7 +75,7 @@ abstract class Setting
             'theme'                   => 'dark',
 
             // external default values
-            'defaults'                => array(),
+            'defaults'                => [],
         ], $params);
 
         if (!is_null($parent)) {
@@ -102,7 +102,7 @@ abstract class Setting
      */
     public static function live(string $key, mixed $default = null): mixed
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ('POST' !== $_SERVER['REQUEST_METHOD']) {
             return null;
         }
 
