@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 6.4.3
 Requires PHP: 8.1
-Stable Tag: 2.1.1
-Version: 2.1.1
+Stable Tag: 2.1.2
+Version: 2.1.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -159,6 +159,9 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 
 == Changelog ==
 
+= 2.1.2 =
+* Added: Feedback page
+
 = 2.1.1 =
 * Added: New wallet supports
 * Update: It will now proceed in a separate development process with the premium version
@@ -184,7 +187,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Added: If it is in a Webview browser, that is, a wallet application, all other options are removed when the relevant wallet is detected.
 * Added: Instant purchase option with CryptoPay on WooCommerce product pages.
 * Added: Email reminder feature for networks that have been approved for a long time, such as Bitcoin.
-* Added: WordPress Cron settings and informations for Server cron.
+* Added: WordPress Cron settings and information for Server cron.
 * Added: The ability to choose the payment process you want with network and currency-based listing modes.
 * Added: Timeout feature for wallets that do not send an event when the connection is rejected. And if you close the waiting section directly. The wallet connection process is reset.
 * Added: The ability to add special discounts for payments in certain currencies.
@@ -202,7 +205,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Fixed: Trust Wallet Browser plugin not being detected or it interferes with MetaMask.
 * Fixed: the issue where page refresh was required in critical errors but could not be refreshed due to incorrect parameters.
 * Removed: BUSD from default settings because Binance ended support
-* Depracted: startPaymentProcess, preparePaymentProcess methods in Services.
+* Deprecated: startPaymentProcess, preparePaymentProcess methods in Services.
 
 = 1.6.1 =
 * Fixed: Download text looked bad in black theme
@@ -238,7 +241,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Added: If there is only one wallet, the Pay now text is updated to Pay with {walletName} and a direct connection is established
 * Added: ENS domain support for Ethereum network
 * Added: Price update feature at regular intervals after selecting the network and cryptocurrency
-* Added: Custom image choosing for EVM Based networks (Bacuse networks like Arbitrum and Optimism show Ethereum icon due to ETH nativecoin)
+* Added: Custom image choosing for EVM Based networks (Because networks like Arbitrum and Optimism show Ethereum icon due to ETH Native Coin)
 * Added: Phantom wallet support for Ethereum networks (Currently only supports mainnet)
 * Added: Feedback area to get users' opinions and improve our product better
 * Improved: The version system has been brought to the Websocket system of payment with QR. This way, you won't be stuck with any version-related incompatibilities
@@ -271,7 +274,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Fixed Mainnet not working problem
 
 = 1.2.1 =
-* Added pro version informations
+* Added pro version information
 
 = 1.2.0 =
 * Added Ethereum, Avalanche, Polygon Support
