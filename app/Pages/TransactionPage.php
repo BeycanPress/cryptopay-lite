@@ -83,6 +83,14 @@ class TransactionPage extends Page
      */
     public function page(): void
     {
+        if (is_null($this->model)) {
+            echo esc_html__(
+                'Unfortunately there is no transaction list for this addon as no model has been registered.',
+                'cryptopay'
+            );
+            return;
+        }
+
         $code = isset($_GET['code']) ? $_GET['code'] : 'all';
         $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : null;
 
@@ -125,13 +133,16 @@ class TransactionPage extends Page
         ->setSortableColumns(['createdAt'])
         ->addHooks(array_merge([
             'hash' => function ($tx) {
-                if (Helpers::providerExists($tx->code)) {
-                    $transaction = Helpers::getProvider(TransactionType::fromObject($tx));
-                    $transactionUrl = $transaction->Transaction($tx->hash)->getUrl();
-                    return Helpers::view('components/link', [
-                        'text' => $tx->hash,
-                        'url' => $transactionUrl
-                    ]);
+                try {
+                    if (Helpers::providerExists($tx->code)) {
+                        $transaction = Helpers::getProvider(TransactionType::fromObject($tx));
+                        $transactionUrl = $transaction->Transaction($tx->hash)->getUrl();
+                        return Helpers::view('components/link', [
+                            'text' => $tx->hash,
+                            'url' => $transactionUrl
+                        ]);
+                    }
+                } catch (\Throwable $th) {
                 }
 
                 return $tx->hash;

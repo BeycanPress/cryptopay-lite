@@ -104,6 +104,7 @@ class Payment
      */
     public function modal(array $deps = []): string
     {
+        Helpers::addStyle('main.min.css');
         return Helpers::view('modal', [
             'cryptopay' => $this->html($deps)
         ]);
