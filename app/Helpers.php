@@ -69,7 +69,17 @@ class Helpers extends PhHelpers
     public static function getCurrentUserEmail(): ?string
     {
         $user = wp_get_current_user();
-        return $user->user_email ?? null;
+        return $user->user_email ?? null; // phpcs:ignore
+    }
+
+    /**
+     * @param string $hash
+     * @param string $addon
+     * @return string
+     */
+    public static function getSingleTxLink(string $hash, string $addon): string
+    {
+        return sprintf(admin_url('admin.php?page=%s_%s_transactions&s=%s'), self::getProp('pluginKey'), $addon, $hash);
     }
 
     /**
