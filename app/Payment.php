@@ -143,7 +143,7 @@ class Payment
                 ['jquery', $appKey],
             );
 
-            Helpers::setProp('mainJsKey', $mainJsKey = Helpers::addScript('main.min.js', $deps));
+            Helpers::setProp('mainJsKey', $mainJsKey = Helpers::addScript('main.min.js', $deps), true);
 
             // config for cryptopay js app
             $this->config = Hook::callFilter('edit_config_data', $this->config);
