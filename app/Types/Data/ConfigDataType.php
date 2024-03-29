@@ -151,7 +151,7 @@ class ConfigDataType extends AbstractType
 
         // declare settings
         $this->mode = Helpers::getMode($addon);
-        $this->theme = $this->getTheme($addon);
+        $this->theme = Helpers::getTheme($addon);
         $this->walletImages = $this->getWalletImages();
         $this->amountUpdateMin = $this->getUpdateMin();
         $this->debug = boolval(Helpers::getSetting('debugging'));
@@ -164,15 +164,6 @@ class ConfigDataType extends AbstractType
     {
         $updateMin = Helpers::getSetting('amountUpdateMin');
         return $updateMin ? floatval($updateMin) : 0.5;
-    }
-
-    /**
-     * @param string $addon
-     * @return string
-     */
-    private function getTheme(string $addon): string
-    {
-        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme', 'light')));
     }
 
     /**

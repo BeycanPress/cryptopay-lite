@@ -174,7 +174,10 @@ class Payment
 
             $html = Hook::callFilter('before_html', '', $this->config);
 
-            $html .= Helpers::view('cryptopay', ['loading' => $loading]);
+            $html .= Helpers::view('cryptopay', [
+                'loading' => $loading,
+                'addon' => $this->addon,
+            ]);
 
             $html = Hook::callFilter('after_html', $html, $this->config);
 

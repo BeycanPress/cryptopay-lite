@@ -1,3 +1,12 @@
+<?php
+    if (BeycanPress\CryptoPayLite\Helpers::getTheme($addon) === 'dark') {
+        $color1 = 'rgb(28 34 43)';
+        $color2 = 'rgb(24 29 36)';
+    } else {
+        $color1 = '#f3f3f3';
+        $color2 = '#ecebeb';
+    }
+?>
 <template id="cp-loading-svg">
     <svg
         role="img"
@@ -27,7 +36,7 @@
             <linearGradient id="fill">
             <stop
                 offset="0.599964"
-                stop-color="#f3f3f3"
+                stop-color="<?php echo $color1; ?>"
                 stop-opacity="1"
             >
                 <animate
@@ -40,7 +49,7 @@
             </stop>
             <stop
                 offset="1.59996"
-                stop-color="#ecebeb"
+                stop-color="<?php echo $color2; ?>"
                 stop-opacity="1"
             >
                 <animate
@@ -53,7 +62,7 @@
             </stop>
             <stop
                 offset="2.59996"
-                stop-color="#f3f3f3"
+                stop-color="<?php echo $color1; ?>"
                 stop-opacity="1"
             >
                 <animate

@@ -137,6 +137,15 @@ class Helpers extends PhHelpers
 
     /**
      * @param string $addon
+     * @return string
+     */
+    public static function getTheme(string $addon): string
+    {
+        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme', 'light')));
+    }
+
+    /**
+     * @param string $addon
      * @return AbstractTransaction|null
      */
     public static function getModelByAddon(string $addon): ?AbstractTransaction
