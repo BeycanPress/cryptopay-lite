@@ -174,7 +174,7 @@ class Helpers extends PhHelpers
      */
     public static function getBlockConfirmationCount(): int
     {
-        return 10;
+        return 0;
     }
 
     /**

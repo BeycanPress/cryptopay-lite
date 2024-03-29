@@ -194,7 +194,16 @@ class TransactionPage extends Page
                     $receiver = esc_html__('Receiver: ', 'cryptopay_lite') . esc_html__('Not found!', 'cryptopay_lite');
                 }
 
-                return $sender . CPL_BR2 . $receiver;
+                $addresses = $sender . CP_BR2 . $receiver;
+
+                if (
+                    $tx->status == Status::FAILED->getValue() &&
+                    strtolower(strval($tx->addresses?->sender)) == strtolower(strval($tx->addresses?->receiver))
+                ) {
+                    $addresses .= CP_BR2 . esc_html__('Warning: Sender and receiver addresses are the same! Transaction can be failed by this!', 'cryptopay'); // @phpcs:ignore
+                }
+
+                return $addresses;
             },
             'createdAt' => function ($tx) {
                 return (new \DateTime($tx->createdAt->date))->setTimezone(
