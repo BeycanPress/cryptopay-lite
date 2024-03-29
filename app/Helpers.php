@@ -55,6 +55,27 @@ class Helpers extends PhHelpers
     }
 
     /**
+     * @param string $modelClass
+     * @return void
+     */
+    public static function registerModel(string $modelClass): void
+    {
+        if (class_exists($modelClass)) {
+            $model = new $modelClass();
+            if (!($model instanceof AbstractTransaction)) {
+                throw new \Exception('Model must be an instance of AbstractTransaction');
+            }
+
+            Hook::addFilter('models', function (array $models) use ($model): array {
+                /** @disregard */
+                return array_merge($models, [
+                    $model->addon => $model
+                ]);
+            });
+        }
+    }
+
+    /**
      * @return int
      */
     public static function getCurrentUserId(): int
