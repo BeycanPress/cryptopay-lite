@@ -65,6 +65,7 @@ class Loader extends PluginHero\Plugin
     public function adminProcess(): void
     {
         new Pages\HomePage();
+        new Pages\Integrations();
 
         if (file_exists(Helpers::getProp('pluginDir') . '/debug.log')) {
             new Pages\DebugLogs();
