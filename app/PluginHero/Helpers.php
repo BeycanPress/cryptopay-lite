@@ -71,24 +71,29 @@ class Helpers
     }
 
     /**
-     * @param string $pluginName
      * @param array<mixed> $rules
+     * @param string $pluginFile
      * @return bool
      */
-    public static function createRequirementRules(string $pluginName, array $rules): bool
+    public static function createRequirementRules(array $rules, string $pluginFile): bool
     {
         $status = true;
+        $pluginName = self::getPluginData($pluginFile)->Name;
 
         if (isset($rules['phpVersions'])) {
             $phpVersions = $rules['phpVersions'];
-            if (!is_array($phpVersions)) {
-                throw new \Exception('phpVersions must be an array!');
+            if (is_array($phpVersions)) {
+                $condition = !in_array(self::getPHPVersion(), $phpVersions);
+            } else {
+                $condition = version_compare(strval(self::getPHPVersion()), strval($phpVersions), '<');
             }
-            if (!in_array(self::getPHPVersion(), $phpVersions)) {
+
+            if ($condition) {
                 $status = false;
                 add_action('admin_notices', function () use ($phpVersions, $pluginName): void {
+                    $versions = is_array($phpVersions) ? implode(', ', $phpVersions) : $phpVersions . ' or higher';
                     // @phpcs:ignore
-                    $message = $pluginName . ': Your current PHP version does not support ' . self::getPHPVersion() . '. This means errors may occur due to incompatibility or other reasons. So ' . $pluginName . ' is disabled please use one of the supported versions ' . implode(' or ', $phpVersions) . '. You can ask your server service provider to update your PHP version.';
+                    $message = $pluginName . ': Your current PHP version does not support ' . self::getPHPVersion() . '. This means errors may occur due to incompatibility or other reasons. So ' . $pluginName . ' is disabled please use one of the supported versions ' . $versions . '. You can ask your server service provider to update your PHP version.';
                     printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
                 });
             }

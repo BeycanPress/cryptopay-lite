@@ -83,6 +83,14 @@ class TransactionPage extends Page
      */
     public function page(): void
     {
+        if (is_null($this->model)) {
+            echo esc_html__(
+                'Unfortunately there is no transaction list for this addon as no model has been registered.',
+                'cryptopay'
+            );
+            return;
+        }
+
         $code = isset($_GET['code']) ? $_GET['code'] : 'all';
         $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : null;
 
@@ -125,13 +133,16 @@ class TransactionPage extends Page
         ->setSortableColumns(['createdAt'])
         ->addHooks(array_merge([
             'hash' => function ($tx) {
-                if (Helpers::providerExists($tx->code)) {
-                    $transaction = Helpers::getProvider(TransactionType::fromObject($tx));
-                    $transactionUrl = $transaction->Transaction($tx->hash)->getUrl();
-                    return Helpers::view('components/link', [
-                        'text' => $tx->hash,
-                        'url' => $transactionUrl
-                    ]);
+                try {
+                    if (Helpers::providerExists($tx->code)) {
+                        $transaction = Helpers::getProvider(TransactionType::fromObject($tx));
+                        $transactionUrl = $transaction->Transaction($tx->hash)->getUrl();
+                        return Helpers::view('components/link', [
+                            'text' => $tx->hash,
+                            'url' => $transactionUrl
+                        ]);
+                    }
+                } catch (\Throwable $th) {
                 }
 
                 return $tx->hash;
@@ -194,7 +205,16 @@ class TransactionPage extends Page
                     $receiver = esc_html__('Receiver: ', 'cryptopay_lite') . esc_html__('Not found!', 'cryptopay_lite');
                 }
 
-                return $sender . CPL_BR2 . $receiver;
+                $addresses = $sender . CP_BR2 . $receiver;
+
+                if (
+                    $tx->status == Status::FAILED->getValue() &&
+                    strtolower(strval($tx->addresses?->sender)) == strtolower(strval($tx->addresses?->receiver))
+                ) {
+                    $addresses .= CP_BR2 . esc_html__('Warning: Sender and receiver addresses are the same! Transaction can be failed by this!', 'cryptopay'); // @phpcs:ignore
+                }
+
+                return $addresses;
             },
             'createdAt' => function ($tx) {
                 return (new \DateTime($tx->createdAt->date))->setTimezone(

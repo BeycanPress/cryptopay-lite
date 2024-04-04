@@ -104,6 +104,7 @@ class Payment
      */
     public function modal(array $deps = []): string
     {
+        Helpers::addStyle('main.min.css');
         return Helpers::view('modal', [
             'cryptopay' => $this->html($deps)
         ]);
@@ -143,7 +144,7 @@ class Payment
                 ['jquery', $appKey],
             );
 
-            Helpers::setProp('mainJsKey', $mainJsKey = Helpers::addScript('main.min.js', $deps));
+            Helpers::setProp('mainJsKey', $mainJsKey = Helpers::addScript('main.min.js', $deps), true);
 
             // config for cryptopay js app
             $this->config = Hook::callFilter('edit_config_data', $this->config);
@@ -173,7 +174,10 @@ class Payment
 
             $html = Hook::callFilter('before_html', '', $this->config);
 
-            $html .= Helpers::view('cryptopay', ['loading' => $loading]);
+            $html .= Helpers::view('cryptopay', [
+                'loading' => $loading,
+                'addon' => $this->addon,
+            ]);
 
             $html = Hook::callFilter('after_html', $html, $this->config);
 

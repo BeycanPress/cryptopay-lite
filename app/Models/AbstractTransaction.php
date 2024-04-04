@@ -6,6 +6,7 @@ namespace BeycanPress\CryptoPayLite\Models;
 
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
+use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\PluginHero\Model\AbstractModel;
 // Types
 use BeycanPress\CryptoPayLite\Types\Data\PaymentDataType;
@@ -207,6 +208,9 @@ abstract class AbstractTransaction extends AbstractModel
      */
     public function updateWithPaymentData(PaymentDataType $data, TransactionType $tx): bool
     {
+        $tx = Hook::callFilter('transaction_update_tx', $tx, $data);
+        $data = Hook::callFilter('transaction_update_data', $data, $tx);
+
         $params = $tx->getParams()->merge($data->getParams());
         $status = $data->getStatus() ? Status::VERIFIED : Status::FAILED;
 

@@ -1,5 +1,5 @@
 <?php
-    use BeycanPress\CryptoPay\Helpers;
+    use BeycanPress\CryptoPayLite\Helpers;
 ?>
 <div class="wrap">
     <h1 class="wp-heading-inline">

@@ -39,12 +39,11 @@
         position: relative;
         margin: 30px auto;
         width: 500px;
-        background: #fff;
         border-radius: 5px;
         padding: 20px;
         padding-top: 45px;
         .cpl-modal-close {
-            position: absolute;
+            position: fixed;
             top: 10px;
             right: 10px;
             font-size: 45px;

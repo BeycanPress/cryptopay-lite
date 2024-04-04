@@ -232,8 +232,8 @@ trait Data
 
         $pluginData = (object) get_plugin_data($file);
 
-        if (!isset($pluginData->Slug)) {
-            $pluginData->Slug = self::getPluginSlug($file);
+        if (!isset($pluginData->Slug)) { // phpcs:ignore
+            $pluginData->Slug = self::getPluginSlug($file); // phpcs:ignore
         }
 
         return $pluginData;

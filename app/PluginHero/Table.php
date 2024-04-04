@@ -217,6 +217,7 @@ class Table extends \WP_List_Table
 
         $this->items = array_slice($this->dataList, 0, $this->perPage);
 
+        // phpcs:ignore
         $this->_column_headers = [$this->columns, [], $this->sortableColumns];
     }
 

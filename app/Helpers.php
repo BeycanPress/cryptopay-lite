@@ -55,6 +55,27 @@ class Helpers extends PhHelpers
     }
 
     /**
+     * @param string $modelClass
+     * @return void
+     */
+    public static function registerModel(string $modelClass): void
+    {
+        if (class_exists($modelClass)) {
+            $model = new $modelClass();
+            if (!($model instanceof AbstractTransaction)) {
+                throw new \Exception('Model must be an instance of AbstractTransaction');
+            }
+
+            Hook::addFilter('models', function (array $models) use ($model): array {
+                /** @disregard */
+                return array_merge($models, [
+                    $model->addon => $model
+                ]);
+            });
+        }
+    }
+
+    /**
      * @return int
      */
     public static function getCurrentUserId(): int
@@ -69,7 +90,17 @@ class Helpers extends PhHelpers
     public static function getCurrentUserEmail(): ?string
     {
         $user = wp_get_current_user();
-        return $user->user_email ?? null;
+        return $user->user_email ?? null; // phpcs:ignore
+    }
+
+    /**
+     * @param string $hash
+     * @param string $addon
+     * @return string
+     */
+    public static function getSingleTxLink(string $hash, string $addon): string
+    {
+        return sprintf(admin_url('admin.php?page=%s_%s_transactions&s=%s'), self::getProp('pluginKey'), $addon, $hash);
     }
 
     /**
@@ -102,6 +133,15 @@ class Helpers extends PhHelpers
         $mode = $mode ? $mode : 'network';
         $mode = Hook::callFilter('mode', $mode);
         return Hook::callFilter('mode_' . $addon, $mode);
+    }
+
+    /**
+     * @param string $addon
+     * @return string
+     */
+    public static function getTheme(string $addon): string
+    {
+        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme', 'light')));
     }
 
     /**
@@ -174,7 +214,7 @@ class Helpers extends PhHelpers
      */
     public static function getBlockConfirmationCount(): int
     {
-        return 10;
+        return 0;
     }
 
     /**
