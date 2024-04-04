@@ -123,8 +123,8 @@ trait Template
      */
     public static function catchShortcode(string $content): string
     {
-        global $shortcode_tags;
-        $tagNames = array_keys($shortcode_tags);
+        global $shortcode_tags; // phpcs:ignore
+        $tagNames = array_keys($shortcode_tags); // phpcs:ignore
         $tagRegexp = join('|', array_map('preg_quote', $tagNames));
 
         // WARNING! Do not change this regex without changing do_shortcode_tag() and strip_shortcodes()

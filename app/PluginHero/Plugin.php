@@ -36,7 +36,7 @@ abstract class Plugin
             'phDir' => $phDir,
             'phVersion' => '0.6.0',
             'pluginData' => $pluginData,
-            'pluginVersion' => $pluginData->Version,
+            'pluginVersion' => $pluginData->Version, // phpcs:ignore
             'pluginUrl' => plugin_dir_url($properties['pluginFile']),
             'pluginDir' => plugin_dir_path($properties['pluginFile']),
         ]);

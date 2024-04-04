@@ -107,6 +107,7 @@ abstract class AbstractType
                         }
                     } elseif ('DateTime' == $propertyType) {
                         if (is_object($propertyValue)) {
+                            // @phpcs:ignore
                             $propertyValue = $propertyValue->date ?? $propertyValue->date_time ?? null;
                         }
                         $property->setValue($instance, new \DateTime($propertyValue));

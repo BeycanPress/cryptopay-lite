@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+// @phpcs:disable Squiz.NamingConventions.ValidVariableName
 // @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 // @phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint
 
