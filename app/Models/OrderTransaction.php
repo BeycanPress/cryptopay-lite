@@ -9,7 +9,7 @@ namespace BeycanPress\CryptoPayLite\Models;
  */
 final class OrderTransaction extends AbstractTransaction
 {
-    protected string $addon = 'woocommerce';
+    public string $addon = 'woocommerce';
 
     /**
      * @return void
