@@ -33,7 +33,7 @@ abstract class AbstractTransaction extends AbstractModel
     /**
      * @var string
      */
-    protected string $addon;
+    public string $addon;
 
     /**
      * @param string $tableName
