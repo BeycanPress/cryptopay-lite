@@ -66,4 +66,14 @@ trait API
 
         return @wp_verify_nonce(sanitize_text_field($_POST['nonce']), $key) ? true : false;
     }
+
+    /**
+     * Get route paths
+     * @param string $route
+     * @return array<string>
+     */
+    public static function getRoutePaths(string $route): array
+    {
+        return array_values(array_filter(explode('/', $route)));
+    }
 }
