@@ -25,12 +25,16 @@ WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With Cryp
 
 As you know, virtual POS and many other payment methods deduct commission from you. The only commission here is the “gas” fee that blockchain networks charge. So the money will be transferred directly to your account. You can receive payments with all blockchain networks that have the RPC API and support the wallet that the user is currently using, and tokens and native currencies under these networks.
 
-**Apart from that, here are the advantages that CryptoPay gives you:**
+**Nonsense that CryptoPay doesn't have:**
 
 * No 3rd party service
+    * You can start getting paid as soon as you install the plugin without having any 3rd party services to start with.
 * No withdrawal limit, fee, date
-* 1-2 business days and no weekend nonsense
-* The money is in your account and in use on the same day 
+    * As it is completely peer to peer, customers pay directly to your wallet
+* No 1-2 business days and weekend nonsense
+    * There is no need to wait for weeks or wait to get paid as in the classic financing process
+* No touching your money for to get commission
+    * Because we only charge per license
 
 Are you ready to speed up the process of receiving WooCommerce crypto payments on WordPress with CryptoPay?
 
