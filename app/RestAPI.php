@@ -106,7 +106,7 @@ class RestAPI extends BaseAPI
     public function middleware(mixed $result, \WP_REST_Server $server, \WP_REST_Request $request): mixed
     {
         // check if request is cryptopay
-        if ('cryptopay-lite' === Helpers::getRoutePaths($request->get_route())[0]) {
+        if ('cryptopay-lite' === (Helpers::getRoutePaths($request->get_route())[0] ?? null)) {
             if ($addon = $this->request->getParam('cp_addon')) {
                 try {
                     // check addon
