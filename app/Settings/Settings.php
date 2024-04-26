@@ -20,7 +20,7 @@ class Settings extends Setting
         $this->createFeedbackPage($parent = Helpers::getPage('HomePage')->getSlug());
         parent::__construct(esc_html__('Settings', 'cryptopay_lite'), $parent);
 
-        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a premium feature => %s', 'cryptopay_lite'), '<a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy premium', 'cryptopay_lite') . '</a>') . '</div><br>';
+        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a premium feature => %s', 'cryptopay_lite'), '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy premium', 'cryptopay_lite') . '</a>') . '</div><br>';
 
         self::createSection([
             'id'     => 'generalSettings',
