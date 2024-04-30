@@ -19,6 +19,7 @@ class Verifier
     {
         Helpers::debug('Verifying transaction...', 'INFO', $transaction->forDebug());
 
+        $code = $transaction->getCode();
         $order = $transaction->getOrder();
         $amount = $order->getPaymentAmount();
         $currency = $order->getPaymentCurrency();
@@ -31,7 +32,7 @@ class Verifier
             return null;
         }
 
-        $confirmationCount = Helpers::getBlockConfirmationCount();
+        $confirmationCount = Helpers::getBlockConfirmationCount($code);
         if (method_exists($transaction, 'getConfirmations') && $confirmationCount > 0) {
             if ($transaction->getConfirmations() < $confirmationCount) {
                 return null;

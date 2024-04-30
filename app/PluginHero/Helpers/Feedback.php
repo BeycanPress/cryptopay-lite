@@ -134,6 +134,7 @@ trait Feedback
         if (function_exists('curl_version')) {
             try {
                 self::sendDeactivationInfo([
+                    'reasonCode' => isset($_POST['reasonCode']) ? sanitize_text_field($_POST['reasonCode']) : null,
                     'reason' =>  isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : null,
                     'email' => isset($_POST['email']) ? sanitize_email($_POST['email']) : null,
                 ]);

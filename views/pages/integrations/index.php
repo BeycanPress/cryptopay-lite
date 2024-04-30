@@ -8,7 +8,7 @@
         <div class="box box-100">
             <div class="postbox">
                 <div class="postbox-header">
-                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Network supports', 'cryptopay'); ?></h2>
+                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Network supports', 'cryptopay'); ?> - (<?php echo esc_html__('Only for premium', 'cryptopay'); ?>)</h2>
                 </div>
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
@@ -28,7 +28,7 @@
         <div class="box box-100">
             <div class="postbox">
                 <div class="postbox-header">
-                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Converter API\'s', 'cryptopay'); ?></h2>
+                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Converter API\'s', 'cryptopay'); ?> - (<?php echo esc_html__('Only for premium', 'cryptopay'); ?>)</h2>
                 </div>
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
@@ -48,7 +48,7 @@
         <div class="box box-100">
             <div class="postbox">
                 <div class="postbox-header">
-                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Add-ons', 'cryptopay'); ?></h2>
+                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Add-ons', 'cryptopay'); ?> - (<?php echo esc_html__('Premium & Lite', 'cryptopay'); ?>)</h2>
                 </div>
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
@@ -68,7 +68,7 @@
         <div class="box box-100">
             <div class="postbox">
                 <div class="postbox-header">
-                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Integrations', 'cryptopay'); ?></h2>
+                    <h2 style="padding-left: 20px; box-sizing: border-box"><?php echo esc_html__('Integrations', 'cryptopay'); ?> - (<?php echo esc_html__('Premium & Lite', 'cryptopay'); ?>)</h2>
                 </div>
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">

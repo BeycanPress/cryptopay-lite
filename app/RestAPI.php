@@ -56,10 +56,12 @@ class RestAPI extends BaseAPI
         $this->currentUserId = Helpers::getCurrentUserId();
 
         // set current user id for woocommerce process
-        add_filter('woocommerce_checkout_customer_id', function () {
-            wp_set_current_user($this->currentUserId);
-            return $this->currentUserId;
-        }, 11);
+        if ($this->currentUserId) {
+            add_filter('woocommerce_checkout_customer_id', function () {
+                wp_set_current_user($this->currentUserId);
+                return $this->currentUserId;
+            }, 11);
+        }
 
         // create payment data
         add_action('rest_pre_dispatch', [$this, 'middleware'], 10, 3);
@@ -106,7 +108,7 @@ class RestAPI extends BaseAPI
     public function middleware(mixed $result, \WP_REST_Server $server, \WP_REST_Request $request): mixed
     {
         // check if request is cryptopay
-        if (false !== strpos($request->get_route(), 'cryptopay-lite')) {
+        if ('cryptopay-lite' === (Helpers::getRoutePaths($request->get_route())[0] ?? null)) {
             if ($addon = $this->request->getParam('cp_addon')) {
                 try {
                     // check addon

@@ -1,6 +1,6 @@
 (($) => {
-    if (!window.bpPhFeedbakcs) {
-        window.bpPhFeedbakcs = [];
+    if (!window.bpPhFeedbacks) {
+        window.bpPhFeedbacks = [];
     }
     $(document).ready(() => {
 
@@ -10,11 +10,11 @@
             let modal = $(this);
             let slug = modal.data('slug');
 
-            if (window.bpPhFeedbakcs.includes(slug)) {
+            if (window.bpPhFeedbacks.includes(slug)) {
                 return;
             }
 
-            window.bpPhFeedbakcs.push(slug);
+            window.bpPhFeedbacks.push(slug);
             let apiUrl = modal.data('api-url');
             let pluginKey = modal.data('plugin-key');
             let apiData = {
@@ -38,7 +38,7 @@
                 $('#'+pluginKey+'-feedback-modal').css('display', 'none');
             });
 
-            let exlcludedForReasonBox = [
+            let excludedForReasonBox = [
                 pluginKey+'_temporary_deactivation',
                 pluginKey+'_premium_version',
             ];
@@ -90,7 +90,7 @@
                     return false;
                 }
 
-                if (!detail && !exlcludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
+                if (!detail && !excludedForReasonBox.includes($('.'+pluginKey+'_deactivation_reason:checked').attr('id'))) {
                     alert('Please provide more information!');
                     return false;
                 }
@@ -104,7 +104,7 @@
             
             $(document).on('change', '.'+pluginKey+'_deactivation_reason', function(e) {
                 e.preventDefault()
-                if (exlcludedForReasonBox.includes($(this).attr('id'))) {
+                if (excludedForReasonBox.includes($(this).attr('id'))) {
                     $('#'+pluginKey+'-feedback-modal-reason-detail').remove();
                     return;
                 }

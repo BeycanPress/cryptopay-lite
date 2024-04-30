@@ -133,7 +133,7 @@ msgid "Buy premium"
 msgstr ""
 
 #: app/Settings/EvmChains.php:30 app/Settings/Settings.php:23
-msgid "Buy pro"
+msgid "Buy premium"
 msgstr ""
 
 #: app/Constants.php:85

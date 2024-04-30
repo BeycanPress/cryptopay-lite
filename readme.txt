@@ -2,7 +2,7 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
-Tested up to: 6.5.0
+Tested up to: 6.5.2
 Requires PHP: 8.1
 Stable Tag: 2.1.4
 Version: 2.1.4
@@ -25,12 +25,16 @@ WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With Cryp
 
 As you know, virtual POS and many other payment methods deduct commission from you. The only commission here is the “gas” fee that blockchain networks charge. So the money will be transferred directly to your account. You can receive payments with all blockchain networks that have the RPC API and support the wallet that the user is currently using, and tokens and native currencies under these networks.
 
-**Apart from that, here are the advantages that CryptoPay gives you:**
+**Nonsense that CryptoPay doesn't have:**
 
 * No 3rd party service
+    * You can start getting paid as soon as you install the plugin without having any 3rd party services to start with.
 * No withdrawal limit, fee, date
-* 1-2 business days and no weekend nonsense
-* The money is in your account and in use on the same day 
+    * As it is completely peer to peer, customers pay directly to your wallet
+* No 1-2 business days and weekend nonsense
+    * There is no need to wait for weeks or wait to get paid as in the classic financing process
+* No touching your money for to get commission
+    * Because we only charge per license
 
 Are you ready to speed up the process of receiving WooCommerce crypto payments on WordPress with CryptoPay?
 
@@ -113,6 +117,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Dark theme mode is available for your dark themes.
 * With Loco Translate, you can easily translate into any language you want.
 * You can easily move your settings with the backup system.
+* Bitcoin Payment Gateway, Solana Payment Gateway, Ethereum Payment Gateway
 
 = Privacy notices =
 
@@ -158,6 +163,8 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+= 2.1.5 =
+* Added: Block confirmation count setting
 
 = 2.1.4 =
 * Added: Integrations list page
