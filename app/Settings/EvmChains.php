@@ -77,6 +77,7 @@ class EvmChains
                     'title'   => esc_html__('Networks', 'cryptopay_lite'),
                     'help'    => esc_html__('Specify the networks you want to accept payments from.', 'cryptopay_lite'),
                     'type'    => 'fieldset',
+                    'desc'    => esc_html__('Unlimited and custom network support is only available in premium. As with MetaMask, you can add any EVM network you want with its information.', 'cryptopay_lite'),
                     'fields' => [
                         [
                             'id'      => 'id_1',
