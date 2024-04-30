@@ -260,7 +260,7 @@ class Settings extends Setting
                     'type'  => 'content',
                     'dependency' => ['cronType', '==', 'server'],
                     'content' => '
-                    <strong>API 1</strong>: ' . home_url('?rest_route=/cryptopay/verify-pending-transactions') . ' (GET, POST)
+                    <strong>API 1</strong>: ' . home_url('?rest_route=/cryptopay-lite/verify-pending-transactions') . ' (GET, POST)
                     
                     ' . CPL_BR2 . '
 
