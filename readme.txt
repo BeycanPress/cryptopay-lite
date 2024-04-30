@@ -163,6 +163,8 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+= 2.1.5 =
+* Added: Block confirmation count setting
 
 = 2.1.4 =
 * Added: Integrations list page
