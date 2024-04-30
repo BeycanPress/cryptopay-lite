@@ -135,7 +135,7 @@ class Settings extends Setting
                     'id'      => 'bitcoinPayments',
                     'title'   => esc_html__('Bitcoin payments', 'cryptopay_lite'),
                     'type'    => 'content',
-                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks#categories" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>'
+                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay_lite') . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks#categories" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay_lite') . '</a>' . CPL_BR2 . 'Bitcoin and all other network support is only available for Premium.'
                 ],
             ]
         ]);
@@ -174,7 +174,9 @@ class Settings extends Setting
                     'content' => 'Currently, in crypto payments, most people list prices in FIAT currencies, i.e. currencies such as USD, EUR. With the currency converter, we convert these currencies into the currency chosen by the user. By default the CryptoCompare API is available. If your token is listed on Coin Market Cap, Coin Gecko or DEXs. You can get suitable currency converter add-ons to get the price value of your token.
                     ' . CPL_BR2 . '
                     <a href="https://beycanpress.gitbook.io/cryptopay-docs/currency-converter" target="_blank">' . esc_html__('Click for more information', 'cryptopay_lite') . '</a>
-                    ' . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters#categories" target="_blank">' . esc_html__('Buy custom converters', 'cryptopay_lite') . '</a>',
+                    ' . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=167&utm_source=plugin_settings&utm_medium=currency_converter&utm_campaign=buy_custom_converters#categories" target="_blank">' . esc_html__('Buy custom converters', 'cryptopay_lite') . '</a>
+                    ' . CPL_BR2 . '
+                    All custom converters are available for premium only.',
                     'title' => esc_html__('What is a currency converter?', 'cryptopay_lite')
                 ],
                 [
