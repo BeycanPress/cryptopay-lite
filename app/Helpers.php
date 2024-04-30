@@ -210,11 +210,12 @@ class Helpers extends PhHelpers
     }
 
     /**
-     * @return int
+     * @param string $code
+     * @return integer
      */
-    public static function getBlockConfirmationCount(): int
+    public static function getBlockConfirmationCount(string $code): int
     {
-        return 0;
+        return self::getSetting($code . 'BlockConfirmationCount') ?? 0;
     }
 
     /**

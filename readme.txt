@@ -117,6 +117,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Dark theme mode is available for your dark themes.
 * With Loco Translate, you can easily translate into any language you want.
 * You can easily move your settings with the backup system.
+* Bitcoin Payment Gateway, Solana Payment Gateway, Ethereum Payment Gateway
 
 = Privacy notices =
 

@@ -12,12 +12,16 @@ WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With Cryp
 
 As you know, virtual POS and many other payment methods deduct commission from you. The only commission here is the “gas” fee that blockchain networks charge. So the money will be transferred directly to your account. You can receive payments with all blockchain networks that have the RPC API and support the wallet that the user is currently using, and tokens and native currencies under these networks.
 
-**Apart from that, here are the advantages that CryptoPay gives you:**
+**Nonsense that CryptoPay doesn't have:**
 
 * No 3rd party service
+    * You can start getting paid as soon as you install the plugin without having any 3rd party services to start with.
 * No withdrawal limit, fee, date
-* 1-2 business days and no weekend nonsense
-* The money is in your account and in use on the same day 
+    * As it is completely peer to peer, customers pay directly to your wallet
+* No 1-2 business days and weekend nonsense
+    * There is no need to wait for weeks or wait to get paid as in the classic financing process
+* No touching your money for to get commission
+    * Because we only charge per license
 
 Are you ready to speed up the process of receiving WooCommerce crypto payments on WordPress with CryptoPay?
 
@@ -84,8 +88,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Highlights:**
 
-* Pay with multiple Blockchain network, Ethereum and all EVM based blockchain networks, Bitcoin, Solana, Tron Etc.
-* You can receive payments via crypto wallets supported by the plugin and all blockchain networks supported by these wallets. (Currently, EVM Bases networks, Solana, Tron and Bitcoin support are available.) Payment support for many networks will be introduced over time.
+* By default, EVM-based networks are supported. To receive payments from other networks such as Bitcoin, Solana and Tron, you need to purchase extra add-ons. You can accept payments from many Web3 wallets integrated for these networks. It is also available on networks that support address transfer (QR Code) payments.
 * You can get pay with native money of blockchain networks or with tokens under these networks.
 * You can receive payments in your own special currencies (tokens). It is enough to have a price list in one of the APIs you will see in the next article. For example Coin Market Cap and Coin Gecko
 * The Crypto Compare API is currently provided. In addition, there are Coin Market Cap, Coin Gecko, Moralis and Pancake Swap API add-ons. Pancake Swap only supports BSC network while Moralis supports EVM based networks and Solana. Crypto Compare, Coin Market Cap and Coin Gecko support all currencies listed in it, regardless of network.
@@ -101,6 +104,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Dark theme mode is available for your dark themes.
 * With Loco Translate, you can easily translate into any language you want.
 * You can easily move your settings with the backup system.
+* Bitcoin Payment Gateway, Solana Payment Gateway, Ethereum Payment Gateway
 
 
 Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**

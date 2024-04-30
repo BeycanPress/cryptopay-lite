@@ -252,7 +252,7 @@ class Payment
 
             // init data
             $receiver = Helpers::getReceiver($this->data);
-            $blockConfirmationCount = Helpers::getBlockConfirmationCount();
+            $blockConfirmationCount = Helpers::getBlockConfirmationCount($network->getCode());
 
             // just for pretty
             $order = $this->data->getOrder();

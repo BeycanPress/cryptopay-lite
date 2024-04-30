@@ -59,15 +59,18 @@ class EvmChains
                 [
                     'id'      => 'evmchainsBlockConfirmationCount',
                     'title'   => esc_html__('Block confirmation count', 'cryptopay_lite'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('Dynamic transaction confirmation value', 'cryptopay_lite')
+                    'type'    => 'number',
+                    'default' => 10,
+                    'sanitize' => function ($val) {
+                        return absint($val);
+                    }
                 ],
                 [
                     'id'     => 'evmchainsWallets',
                     'type'   => 'content',
                     'title'  => esc_html__('Wallets', 'cryptopay_lite'),
                     'help'   => esc_html__('Specify the wallets you want to accept payments from.', 'cryptopay_lite'),
-                    'content' => $proMsg . esc_html__('Specify the wallets you want to accept payments from.', 'cryptopay_lite')
+                    'content' => $proMsg . esc_html__('Specify the wallets you want to accept payments from. WalletConnect and mobile support.', 'cryptopay_lite')
                 ],
                 [
                     'id'      => 'evmchainsNetworks',
