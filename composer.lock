@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beycanpress/csf",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/csf.git",
-                "reference": "f8db82b6339e69cbb765496d623789e7f472977e"
+                "reference": "8abd652032c4f49cbacd9f838d5f987dd80d81a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/f8db82b6339e69cbb765496d623789e7f472977e",
-                "reference": "f8db82b6339e69cbb765496d623789e7f472977e",
+                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/8abd652032c4f49cbacd9f838d5f987dd80d81a2",
+                "reference": "8abd652032c4f49cbacd9f838d5f987dd80d81a2",
                 "shasum": ""
             },
             "type": "library",
@@ -29,9 +29,9 @@
             "homepage": "https://github.com/BeycanPress/csf",
             "support": {
                 "issues": "https://github.com/BeycanPress/csf/issues",
-                "source": "https://github.com/BeycanPress/csf/tree/2.3.4"
+                "source": "https://github.com/BeycanPress/csf/tree/2.3.5"
             },
-            "time": "2023-12-06T04:35:59+00:00"
+            "time": "2024-05-01T02:48:38+00:00"
         },
         {
             "name": "beycanpress/currency-converter",

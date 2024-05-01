@@ -26,14 +26,14 @@
 
             var deactivationUrl = '';
             window.onload = function(){
-                $(document).on('click', 'tr[data-plugin="'+slug+'"] .column-primary .deactivate a', function(e){
+                $(document).on('click', 'tr[data-plugin="'+slug+'"] .column-primary .deactivate a', function(e) {
                     e.preventDefault()
                     deactivationUrl =  $(this).attr('href');
                     $('#'+pluginKey+'-feedback-modal').css('display', 'flex');
                 });
             }
 
-            $(document).on('click', '.'+pluginKey+'-feedback-button-cancel', function(e){
+            $(document).on('click', '.'+pluginKey+'-feedback-button-cancel', function(e) {
                 e.preventDefault();
                 $('#'+pluginKey+'-feedback-modal').css('display', 'none');
             });
@@ -75,12 +75,12 @@
                 }
             }
             
-            $(document).on('click', '.'+pluginKey+'-feedback-skip', function(e){
+            $(document).on('click', '.'+pluginKey+'-feedback-skip', function(e) {
                 e.preventDefault();
                 deactivateProcess("I rather wouldn't say", 'rather-wouldnt-say');
             });
 
-            $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e){
+            $(document).on('click', '.'+pluginKey+'-feedback-button-deactivate', function(e) {
                 e.preventDefault();
                 var reason = $('.'+pluginKey+'_deactivation_reason:checked').val();
                 var detail = $('#'+pluginKey+'_deactivation_reason_detail').val();
