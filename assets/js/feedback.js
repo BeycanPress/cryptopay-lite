@@ -25,13 +25,11 @@
             }
 
             var deactivationUrl = '';
-            window.onload = function(){
-                $(document).on('click', 'tr[data-plugin="'+slug+'"] .column-primary .deactivate a', function(e) {
-                    e.preventDefault()
-                    deactivationUrl =  $(this).attr('href');
-                    $('#'+pluginKey+'-feedback-modal').css('display', 'flex');
-                });
-            }
+            $(document).on('click', 'tr[data-plugin="'+slug+'"] .column-primary .deactivate a', function(e) {
+                e.preventDefault()
+                deactivationUrl =  $(this).attr('href');
+                $('#'+pluginKey+'-feedback-modal').css('display', 'flex');
+            });
 
             $(document).on('click', '.'+pluginKey+'-feedback-button-cancel', function(e) {
                 e.preventDefault();
