@@ -36,6 +36,10 @@ if ( ! class_exists( 'CSF_Metabox' ) ) {
       'defaults'           => array(),
     );
 
+    public $post_formats   = array();
+
+    public $page_templates = array();
+
     // run metabox construct
     public function __construct( $key, $params = array() ) {
 
