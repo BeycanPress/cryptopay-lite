@@ -168,7 +168,6 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 * Fixed: MetaMask connection problem with last update
 * Removed: BNB Chain Wallet (merged with TrustWallet)
 
-== Changelog ==
 = 2.1.6 =
 * Added: Block confirmation count setting
 
