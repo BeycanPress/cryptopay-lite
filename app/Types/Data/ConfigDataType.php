@@ -55,6 +55,12 @@ class ConfigDataType extends AbstractType
      */
     private string $version;
 
+    /**
+     * CryptoPay version code
+     * @var string
+     */
+    private string $wcProjectId;
+
     #String types
 
     #Class types
@@ -145,6 +151,7 @@ class ConfigDataType extends AbstractType
         $this->lang = Constants::getLangParams();
         $this->imagesUrl = Constants::getImagesUrl();
         $this->version = Helpers::getProp('pluginVersion');
+        $this->wcProjectId = Helpers::getSetting('wcProjectId');
         $this->createTransaction = boolval(Helpers::getModelByAddon($addon));
 
         $this->testnet = Helpers::getTestnetStatus();
@@ -180,7 +187,7 @@ class ConfigDataType extends AbstractType
 
         array_map(function ($wallet) use (&$walletImages, $pluginUrl): void {
             $walletImages[$wallet] = $pluginUrl . 'assets/images/wallets/' . $wallet . '.png';
-        }, ["metamask","trustwallet","bitget","okx","xdefi", "binancewallet"]);
+        }, ["metamask","trustwallet","bitget","okx","xdefi", "walletconnect"]);
 
         return (object) $walletImages;
     }
