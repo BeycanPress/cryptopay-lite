@@ -70,6 +70,18 @@ class Settings extends Setting
                     ],
                     'default' => 'network',
                     'desc'    => esc_html__('You can choose the mode you want to use in the payment process. If you choose the network mode, the user will first choose the network and then the currency and then the wallet. If you choose the currency mode, the user will first choose the currency and then the wallet.', 'cryptopay_lite')
+                ],
+                [
+                    'id'      => 'wcProjectId',
+                    'title'   => esc_html__('WalletConnect Project ID', 'cryptopay'),
+                    'type'    => 'text',
+                    'desc'    => esc_html__('WalletConnect Project ID is required for WalletConnect, which are used to connect to mobile wallets on many networks. If you do not have a WalletConnect Project ID, WalletConnect will not work. You can get your project ID by registering for WalletConnect Cloud at the link below.', 'cryptopay')
+                    . CP_BR2 .
+                    Helpers::view('components/link', [
+                        'text' => esc_html__('WalletConnect Cloud', 'cryptopay'),
+                        'url' => 'https://cloud.walletconnect.com/sign-in'
+                    ])
+                    ,
                 ]
             ]
         ]);
@@ -201,7 +213,7 @@ class Settings extends Setting
                     'type'  => 'content',
                     'title' => esc_html__('Converter API', 'cryptopay_lite'),
                     'content' => $proMsg . esc_html__('You can choose the API you want to use for the currency converter.', 'cryptopay_lite'),
-                ],
+                ]
             ]
         ]);
 
