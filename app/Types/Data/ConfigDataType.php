@@ -7,7 +7,6 @@ namespace BeycanPress\CryptoPayLite\Types\Data;
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Constants;
-use BeycanPress\CryptoPayLite\PluginHero\Hook;
 // Types
 use BeycanPress\CryptoPayLite\Types\AbstractType;
 
@@ -59,7 +58,7 @@ class ConfigDataType extends AbstractType
      * CryptoPay version code
      * @var string
      */
-    private string $wcProjectId;
+    private ?string $wcProjectId;
 
     #String types
 
