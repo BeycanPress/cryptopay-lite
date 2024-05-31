@@ -50,7 +50,8 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * WooCommerce payment gateway
 * Limited EVM-based network support
 * Ethereum, BSC, Avalanche, Polygon
-* MetaMask, Trust Wallet, Binance Wallet support
+* MetaMask, Trust Wallet, and more
+* WalletConnect support for mobile devices
 * Getting paid with native coins and certain stable coins
 * Fast confirmation times as transactions are p2p
 * Order is created first, then payment is received
@@ -76,7 +77,6 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Lots of converter API support add-ons
 * Custom token support & prices support
 * Payment feature on the "Checkout" page
-* WalletConnect support
 * QR Code support
 * Ticket based support
 * Backend confirmation system
