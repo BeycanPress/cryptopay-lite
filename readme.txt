@@ -23,7 +23,7 @@ WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With Cryp
 
 **What advantages does CryptoPay provide you?**
 
-As you know, virtual POS and many other payment methods deduct commission from you. The only commission here is the “gas” fee that blockchain networks charge. So the money will be transferred directly to your account. You can receive payments with all blockchain networks that have the RPC API and support the wallet that the user is currently using, and tokens and native currencies under these networks.
+As you know, virtual POS and many other payment methods deduct commission from you. The only commission here is the "gas" fee that blockchain networks charge. So the money will be transferred directly to your account. You can receive payments from all EVM-based networks as well as other Blockchain networks such as Bitcoin, Solana, Tron.
 
 **Nonsense that CryptoPay doesn't have:**
 
@@ -41,58 +41,52 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 **Comparison with other services:**
 
 ***CryptoPay:***
+
 ✅ All payments reach you directly. So the whole system works as P2P (Peer to Peer).
-✅ There are no additional transaction fees other than the transaction fee that the paying user pays to the Blockchain network.
+✅ No commission is charged to sellers in any way. Only payers pay blockchain transaction fees.
 ✅ Since all transactions are P2P (Peer to Peer), payment confirmation times are minimal.
-✅ Easily integrable to other plugins with the APIs in the plugin.
+✅ Easily integrable to other plugins with the APIs in the plugin (integrated 16+ plugins).
 ✅ For example, providing services with many extra plugins such as the Donation plugin.
 
 ***Other services:***
-❌ Payments are generally not P2P (Peer to Peer). They first take the payment into their own wallet and then transfer it to you.
-❌ For taking the payment to them first and then transferring it to you.
-❌ The paying user pays transaction fee for Blockchain.
-❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
+
+❌ They transfer the payment first to their wallet to get a commission and then to your wallet.
+❌ Payments are usually not P2P (Peer to Peer). Therefore, payment approval times are very long.
 ❌ The commission amounts that the service generates its own income will be deducted from your earnings.
 ❌ Even the fastest networks have very high payment confirmation times, as multiple transfers are made to earn commissions.
 ❌ Generally you can only use it for WooCommerce. To integrate with other plugins, you need a serious programming knowledge.
+❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
 
 **Free Version:**
 
 * No commission
 * Unlimited payments
 * WooCommerce payment gateway
+* 16+ WordPress plugin integrations
+* Payment transaction record list
 * Limited EVM-based network support
-* Ethereum, BSC, Avalanche, Polygon
-* MetaMask, Trust Wallet, and more
+* Ethereum, BSC, Avalanche, Polygon, Fantom
+* Use blockchain testnet networks for testing
+* MetaMask, Trust Wallet, Bitget, Okx, and more
 * WalletConnect support for mobile devices
-* Getting paid with native coins and certain stable coins
-* Fast confirmation times as transactions are p2p
-* Order is created first, then payment is received
 * Dynamic block confirmation count setting
-* Payment transaction list
-* Automatic update system
-* Unlimited domains
-* WordPress.org support
-* Use testnet for testing
+* Fast confirmation times as transactions are p2p
+* Order is created first, then payment is can receive
 
 **Pro Version:**
 
-* 1 Domain license
-* 1 Year of updates
+* 1 Domain support
 * 1 Year of support
-* All the features in the free package
+* 1 Year of updates
 * Unlimited EVM-based network support
-* Unlimited coin payments support
-* Lots of extra feature add-ons
-* Lots of network support add-ons
-* Solana, Tron, Bitcoin Payments
-* Lots of converter API support add-ons
-* Custom token support & prices support
-* Payment feature on the "Checkout" page
-* Pay by transfer to address support
-* Backend confirmation system
-* Dark and light theme option
-* Payment details on the order page
+* Pay by transfer to address support (QR Code)
+* Unlimited coin payments support for each network
+* Custom token & prices support (Your utility tokens)
+* Extra network support add-ons (Bitcoin, Solana, Tron)
+* Extra converter support add-ons (CoinGecko, Moralis)
+* Instant payment on the "Checkout" and "Product" page
+* Backend payment confirmation system (reminders)
+* Payment transaction details on the order page
 * Easy integration with other plugins via API
 
 **Highlights:**
