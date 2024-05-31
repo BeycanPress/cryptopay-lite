@@ -29,20 +29,20 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 ***CryptoPay:***
 
-✅ All payments reach you directly. So the whole system works as P2P (Peer to Peer).
-✅ No commission is charged to sellers in any way. Only payers pay blockchain transaction fees.
-✅ Since all transactions are P2P (Peer to Peer), payment confirmation times are minimal.
-✅ Easily integrable to other plugins with the APIs in the plugin (integrated 16+ plugins).
-✅ For example, providing services with many extra plugins such as the Donation plugin.
+* ✅ All payments reach you directly. So the whole system works as P2P (Peer to Peer).
+* ✅ No commission is charged to sellers in any way. Only payers pay blockchain transaction fees.
+* ✅ Since all transactions are P2P (Peer to Peer), payment confirmation times are minimal.
+* ✅ Easily integrable to other plugins with the APIs in the plugin (integrated 16+ plugins).
+* ✅ For example, providing services with many extra plugins such as the Donation plugin.
 
 ***Other services:***
 
-❌ They transfer the payment first to their wallet to get a commission and then to your wallet.
-❌ Payments are usually not P2P (Peer to Peer). Therefore, payment approval times are very long.
-❌ The commission amounts that the service generates its own income will be deducted from your earnings.
-❌ Even the fastest networks have very high payment confirmation times, as multiple transfers are made to earn commissions.
-❌ Generally you can only use it for WooCommerce. To integrate with other plugins, you need a serious programming knowledge.
-❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
+* ❌ They transfer the payment first to their wallet to get a commission and then to your wallet.
+* ❌ Payments are usually not P2P (Peer to Peer). Therefore, payment approval times are very long.
+* ❌ The commission amounts that the service generates its own income will be deducted from your earnings.
+* ❌ Even the fastest networks have very high payment confirmation times, as multiple transfers are made to earn commissions.
+* ❌ Generally you can only use it for WooCommerce. To integrate with other plugins, you need a serious programming knowledge.
+* ❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
 
 **Free Version:**
 
