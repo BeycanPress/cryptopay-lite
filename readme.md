@@ -55,6 +55,7 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Getting paid with native coins and certain stable coins
 * Fast confirmation times as transactions are p2p
 * Order is created first, then payment is received
+* Dynamic block confirmation count setting
 * Payment transaction list
 * Automatic update system
 * Unlimited domains
@@ -71,19 +72,14 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * Unlimited coin payments support
 * Lots of extra feature add-ons
 * Lots of network support add-ons
-* Bitcoin Payments
-* Solana Payments
-* Tron Payments
+* Solana, Tron, Bitcoin Payments
 * Lots of converter API support add-ons
 * Custom token support & prices support
 * Payment feature on the "Checkout" page
-* QR Code support
-* Ticket based support
+* Pay by transfer to address support
 * Backend confirmation system
 * Dark and light theme option
-* Network sorting feature
-* Dynamic block confirmation count setting
-* CryptoPay payment details on the order page
+* Payment details on the order page
 * Easy integration with other plugins via API
 
 **Highlights:**
