@@ -76,7 +76,7 @@ class Settings extends Setting
                     'title'   => esc_html__('WalletConnect Project ID', 'cryptopay'),
                     'type'    => 'text',
                     'desc'    => esc_html__('WalletConnect Project ID is required for WalletConnect, which are used to connect to mobile wallets on many networks. If you do not have a WalletConnect Project ID, WalletConnect will not work. You can get your project ID by registering for WalletConnect Cloud at the link below.', 'cryptopay')
-                    . CP_BR2 .
+                    . CPL_BR2 .
                     Helpers::view('components/link', [
                         'text' => esc_html__('WalletConnect Cloud', 'cryptopay'),
                         'url' => 'https://cloud.walletconnect.com/sign-in'
