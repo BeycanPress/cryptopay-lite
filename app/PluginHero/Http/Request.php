@@ -337,7 +337,7 @@ final class Request
 
         $this->params = array_merge($this->params, $this->xmlParse());
 
-        $this->params = json_decode(json_encode($this->params));
+        $this->params = json_decode(json_encode($this->params) ?: '{}');
     }
 
     /**

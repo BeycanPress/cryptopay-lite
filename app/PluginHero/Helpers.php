@@ -146,6 +146,30 @@ class Helpers
                     printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
                 });
             }
+
+            if (isset($extensions['bcmath']) && !extension_loaded('bcmath')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': bcmath PHP extension is not installed. So ' . $pluginName . ' has been disabled bcmath is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.bc.php' : '<a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a>') . '" for install assistance. You can ask your server service provider to install bcmath.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
+
+            if (isset($extensions['gmp']) && !extension_loaded('gmp')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': gmp PHP extension is not installed. So ' . $pluginName . ' has been disabled gmp is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.gmp.php' : '<a href="https://www.php.net/manual/en/book.gmp.php">https://www.php.net/manual/en/book.gmp.php</a>') . '" for install assistance. You can ask your server service provider to install gmp.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
+
+            if (isset($extensions['sodium']) && !extension_loaded('sodium')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': sodium PHP extension is not installed. So ' . $pluginName . ' has been disabled sodium is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.sodium.php' : '<a href="https://www.php.net/manual/en/book.sodium.php">https://www.php.net/manual/en/book.sodium.php</a>') . '" for install assistance. You can ask your server service provider to install sodium.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
         }
 
         if (!$status && isset($rules['documentation'])) {

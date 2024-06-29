@@ -22,7 +22,7 @@ defined('ABSPATH') || exit;
  * Domain Path: /languages
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
  * Requires at least: 5.0
- * Tested up to: 6.5.3
+ * Tested up to: 6.5.5
  * Requires PHP: 8.1
 */
 
