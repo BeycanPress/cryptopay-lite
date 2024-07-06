@@ -56,7 +56,7 @@ final class Request
     {
         $this->checkRequests();
         $this->parseContent();
-        $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
     }
 
     # public methods #
