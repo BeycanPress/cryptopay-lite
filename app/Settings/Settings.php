@@ -124,7 +124,7 @@ class Settings extends Setting
                     'type'    => 'content',
                     'content' => Helpers::view('components/link', [
                         'text' => esc_html__('Click to activate', 'cryptopay'),
-                        'url' => admin_url('admin.php?page=wc-settings&tab=checkout&section=cryptopay')
+                        'url' => admin_url('admin.php?page=wc-settings&tab=checkout&section=cryptopay_lite')
                     ])
                 ]
             ]
