@@ -59,7 +59,6 @@ class ConfigDataType extends AbstractType
      * CryptoPay logo URL for using on the QR code.
      * @var string
      */
-    // @phpstan-ignore-next-line
     private string $logo;
 
     /**
@@ -68,7 +67,6 @@ class ConfigDataType extends AbstractType
      * this will be empty and the user will be prompted to enter an email.
      * @var ?string
      */
-    // @phpstan-ignore-next-line
     private ?string $userEmail;
 
     #String types
@@ -129,7 +127,6 @@ class ConfigDataType extends AbstractType
      * can set up an email reminder using this.
      * @var bool
      */
-    // @phpstan-ignore-next-line
     private bool $reminderEmail;
 
     /**

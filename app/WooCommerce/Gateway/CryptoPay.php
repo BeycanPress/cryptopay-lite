@@ -10,6 +10,9 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Gateway;
 
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
+use BeycanPress\CryptoPayLite\Payment;
+// Types
+use BeycanPress\CryptoPayLite\Types\Order\OrderType;
 
 class CryptoPay extends \WC_Payment_Gateway
 {
@@ -99,6 +102,12 @@ class CryptoPay extends \WC_Payment_Gateway
             $this->supports[] = 'subscriptions';
         }
 
+        // If in checkout mode, we need to hide place order button and set has_fields to true
+        $this->has_fields = 'checkout' == Helpers::getSetting('paymentReceivingArea');
+        if ('checkout' == Helpers::getSetting('paymentReceivingArea') && !is_wc_endpoint_url()) {
+            add_filter('woocommerce_order_button_html', [$this, 'hidePlaceOrderButton']);
+        }
+
         // Method with all the options fields
         $this->init_form_fields();
 
@@ -110,9 +119,12 @@ class CryptoPay extends \WC_Payment_Gateway
         $this->description = $this->get_option('description');
         $this->order_button_text = $this->get_option('order_button_text');
 
+        // If js not loaded yet, and user click on pay button, we need to show error if in checkout mode
+        add_action('woocommerce_after_checkout_validation', [$this, 'checkPaymentReceivingArea'], 10, 2);
         // This action hook saves the settings
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
     }
+
 
     /**
      * @param string $button
@@ -127,6 +139,20 @@ class CryptoPay extends \WC_Payment_Gateway
         }
 
         return $button;
+    }
+
+    /**
+     * @param array<mixed> $data
+     * @param object $errors
+     * @return void
+     */
+    public function checkPaymentReceivingArea(array $data, object $errors): void
+    {
+        $paymentMethod = WC()->session->get('chosen_payment_method');
+
+        if ($paymentMethod == $this->id && 'checkout' == Helpers::getSetting('paymentReceivingArea')) {
+            $errors->add('payment', esc_html__('Please wait for CryptoPay Lite to load!', 'cryptopay'));
+        }
     }
 
     /**
@@ -188,7 +214,19 @@ class CryptoPay extends \WC_Payment_Gateway
      */
     public function payment_fields(): void
     {
-        echo esc_html($this->description);
+        if ('checkout' == Helpers::getSetting('paymentReceivingArea') && !is_wc_endpoint_url()) {
+            echo (new Payment('woocommerce'))
+            ->setOrder(OrderType::fromArray([
+                'amount' => (float) \WC()->cart->total,
+                'currency' => get_woocommerce_currency()
+            ]))
+            ->setAutoStart(false)
+            ->html(loading:true);
+
+            Helpers::addScript('checkout.min.js', [Helpers::getProp('mainJsKey', null)]);
+        } else {
+            echo esc_html($this->description);
+        }
     }
 
     /**

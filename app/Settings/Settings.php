@@ -98,9 +98,14 @@ class Settings extends Setting
                 [
                     'id'      => 'paymentReceivingArea',
                     'title'   => esc_html__('Payment receiving area', 'cryptopay'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('With this setting, you can choose from where the user receives the payment. With the checkout option, payment will be taken directly from the checkout page before the order is created, and then the order will be created. After the order is created with the Order Pay option, payment will be received on the Order Pay page.', 'cryptopay'),
-                    'default' => 'orderPay'
+                    'type'    => 'select',
+                    'options' => [
+                        'checkout' => esc_html__('Checkout', 'cryptopay'),
+                        'orderPay' => esc_html__('Order pay', 'cryptopay')
+                    ],
+                    'help'    => esc_html__('With this setting, you can choose from where the user receives the payment. With the checkout option, payment will be taken directly from the checkout page before the order is created, and then the order will be created. After the order is created with the Order Pay option, payment will be received on the Order Pay page.', 'cryptopay'),
+                    'default' => 'orderPay',
+                    'desc' => esc_html__('This feature is currently only available in Classic Checkout. Newer versions of WooCommerce use Block Checkout. You can create your own Classic Checkout page with the shortcode [woocommerce_checkout].', 'cryptopay')
                 ],
                 [
                     'id'      => 'paymentCompleteOrderStatus',

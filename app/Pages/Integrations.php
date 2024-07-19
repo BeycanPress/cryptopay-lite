@@ -78,8 +78,8 @@ class Integrations extends Page
     {
         $oldCount = get_option('cryptopay_lite_new_product_notification_count') ?? 0;
         if (date('Y-m-d') != get_option('cryptopay_lite_new_product_notification_date')) {
-            $res = $this->client->get('notification'); // @phpstan-ignore-line
-            $newCount = isset($res->success) && $res->success ? $res->data->count : 0; // @phpstan-ignore-line
+            $res = $this->client->get('notification');
+            $newCount = isset($res->success) && $res->success ? $res->data->count : 0;
             update_option('cryptopay_lite_new_product_notification_date', date('Y-m-d'));
             update_option('cryptopay_lite_new_product_notification_count', $newCount);
             if (($newCount - $oldCount)) {
@@ -98,8 +98,8 @@ class Integrations extends Page
             update_option('cryptopay_lite_new_product_notification_new_count', 0);
             $oldProducts = json_decode(get_option('cryptopay_lite_products_json', '{}'));
             if ($this->count || empty((array) $oldProducts)) {
-                $res = $this->client->get('products'); // @phpstan-ignore-line
-                $products = isset($res->success) && $res->success ? $res->data->products : []; // @phpstan-ignore-line
+                $res = $this->client->get('products');
+                $products = isset($res->success) && $res->success ? $res->data->products : [];
                 if (!empty($products)) {
                     update_option('cryptopay_lite_products_json', json_encode($products));
                 }
