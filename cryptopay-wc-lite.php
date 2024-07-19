@@ -18,9 +18,9 @@ defined('ABSPATH') || exit;
  * Author URI:  https://beycanpress.com
  * License:     GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain: cryptopay_lite
+ * Text Domain: cryptopay
  * Domain Path: /languages
- * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
+ * Tags: Crypto, Cryptocurrency Payment, Gateway, WooCommerce
  * Requires at least: 5.0
  * Tested up to: 6.6
  * Requires PHP: 8.1
