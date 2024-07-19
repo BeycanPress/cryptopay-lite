@@ -191,9 +191,13 @@ class Payment
      */
     private function getJsProviders(): object
     {
-        $providers = [
-            'EvmChains' => Helpers::addScript('evm-chains-provider.js'),
-        ];
+        if (wp_script_is('cryptopay-evm-chains-provider', 'enqueued')) {
+            $id = 'cryptopay-evm-chains-provider';
+        } else {
+            $id = Helpers::addScript('evm-chains-provider.js');
+        }
+
+        $providers = ['EvmChains' => $id];
 
         return (object) [
             'names' => array_keys($providers),

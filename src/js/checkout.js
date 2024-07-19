@@ -112,7 +112,6 @@
         if (CryptoPayLiteConfig.init) {
             CryptoPayLiteApp.events.add('init', async (ctx) => {
                 ctx.disableAutoQr = true;
-                
             }, 'wc_checkout');
             CryptoPayLiteApp.events.add('payNow', (ctx) => {
                 cplHelpers.waitingPopup(CryptoPayLiteLang.checkingForm);
