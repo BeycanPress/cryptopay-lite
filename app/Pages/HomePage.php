@@ -19,8 +19,8 @@ class HomePage extends Page
     public function __construct()
     {
         parent::__construct([
-            'pageName' => esc_html__('CryptoPay Lite', 'cryptopay_lite'),
-            'subMenuPageName' => esc_html__('Buy premium', 'cryptopay_lite'),
+            'pageName' => esc_html__('CryptoPay Lite', 'cryptopay'),
+            'subMenuPageName' => esc_html__('Buy premium', 'cryptopay'),
             'slug' => 'cryptopay_lite_home',
             'icon' => Helpers::getImageUrl('menu.png'),
             'subMenu' => true,

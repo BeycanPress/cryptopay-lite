@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     2.2.1
+ * Version:     2.3.0
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress LLC
@@ -22,7 +22,7 @@ defined('ABSPATH') || exit;
  * Domain Path: /languages
  * Tags: Cryptopay, Cryptocurrency, WooCommerce, WordPress, MetaMask, Trust, Binance, Wallet, Ethereum, Bitcoin, Binance smart chain, Payment, Plugin, Gateway
  * Requires at least: 5.0
- * Tested up to: 6.5.5
+ * Tested up to: 6.6
  * Requires PHP: 8.1
 */
 
@@ -62,6 +62,7 @@ $args = [
     'phpVersions' => 8.1,
     'extensions' => [
         'bcmath',
+        'gmp',
         'curl',
         'file_get_contents',
     ]

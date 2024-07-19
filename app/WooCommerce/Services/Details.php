@@ -28,7 +28,7 @@ class Details
     {
         $order = wc_get_order($orderId);
 
-        if ('cryptopay_lite' == $order->get_payment_method()) {
+        if ('cryptopay' == $order->get_payment_method()) {
             $transaction = (new OrderTransaction())->getTransactionByOrderId($orderId);
 
             if ($order->get_status() == Status::PENDING->getValue() && !$transaction) {
@@ -45,7 +45,7 @@ class Details
      */
     public function backend(\WC_Order $order): void
     {
-        if ('cryptopay_lite' == $order->get_payment_method()) {
+        if ('cryptopay' == $order->get_payment_method()) {
             $tx = (new OrderTransaction())->getTransactionByOrderId($order->get_id());
             if (!$tx) {
                 return;

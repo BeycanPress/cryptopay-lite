@@ -14,8 +14,7 @@ namespace Web3;
 use InvalidArgumentException;
 use Web3\Providers\Provider;
 use Web3\Providers\HttpProvider;
-use Web3\RequestManagers\RequestManager;
-use Web3\RequestManagers\HttpRequestManager;
+use Web3\Providers\WsProvider;
 use Web3\Utils;
 use Web3\Eth;
 use Web3\Contracts\Ethabi;
@@ -118,9 +117,9 @@ class Contract
         if (is_string($provider) && (filter_var($provider, FILTER_VALIDATE_URL) !== false)) {
             // check the uri schema
             if (preg_match('/^https?:\/\//', $provider) === 1) {
-                $requestManager = new HttpRequestManager($provider);
-
-                $this->provider = new HttpProvider($requestManager);
+                $this->provider = new HttpProvider($provider);
+            } else if (preg_match('/^wss?:\/\//', $provider) === 1) {
+                $this->provider = new WsProvider($provider);
             }
         } else if ($provider instanceof Provider) {
             $this->provider = $provider;
@@ -177,7 +176,7 @@ class Contract
     //     if (empty($this->provider)) {
     //         throw new \RuntimeException('Please set provider first.');
     //     }
-    //     $class = explode('\\', get_class());
+    //     $class = explode('\\', get_class($this));
     //     if (preg_match('/^[a-zA-Z0-9]+$/', $name) === 1) {
     //     }
     // }
@@ -441,7 +440,7 @@ class Contract
      * Deploy a contruct with params.
      * 
      * @param mixed
-     * @return void
+     * @return void|\React\Promise\PromiseInterface
      */
     public function new()
     {
@@ -469,7 +468,7 @@ class Contract
             }
             $transaction['data'] = '0x' . $this->bytecode . Utils::stripZero($data);
 
-            $this->eth->sendTransaction($transaction, function ($err, $transaction) use ($callback){
+            return $this->eth->sendTransaction($transaction, function ($err, $transaction) use ($callback){
                 if ($err !== null) {
                     return call_user_func($callback, $err, null);
                 }
@@ -483,7 +482,7 @@ class Contract
      * Send function method.
      * 
      * @param mixed
-     * @return void
+     * @return void|\React\Promise\PromiseInterface
      */
     public function send()
     {
@@ -564,7 +563,7 @@ class Contract
             $transaction['to'] = $this->toAddress;
             $transaction['data'] = $functionSignature . Utils::stripZero($data);
 
-            $this->eth->sendTransaction($transaction, function ($err, $transaction) use ($callback){
+            return $this->eth->sendTransaction($transaction, function ($err, $transaction) use ($callback){
                 if ($err !== null) {
                     return call_user_func($callback, $err, null);
                 }
@@ -578,7 +577,7 @@ class Contract
      * Call function method.
      *
      * @param mixed
-     * @return void
+     * @return void|\React\Promise\PromiseInterface
      */
     public function call()
     {
@@ -658,7 +657,7 @@ class Contract
             $transaction['to'] = $this->toAddress;
             $transaction['data'] = $functionSignature . Utils::stripZero($data);
 
-            $this->eth->call($transaction, $defaultBlock, function ($err, $transaction) use ($callback, $function){
+            return $this->eth->call($transaction, $defaultBlock, function ($err, $transaction) use ($callback, $function){
                 if ($err !== null) {
                     return call_user_func($callback, $err, null);
                 }
@@ -674,7 +673,7 @@ class Contract
      * Estimate function gas.
      * 
      * @param mixed
-     * @return void
+     * @return void|\React\Promise\PromiseInterface
      */
     public function estimateGas()
     {
@@ -778,7 +777,7 @@ class Contract
                 $transaction['data'] = $functionSignature . Utils::stripZero($data);
             }
 
-            $this->eth->estimateGas($transaction, function ($err, $gas) use ($callback) {
+            return $this->eth->estimateGas($transaction, function ($err, $gas) use ($callback) {
                 if ($err !== null) {
                     return call_user_func($callback, $err, null);
                 }

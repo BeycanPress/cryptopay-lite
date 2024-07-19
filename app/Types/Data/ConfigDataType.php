@@ -7,6 +7,7 @@ namespace BeycanPress\CryptoPayLite\Types\Data;
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Constants;
+use BeycanPress\CryptoPayLite\Settings\EvmChains;
 // Types
 use BeycanPress\CryptoPayLite\Types\AbstractType;
 
@@ -32,9 +33,9 @@ class ConfigDataType extends AbstractType
 
     /**
      * CryptoPay JS theme
-     * @var string
+     * @var array<mixed>
      */
-    private string $theme;
+    private array $theme;
 
     /**
      * URL of our Rest API that handles the payment process.
@@ -55,10 +56,20 @@ class ConfigDataType extends AbstractType
     private string $version;
 
     /**
-     * CryptoPay version code
+     * CryptoPay logo URL for using on the QR code.
      * @var string
      */
-    private ?string $wcProjectId;
+    // @phpstan-ignore-next-line
+    private string $logo;
+
+    /**
+     * Reminder e-mail is the e-mail of the current user if the user is logged in during the e-mail.
+     * This is used directly. If the user is not logged in,
+     * this will be empty and the user will be prompted to enter an email.
+     * @var ?string
+     */
+    // @phpstan-ignore-next-line
+    private ?string $userEmail;
 
     #String types
 
@@ -70,22 +81,26 @@ class ConfigDataType extends AbstractType
      */
     private array $networks;
 
+    /**
+     * Wallets to send to CryptoPay JS.
+     * @var array<string>
+     */
+    private array $wallets;
+
     #Class types
 
     #Object types
 
     /**
-     * It has an imagesUrl, but this imagesUrl is generally used to access all cryptocurrency icons.
-     * We have such a property and hook because we create separate packages (add-ons) for each network.
-     * So the URLs of wallets that are specific to other packages can be added.
-     * @var object<string>
+     * Wallet Adapter config
+     * @var object
      */
-    private object $walletImages;
+    private object $adapterConfig;
 
     /**
      * The dynamic texts to be sent to CryptoPay JS.
      * @see \BeycanPress\CryptoPayLite\Constants
-     * @var object<string>
+     * @var object
      */
     private object $lang;
 
@@ -103,6 +118,19 @@ class ConfigDataType extends AbstractType
      * @var bool
      */
     private bool $testnet;
+
+    /**
+     * @var boolean
+     */
+    private bool $modal = false;
+
+    /**
+     * Users who do not want to wait for the verification process, which is a data from the settings,
+     * can set up an email reminder using this.
+     * @var bool
+     */
+    // @phpstan-ignore-next-line
+    private bool $reminderEmail;
 
     /**
      * When debug mode is activated, it also activates debug mode in CryptoPay JS.
@@ -146,11 +174,12 @@ class ConfigDataType extends AbstractType
 
         // declare defaults
         $this->discountRates = (object) [];
+        $this->logo = Constants::getLogoUrl();
         $this->apiUrl = Constants::getApiUrl();
         $this->lang = Constants::getLangParams();
         $this->imagesUrl = Constants::getImagesUrl();
+        $this->userEmail = Helpers::getCurrentUserEmail();
         $this->version = Helpers::getProp('pluginVersion');
-        $this->wcProjectId = Helpers::getSetting('wcProjectId');
         $this->createTransaction = boolval(Helpers::getModelByAddon($addon));
 
         $this->testnet = Helpers::getTestnetStatus();
@@ -158,9 +187,16 @@ class ConfigDataType extends AbstractType
         // declare settings
         $this->mode = Helpers::getMode($addon);
         $this->theme = Helpers::getTheme($addon);
-        $this->walletImages = $this->getWalletImages();
+        $this->wallets = EvmChains::getWallets();
         $this->amountUpdateMin = $this->getUpdateMin();
         $this->debug = boolval(Helpers::getSetting('debugging'));
+        $this->reminderEmail = boolval(Helpers::getSetting('reminderEmail'));
+
+        // only for multiplechain providers
+        $this->adapterConfig = (object) [
+            'themeMode' => $this->theme['mode'],
+            'projectId' => Helpers::getSetting('wcProjectId'),
+        ];
     }
 
     /**
@@ -172,26 +208,17 @@ class ConfigDataType extends AbstractType
         return $updateMin ? floatval($updateMin) : 0.5;
     }
 
-    /**
-     * @return object
-     */
-    private function getWalletImages(): object
-    {
-        $pluginUrl = Helpers::getProp('pluginUrl');
-
-        $walletImages = [
-            'qr' => $pluginUrl . 'assets/images/wallets/qr.jpg',
-            'walletconnect' => $pluginUrl . 'assets/images/wallets/walletconnect.png',
-        ];
-
-        array_map(function ($wallet) use (&$walletImages, $pluginUrl): void {
-            $walletImages[$wallet] = $pluginUrl . 'assets/images/wallets/' . $wallet . '.png';
-        }, ["metamask","trustwallet","bitget","okx","xdefi", "walletconnect"]);
-
-        return (object) $walletImages;
-    }
-
     // Set methods for outcoming data
+
+    /**
+     * @param bool $modal
+     * @return self
+     */
+    public function setModal(bool $modal): self
+    {
+        $this->modal = $modal;
+        return $this;
+    }
 
     /**
      * @param array<int> $networks

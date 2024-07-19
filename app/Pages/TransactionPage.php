@@ -6,6 +6,7 @@ namespace BeycanPress\CryptoPayLite\Pages;
 
 //Classes
 use BeycanPress\CryptoPayLite\Helpers;
+use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\PluginHero\Page;
 use BeycanPress\CryptoPayLite\PluginHero\Table;
 use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
@@ -95,7 +96,7 @@ class TransactionPage extends Page
         $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : null;
 
         if (isset($_GET['id']) && $this->model->delete(['id' => absint($_GET['id'])])) {
-            Helpers::notice(esc_html__('Successfully deleted!', 'cryptopay_lite'), 'success', true);
+            Helpers::notice(esc_html__('Successfully deleted!', 'cryptopay'), 'success', true);
         }
 
         $params = [];
@@ -108,25 +109,27 @@ class TransactionPage extends Page
             $params['status'] = $status;
         }
 
+        Hook::callAction('transaction_page', $params, $code, $status);
+
         $table = (new Table([], $params))
         ->setColumns(array_filter([
-            'hash'      => esc_html__('Hash', 'cryptopay_lite'),
-            'orderId'   => esc_html__('Order ID', 'cryptopay_lite'),
-            'userId'    => esc_html__('User ID', 'cryptopay_lite'),
-            'network'   => esc_html__('Network', 'cryptopay_lite'),
-            'amount'    => esc_html__('Amount', 'cryptopay_lite'),
-            'status'    => esc_html__('Status', 'cryptopay_lite'),
-            'addresses' => esc_html__('Addresses', 'cryptopay_lite'),
-            'updatedAt' => esc_html__('Updated at', 'cryptopay_lite'),
-            'createdAt' => esc_html__('Created at', 'cryptopay_lite'),
-            'delete'    => esc_html__('Delete', 'cryptopay_lite')
+            'hash'      => esc_html__('Hash', 'cryptopay'),
+            'orderId'   => esc_html__('Order ID', 'cryptopay'),
+            'userId'    => esc_html__('User ID', 'cryptopay'),
+            'network'   => esc_html__('Network', 'cryptopay'),
+            'amount'    => esc_html__('Amount', 'cryptopay'),
+            'status'    => esc_html__('Status', 'cryptopay'),
+            'addresses' => esc_html__('Addresses', 'cryptopay'),
+            'updatedAt' => esc_html__('Updated at', 'cryptopay'),
+            'createdAt' => esc_html__('Created at', 'cryptopay'),
+            'delete'    => esc_html__('Delete', 'cryptopay')
         ], function ($key) {
             return !in_array($key, $this->hideColumns);
         }, ARRAY_FILTER_USE_KEY))
         ->setOptions([
             'search' => [
                 'id' => 'search-box',
-                'title' => esc_html__('Search...', 'cryptopay_lite')
+                'title' => esc_html__('Search...', 'cryptopay')
             ]
         ])
         ->setOrderQuery(['createdAt', 'desc'])
@@ -135,8 +138,8 @@ class TransactionPage extends Page
             'hash' => function ($tx) {
                 try {
                     if (Helpers::providerExists($tx->code)) {
-                        $transaction = Helpers::getProvider(TransactionType::fromObject($tx));
-                        $transactionUrl = $transaction->Transaction($tx->hash)->getUrl();
+                        $provider = Helpers::getProvider(TransactionType::fromObject($tx));
+                        $transactionUrl = $provider->transaction($tx->hash)->getUrl();
                         return Helpers::view('components/link', [
                             'text' => $tx->hash,
                             'url' => $transactionUrl
@@ -164,14 +167,14 @@ class TransactionPage extends Page
 
                 if (isset($realAmount)) {
                     $result = esc_html(
-                        __('Discounted amount: ', 'cryptopay_lite') . $amount . " " . $currency->symbol
+                        __('Discounted amount: ', 'cryptopay') . $amount . " " . $currency->symbol
                     ) . CPL_BR2;
 
                     $result .= esc_html(
-                        __('Real amount: ', 'cryptopay_lite') . $realAmount . " " . $currency->symbol
+                        __('Real amount: ', 'cryptopay') . $realAmount . " " . $currency->symbol
                     ) . CPL_BR2;
 
-                    $result .= esc_html(__('Discount rate: ', 'cryptopay_lite') . $tx->order->discountRate . "%");
+                    $result .= esc_html(__('Discount rate: ', 'cryptopay') . $tx->order->discountRate . "%");
 
                     return $result;
                 } else {
@@ -184,7 +187,7 @@ class TransactionPage extends Page
                 ]);
 
                 if (isset($tx->params->sanction)) {
-                    $result .= CPL_BR2 . esc_html__('Sanctions source: ', 'cryptopay_lite');
+                    $result .= CPL_BR2 . esc_html__('Sanctions source: ', 'cryptopay');
                     $result .= $tx->params->sanction->source .  ' with ' . $tx->params->sanction->api . ' API';
                 }
 
@@ -192,17 +195,17 @@ class TransactionPage extends Page
             },
             'addresses' => function ($tx) {
                 if (!isset($tx->addresses)) {
-                    return esc_html__('Not found!', 'cryptopay_lite');
+                    return esc_html__('Not found!', 'cryptopay');
                 }
 
                 if (isset($tx->addresses->sender) || isset($tx->addresses->receiver)) {
-                    $sender = $tx->addresses->sender ?? esc_html__('Pending...', 'cryptopay_lite');
-                    $receiver = $tx->addresses->receiver ?? esc_html__('Pending...', 'cryptopay_lite');
-                    $sender = esc_html__('Sender: ', 'cryptopay_lite') . $sender;
-                    $receiver = esc_html__('Receiver: ', 'cryptopay_lite') . $receiver;
+                    $sender = $tx->addresses->sender ?? esc_html__('Pending...', 'cryptopay');
+                    $receiver = $tx->addresses->receiver ?? esc_html__('Pending...', 'cryptopay');
+                    $sender = esc_html__('Sender: ', 'cryptopay') . $sender;
+                    $receiver = esc_html__('Receiver: ', 'cryptopay') . $receiver;
                 } else {
-                    $sender = esc_html__('Sender: ', 'cryptopay_lite') . esc_html__('Not found!', 'cryptopay_lite');
-                    $receiver = esc_html__('Receiver: ', 'cryptopay_lite') . esc_html__('Not found!', 'cryptopay_lite');
+                    $sender = esc_html__('Sender: ', 'cryptopay') . esc_html__('Not found!', 'cryptopay');
+                    $receiver = esc_html__('Receiver: ', 'cryptopay') . esc_html__('Not found!', 'cryptopay');
                 }
 
                 $addresses = $sender . CPL_BR2 . $receiver;

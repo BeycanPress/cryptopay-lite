@@ -103,7 +103,7 @@ class InitType extends AbstractType
     public function prepareForJsSide(): array
     {
         return $this->toArray(exclude:[
-            'order' => ['discountRate']
+            'order' => ['refunds', 'discountRate']
         ]);
     }
 }

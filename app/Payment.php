@@ -104,10 +104,8 @@ class Payment
      */
     public function modal(array $deps = []): string
     {
-        Helpers::addStyle('main.min.css');
-        return Helpers::view('modal', [
-            'cryptopay' => $this->html($deps)
-        ]);
+        $this->config->setModal(true);
+        return $this->html($deps);
     }
 
     /**
@@ -125,7 +123,7 @@ class Payment
                 throw new NoActiveNetworkException(
                     esc_html__(
                         'No network is active, please activate at least one network!',
-                        'cryptopay_lite'
+                        'cryptopay'
                     )
                 );
             }
@@ -237,7 +235,7 @@ class Payment
                 throw new NoActiveCurrencyException(
                     esc_html__(
                         'No active currencies were found on this network. Please report this to the administrator.',
-                        'cryptopay_lite'
+                        'cryptopay'
                     )
                 );
             } else {

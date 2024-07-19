@@ -147,7 +147,9 @@ abstract class Setting
      */
     public static function get(string $key, mixed $default = null): mixed
     {
-        return self::getAll()[$key] ?? $default;
+        $settings = self::getAll();
+        $val = $settings[$key] ?? null;
+        return $val ? $val : $default;
     }
 
     /**

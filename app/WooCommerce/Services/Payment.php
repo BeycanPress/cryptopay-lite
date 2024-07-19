@@ -64,7 +64,7 @@ class Payment
     public function orderProcessed(int $orderId, array $data, object $order): void
     {
         /** @var \WC_Order $order */
-        if ('cryptopay_lite' == $order->get_payment_method() && function_exists('wcs_get_subscriptions_for_order')) {
+        if ('cryptopay' == $order->get_payment_method() && function_exists('wcs_get_subscriptions_for_order')) {
             /** @var \WC_Order_Item $item */
             foreach ($order->get_items() as $item) {
                 $subs = wcs_get_subscriptions_for_order($item->get_order_id(), ['order_type' => 'any']);
@@ -125,9 +125,9 @@ class Payment
 
             if ($data->getStatus()) {
                 if ('wc-completed' == Helpers::getSetting('paymentCompleteOrderStatus')) {
-                    $note = esc_html__('Your order is complete.', 'cryptopay_lite');
+                    $note = esc_html__('Your order is complete.', 'cryptopay');
                 } else {
-                    $note = esc_html__('Your order is processing.', 'cryptopay_lite');
+                    $note = esc_html__('Your order is processing.', 'cryptopay');
                 }
 
                 $order->payment_complete();
@@ -135,7 +135,7 @@ class Payment
             } else {
                 $order->update_status(
                     'wc-failed',
-                    esc_html__('Payment not verified via Blockchain!', 'cryptopay_lite')
+                    esc_html__('Payment not verified via Blockchain!', 'cryptopay')
                 );
             }
         }

@@ -25,7 +25,7 @@ class Initialize
 
             if (is_admin()) {
                 new TransactionPage(
-                    esc_html__('Order transactions', 'cryptopay_lite'),
+                    esc_html__('Order transactions', 'cryptopay'),
                     'woocommerce',
                     2,
                     [

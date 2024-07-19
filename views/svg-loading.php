@@ -1,5 +1,6 @@
 <?php
-    if (BeycanPress\CryptoPayLite\Helpers::getTheme($addon) === 'dark') {
+    use BeycanPress\CryptoPayLite\Helpers;
+    if (Helpers::getTheme($addon)['mode'] === 'dark') {
         $color1 = 'rgb(28 34 43)';
         $color2 = 'rgb(24 29 36)';
     } else {

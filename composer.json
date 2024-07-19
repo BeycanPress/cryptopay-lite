@@ -11,8 +11,8 @@
     },
     "require": {
         "ext-bcmath": "*",
-        "multiplechain/evm-chains": "^0.1.20",
         "beycanpress/csf": "^2.3",
+        "multiplechain/evm-chains": "^0.1.23",
         "beycanpress/currency-converter": "^0.1.3"
     }
 }

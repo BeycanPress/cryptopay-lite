@@ -56,7 +56,7 @@ class Converter
         if (is_null($paymentAmount)) {
             throw new ConverterException(
                 // @phpcs:ignore
-                esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay_lite')
+                esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay')
             );
         }
 

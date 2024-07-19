@@ -1,0 +1,1221 @@
+[
+    {
+        "id": 42161,
+        "name": "Arbitrum One",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0xa4b1",
+        "explorerUrl": "https://arbiscan.io",
+        "rpcUrl": "https://arb1.arbitrum.io/rpc",
+        "wsUrl": "wss://arbitrum-mainnet.infura.io/ws/v3"
+    },
+    {
+        "id": 42170,
+        "name": "Arbitrum Nova",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0xa4ba",
+        "explorerUrl": "https://nova.arbiscan.io",
+        "rpcUrl": "https://nova.arbitrum.io/rpc"
+    },
+    {
+        "id": 1313161554,
+        "name": "Aurora",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x4e454152",
+        "explorerUrl": "https://aurorascan.dev",
+        "rpcUrl": "https://mainnet.aurora.dev"
+    },
+    {
+        "id": 43114,
+        "name": "Avalanche",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Avalanche",
+            "symbol": "AVAX"
+        },
+        "hexId": "0xa86a",
+        "explorerUrl": "https://snowtrace.io",
+        "rpcUrl": "https://api.avax.network/ext/bc/C/rpc"
+    },
+    {
+        "id": 8453,
+        "name": "Base",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Base",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0x2105",
+        "explorerUrl": "https://basescan.org",
+        "rpcUrl": "https://mainnet.base.org"
+    },
+    {
+        "id": 641230,
+        "name": "Bear Network Chain Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "BearNetworkChain",
+            "symbol": "BRNKC"
+        },
+        "hexId": "0x9c8ce",
+        "explorerUrl": "https://brnkscan.bearnetwork.net",
+        "rpcUrl": "https://brnkc-mainnet.bearnetwork.net"
+    },
+    {
+        "id": 288,
+        "name": "Boba Network",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Boba",
+            "symbol": "BOBA"
+        },
+        "hexId": "0x120",
+        "explorerUrl": "https://bobascan.com",
+        "rpcUrl": "https://mainnet.boba.network"
+    },
+    {
+        "id": 1039,
+        "name": "Bronos",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "BRO",
+            "symbol": "BRO"
+        },
+        "hexId": "0x40f",
+        "explorerUrl": "https://broscan.bronos.org",
+        "rpcUrl": "https://evm.bronos.org"
+    },
+    {
+        "id": 56,
+        "name": "BNB Smart Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "BNB",
+            "symbol": "BNB"
+        },
+        "hexId": "0x38",
+        "explorerUrl": "https://bscscan.com",
+        "rpcUrl": "https://rpc.ankr.com/bsc"
+    },
+    {
+        "id": 4999,
+        "name": "BlackFort Exchange Network",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "BlackFort Token",
+            "symbol": "BXN",
+            "decimals": 18
+        },
+        "hexId": "0x1387",
+        "explorerUrl": "https://explorer.blackfort.network",
+        "rpcUrl": "https://mainnet.blackfort.network/rpc"
+    },
+    {
+        "id": 4777,
+        "name": "BlackFort Exchange Network Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "BlackFort Testnet Token",
+            "symbol": "TBXN",
+            "decimals": 18
+        },
+        "hexId": "0x12a9",
+        "explorerUrl": "https://testnet-explorer.blackfort.network",
+        "rpcUrl": "https://testnet.blackfort.network/rpc"
+    },
+    {
+        "id": 7700,
+        "name": "Canto",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Canto",
+            "symbol": "CANTO"
+        },
+        "hexId": "0x1e14",
+        "explorerUrl": "https://tuber.build",
+        "rpcUrl": "https://canto.gravitychain.io"
+    },
+    {
+        "id": 42220,
+        "name": "Celo",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "CELO",
+            "symbol": "CELO"
+        },
+        "hexId": "0xa4ec",
+        "explorerUrl": "https://explorer.celo.org/mainnet",
+        "rpcUrl": "https://forno.celo.org"
+    },
+    {
+        "id": 61,
+        "name": "Ethereum Classic",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "ETC",
+            "symbol": "ETC"
+        },
+        "hexId": "0x3d",
+        "explorerUrl": "https://blockscout.com/etc/mainnet",
+        "rpcUrl": "https://etc.rivet.link"
+    },
+    {
+        "id": 1030,
+        "name": "Conflux eSpace",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Conflux",
+            "symbol": "CFX",
+            "decimals": 18
+        },
+        "hexId": "0x406",
+        "explorerUrl": "https://evm.confluxscan.io",
+        "rpcUrl": "https://evm.confluxrpc.org"
+    },
+    {
+        "id": 25,
+        "name": "Cronos Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Cronos",
+            "symbol": "CRO"
+        },
+        "hexId": "0x19",
+        "explorerUrl": "https://cronoscan.com",
+        "rpcUrl": "https://evm.cronos.org"
+    },
+    {
+        "id": 3737,
+        "name": "Crossbell",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "CSB",
+            "symbol": "CSB"
+        },
+        "hexId": "0xe99",
+        "explorerUrl": "https://scan.crossbell.io",
+        "rpcUrl": "https://rpc.crossbell.io"
+    },
+    {
+        "testnet": false,
+        "hexId": "0xNaN",
+        "explorerUrl": "",
+        "rpcUrl": ""
+    },
+    {
+        "id": 53935,
+        "name": "DFK Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Jewel",
+            "symbol": "JEWEL"
+        },
+        "hexId": "0xd2af",
+        "explorerUrl": "https://subnets.avax.network/defi-kingdoms",
+        "rpcUrl": "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc"
+    },
+    {
+        "id": 2000,
+        "name": "Dogechain",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Dogechain",
+            "symbol": "DC"
+        },
+        "hexId": "0x7d0",
+        "explorerUrl": "https://explorer.dogechain.dog",
+        "rpcUrl": "https://rpc.dogechain.dog"
+    },
+    {
+        "id": 2021,
+        "name": "Edgeware EdgeEVM Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Edgeware",
+            "symbol": "EDG"
+        },
+        "hexId": "0x7e5",
+        "explorerUrl": "https://edgscan.live",
+        "rpcUrl": "https://edgeware-evm.jelliedowl.net"
+    },
+    {
+        "id": 2022,
+        "name": "Beresheet BereEVM Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Testnet EDG",
+            "symbol": "tEDG"
+        },
+        "hexId": "0x7e6",
+        "explorerUrl": "https://testnet.edgscan.live",
+        "rpcUrl": "https://beresheet-evm.jelliedowl.net"
+    },
+    {
+        "id": 1994,
+        "name": "Ekta",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "EKTA",
+            "symbol": "EKTA"
+        },
+        "hexId": "0x7ca",
+        "explorerUrl": "https://ektascan.io",
+        "rpcUrl": "https://main.ekta.io"
+    },
+    {
+        "id": 42262,
+        "name": "Oasis Emerald",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Oasis ROSE",
+            "symbol": "ROSE"
+        },
+        "hexId": "0xa516",
+        "explorerUrl": "https://explorer.emerald.oasis.dev",
+        "rpcUrl": "https://emerald.oasis.dev",
+        "wsUrl": "wss://emerald.oasis.dev/ws"
+    },
+    {
+        "id": 17777,
+        "name": "EOS EVM",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "EOS",
+            "symbol": "EOS"
+        },
+        "hexId": "0x4571",
+        "explorerUrl": "https://explorer.evm.eosnetwork.com",
+        "rpcUrl": "https://api.evm.eosnetwork.com"
+    },
+    {
+        "id": 9001,
+        "name": "Evmos",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Evmos",
+            "symbol": "EVMOS"
+        },
+        "hexId": "0x2329",
+        "explorerUrl": "https://escan.live",
+        "rpcUrl": "https://eth.bd.evmos.org:8545"
+    },
+    {
+        "id": 9000,
+        "name": "Evmos Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Evmos",
+            "symbol": "EVMOS"
+        },
+        "hexId": "0x2328",
+        "explorerUrl": "https://evm.evmos.dev/",
+        "rpcUrl": "https://eth.bd.evmos.dev:8545"
+    },
+    {
+        "id": 246,
+        "name": "Energy Web Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "EWT",
+            "symbol": "EWT",
+            "decimals": 18
+        },
+        "hexId": "0xf6",
+        "explorerUrl": "https://explorer.energyweb.org",
+        "rpcUrl": "https://rpc.energyweb.org"
+    },
+    {
+        "id": 250,
+        "name": "Fantom",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Fantom",
+            "symbol": "FTM"
+        },
+        "hexId": "0xfa",
+        "explorerUrl": "https://ftmscan.com",
+        "rpcUrl": "https://rpc.ankr.com/fantom"
+    },
+    {
+        "id": 4002,
+        "name": "Fantom Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Fantom",
+            "symbol": "FTM"
+        },
+        "hexId": "0xfa2",
+        "explorerUrl": "https://testnet.ftmscan.com",
+        "rpcUrl": "https://rpc.testnet.fantom.network"
+    },
+    {
+        "id": 12306,
+        "name": "Fibo Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "fibo",
+            "symbol": "FIBO"
+        },
+        "hexId": "0x3012",
+        "explorerUrl": "https://scan.fibochain.org",
+        "rpcUrl": "https://network.hzroc.art"
+    },
+    {
+        "id": 314,
+        "name": "Filecoin Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "filecoin",
+            "symbol": "FIL"
+        },
+        "hexId": "0x13a",
+        "explorerUrl": "https://filfox.info/en",
+        "rpcUrl": "https://api.node.glif.io/rpc/v1"
+    },
+    {
+        "id": 314159,
+        "name": "Filecoin Calibration",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "testnet filecoin",
+            "symbol": "tFIL"
+        },
+        "hexId": "0x4cb2f",
+        "explorerUrl": "https://calibration.filscan.io",
+        "rpcUrl": "https://api.calibration.node.glif.io/rpc/v1"
+    },
+    {
+        "id": 3141,
+        "name": "Filecoin Hyperspace",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "testnet filecoin",
+            "symbol": "tFIL"
+        },
+        "hexId": "0xc45",
+        "explorerUrl": "https://hyperspace.filfox.info/en",
+        "rpcUrl": "https://api.hyperspace.node.glif.io/rpc/v1"
+    },
+    {
+        "id": 14,
+        "name": "Flare Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "flare",
+            "symbol": "FLR"
+        },
+        "hexId": "0xe",
+        "explorerUrl": "https://flare-explorer.flare.network",
+        "rpcUrl": "https://flare-api.flare.network/ext/C/rpc"
+    },
+    {
+        "id": 31337,
+        "name": "Foundry",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x7a69",
+        "explorerUrl": "",
+        "rpcUrl": "http://127.0.0.1:8545",
+        "wsUrl": "ws://127.0.0.1:8545"
+    },
+    {
+        "id": 122,
+        "name": "Fuse",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Fuse",
+            "symbol": "FUSE",
+            "decimals": 18
+        },
+        "hexId": "0x7a",
+        "explorerUrl": "https://explorer.fuse.io",
+        "rpcUrl": "https://rpc.fuse.io"
+    },
+    {
+        "id": 123,
+        "name": "Fuse Sparknet",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Spark",
+            "symbol": "SPARK",
+            "decimals": 18
+        },
+        "hexId": "0x7b",
+        "explorerUrl": "https://explorer.fusespark.io",
+        "rpcUrl": "https://rpc.fusespark.io"
+    },
+    {
+        "id": 100,
+        "name": "Gnosis",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Gnosis",
+            "symbol": "xDAI"
+        },
+        "hexId": "0x64",
+        "explorerUrl": "https://blockscout.com/xdai/mainnet",
+        "rpcUrl": "https://rpc.gnosischain.com"
+    },
+    {
+        "id": 10200,
+        "name": "Gnosis Chiado",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Gnosis",
+            "symbol": "xDAI"
+        },
+        "hexId": "0x27d8",
+        "explorerUrl": "https://blockscout.chiadochain.net",
+        "rpcUrl": "https://rpc.chiadochain.net"
+    },
+    {
+        "id": 11235,
+        "name": "HAQQ Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Islamic Coin",
+            "symbol": "ISLM"
+        },
+        "hexId": "0x2be3",
+        "explorerUrl": "https://explorer.haqq.network",
+        "rpcUrl": "https://rpc.eth.haqq.network"
+    },
+    {
+        "id": 54211,
+        "name": "HAQQ Testedge 2",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Islamic Coin",
+            "symbol": "ISLMT"
+        },
+        "hexId": "0xd3c3",
+        "explorerUrl": "https://explorer.testedge2.haqq.network",
+        "rpcUrl": "https://rpc.eth.testedge2.haqq.network"
+    },
+    {
+        "id": 31337,
+        "name": "Hardhat",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x7a69",
+        "explorerUrl": "",
+        "rpcUrl": "http://127.0.0.1:8545"
+    },
+    {
+        "id": 1666600000,
+        "name": "Harmony One",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Harmony",
+            "symbol": "ONE",
+            "decimals": 18
+        },
+        "hexId": "0x63564c40",
+        "explorerUrl": "https://explorer.harmony.one",
+        "rpcUrl": "https://rpc.ankr.com/harmony"
+    },
+    {
+        "id": 4689,
+        "name": "IoTeX",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "IoTeX",
+            "symbol": "IOTX"
+        },
+        "hexId": "0x1251",
+        "explorerUrl": "https://iotexscan.io",
+        "rpcUrl": "https://babel-api.mainnet.iotex.io",
+        "wsUrl": "wss://babel-api.mainnet.iotex.io"
+    },
+    {
+        "id": 4690,
+        "name": "IoTeX Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "IoTeX",
+            "symbol": "IOTX"
+        },
+        "hexId": "0x1252",
+        "explorerUrl": "https://testnet.iotexscan.io",
+        "rpcUrl": "https://babel-api.testnet.iotex.io",
+        "wsUrl": "wss://babel-api.testnet.iotex.io"
+    },
+    {
+        "id": 8217,
+        "name": "Klaytn",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Klaytn",
+            "symbol": "KLAY"
+        },
+        "hexId": "0x2019",
+        "explorerUrl": "https://scope.klaytn.com",
+        "rpcUrl": "https://cypress.fautor.app/archive"
+    },
+    {
+        "id": 59144,
+        "name": "Linea Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Linea Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0xe708",
+        "explorerUrl": "https://lineascan.build",
+        "rpcUrl": "https://rpc.linea.build",
+        "wsUrl": "wss://rpc.linea.build"
+    },
+    {
+        "id": 1337,
+        "name": "Localhost",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x539",
+        "explorerUrl": "",
+        "rpcUrl": "http://127.0.0.1:8545"
+    },
+    {
+        "id": 1,
+        "name": "Ethereum",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0x1",
+        "explorerUrl": "https://etherscan.io",
+        "rpcUrl": "https://cloudflare-eth.com",
+        "wsUrl": "wss://mainnet.infura.io/ws/v3"
+    },
+    {
+        "id": 5000,
+        "name": "Mantle",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "MNT",
+            "symbol": "MNT"
+        },
+        "hexId": "0x1388",
+        "explorerUrl": "https://explorer.mantle.xyz",
+        "rpcUrl": "https://rpc.mantle.xyz"
+    },
+    {
+        "id": 1088,
+        "name": "Metis",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Metis",
+            "symbol": "METIS"
+        },
+        "hexId": "0x440",
+        "explorerUrl": "https://andromeda-explorer.metis.io",
+        "rpcUrl": "https://andromeda.metis.io/?owner=1088"
+    },
+    {
+        "id": 599,
+        "name": "Metis Goerli",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Metis Goerli",
+            "symbol": "METIS"
+        },
+        "hexId": "0x257",
+        "explorerUrl": "https://goerli.explorer.metisdevops.link",
+        "rpcUrl": "https://goerli.gateway.metisdevops.link"
+    },
+    {
+        "id": 7518,
+        "name": "MEVerse Chain Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "MEVerse",
+            "symbol": "MEV"
+        },
+        "hexId": "0x1d5e",
+        "explorerUrl": "https://www.meversescan.io",
+        "rpcUrl": "https://rpc.meversemainnet.io"
+    },
+    {
+        "id": 1284,
+        "name": "Moonbeam",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "GLMR",
+            "symbol": "GLMR"
+        },
+        "hexId": "0x504",
+        "explorerUrl": "https://moonscan.io",
+        "rpcUrl": "https://moonbeam.public.blastapi.io",
+        "wsUrl": "wss://moonbeam.public.blastapi.io"
+    },
+    {
+        "id": 1285,
+        "name": "Moonriver",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "MOVR",
+            "symbol": "MOVR"
+        },
+        "hexId": "0x505",
+        "explorerUrl": "https://moonriver.moonscan.io",
+        "rpcUrl": "https://moonriver.public.blastapi.io",
+        "wsUrl": "wss://moonriver.public.blastapi.io"
+    },
+    {
+        "id": 4242,
+        "name": "Nexi",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Nexi",
+            "symbol": "NEXI",
+            "decimals": 18
+        },
+        "hexId": "0x1092",
+        "explorerUrl": "https://www.nexiscan.com",
+        "rpcUrl": "https://rpc.chain.nexi.technology"
+    },
+    {
+        "id": 240,
+        "name": "Nexilix Smart Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Nexilix",
+            "symbol": "NEXILIX"
+        },
+        "hexId": "0xf0",
+        "explorerUrl": "https://scan.nexilix.com",
+        "rpcUrl": "https://rpcurl.pos.nexilix.com"
+    },
+    {
+        "id": 248,
+        "name": "Oasys",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Oasys",
+            "symbol": "OAS",
+            "decimals": 18
+        },
+        "hexId": "0xf8",
+        "explorerUrl": "https://scan.oasys.games",
+        "rpcUrl": "https://rpc.mainnet.oasys.games"
+    },
+    {
+        "id": 66,
+        "name": "OKC",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "OKT",
+            "symbol": "OKT"
+        },
+        "hexId": "0x42",
+        "explorerUrl": "https://www.oklink.com/okc",
+        "rpcUrl": "https://exchainrpc.okex.org"
+    },
+    {
+        "id": 10,
+        "name": "OP Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0xa",
+        "explorerUrl": "https://explorer.optimism.io",
+        "rpcUrl": "https://mainnet.optimism.io",
+        "wsUrl": "wss://optimism-mainnet.infura.io/ws/v3"
+    },
+    {
+        "id": 137,
+        "name": "Polygon",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "MATIC",
+            "symbol": "MATIC",
+            "decimals": 18
+        },
+        "hexId": "0x89",
+        "explorerUrl": "https://polygonscan.com",
+        "rpcUrl": "https://polygon-rpc.com",
+        "wsUrl": "wss://polygon-mainnet.infura.io/ws/v3"
+    },
+    {
+        "id": 1101,
+        "name": "Polygon zkEVM",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0x44d",
+        "explorerUrl": "https://zkevm.polygonscan.com",
+        "rpcUrl": "https://zkevm-rpc.com"
+    },
+    {
+        "id": 369,
+        "name": "PulseChain",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Pulse",
+            "symbol": "PLS",
+            "decimals": 18
+        },
+        "hexId": "0x171",
+        "explorerUrl": "https://scan.pulsechain.com",
+        "rpcUrl": "https://rpc.pulsechain.com",
+        "wsUrl": "wss://ws.pulsechain.com"
+    },
+    {
+        "id": 35441,
+        "name": "Q Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Q",
+            "symbol": "Q"
+        },
+        "hexId": "0x8a71",
+        "explorerUrl": "https://explorer.q.org",
+        "rpcUrl": "https://rpc.q.org"
+    },
+    {
+        "id": 570,
+        "name": "Rollux Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Syscoin",
+            "symbol": "SYS"
+        },
+        "hexId": "0x23a",
+        "explorerUrl": "https://explorer.rollux.com",
+        "rpcUrl": "https://rpc.rollux.com",
+        "wsUrl": "wss://rpc.rollux.com/wss"
+    },
+    {
+        "id": 57000,
+        "name": "Rollux Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Syscoin",
+            "symbol": "SYS"
+        },
+        "hexId": "0xdea8",
+        "explorerUrl": "https://rollux.tanenbaum.io",
+        "rpcUrl": "https://rpc-tanenbaum.rollux.com/",
+        "wsUrl": "wss://rpc-tanenbaum.rollux.com/wss"
+    },
+    {
+        "id": 2020,
+        "name": "Ronin",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "RON",
+            "symbol": "RON",
+            "decimals": 18
+        },
+        "hexId": "0x7e4",
+        "explorerUrl": "https://app.roninchain.com",
+        "rpcUrl": "https://api.roninchain.com/rpc"
+    },
+    {
+        "id": 23294,
+        "name": "Oasis Sapphire",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Oasis ROSE",
+            "symbol": "ROSE"
+        },
+        "hexId": "0x5afe",
+        "explorerUrl": "https://explorer.oasis.io/mainnet/sapphire",
+        "rpcUrl": "https://sapphire.oasis.io",
+        "wsUrl": "wss://sapphire.oasis.io/ws"
+    },
+    {
+        "id": 23295,
+        "name": "Oasis Sapphire Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Oasis TEST",
+            "symbol": "TEST"
+        },
+        "hexId": "0x5aff",
+        "explorerUrl": "https://explorer.oasis.io/testnet/sapphire",
+        "rpcUrl": "https://testnet.sapphire.oasis.dev",
+        "wsUrl": "wss://testnet.sapphire.oasis.dev/ws"
+    },
+    {
+        "id": 391845894,
+        "name": "SKALE | Block Brawlers",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "BRAWL",
+            "symbol": "BRAWL",
+            "decimals": 18
+        },
+        "hexId": "0x175b1806",
+        "explorerUrl": "https://frayed-decent-antares.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/frayed-decent-antares",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/frayed-decent-antares"
+    },
+    {
+        "id": 1564830818,
+        "name": "SKALE | Calypso NFT Hub",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x5d456c62",
+        "explorerUrl": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/honorable-steel-rasalhague",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/honorable-steel-rasalhague"
+    },
+    {
+        "id": 1026062157,
+        "name": "SKALE | CryptoBlades",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x3d28774d",
+        "explorerUrl": "https://affectionate-immediate-pollux.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/affectionate-immediate-pollux",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/affectionate-immediate-pollux"
+    },
+    {
+        "id": 2046399126,
+        "name": "SKALE | Crypto Colosseum",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x79f99296",
+        "explorerUrl": "https://haunting-devoted-deneb.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/haunting-devoted-deneb",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/haunting-devoted-deneb"
+    },
+    {
+        "id": 2046399126,
+        "name": "SKALE | Europa Liquidity Hub",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x79f99296",
+        "explorerUrl": "https://elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/elated-tan-skat",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/elated-tan-skat"
+    },
+    {
+        "id": 2139927552,
+        "name": "SKALE | Exorde",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x7f8cb400",
+        "explorerUrl": "https://light-vast-diphda.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/light-vast-diphda",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/light-vast-diphda"
+    },
+    {
+        "id": 1273227453,
+        "name": "SKALE | Human Protocol",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x4be3e8bd",
+        "explorerUrl": "https://wan-red-ain.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/wan-red-ain",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/wan-red-ain"
+    },
+    {
+        "id": 1482601649,
+        "name": "SKALE | Nebula Gaming Hub",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x585eb4b1",
+        "explorerUrl": "https://green-giddy-denebola.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/green-giddy-denebola",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/green-giddy-denebola"
+    },
+    {
+        "id": 278611351,
+        "name": "SKALE | Razor Network",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x109b4597",
+        "explorerUrl": "https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/turbulent-unique-scheat",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/turbulent-unique-scheat"
+    },
+    {
+        "id": 1350216234,
+        "name": "SKALE | Titan Community Hub",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "sFUEL",
+            "symbol": "sFUEL",
+            "decimals": 18
+        },
+        "hexId": "0x507aaa2a",
+        "explorerUrl": "https://parallel-stormy-spica.explorer.mainnet.skalenodes.com",
+        "rpcUrl": "https://mainnet.skalenodes.com/v1/parallel-stormy-spica",
+        "wsUrl": "wss://mainnet.skalenodes.com/v1/ws/parallel-stormy-spica"
+    },
+    {
+        "id": 19,
+        "name": "Songbird Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "songbird",
+            "symbol": "SGB"
+        },
+        "hexId": "0x13",
+        "explorerUrl": "https://songbird-explorer.flare.network",
+        "rpcUrl": "https://songbird-api.flare.network/ext/C/rpc"
+    },
+    {
+        "id": 57,
+        "name": "Syscoin Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Syscoin",
+            "symbol": "SYS"
+        },
+        "hexId": "0x39",
+        "explorerUrl": "https://explorer.syscoin.org",
+        "rpcUrl": "https://rpc.syscoin.org",
+        "wsUrl": "wss://rpc.syscoin.org/wss"
+    },
+    {
+        "id": 5700,
+        "name": "Syscoin Tanenbaum Testnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Syscoin",
+            "symbol": "SYS"
+        },
+        "hexId": "0x1644",
+        "explorerUrl": "https://tanenbaum.io",
+        "rpcUrl": "https://rpc.tanenbaum.io",
+        "wsUrl": "wss://rpc.tanenbaum.io/wss"
+    },
+    {
+        "id": 167005,
+        "name": "Taiko (Alpha-3 Testnet)",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "hexId": "0x28c5d",
+        "explorerUrl": "https://explorer.test.taiko.xyz",
+        "rpcUrl": "https://rpc.test.taiko.xyz"
+    },
+    {
+        "id": 841,
+        "name": "Taraxa Mainnet",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "Tara",
+            "symbol": "TARA",
+            "decimals": 18
+        },
+        "hexId": "0x349",
+        "explorerUrl": "https://explorer.mainnet.taraxa.io",
+        "rpcUrl": "https://rpc.mainnet.taraxa.io"
+    },
+    {
+        "id": 40,
+        "name": "Telos",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Telos",
+            "symbol": "TLOS"
+        },
+        "hexId": "0x28",
+        "explorerUrl": "https://www.teloscan.io/",
+        "rpcUrl": "https://mainnet.telos.net/evm"
+    },
+    {
+        "id": 73799,
+        "name": "Volta Chain",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "VT",
+            "symbol": "VT",
+            "decimals": 18
+        },
+        "hexId": "0x12047",
+        "explorerUrl": "https://volta-explorer.energyweb.org",
+        "rpcUrl": "https://volta-rpc.energyweb.org"
+    },
+    {
+        "id": 888,
+        "name": "Wanchain",
+        "testnet": false,
+        "nativeCurrency": {
+            "name": "WANCHAIN",
+            "symbol": "WAN",
+            "decimals": 18
+        },
+        "hexId": "0x378",
+        "explorerUrl": "https://wanscan.org",
+        "rpcUrl": "https://gwan-ssl.wandevs.org:56891"
+    },
+    {
+        "id": 50,
+        "name": "XinFin Network",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "XDC",
+            "symbol": "XDC"
+        },
+        "hexId": "0x32",
+        "explorerUrl": "https://xdc.blocksscan.io",
+        "rpcUrl": "https://rpc.xinfin.network"
+    },
+    {
+        "id": 51,
+        "name": "Apothem Network",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "TXDC",
+            "symbol": "TXDC"
+        },
+        "hexId": "0x33",
+        "explorerUrl": "https://apothem.blocksscan.io",
+        "rpcUrl": "https://erpc.apothem.network"
+    },
+    {
+        "id": 324,
+        "name": "zkSync Era",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x144",
+        "explorerUrl": "https://explorer.zksync.io",
+        "rpcUrl": "https://mainnet.era.zksync.io",
+        "wsUrl": "wss://mainnet.era.zksync.io/ws"
+    },
+    {
+        "id": 7777777,
+        "name": "Zora",
+        "testnet": false,
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Ether",
+            "symbol": "ETH"
+        },
+        "hexId": "0x76adf1",
+        "explorerUrl": "https://explorer.zora.energy",
+        "rpcUrl": "https://rpc.zora.energy",
+        "wsUrl": "wss://rpc.zora.energy"
+    }
+]

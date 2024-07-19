@@ -1,232 +1,145 @@
 <?php
 
-namespace MultipleChain;
+declare(strict_types=1);
 
-use InvalidArgumentException;
-use phpseclib\Math\BigInteger as BigNumber;
+namespace MultipleChain;
 
 class Utils
 {
+    private const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
     /**
-     * @param string $value
+     * @param mixed $value
+     * @return bool
+     */
+    public static function isHex(mixed $value): bool
+    {
+        return (is_string($value) && 1 === preg_match('/^(0x)[a-f0-9]*$/', $value));
+    }
+
+    /**
+     * @param int|string $value
      * @return string
      */
-    public static function hex($value) : string
+    public static function toHex(int|string $value): string
     {
-        return '0x' . dechex($value);
+        return '0x' . dechex(intval($value));
     }
 
     /**
-     * Converts the regular number into a format that blockchain networks will understand
-     * Decimal number to hexadecimal number
-     * @param float|int $amount
-     * @param int $decimals
-     * @return string
-     */
-    public static function toHex(float $amount, int $decimals) : string
-    {
-        $value = self::toBigNumber($amount, $decimals);
-        if (is_numeric($value)) {
-            // turn to hex number
-            $bn = self::toBn($value);
-            $hex = $bn->toHex(true);
-            $hex = preg_replace('/^0+(?!$)/', '', $hex);
-        } elseif (is_string($value)) {
-            $value = self::stripZero($value);
-            $hex = implode('', unpack('H*', $value));
-        } elseif ($value instanceof BigNumber) {
-            $hex = $value->toHex(true);
-            $hex = preg_replace('/^0+(?!$)/', '', $hex);
-        } else {
-            throw new InvalidArgumentException('The value to toHex function is not support.');
-        }
-
-        return '0x' . $hex;
-    }
-
-    /**
-     * Converts a hexadecimal number to a normal number
-     * Hecadecimal number to decimal number
-     * @param string|int|float $amount
-     * @param int $decimals
-     * @return float
-     */
-    public static function toDec(string $amount, int $decimals) : float
-    {
-        $bn = self::toBn($amount);
-        $length = '1' . str_repeat('0', $decimals);
-        $bnt = new BigNumber($length);
-
-        $amount = $bn->divide($bnt)[1]->toString();
-        $result = (float) bcdiv($amount, $length, $decimals);
-        $result += (float) $bn->divide($bnt)[0]->toString();
-
-        return $result;
-    }
-
-    /**
-     * @param BigNumber|string|int $number
-     * @param int $decimals
-     * @return BigNumber
-     */
-    public static function toBigNumber($number, int $decimals) : BigNumber
-    {
-        $bn = self::toBn($number);
-        $length = '1' . str_repeat('0', $decimals);
-
-        $bnt = new BigNumber($length);
-
-        if (is_array($bn)) {
-            list($whole, $fraction, $fractionLength, $negative1) = $bn;
-
-            if ($fractionLength > strlen($length)) {
-                throw new InvalidArgumentException('toBigNumber fraction part is out of limit.');
-            }
-            $whole = $whole->multiply($bnt);
-
-            switch (MATH_BIGINTEGER_MODE) {
-                case $whole::MODE_GMP:
-                    static $two;
-                    $powerBase = gmp_pow(gmp_init(10), (int) $fractionLength);
-                    break;
-                case $whole::MODE_BCMATH:
-                    $powerBase = bcpow('10', (string) $fractionLength, 0);
-                    break;
-                default:
-                    $powerBase = pow(10, (int) $fractionLength);
-                    break;
-            }
-            $base = new BigNumber($powerBase);
-            $fraction = $fraction->multiply($bnt)->divide($base)[0];
-
-            if ($negative1 !== false) {
-                return $whole->add($fraction)->multiply($negative1);
-            }
-            return $whole->add($fraction);
-        }
-
-        return $bn->multiply($bnt);
-    }
-
-    /**
-     * @param BigNumber|string|int $number
-     * @return BigNumber|array
-     */
-    public static function toBn($number) 
-    {
-        if ($number instanceof BigNumber){
-            $bn = $number;
-        } elseif (is_int($number)) {
-            $bn = new BigNumber($number);
-        } elseif (is_numeric($number)) {
-            $number = (string) $number;
-
-            if (self::isNegative($number)) {
-                $count = 1;
-                $number = str_replace('-', '', $number, $count);
-                $negative1 = new BigNumber(-1);
-            }
-            if (strpos($number, '.') > 0) {
-                $comps = explode('.', $number);
-
-                if (count($comps) > 2) {
-                    throw new InvalidArgumentException('toBn number must be a valid number.');
-                }
-                $whole = $comps[0];
-                $fraction = $comps[1];
-
-                return [
-                    new BigNumber($whole),
-                    new BigNumber($fraction),
-                    strlen($comps[1]),
-                    isset($negative1) ? $negative1 : false
-                ];
-            } else {
-                $bn = new BigNumber($number);
-            }
-            if (isset($negative1)) {
-                $bn = $bn->multiply($negative1);
-            }
-        } elseif (is_string($number)) {
-            $number = mb_strtolower($number);
-
-            if (self::isNegative($number)) {
-                $count = 1;
-                $number = str_replace('-', '', $number, $count);
-                $negative1 = new BigNumber(-1);
-            }
-            if (self::isZeroPrefixed($number) || preg_match('/[a-f]+/', $number) === 1) {
-                $number = self::stripZero($number);
-                $bn = new BigNumber($number, 16);
-            } elseif (empty($number)) {
-                $bn = new BigNumber(0);
-            } else {
-                throw new InvalidArgumentException('toBn number must be valid hex string.');
-            }
-            if (isset($negative1)) {
-                $bn = $bn->multiply($negative1);
-            }
-        } else {
-            throw new InvalidArgumentException('toBn number must be BigNumber, string or int.');
-        }
-        return $bn;
-    }
-
-    /**
-     * @param string $amount
+     *
+     * @param float $value
      * @param integer $decimals
      * @return string
      */
-    public static function toString(string $amount, int $decimals) : string
+    public static function numberToHex(float $value, int $decimals): string
+    {
+        $length = bcpow('10', strval($decimals));
+        $newValue = bcmul(strval($value), $length, 0);
+        $newValueHex = gmp_strval(gmp_init($newValue, 10), 16);
+        return '0x' . $newValueHex;
+    }
+
+    /**
+     * @param string $value
+     * @param integer $decimals
+     * @return float
+     */
+    public static function hexToNumber(string $value, int $decimals): float
+    {
+        $length = bcpow('10', strval($decimals));
+        $newValue = gmp_strval(gmp_init($value, 16), 10);
+        $result = bcdiv($newValue, $length, $decimals);
+        return floatval($result);
+    }
+
+    /**
+     * @param array<int>|string $input
+     * @return string
+     */
+    public static function base58Encode(array|string $input): string
+    {
+        if (is_string($input)) {
+            $unpack = unpack('C*', $input);
+            $input = array_values($unpack ? $unpack : []);
+        }
+
+        $base58Array = [];
+        $value = gmp_init(bin2hex(implode(array_map('chr', $input))), 16);
+
+        while (gmp_cmp($value, 0) > 0) {
+            list($value, $remainder) = gmp_div_qr($value, 58);
+            $base58Array[] = self::BASE58_ALPHABET[gmp_intval($remainder)];
+        }
+
+        foreach ($input as $byte) {
+            if (0 !== $byte) {
+                break;
+            }
+            $base58Array[] = self::BASE58_ALPHABET[0];
+        }
+
+        return implode('', array_reverse($base58Array));
+    }
+
+    /**
+     * @param string $input
+     * @return array<int>
+     */
+    public static function base58Decode(string $input): array
+    {
+        $value = gmp_init(0);
+        for ($i = 0; $i < strlen($input); $i++) {
+            $value = gmp_add(gmp_mul($value, 58), intval(strpos(self::BASE58_ALPHABET, $input[$i])));
+        }
+
+        $hex = gmp_strval($value, 16);
+        if (0 != strlen($hex) % 2) {
+            $hex = '0' . $hex;
+        }
+
+        $unpack = unpack('C*', strval(hex2bin($hex)));
+
+        return array_values($unpack ? $unpack : []);
+    }
+
+    /**
+     * @param array<int> $buffer
+     * @return string
+     */
+    public static function bufferToString(array $buffer): string
+    {
+        return implode(array_map('chr', $buffer));
+    }
+
+    /**
+     * @param string $string
+     * @return array<int>
+     */
+    public static function stringToBuffer(string $string): array
+    {
+        $unpack = unpack('C*', $string);
+        return array_values($unpack ? $unpack : []);
+    }
+
+    /**
+     * @param string|float $amount
+     * @param integer $decimals
+     * @return string
+     */
+    public static function toString(string|float $amount, int $decimals = 18): string
     {
         $pos1 = stripos((string) $amount, 'E-');
         $pos2 = stripos((string) $amount, 'E+');
-    
-        if ($pos1 !== false) {
-            $amount = number_format($amount, $decimals, '.', ',');
+
+        if (false !== $pos1) {
+            $amount = number_format(floatval($amount), $decimals, '.', ',');
         }
 
-        if ($pos2 !== false) {
-            $amount = number_format($amount, $decimals, '.', '');
+        if (false !== $pos2) {
+            $amount = number_format(floatval($amount), $decimals, '.', '');
         }
-    
-        return $amount > 1 ? $amount : rtrim($amount, '0');
-    }
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-    public static function isNegative(string $value)
-    {
-        if (!is_string($value)) {
-            throw new InvalidArgumentException('The value to isNegative function must be string.');
-        }
-        return (strpos($value, '-') === 0);
-    }
-
-    /**
-     * @param string $value
-     * @return bool
-     */
-    public static function isZeroPrefixed(string $value)
-    {
-        if (!is_string($value)) {
-            throw new InvalidArgumentException('The value to isZeroPrefixed function must be string.');
-        }
-        return (strpos($value, '0x') === 0);
-    }
-
-    /**
-     * @param string $value
-     * @return string
-     */
-    public static function stripZero(string $value)
-    {
-        if (self::isZeroPrefixed($value)) {
-            $count = 1;
-            return str_replace('0x', '', $value, $count);
-        }
-        return $value;
+        return strval(floatval($amount) > 1 ? $amount : rtrim(strval($amount), '0'));
     }
 }

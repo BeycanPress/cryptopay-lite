@@ -7,8 +7,8 @@
                 <div class="postbox-header">
                     <h2 class="buy-title" style="padding-left: 20px; box-sizing: border-box">
                         Watch preview
-                        <a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Buy premium', 'cryptopay_lite'); ?></a>
-                        <a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Review now', 'cryptopay_lite'); ?></a>
+                        <a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Buy premium', 'cryptopay'); ?></a>
+                        <a href="https://beycanpress.com/cryptopay/?utm_source=lite_version&utm_medium=home_page" target="_blank" class="button buy-button"><?php echo __('Review now', 'cryptopay'); ?></a>
                     </h2>
                 </div>
                 
