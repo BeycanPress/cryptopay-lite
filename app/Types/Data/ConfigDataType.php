@@ -218,6 +218,15 @@ class ConfigDataType extends AbstractType
     }
 
     /**
+     * @return self
+     */
+    public function disableReminderEmail(): self
+    {
+        $this->reminderEmail = false;
+        return $this;
+    }
+
+    /**
      * @param array<int> $networks
      * @return self
      */
