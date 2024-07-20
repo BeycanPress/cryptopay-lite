@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BeycanPress\CryptoPay\PluginHero\Http;
+namespace BeycanPress\CryptoPayLite\PluginHero\Http;
 
 final class Request
 {
