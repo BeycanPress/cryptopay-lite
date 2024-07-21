@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
-Tested up to: 6.5.3
+Tested up to: 6.6
 Requires PHP: 8.1
-Stable Tag: 2.2.1
-Version: 2.2.1
+Stable Tag: 2.3.0
+Version: 2.3.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,12 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 ❌ Even the fastest networks have very high payment confirmation times, as multiple transfers are made to earn commissions.
 ❌ Generally you can only use it for WooCommerce. To integrate with other plugins, you need a serious programming knowledge.
 ❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
+
+**Are Network Supports available in Lite Version?**
+
+Bitcoin, Solana, Tron etc. network supports are for premium only. So you can't get Bitcoin or Solana payments by buying network support add-ons. Because network supports work with the premium version.
+
+This is because some services such as “Pay by transfer to address” run on servers that cost us monthly. So it's a one-time payment of 49 dollars. It is impossible for us to cover these costs every month.
 
 **Free Version:**
 
@@ -153,6 +159,13 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.3.0 =
+* Added: Currency discounts
+* Added: Backend confirmation system
+* Added: Color manageable new theme system
+* Added: WooCommerce checkout page payment process
+* Added: Web3Modal, WalletConnect and another wallet supports
 
 = 2.2.1 =
 * Fixed: Undefined constant problem

@@ -16,7 +16,7 @@ class DebugLogs extends Page
     {
         parent::__construct([
             'priority' => 11,
-            'pageName' => esc_html__('Debug logs', 'cryptopay_lite'),
+            'pageName' => esc_html__('Debug logs', 'cryptopay'),
             'parent' => Helpers::getPage('HomePage')->getSlug(),
         ]);
     }

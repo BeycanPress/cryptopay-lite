@@ -131,7 +131,8 @@ class Helpers
             if (!is_array($extensions)) {
                 throw new \Exception('extensions must be an array!');
             }
-            if (isset($extensions['curl']) && !extension_loaded('curl')) {
+
+            if (in_array('curl', $extensions) && !extension_loaded('curl')) {
                 $status = false;
                 add_action('admin_notices', function () use ($pluginName): void {
                     $message = $pluginName . ': cURL PHP extension is not installed. So ' . $pluginName . ' has been disabled cURL is a HTTP request library that ' . $pluginName . ' needs and uses to verify blockchain transactions. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.curl.php' : '<a href="https://www.php.net/manual/en/book.curl.php">https://www.php.net/manual/en/book.curl.php</a>') . '" for install assistance. You can ask your server service provider to install cURL.'; // @phpcs:ignore
@@ -139,10 +140,34 @@ class Helpers
                 });
             }
 
-            if (isset($extensions['file_get_contents']) && !function_exists('file_get_contents')) {
+            if (in_array('file_get_contents', $extensions) && !function_exists('file_get_contents')) {
                 $status = false;
                 add_action('admin_notices', function () use ($pluginName): void {
                     $message = $pluginName . ': file_get_contents PHP function is not available. So ' . $pluginName . ' has been disabled file_get_contents is a PHP function that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/function.file-get-contents.php' : '<a href="https://www.php.net/manual/en/function.file-get-contents.php">https://www.php.net/manual/en/function.file-get-contents.php</a>') . '" for install assistance. You can ask your server service provider to enable file_get_contents.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
+
+            if (in_array('bcmath', $extensions) && !extension_loaded('bcmath')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': bcmath PHP extension is not installed. So ' . $pluginName . ' has been disabled bcmath is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.bc.php' : '<a href="https://www.php.net/manual/en/book.bc.php">https://www.php.net/manual/en/book.bc.php</a>') . '" for install assistance. You can ask your server service provider to install bcmath.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
+
+            if (in_array('gmp', $extensions) && !extension_loaded('gmp')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': gmp PHP extension is not installed. So ' . $pluginName . ' has been disabled gmp is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.gmp.php' : '<a href="https://www.php.net/manual/en/book.gmp.php">https://www.php.net/manual/en/book.gmp.php</a>') . '" for install assistance. You can ask your server service provider to install gmp.'; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
+                });
+            }
+
+            if (in_array('sodium', $extensions) && !extension_loaded('sodium')) {
+                $status = false;
+                add_action('admin_notices', function () use ($pluginName): void {
+                    $message = $pluginName . ': sodium PHP extension is not installed. So ' . $pluginName . ' has been disabled sodium is a PHP extension that ' . $pluginName . ' needs and uses for some process. Please visit "' . ('cli' == php_sapi_name() ? 'https://www.php.net/manual/en/book.sodium.php' : '<a href="https://www.php.net/manual/en/book.sodium.php">https://www.php.net/manual/en/book.sodium.php</a>') . '" for install assistance. You can ask your server service provider to install sodium.'; // @phpcs:ignore
                     printf('<div class="notice notice-error"><p>%1$s</p></div>', $message);
                 });
             }

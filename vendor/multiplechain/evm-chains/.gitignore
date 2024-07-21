@@ -1,3 +1,18 @@
-test.php
-.history
+coverage
 vendor
+*.local
+test*.php
+.env
+.phpunit.result.cache
+tests/data.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

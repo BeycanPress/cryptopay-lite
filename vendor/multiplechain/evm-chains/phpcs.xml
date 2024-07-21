@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<ruleset name="MultipleChainStandard">
+    <rule ref="PSR12"/>
+    <description>
+        MultipleChainStandard
+    </description>
+    <file>./**/*.php</file>
+    <arg name="extensions" value="php"/>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <arg name="standard" value="PSR12"/>
+    <rule ref="Generic.Files.InlineHTML"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Squiz.Commenting.FunctionComment.Missing"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamName"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
+    <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingReturn"/>
+    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
+    <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+        <severity>0</severity>
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectStrictTypesFormat" />
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.UselessAnnotation" />
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation" />
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
+        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation" />
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
+    <rule ref="SlevomatCodingStandard.Commenting.AnnotationName"/>
+</ruleset>

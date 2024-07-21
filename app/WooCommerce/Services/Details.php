@@ -6,6 +6,7 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Services;
 
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Models\OrderTransaction;
+use BeycanPress\CryptoPayLite\WooCommerce\Gateway\CryptoPay;
 use BeycanPress\CryptoPayLite\Types\Enums\TransactionStatus as Status;
 
 class Details
@@ -28,7 +29,7 @@ class Details
     {
         $order = wc_get_order($orderId);
 
-        if ('cryptopay_lite' == $order->get_payment_method()) {
+        if (CryptoPay::ID == $order->get_payment_method()) {
             $transaction = (new OrderTransaction())->getTransactionByOrderId($orderId);
 
             if ($order->get_status() == Status::PENDING->getValue() && !$transaction) {
@@ -45,7 +46,7 @@ class Details
      */
     public function backend(\WC_Order $order): void
     {
-        if ('cryptopay_lite' == $order->get_payment_method()) {
+        if (CryptoPay::ID == $order->get_payment_method()) {
             $tx = (new OrderTransaction())->getTransactionByOrderId($order->get_id());
             if (!$tx) {
                 return;

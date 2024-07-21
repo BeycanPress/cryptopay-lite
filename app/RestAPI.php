@@ -80,9 +80,21 @@ class RestAPI extends BaseAPI
                     'callback' => 'paymentFinished',
                     'methods' => ['POST']
                 ],
+                'set-reminder-email' => [
+                    'callback' => 'setReminderEmail',
+                    'methods' => ['POST']
+                ],
                 'currency-converter' => [
                     'callback' => 'currencyConverter',
                     'methods' => ['GET']
+                ],
+                'verify-pending-transactions' => [
+                    'callback' => 'verifyPendingTransactions',
+                    'methods' => ['GET', 'POST']
+                ],
+                'custom-endpoints' => [
+                    'callback' => 'customEndpoint',
+                    'methods' => ['GET', 'POST']
                 ]
             ]
         ]);
@@ -228,7 +240,7 @@ class RestAPI extends BaseAPI
     /**
      * If there is a model for the relevant addon and transaction data is created,
      * it is used to update the data after the payment transaction is completed.
-     * The same process works in verifer.
+     * The same process works in verifier.
      * @see Verifier
      * @return void
      */
@@ -278,7 +290,7 @@ class RestAPI extends BaseAPI
             }
 
             if ($this->paymentData->getStatus()) {
-                $msg = esc_html__('Payment completed successfully', 'cryptopay_lite');
+                $msg = esc_html__('Payment completed successfully', 'cryptopay');
                 $msg = Hook::callFilter('payment_success_message_' . $this->addon, $msg);
                 Response::success($msg, ['redirect' => $urls['success']]);
             } else {
@@ -291,6 +303,31 @@ class RestAPI extends BaseAPI
     }
 
     /**
+     * The user creates a reminder email without waiting for the payment to be completed.
+     * @return void
+     */
+    public function setReminderEmail(): void
+    {
+        $email = $this->request->getParam('email');
+
+        if (!$email) {
+            Response::error(esc_html__('Please enter a valid email!', 'cryptopay'), 'GNR101');
+        }
+
+        Helpers::debug('Added reminder email', 'INFO', [
+            'email' => $email
+        ]);
+
+        $this->paymentData->getModel()->update([
+            'reminderEmail' => $email
+        ], [
+            'hash' => $this->paymentData->getHash()
+        ]);
+
+        Response::success(esc_html__("Reminder email set successfully!", 'cryptopay'));
+    }
+
+    /**
      * Currency converter process
      * @see Converter
      * @return void
@@ -298,12 +335,58 @@ class RestAPI extends BaseAPI
     public function currencyConverter(): void
     {
         try {
-            Helpers::debug('Currency convertering', 'INFO', $this->paymentData->forDebug());
+            Helpers::debug('Currency converting', 'INFO', $this->paymentData->forDebug());
             Response::success(null, Converter::convert($this->paymentData));
         } catch (\Exception $e) {
             Helpers::debug($e->getMessage(), 'ERROR', $e);
             Response::error($this->getErrorMessage('CCE101'), 'CCE101');
         }
+    }
+
+
+    /**
+     * Verify pending transactions endpoint
+     * @return void
+     */
+    public function verifyPendingTransactions(): void
+    {
+        if ('wp' == Helpers::getSetting('cronType')) {
+            Response::error(esc_html__('Please disable WP Cron from settings!', 'cryptopay'), 'ERR');
+        }
+
+        try {
+            $models = Helpers::getModels();
+
+            Helpers::debug('Starting verify pending transactions on RestAPI', 'INFO', [
+                'models' => array_keys($models)
+            ]);
+
+            foreach ($models as $model) {
+                Verifier::verifyPendingTransactions($model);
+            }
+        } catch (\Throwable $th) {
+            Helpers::debug($th->getMessage(), 'ERROR', $th);
+            Response::error($th->getMessage(), 'ERR', [
+                $th->getTrace()
+            ]);
+        }
+
+        Response::success();
+    }
+
+    /**
+     * Developers can set custom endpoints for their addons.
+     * @return void
+     */
+    public function customEndpoint(): void
+    {
+        $endpoint = $this->request->getParam('endpoint');
+
+        if (!$endpoint) {
+            Response::error($this->getErrorMessage('CEE100'), 'CEE100');
+        }
+
+        Hook::callAction('custom_endpoint_' . $endpoint, $this->request, $this->paymentData);
     }
 
     /**
@@ -314,19 +397,19 @@ class RestAPI extends BaseAPI
     private function getErrorMessage(string $code): string
     {
         $errorMap = [
-            'INT100' => esc_html__('Internal error!', 'cryptopay_lite'),
-            'MOD100' => esc_html__('Model not found!', 'cryptopay_lite'),
-            'CEE100' => esc_html__('Endpoint not found!', 'cryptopay_lite'),
-            'IDE100' => esc_html__('Please enter a valid data.', 'cryptopay_lite'),
-            'TAE101' => esc_html__('Transaction already exists!', 'cryptopay_lite'),
-            'TNF101' => esc_html__('Transaction record not found!', 'cryptopay_lite'),
-            'PFE100' => esc_html__('Payment not verified via Blockchain', 'cryptopay_lite'),
-            'PFE101' => esc_html__('Payment not verified via Blockchain - Because reason: %s', 'cryptopay_lite'),
-            'PFE102' => esc_html__('Redirect links cannot finded!', 'cryptopay_lite'),
+            'INT100' => esc_html__('Internal error!', 'cryptopay'),
+            'MOD100' => esc_html__('Model not found!', 'cryptopay'),
+            'CEE100' => esc_html__('Endpoint not found!', 'cryptopay'),
+            'IDE100' => esc_html__('Please enter a valid data.', 'cryptopay'),
+            'TAE101' => esc_html__('Transaction already exists!', 'cryptopay'),
+            'TNF101' => esc_html__('Transaction record not found!', 'cryptopay'),
+            'PFE100' => esc_html__('Payment not verified via Blockchain', 'cryptopay'),
+            'PFE101' => esc_html__('Payment not verified via Blockchain - Because reason: %s', 'cryptopay'),
+            'PFE102' => esc_html__('Redirect links cannot found!', 'cryptopay'),
             // @phpcs:ignore
-            'CCE101' => esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay_lite'),
+            'CCE101' => esc_html__('There was a problem converting currency! Make sure your currency value is available in the relevant API or you define a custom value for your currency.', 'cryptopay'),
         ];
 
-        return $errorMap[$code] ?? esc_html__('An unknown error occurred!', 'cryptopay_lite');
+        return $errorMap[$code] ?? esc_html__('An unknown error occurred!', 'cryptopay');
     }
 }

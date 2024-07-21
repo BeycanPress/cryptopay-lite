@@ -1,0 +1,42 @@
+name: PHP CodeSniffer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches:
+      - alpha
+      - master
+
+jobs:
+  test_and_code_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install dependencies
+        run: |
+          composer install
+
+      - name: Run PHPCS
+        run: |
+          composer run phpcs
+          exit_status=$?
+          if [ $exit_status -ne 0 ]; then
+            echo "PHPCS check failed. Please fix the issues before merging."
+            exit 1
+          fi
+
+      - name: Set PR status
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          STATUS_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}"
+          STATUS="{\"state\":\"success\",\"context\":\"Test Process\",\"description\":\"Test Process passed\"}"
+          curl -X POST -H "Authorization: token $TOKEN" -d "$STATUS" "$STATUS_URL"

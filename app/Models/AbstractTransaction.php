@@ -23,12 +23,7 @@ abstract class AbstractTransaction extends AbstractModel
      * @var string
      * Because abstract class don't have property type, that's from php side giving error
      */
-    public string $version = '1.3.0';
-
-    /**
-     * @var string
-     */
-    public string $updateVersion = '1.3.0';
+    public string $version = '1.3.1';
 
     /**
      * @var string
@@ -73,6 +68,11 @@ abstract class AbstractTransaction extends AbstractModel
             'testnet' => [
                 'type' => 'boolean',
             ],
+            'reminderEmail' => [
+                'type' => 'string',
+                'length' => 250,
+                'nullable' => true,
+            ],
             'addresses' => [
                 'type' => 'json',
             ],
@@ -88,67 +88,6 @@ abstract class AbstractTransaction extends AbstractModel
                 'default' => 'current_timestamp',
             ],
         ]);
-
-        // column updates for 1.2.0
-        // TODO: remove in next versions, maybe 2.5.0+
-        if ($this->updateVersion != get_option($this->tableName . '_update_version')) {
-            update_option($this->tableName . '_update_version', $this->updateVersion);
-
-            /**
-             * For paymentPrice values to paymentAmount
-             * @since 2.1.0
-             */
-            // @phpcs:ignore
-            $oldOrderColumns = $this->getResults(
-                "SELECT `id`, `order` FROM {$this->tableName} WHERE `order` LIKE '%paymentPrice%';"
-            );
-
-            if (!empty($oldOrderColumns)) {
-                $totalQuery = "UPDATE {$this->tableName} SET `order` = CASE ";
-                foreach ($oldOrderColumns as $value) {
-                    $newOrder = str_ireplace('paymentPrice', 'paymentAmount', $value->order);
-                    $totalQuery .= "WHEN `id` = {$value->id} THEN '{$newOrder}' ";
-                }
-
-                $totalQuery .= "ELSE `order` END WHERE `order` LIKE '%paymentPrice%';";
-
-                $this->query($totalQuery);
-            }
-
-            /**
-             * This for new typing system because ParamsType cannot be null
-             * @since 2.1.0
-             */
-            $this->query("ALTER TABLE {$this->tableName} MODIFY COLUMN `params` json NOT NULL;");
-            $this->query(
-                "UPDATE {$this->tableName} SET `params` = '{}' 
-                WHERE `params` IS NULL OR `params` = 'null' OR `params` = '';"
-            );
-
-            /**
-             * Addresses column added in 2.0.0 and with this version types needed not null addresses data
-             * that's why we need to update all null addresses to empty object
-             * @since 2.1.0
-             */
-            $this->query("ALTER TABLE {$this->tableName} MODIFY COLUMN `addresses` json NOT NULL;");
-            $this->query(
-                "UPDATE {$this->tableName} SET `addresses` = '{}' 
-                WHERE `addresses` IS NULL OR `addresses` = 'null' OR `addresses` = '';"
-            );
-
-            /**
-             * Network and order also updating to json type
-             * @since 2.1.0
-             */
-            $this->query("ALTER TABLE {$this->tableName} MODIFY COLUMN `network` json NOT NULL;");
-            $this->query("ALTER TABLE {$this->tableName} MODIFY COLUMN `order` json NOT NULL;");
-
-            /**
-             * Because evm networks code change to evmchains from evmBased, that's why we need to update all
-             * @since 2.1.0
-             */
-            $this->query("UPDATE {$this->tableName} SET `code` = 'evmchains' WHERE `code` = 'evmBased';");
-        }
 
         $this->createTable();
     }
@@ -215,8 +154,8 @@ abstract class AbstractTransaction extends AbstractModel
         $status = $data->getStatus() ? Status::VERIFIED : Status::FAILED;
 
         $provider = Helpers::getProvider($tx);
-        $pTx = $provider->Transaction($tx->getHash());
-        $tx->getAddresses()->setSender($pTx->getFrom());
+        $pTx = $provider->transaction($tx->getHash());
+        $tx->getAddresses()->setSender($pTx->getSigner());
 
         return (bool) $this->update([
             'hash' => $data->getHash(),
@@ -343,6 +282,18 @@ abstract class AbstractTransaction extends AbstractModel
         return $this->findOneBy([
             'orderId' => $orderId
         ], ['id', 'DESC']);
+    }
+
+    /**
+     * @param array<mixed> $params
+     * @return TransactionsType
+     */
+    public function getRemindedPendingTransactions(array $params): TransactionsType
+    {
+        return $this->findBy(array_merge($params, [
+            'status' => Status::PENDING->getValue(),
+            ['reminderEmail', 'IS NOT', 'NULL']
+        ]));
     }
 
     /**

@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">
-        <?php echo esc_html__('Transaction list', 'cryptopay_lite'); ?>
+        <?php echo esc_html__('Transaction list', 'cryptopay'); ?>
     </h1>
     <hr class="wp-header-end">
     <br>

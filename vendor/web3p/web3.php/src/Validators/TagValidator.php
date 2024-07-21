@@ -26,7 +26,7 @@ class TagValidator implements IValidator
     {
         $value = Utils::toString($value);
         $tags = [
-            'latest', 'earliest', 'pending'
+            'latest', 'earliest', 'pending', 'safe', 'finalized'
         ];
 
         return in_array($value, $tags);

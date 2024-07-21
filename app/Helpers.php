@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace BeycanPress\CryptoPayLite;
 
 // Classes
-use MultipleChain\EvmChains\Provider;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\Settings\Settings;
+use MultipleChain\EvmChains\Models\Transaction;
+use MultipleChain\EvmChains\Models\CoinTransaction;
+use MultipleChain\EvmChains\Models\TokenTransaction;
 use BeycanPress\CryptoPayLite\Models\OrderTransaction;
 use BeycanPress\CryptoPayLite\Models\AbstractTransaction;
+use MultipleChain\EvmChains\Provider as EvmChainsProvider;
 use BeycanPress\CryptoPayLite\PluginHero\Helpers as PhHelpers;
 // Types
 use BeycanPress\CryptoPayLite\Types\Network\CurrencyType;
@@ -137,11 +140,79 @@ class Helpers extends PhHelpers
 
     /**
      * @param string $addon
-     * @return string
+     * @return array<mixed>
      */
-    public static function getTheme(string $addon): string
+    public static function getTheme(string $addon): array
     {
-        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', Helpers::getSetting('theme', 'light')));
+        $themeLight = Helpers::getSetting('themeLight', [
+            'text' => '#3d3d3d',
+            'discount' => 'red',
+            'border' => '#e2e4ec',
+            'primary' => '#f5f7f9',
+            'secondary' => '#888',
+            'tertiary' => '#555',
+            'background' => '#ffffff',
+            'boxShadow' => 'rgba(0, 0, 0, 0.2)',
+            'buttonColor' => '#fff',
+            'buttonDisabled' => '#cccccc',
+            'buttonBackground' => '#409eff',
+            'buttonHoverBackground' => '#79bbff',
+        ]);
+
+        $themeDark = Helpers::getSetting('themeDark', [
+            'text' => 'rgb(168, 174, 182)',
+            'discount' => 'rgb(210, 58, 58)',
+            'border' => 'rgb(5, 11, 19)',
+            'primary' => 'rgb(20, 29, 32)',
+            'secondary' => 'rgba(5, 11, 19, 0.8)',
+            'tertiary' => 'rgb(3, 6, 11)',
+            'background' => 'rgb(28, 34, 43)',
+            'boxShadow' => 'rgba(255, 255, 255, 0.1)',
+            'buttonColor' => '#fff',
+            'buttonDisabled' => '#cccccc',
+            'buttonBackground' => '#1da87c',
+            'buttonHoverBackground' => '#116c4f',
+        ]);
+
+        $theme = [
+            'mode' => Helpers::getSetting('themeMode', 'light'),
+            'style' => [
+                'light' => [
+                    'text' => $themeLight['text'],
+                    'discount' => $themeLight['discount'],
+                    'border' => $themeLight['border'],
+                    'primary' => $themeLight['primary'],
+                    'secondary' => $themeLight['secondary'],
+                    'tertiary' => $themeLight['tertiary'],
+                    'background' => $themeLight['background'],
+                    'boxShadow' => $themeLight['boxShadow'],
+                    'button' => [
+                        'color' => $themeLight['buttonColor'],
+                        'disabled' => $themeLight['buttonDisabled'],
+                        'background' => $themeLight['buttonBackground'],
+                        'hoverBackground' => $themeLight['buttonHoverBackground']
+                    ]
+                ],
+                'dark' => [
+                    'text' => $themeDark['text'],
+                    'discount' => $themeDark['discount'],
+                    'border' => $themeDark['border'],
+                    'primary' => $themeDark['primary'],
+                    'secondary' => $themeDark['secondary'],
+                    'tertiary' => $themeDark['tertiary'],
+                    'background' => $themeDark['background'],
+                    'boxShadow' => $themeDark['boxShadow'],
+                    'button' => [
+                        'color' => $themeDark['buttonColor'],
+                        'disabled' => $themeDark['buttonDisabled'],
+                        'background' => $themeDark['buttonBackground'],
+                        'hoverBackground' => $themeDark['buttonHoverBackground']
+                    ]
+                ]
+            ]
+        ];
+
+        return Hook::callFilter('theme_' . $addon, Hook::callFilter('theme', $theme));
     }
 
     /**
@@ -164,23 +235,14 @@ class Helpers extends PhHelpers
 
     /**
      * @param TransactionType $transaction
-     * @return object
+     * @return Provider
      */
-    public static function getProvider(TransactionType $transaction): object
+    public static function getProvider(TransactionType $transaction): Provider
     {
-        $providers = [
-            'evmchains' => Provider::class
-        ];
-
-        $provider = $providers[$transaction->getCode()] ?? null;
+        $provider = self::getProviders()[$transaction->getCode()] ?? null;
 
         if ($provider) {
-            $network = $transaction->getNetwork();
-            return new $provider([
-                'network' => $network->toObject(),
-                'rpcUrl' => $network->getRpcUrl(),
-                'testnet' => $transaction->getTestnet(),
-            ]);
+            return new Provider($transaction, $provider);
         } else {
             throw new \Exception('Provider not found!');
         }
@@ -192,11 +254,22 @@ class Helpers extends PhHelpers
      */
     public static function providerExists(string $code): bool
     {
-        $providers = [
-            'evmchains' => Provider::class
-        ];
+        return isset(self::getProviders()[$code]);
+    }
 
-        return isset($providers[$code]);
+    /**
+     * @return array<mixed>
+     */
+    public static function getProviders(): array
+    {
+        return Hook::callFilter('php_providers', [
+            'evmchains' => [
+                'transaction' => Transaction::class,
+                'provider' => EvmChainsProvider::class,
+                'coinTransaction' => CoinTransaction::class,
+                'tokenTransaction' => TokenTransaction::class
+            ]
+        ]);
     }
 
     /**
@@ -243,7 +316,7 @@ class Helpers extends PhHelpers
         $amount = self::toString($order->getPaymentAmount(), $currency->getDecimals());
 
         if (Helpers::providerExists($transaction->getCode())) {
-            $transactionUrl = (Helpers::getProvider($transaction))->Transaction($transaction->getHash())->getUrl();
+            $transactionUrl = (Helpers::getProvider($transaction))->transaction($transaction->getHash())->getUrl();
         } else {
             $transactionUrl = null;
         }
@@ -315,6 +388,6 @@ class Helpers extends PhHelpers
     public static function networkWillNotWorkMessage(string $networkName): void
     {
         // @phpcs:ignore
-        self::adminNotice(str_replace('{networkName}', $networkName, esc_html__('You did not specify a wallet address in the "CryptoPay Lite {networkName} settings", {networkName} network will not work. Please specify a wallet address first.', 'cryptopay_lite')), 'error');
+        self::adminNotice(str_replace('{networkName}', $networkName, esc_html__('You did not specify a wallet address in the "CryptoPay Lite {networkName} settings", {networkName} network will not work. Please specify a wallet address first.', 'cryptopay')), 'error');
     }
 }

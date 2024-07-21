@@ -56,7 +56,7 @@ final class Request
     {
         $this->checkRequests();
         $this->parseContent();
-        $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
     }
 
     # public methods #
@@ -258,6 +258,15 @@ final class Request
     }
 
     /**
+     * Checks if a string data is xml data.
+     * @return bool
+     */
+    private function isXml(): bool
+    {
+        return false !== strpos($this->getContent(), '<?xml') ? true : false;
+    }
+
+    /**
      * Checks if a string data is query string data.
      * @return bool
      */
@@ -326,18 +335,22 @@ final class Request
             $this->params = array_merge($this->params, $this->parseFormData());
         }
 
-        if ($this->isQueryString()) {
+        $isJson = $this->isJson();
+
+        if ($this->isQueryString() && !$isJson) {
             parse_str($this->getContent(), $result);
             $this->params = array_merge($this->params, $result);
         }
 
-        if ($this->isJson()) {
+        if ($isJson) {
             $this->params = array_merge($this->params, json_decode($this->getContent(), true));
         }
 
-        $this->params = array_merge($this->params, $this->xmlParse());
+        if ($this->isXml()) {
+            $this->params = array_merge($this->params, $this->xmlParse());
+        }
 
-        $this->params = json_decode(json_encode($this->params));
+        $this->params = json_decode(json_encode($this->params) ?: '{}');
     }
 
     /**

@@ -1,0 +1,36 @@
+{
+    "name": "multiplechain/definitions",
+    "version": "0.1.2",
+    "description": "MultipleChain Definitions",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MultipleChain\\": "src/"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=phpcs.xml .",
+        "phpcbf": "phpcbf --standard=phpcs.xml .",
+        "phpstan": "phpstan analyse --memory-limit=2G --configuration=phpstan.neon"
+    },
+    "authors": [
+        {
+            "name": "Halil Beycan",
+            "email": "halilbeycan0@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^1.11",
+        "squizlabs/php_codesniffer": "^3.10",
+        "slevomat/coding-standard": "^8.15"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "multiplechain/utils": "^0.1.3"
+    }
+}

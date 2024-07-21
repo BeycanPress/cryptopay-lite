@@ -31,7 +31,7 @@ abstract class Setting
      */
     public function __construct(string $title, string $parent = null, array $params = [])
     {
-        self::$prefix = Helpers::getProp('settingKey');
+        self::$prefix = self::getSettingKey();
 
         self::$params = array_merge([
             'framework_title'         => $title . ' <small>By BeycanPress</small>',
@@ -96,6 +96,14 @@ abstract class Setting
     }
 
     /**
+     * @return string
+     */
+    private static function getSettingKey(): string
+    {
+        return Helpers::getProp('settingKey', null) ?? (Helpers::getProp('pluginKey') . '_settings');
+    }
+
+    /**
      * @param string $key
      * @param mixed $default
      * @return mixed
@@ -107,7 +115,7 @@ abstract class Setting
         }
 
         if (self::$params['ajax_save'] ?? true) {
-            $action = 'csf_' . Helpers::getProp('settingKey') . '_ajax_save';
+            $action = 'csf_' . self::getSettingKey() . '_ajax_save';
 
             if (!isset($_POST[$action]) && !isset($_POST['data'])) {
                 return null;
@@ -115,17 +123,17 @@ abstract class Setting
 
             $data = json_decode(stripslashes($_POST['data']), true);
 
-            $settings = $data[Helpers::getProp('settingKey')];
+            $settings = $data[self::getSettingKey()];
         } else {
             if (!isset($_GET['page'])) {
                 return null;
             }
 
-            if (Helpers::getProp('settingKey') !== $_GET['page']) {
+            if (self::getSettingKey() !== $_GET['page']) {
                 return null;
             }
 
-            $settings = $_POST[Helpers::getProp('settingKey')];
+            $settings = $_POST[self::getSettingKey()];
         }
 
         return $settings[$key] ?? $default;
@@ -139,7 +147,9 @@ abstract class Setting
      */
     public static function get(string $key, mixed $default = null): mixed
     {
-        return self::getAll()[$key] ?? $default;
+        $settings = self::getAll();
+        $val = $settings[$key] ?? null;
+        return $val ? $val : $default;
     }
 
     /**
@@ -148,7 +158,7 @@ abstract class Setting
     public static function getAll(): array
     {
         if (is_null(self::$data)) {
-            $data = get_option(Helpers::getProp('settingKey'), []);
+            $data = get_option(self::getSettingKey(), []);
             self::$data = is_array($data) ? $data : [];
         }
 
@@ -164,6 +174,6 @@ abstract class Setting
     {
         self::getAll();
         self::$data[$key] = $value;
-        update_option(Helpers::getProp('settingKey'), self::$data);
+        update_option(self::getSettingKey(), self::$data);
     }
 }

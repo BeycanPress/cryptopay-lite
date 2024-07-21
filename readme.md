@@ -44,6 +44,12 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 * ❌ Generally you can only use it for WooCommerce. To integrate with other plugins, you need a serious programming knowledge.
 * ❌ An additional transaction fee is charged to transfer the payment from their wallet to you, and this is deducted from your earnings.
 
+**Are Network Supports available in Lite Version?**
+
+Bitcoin, Solana, Tron etc. network supports are for premium only. So you can't get Bitcoin or Solana payments by buying network support add-ons. Because network supports work with the premium version.
+
+This is because some services such as “Pay by transfer to address” run on servers that cost us monthly. So it's a one-time payment of 49 dollars. It is impossible for us to cover these costs every month.
+
 **Free Version:**
 
 * No commission

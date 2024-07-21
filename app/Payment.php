@@ -104,10 +104,8 @@ class Payment
      */
     public function modal(array $deps = []): string
     {
-        Helpers::addStyle('main.min.css');
-        return Helpers::view('modal', [
-            'cryptopay' => $this->html($deps)
-        ]);
+        $this->config->setModal(true);
+        return $this->html($deps);
     }
 
     /**
@@ -125,7 +123,7 @@ class Payment
                 throw new NoActiveNetworkException(
                     esc_html__(
                         'No network is active, please activate at least one network!',
-                        'cryptopay_lite'
+                        'cryptopay'
                     )
                 );
             }
@@ -193,9 +191,13 @@ class Payment
      */
     private function getJsProviders(): object
     {
-        $providers = [
-            'EvmChains' => Helpers::addScript('evm-chains-provider.js'),
-        ];
+        if (wp_script_is('cryptopay-evm-chains-provider', 'enqueued')) {
+            $id = 'cryptopay-evm-chains-provider';
+        } else {
+            $id = Helpers::addScript('evm-chains-provider.js');
+        }
+
+        $providers = ['EvmChains' => $id];
 
         return (object) [
             'names' => array_keys($providers),
@@ -237,7 +239,7 @@ class Payment
                 throw new NoActiveCurrencyException(
                     esc_html__(
                         'No active currencies were found on this network. Please report this to the administrator.',
-                        'cryptopay_lite'
+                        'cryptopay'
                     )
                 );
             } else {

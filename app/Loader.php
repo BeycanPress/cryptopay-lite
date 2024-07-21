@@ -14,8 +14,8 @@ class Loader extends PluginHero\Plugin
     {
         parent::__construct([
             'pluginFile' => $pluginFile,
+            'textDomain' => 'cryptopay',
             'pluginKey' => 'cryptopay_lite',
-            'textDomain' => 'cryptopay_lite',
             'settingKey' => 'cryptopay_lite_settings',
         ]);
 
@@ -26,13 +26,14 @@ class Loader extends PluginHero\Plugin
         if (Helpers::getSetting('evmchainsWalletAddress')) {
             add_action('plugins_loaded', function (): void {
                 new RestAPI();
+                new Services\Initialize();
                 new WooCommerce\Initialize();
             });
         } else {
             Helpers::adminNotice(
                 __(
                     'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.',
-                    'cryptopay_lite'
+                    'cryptopay'
                 ),
                 'error'
             );
@@ -51,9 +52,9 @@ class Loader extends PluginHero\Plugin
     public function pluginActionLinks(array $links): array
     {
         // @phpcs:disable
-        $links[] = '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugins_list" style="color: #389e38;font-weight: bold;" target="_blank">' . __('Buy Premium', 'cryptopay_lite') . '</a>';
-        $links[] = '<a href="' . admin_url('admin.php?page=cryptopay_lite_settings') . '">' . __('Settings', 'cryptopay_lite') . '</a>';
-        $links[] = '<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">' . __('Documentation', 'cryptopay_lite') . '</a>';
+        $links[] = '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugins_list" style="color: #389e38;font-weight: bold;" target="_blank">' . __('Buy Premium', 'cryptopay') . '</a>';
+        $links[] = '<a href="' . admin_url('admin.php?page=cryptopay_lite_settings') . '">' . __('Settings', 'cryptopay') . '</a>';
+        $links[] = '<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">' . __('Documentation', 'cryptopay') . '</a>';
         // @phpcs:enable
 
         return $links;
@@ -66,10 +67,25 @@ class Loader extends PluginHero\Plugin
     {
         new Pages\HomePage();
         new Pages\Integrations();
+        new Pages\PendingReminders();
 
         if (file_exists(Helpers::getProp('pluginDir') . '/debug.log')) {
             new Pages\DebugLogs();
         }
+
+        add_filter('safe_style_css', function ($styles): array {
+            $styles[] = 'display';
+            $styles[] = 'justify-content';
+            $styles[] = 'max-width';
+            $styles[] = 'height';
+            return $styles;
+        });
+
+        Helpers::adminNotice(
+            '<b style="display:block;font-size:22px;text-align:center">If you want to receive commission-free cryptocurrency payments for life, don\'t miss this opportunity!</b><br><a href="https://beycanpress.com/checkout?add-to-cart=800&utm_source=lite_banner&utm_campaign=summer_discount" target="_blank" style="display:flex;justify-content:center;"><img src="'. Helpers::getImageUrl('banner.png') .'" alt="Summer Discount" style="max-width:800px;height:auto;"></a>', // @phpcs:ignore
+            'info',
+            true
+        );
 
         add_action('init', function (): void {
             new Settings\Settings();

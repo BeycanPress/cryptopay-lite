@@ -11,29 +11,6 @@
             window.CryptoPayLiteApp.start(window.CryptoPayLiteVars.order, params);
         }
 
-        // methods
-        window.CryptoPayLiteModal = {
-            open: ()  => {
-                $(".cpl-modal").css('display', 'flex');
-                $(document).trigger('cplModalOpened');
-            },
-            close: () => {
-                $(".cpl-modal").hide();
-                $(document).trigger('cplModalClosed');
-            }
-        }
-
-        // events
-        $(window).on('click', function(e) {
-            if (e.target == $(".cpl-modal")[0]) {
-                CryptoPayLiteModal.close();
-            }
-        });
-        
-        $(document).on('click', '.cpl-modal-close', function() {
-            CryptoPayLiteModal.close();
-        });
-
         if (!window.customElements.get('cpl-powered-by')) {
             const template = document.createElement('template');
             template.innerHTML = `

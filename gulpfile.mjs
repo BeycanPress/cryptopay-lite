@@ -12,6 +12,7 @@ const sass = gulpSass(nodeSass);
 const tasks = [
     'js-main',
     'js-blocks',
+    'js-checkout',
     'scss-admin',
     'scss-main',
 ];

@@ -1,0 +1,71 @@
+name: Test and Code Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches:
+      - alpha
+      - master
+
+jobs:
+  test_and_code_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: xdebug
+
+      - name: Create data.json file
+        run: cp tests/data.example.json tests/data.json
+
+      - name: Install dependencies
+        run: |
+          composer install
+
+      - name: Run PHPStan
+        run: |
+          composer run phpstan
+          exit_status=$?
+          if [ $exit_status -ne 0 ]; then
+            echo "PHPStan check failed. Please fix the issues before merging."
+            exit 1
+          fi
+
+      - name: Run PHPCS
+        run: |
+          composer run phpcs
+          exit_status=$?
+          if [ $exit_status -ne 0 ]; then
+            echo "PHPCS check failed. Please fix the issues before merging."
+            exit 1
+          fi
+
+      - name: Run PHPUnit
+        run: |
+          composer run coverage
+          exit_status=$?
+          if [ $exit_status -ne 0 ]; then
+            echo "PHPUnit check failed. Please fix the issues before merging."
+            exit 1
+          fi
+      
+      - name: Code coverage
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: MultipleChain-PHP/evm-chains
+          files: './coverage/clover.xml'
+
+      - name: Set PR status
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          STATUS_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}"
+          STATUS="{\"state\":\"success\",\"context\":\"Test Process\",\"description\":\"Test Process passed\"}"
+          curl -X POST -H "Authorization: token $TOKEN" -d "$STATUS" "$STATUS_URL"

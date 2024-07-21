@@ -1,23 +1,46 @@
 {
     "name": "multiplechain/utils",
-    "version": "0.1.1",
-    "description": "Blockchain general utils",
+    "version": "0.1.4",
+    "description": "MultipleChain Utils",
     "type": "library",
     "license": "MIT",
-    "author": "multiplechain",
-    "support": {
-        "issues": "https://github.com/MultipleChain/utils-php/issues"
-    },
-    "homepage": "https://github.com/MultipleChain/utils-php",
-    "require": {
-        "php": ">=7.4",
-        "phpseclib/phpseclib": "~2.0.11",
-        "ext-mbstring": "*",
-        "ext-bcmath": "*"
-    },
     "autoload": {
         "psr-4": {
-            "MultipleChain\\" : "src"
+            "MultipleChain\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MultipleChain\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpcs": "phpcs --standard=phpcs.xml .",
+        "phpcbf": "phpcbf --standard=phpcs.xml .",
+        "phpstan": "phpstan analyse --memory-limit=2G --configuration=phpstan.neon"
+    },
+    "authors": [
+        {
+            "name": "Halil Beycan",
+            "email": "halilbeycan0@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-mbstring": "*",
+        "ext-bcmath": "*",
+        "ext-gmp": "*",
+        "phpseclib/phpseclib": "~2.0.30"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^1.11",
+        "squizlabs/php_codesniffer": "^3.10",
+        "slevomat/coding-standard": "^8.15"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

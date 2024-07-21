@@ -56,6 +56,11 @@ class TransactionType extends AbstractType
     private string $code;
 
     /**
+     * @var string|null
+     */
+    private ?string $reminderEmail;
+
+    /**
      * @var bool
      */
     private bool $testnet = false;
@@ -171,6 +176,16 @@ class TransactionType extends AbstractType
     }
 
     /**
+     * @param string|null $reminderEmail
+     * @return self
+     */
+    public function setReminderEmail(?string $reminderEmail): self
+    {
+        $this->reminderEmail = $reminderEmail;
+        return $this;
+    }
+
+    /**
      * @param AddressesType $addresses
      * @return self
      */
@@ -280,6 +295,14 @@ class TransactionType extends AbstractType
     public function getTestnet(): bool
     {
         return $this->testnet;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReminderEmail(): ?string
+    {
+        return $this->reminderEmail;
     }
 
     /**
