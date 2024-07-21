@@ -219,7 +219,7 @@ class Settings extends Setting
                     'title' => esc_html__('What is a currency converter?', 'cryptopay')
                 ],
                 [
-                    'id' => 'autoPriceUpdateMin',
+                    'id' => 'amountUpdateMin',
                     'type' => 'number',
                     'title' => esc_html__('Auto price update (Min)', 'cryptopay'),
                     'help' => esc_html__('The setting where you specify how long the price will be updated after the network and cryptocurrency has been selected.', 'cryptopay'),
