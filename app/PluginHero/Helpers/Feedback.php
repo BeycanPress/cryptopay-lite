@@ -49,6 +49,12 @@ trait Feedback
     {
         self::registerActivation(self::getProp('pluginFile'), fn() => self::sendActivationInfo());
 
+        add_action('init', function (): void {
+            if (isset($_GET['bp-plugin-check-' . self::getProp('pluginKey')])) {
+                wp_send_json_success();
+            }
+        });
+
         if ($form) {
             global $pagenow;
             if ('plugins.php' === $pagenow) {
