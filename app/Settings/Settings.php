@@ -141,7 +141,7 @@ class Settings extends Setting
                     'id'      => 'bitcoinPayments',
                     'title'   => esc_html__('Bitcoin payments', 'cryptopay'),
                     'type'    => 'content',
-                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay') . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks#categories" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay') . '</a>' . CPL_BR2 . 'Bitcoin and all other network support is only available for Premium.'
+                    'content' => esc_html__('CryptoPay supports all EVM-based networks by default, but you can start accepting payments from other blockchain networks by purchasing extra network support.', 'cryptopay') . CPL_BR2 . '<a href="https://beycanpress.com/our-plugins/?categoryId=88&utm_source=plugin_settings&utm_medium=bitcoin_payments&utm_campaign=buy_custom_networks#categories" target="_blank">' . esc_html__('Buy custom network supports', 'cryptopay') . '</a>' . CPL_BR2 . 'Bitcoin and all other network support is only available for premium.'
                 ],
             ]
         ]);
@@ -440,7 +440,7 @@ class Settings extends Setting
                 esc_html__('Feedback', 'cryptopay'),
                 esc_html__('Feedback', 'cryptopay') . '<span class="awaiting-mod">NEW</span>',
                 'manage_options',
-                'cryptopay_feedback',
+                'cryptopay_lite_feedback',
                 function (): void {
                     Helpers::viewEcho('feedback');
                 }

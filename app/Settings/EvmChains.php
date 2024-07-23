@@ -125,6 +125,12 @@ class EvmChains
                     ]
                 ],
                 [
+                    'id'      => 'buyPremiumForCustomNetworks',
+                    'title'   => esc_html__('Unlimited network and currency', 'cryptopay'),
+                    'type'    => 'content',
+                    'content' => esc_html__('Get the premium to get paid with unlimited EVM blockchain network and any cryptocurrency (token) you want!', 'cryptopay') . CPL_BR2 . '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=plugin_settings&utm_medium=evm_settings&utm_campaign=unlimited_network" target="_blank">' . esc_html__('Buy premium now', 'cryptopay') . '</a>'
+                ],
+                [
                     'id'      => 'evmchainsNetworks',
                     'title'   => esc_html__('Networks', 'cryptopay'),
                     'help'    => esc_html__('Specify the networks you want to accept payments from.', 'cryptopay'),
