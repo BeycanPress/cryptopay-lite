@@ -142,12 +142,6 @@ class Verifier
             'model' => $model->tableName ?? 'unknown'
         ]);
 
-        $uniqueTransactions = [];
-        /** @var TransactionType $transaction */
-        foreach ($transactions as $transaction) {
-            $uniqueTransactions[$transaction->getOrderId()] = $transaction;
-        }
-
         /** @var TransactionType $transaction */
         foreach ($transactions as $transaction) {
             try {
