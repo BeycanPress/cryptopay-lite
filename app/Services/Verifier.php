@@ -145,7 +145,7 @@ class Verifier
         /** @var TransactionType $transaction */
         foreach ($transactions as $transaction) {
             try {
-                if ((time() - $transaction->getCreatedAt()->getTimestamp()) < 30) {
+                if ((strtotime(current_time('mysql')) - $transaction->getCreatedAt()->getTimestamp()) < 30) {
                     continue;
                 }
 
