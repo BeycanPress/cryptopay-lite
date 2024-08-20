@@ -314,7 +314,7 @@ final class Request
         $saved = libxml_use_internal_errors(true);
         $xml = @simplexml_load_string($this->getContent());
         if ($xml) {
-            $json = json_encode($xml);
+            $json = wp_json_encode($xml);
             return json_decode($json, true);
         } else {
             $this->errors[] = [
@@ -350,7 +350,7 @@ final class Request
             $this->params = array_merge($this->params, $this->xmlParse());
         }
 
-        $this->params = json_decode(json_encode($this->params) ?: '{}');
+        $this->params = json_decode(wp_json_encode($this->params) ?: '{}');
     }
 
     /**
@@ -360,6 +360,8 @@ final class Request
      */
     private function checkRequests(): void
     {
+        // phpcs:disable WordPress.Security.NonceVerification.Missing
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (!empty($_REQUEST)) {
             $this->params = array_merge($this->params, $_REQUEST);
         }

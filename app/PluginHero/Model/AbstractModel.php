@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace BeycanPress\CryptoPayLite\PluginHero\Model;
 
 /**
- * @author BeycanDeveloper
- * @version 0.1.0
- * @link https://beycanpress.com
  * Our abstract model class that will allow users to create their
  * own models and use auxiliary database processing methods
  */

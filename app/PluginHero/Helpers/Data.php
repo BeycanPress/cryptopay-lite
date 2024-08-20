@@ -51,7 +51,7 @@ trait Data
         } elseif ('no-default' !== $default) {
             return $default;
         } else {
-            throw new \Exception('Property not found: ' . $property);
+            throw new \Exception('Property not found: ' . esc_html($property));
         }
     }
 
@@ -64,7 +64,7 @@ trait Data
     public static function setProp(string $property, mixed $value, bool $force = false): void
     {
         if (!$force && isset(Plugin::$properties->{$property})) {
-            throw new \Exception('Property already exists: ' . $property);
+            throw new \Exception('Property already exists: ' . esc_html($property));
         }
 
         Plugin::$properties->{$property} = $value;
@@ -80,7 +80,7 @@ trait Data
         if (isset(Plugin::$properties->{$property})) {
             Plugin::$properties->{$property} = $value;
         } else {
-            throw new \Exception('Property not found: ' . $property);
+            throw new \Exception('Property not found: ' . esc_html($property));
         }
     }
 
@@ -94,7 +94,7 @@ trait Data
         if (!isset(self::$funcs[$name])) {
             self::$funcs[$name] = $closure;
         } else {
-            throw new \Exception('Function already exists: ' . $name);
+            throw new \Exception('Function already exists: ' . esc_html($name));
         }
     }
 
@@ -109,7 +109,7 @@ trait Data
             $closure = self::$funcs[$name];
             return $closure(...$args);
         } else {
-            throw new \Exception('Function not found: ' . $name);
+            throw new \Exception('Function not found: ' . esc_html($name));
         }
     }
 
@@ -131,13 +131,13 @@ trait Data
                 if (!isset(self::$pages[$name][$slug])) {
                     self::$pages[$name][$slug] = $page;
                 } else {
-                    throw new \Exception('Page already exists: ' . $name . ' - ' . $slug);
+                    throw new \Exception('Page already exists: ' . esc_html($name) . ' - ' . esc_html($slug));
                 }
             } else {
                 self::$pages[$name] = $page;
             }
         } else {
-            throw new \Exception('Page already exists: ' . $name);
+            throw new \Exception('Page already exists: ' . esc_html($name));
         }
     }
 
@@ -157,12 +157,12 @@ trait Data
                 if (isset(self::$pages[$name][$slug])) {
                     return self::$pages[$name][$slug];
                 } else {
-                    throw new \Exception('Page not found: ' . $name . ' - ' . $slug);
+                    throw new \Exception('Page not found: ' . esc_html($name) . ' - ' . esc_html($slug));
                 }
             }
             return self::$pages[$name];
         } else {
-            throw new \Exception('Page not found: ' . $name);
+            throw new \Exception('Page not found: ' . esc_html($name));
         }
     }
 
@@ -176,7 +176,7 @@ trait Data
         if (!isset(self::$apis[$name])) {
             self::$apis[$name] = $api;
         } else {
-            throw new \Exception('Page already exists: ' . $name);
+            throw new \Exception('API already exists: ' . esc_html($name));
         }
     }
 
@@ -189,7 +189,7 @@ trait Data
         if (isset(self::$apis[$name])) {
             return self::$apis[$name];
         } else {
-            throw new \Exception('API not found: ' . $name);
+            throw new \Exception('API not found: ' . esc_html($name));
         }
     }
 
@@ -203,7 +203,7 @@ trait Data
         if (!isset(self::$addons[$key])) {
             self::$addons[$key] = new Addon($key, $file);
         } else {
-            throw new \Exception('Addon already registered:' . $key);
+            throw new \Exception('Addon already registered:' . esc_html($key));
         }
     }
 
@@ -216,7 +216,7 @@ trait Data
         if (isset(self::$addons[$key])) {
             return self::$addons[$key];
         } else {
-            throw new \Exception('Addon not found:' . $key);
+            throw new \Exception('Addon not found:' . esc_html($key));
         }
     }
 
@@ -256,6 +256,22 @@ trait Data
     public static function getUserBy(string $field, mixed $value): ?object
     {
         global $wpdb;
-        return $wpdb->get_row("SELECT * FROM $wpdb->users WHERE $field = '$value'");
+
+        $key = 'bp_user_by_' . $field . '_' . $value;
+        $result = wp_cache_get($key);
+
+        if (false === $result) {
+            // @phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $result = $wpdb->get_row(
+                $wpdb->prepare(
+                    "SELECT * FROM $wpdb->users WHERE `%s` = %s",
+                    $field,
+                    $value
+                )
+            );
+            wp_cache_set($key, $result);
+        }
+
+        return $result;
     }
 }

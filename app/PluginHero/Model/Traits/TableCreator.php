@@ -94,7 +94,7 @@ trait TableCreator
     private function errorCheck(): void
     {
         if (!empty($this->db->last_error)) {
-            throw new \Exception($this->db->last_error);
+            throw new \Exception(esc_html($this->db->last_error));
         }
     }
 
@@ -130,7 +130,7 @@ trait TableCreator
             }
 
             if (isset($properties['default']) && $properties['default']) {
-                $sqlQuery = str_ireplace('{{default}}', " DEFAULT " . strtoupper($properties['default']), $sqlQuery);
+                $sqlQuery = str_ireplace('{{default}}', " DEFAULT " . $properties['default'], $sqlQuery);
             } else {
                 $sqlQuery = str_ireplace('{{default}}', '', $sqlQuery);
             }

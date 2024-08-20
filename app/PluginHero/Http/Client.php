@@ -13,16 +13,16 @@ final class Client
     private ?string $baseUrl = null;
 
     /**
-     * cURL process infos
-     * @var mixed
+     * HTTP process infos
+     * @var array<string, mixed>
      */
-    private mixed $info;
+    private array $info = [];
 
     /**
-     * cURL process errors
+     * HTTP process errors
      * @var string
      */
-    private string $error;
+    private string $error = '';
 
     /**
      * @var array<string>
@@ -46,10 +46,10 @@ final class Client
 
     /**
      * Default options
-     * @var array<int,mixed>
+     * @var array<string,mixed>
      */
     private array $options = [
-        CURLOPT_RETURNTRANSFER => true,
+        'timeout' => 10,
     ];
 
     /**
@@ -63,21 +63,21 @@ final class Client
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @param mixed $value
      * @return Client
      */
-    public function addOption(int $key, mixed $value): Client
+    public function addOption(string $key, mixed $value): Client
     {
         $this->options[$key] = $value;
         return $this;
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @return Client
      */
-    public function deleteOption(int $key): Client
+    public function deleteOption(string $key): Client
     {
         if (isset($this->options[$key])) {
             unset($this->options[$key]);
@@ -86,7 +86,7 @@ final class Client
     }
 
     /**
-     * @param array<int> $keys
+     * @param array<string> $keys
      * @return Client
      */
     public function deleteOptions(array $keys): Client
@@ -98,7 +98,7 @@ final class Client
     }
 
     /**
-     * @param array<int,mixed> $options
+     * @param array<string,mixed> $options
      * @return Client
      */
     public function addOptions(array $options): Client
@@ -114,7 +114,7 @@ final class Client
      */
     public function addHeader(string $key, string $value): Client
     {
-        $this->headers[$key] = $key . ': ' . $value;
+        $this->headers[$key] = $value;
         return $this;
     }
 
@@ -156,9 +156,9 @@ final class Client
     }
 
     /**
-     * @return mixed
+     * @return array<string, mixed>
      */
-    public function getInfo(): mixed
+    public function getInfo(): array
     {
         return $this->info;
     }
@@ -172,7 +172,6 @@ final class Client
     }
 
     /**
-     *
      * @param string $string
      * @return mixed
      */
@@ -197,38 +196,31 @@ final class Client
             throw new \Exception("Method not found");
         }
 
-        $this->addOption(CURLOPT_CUSTOMREQUEST, strtoupper($name));
-        $this->addOption(CURLOPT_HTTPHEADER, array_values($this->headers));
-        return $this->beforeSend(...$arguments);
+        return $this->beforeSend($name, ...$arguments);
     }
 
     /**
-     * @return array<string>
-     */
-    public function getMethods(): array
-    {
-        return $this->methods;
-    }
-
-    /**
+     * @param string $method
      * @param string $url
      * @param array<mixed> $data
      * @param boolean $raw
      * @return mixed
      */
-    private function beforeSend(string $url, array $data = [], bool $raw = false): mixed
+    private function beforeSend(string $method, string $url, array $data = [], bool $raw = false): mixed
     {
+        if (!filter_var($url, FILTER_VALIDATE_URL) && !is_null($this->baseUrl)) {
+            $url = $this->baseUrl . $url;
+        }
+
         if (!empty($data)) {
             if ($raw) {
-                $data = json_encode($data);
-                $data = <<<DATA
-                    $data
-                DATA;
-            } else {
-                $data = http_build_query($data);
+                $data = wp_json_encode($data);
             }
-            $this->addOption(CURLOPT_POSTFIELDS, $data);
+            $this->options['body'] = $data;
         }
+
+        $this->options['method'] = strtoupper($method);
+        $this->options['headers'] = $this->headers;
 
         return $this->send($url);
     }
@@ -239,32 +231,19 @@ final class Client
      */
     private function send(string $url): mixed
     {
-        if (!filter_var($url, FILTER_VALIDATE_URL) && !is_null($this->baseUrl)) {
-            $url = $this->baseUrl . $url;
+        $response = wp_remote_request($url, $this->options);
+
+        if (is_wp_error($response)) {
+            $this->error = $response->get_error_message();
+            return false;
         }
 
-        // Inıt
-        $curl = curl_init($url);
+        $this->info = [
+            'response_code' => wp_remote_retrieve_response_code($response),
+            'response_message' => wp_remote_retrieve_response_message($response),
+        ];
 
-        // Set options
-        curl_setopt_array($curl, $this->options);
-
-        // Exec
-        $result = curl_exec($curl);
-
-        // Get some information
-        $this->info = curl_getinfo($curl);
-        $this->error = curl_error($curl);
-
-        // Close
-        curl_close($curl);
-
-        if (is_string($result)) {
-            $result = $this->ifIsJson($result);
-        }
-
-        $this->deleteOption(CURLOPT_POSTFIELDS);
-
-        return $result;
+        $body = wp_remote_retrieve_body($response);
+        return $this->ifIsJson($body);
     }
 }

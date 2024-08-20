@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
+// @phpcs:disable PSR1.Files.SideEffects
+
+if (!function_exists('WP_Filesystem')) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+}
+
+WP_Filesystem();
+
 trait Debug
 {
     /**
@@ -14,6 +22,8 @@ trait Debug
      */
     public static function debug(string $message, string $level = 'INFO', array|\Throwable $context = []): void
     {
+        global $wp_filesystem;
+
         if (self::getProp('debugging', false)) {
             $debugLevel = self::getProp('debugLevel', 'ALL');
             if ('ALL' !== $debugLevel && $debugLevel !== $level) {
@@ -42,9 +52,11 @@ trait Debug
 
             $file = self::getProp('pluginDir') . 'debug.log';
 
-            $fp = fopen($file, 'a+');
-            fwrite($fp, $content);
-            fclose($fp);
+            if ($wp_filesystem->exists($file)) {
+                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
+            } else {
+                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
+            }
         }
     }
 
@@ -53,9 +65,10 @@ trait Debug
      */
     public static function getLogFile(): ?string
     {
+        global $wp_filesystem;
         $file = self::getProp('pluginDir') . 'debug.log';
         if (file_exists($file)) {
-            return file_get_contents($file);
+            return $wp_filesystem->get_contents($file);
         } else {
             return null;
         }
@@ -67,7 +80,7 @@ trait Debug
     public static function deleteLogFile(): void
     {
         if (file_exists(self::getProp('pluginDir') . 'debug.log')) {
-            unlink(self::getProp('pluginDir') . 'debug.log');
+            wp_delete_file(self::getProp('pluginDir') . 'debug.log');
         }
     }
 }

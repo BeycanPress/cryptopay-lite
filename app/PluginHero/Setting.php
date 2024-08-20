@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
+// @phpcs:disable WordPress.Security.NonceVerification.Missing
+// @phpcs:disable WordPress.Security.NonceVerification.Recommended
+
 use CSF;
 
 abstract class Setting
@@ -16,7 +19,7 @@ abstract class Setting
     /**
      * @var string
      */
-    private static string $prefix;
+    public static string $prefix;
 
     /**
      * @var array<mixed>|null
@@ -98,7 +101,7 @@ abstract class Setting
     /**
      * @return string
      */
-    private static function getSettingKey(): string
+    public static function getSettingKey(): string
     {
         return Helpers::getProp('settingKey', null) ?? (Helpers::getProp('pluginKey') . '_settings');
     }

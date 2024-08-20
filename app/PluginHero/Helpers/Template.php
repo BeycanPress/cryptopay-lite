@@ -147,10 +147,13 @@ trait Template
 
             $result = [
                 'style' => true,
-                'script' => true
+                'script' => [
+                    'src' => true,
+                ]
             ];
 
             foreach ($dom->getElementsByTagName('*') as $element) {
+                /** @var \DOMElement $element */
                 $tagName = $element->tagName;
 
                 if (isset($result[$tagName])) {
@@ -173,10 +176,33 @@ trait Template
             }
 
             if (isset($result['input'])) {
+                if (is_bool($result['input'])) {
+                    $result['input'] = [];
+                }
                 $result['input']['class'] = true;
+                $result['input']['placeholder'] = true;
+                $result['input']['size'] = true;
+                $result['input']['id'] = true;
+                $result['input']['spellcheck'] = true;
+                $result['input']['autocomplete'] = true;
+                $result['input']['required'] = true;
+            }
+
+            if (isset($result['form'])) {
+                if (is_bool($result['form'])) {
+                    $result['form'] = [];
+                }
+                $result['form']['action'] = true;
+                $result['form']['method'] = true;
+                $result['form']['enctype'] = true;
+                $result['form']['id'] = true;
+                $result['form']['class'] = true;
             }
 
             if (isset($result['option'])) {
+                if (is_bool($result['option'])) {
+                    $result['option'] = [];
+                }
                 $result['option']['selected'] = true;
             }
 
@@ -194,6 +220,21 @@ trait Template
     public static function getImageUrl(string $imageName): string
     {
         return self::getProp('pluginUrl') . 'assets/images/' . $imageName;
+    }
+
+    /**
+     * @param string $notice notice to be given
+     * @param string $type error, success more
+     * @param bool $dismissible in-dismissible button show and hide
+     * @return void
+     */
+    public static function basicNotice(string $notice, string $type = 'success', bool $dismissible = false): void
+    {
+        self::ksesEcho(self::getTemplate('notice', [
+            'type' => $type,
+            'notice' => $notice,
+            'dismissible' => $dismissible
+        ]));
     }
 
     /**

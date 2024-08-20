@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
 // @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+// @phpcs:disable WordPress.Security.NonceVerification.Missing
+// @phpcs:disable WordPress.Security.NonceVerification.Recommended
 
 use BeycanPress\CryptoPayLite\PluginHero\Model\AbstractModel;
 
@@ -111,9 +113,6 @@ class Table extends \WP_List_Table
      */
     public function createDataList(?\Closure $customDataList = null): self
     {
-        $dataList = [];
-        $dataListCount = 0;
-
         $paged = isset($_GET['paged']) ? absint($_GET['paged']) : 1;
         $offset = (($paged - 1) * $this->perPage);
 
@@ -133,10 +132,13 @@ class Table extends \WP_List_Table
         } elseif (!isset($dataList) && is_array($this->dataList)) {
             $dataList = $this->getDataList();
             $dataListCount = $this->getDataListCount();
+        } elseif (!isset($dataList)) {
+            $dataList = [];
+            $dataListCount = 0;
         }
 
         $this->setDataList($dataList);
-        $this->setTotalRow($dataListCount);
+        $this->setTotalRow($dataListCount ?? 0);
 
         return $this;
     }
