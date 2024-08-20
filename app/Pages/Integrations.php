@@ -141,6 +141,10 @@ class Integrations extends Page
             Helpers::debug($th->getMessage(), 'ERROR', $th);
         }
 
+        if (is_object($plugins)) {
+            $plugins = (array) $plugins;
+        }
+
         Helpers::addStyle('admin.min.css');
         Helpers::viewEcho('pages/integrations/index', compact('plugins'));
     }
