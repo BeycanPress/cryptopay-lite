@@ -102,7 +102,7 @@ class Integrations extends Page
         try {
             update_option('cryptopay_lite_new_product_notification_new_count', 0);
             $oldProducts = json_decode(get_option('cryptopay_lite_products_json', '{}'));
-            if (true /* $this->count || empty((array) $oldProducts) */) {
+            if ($this->count || empty((array) $oldProducts)) {
                 $res = $this->client->get('get-plugins-by-category' . $this->categories);
                 $pluginsPure = isset($res->success) && $res->success ? $res->data->plugins : [];
 
