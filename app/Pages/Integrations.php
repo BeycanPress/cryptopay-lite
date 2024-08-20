@@ -83,7 +83,7 @@ class Integrations extends Page
     {
         $oldCount = get_option('cryptopay_lite_new_product_notification_count') ?? 0;
         if (date('Y-m-d') != get_option('cryptopay_lite_new_product_notification_date')) {
-            $res = $this->client->get('notification');
+            $res = $this->client->get('notification-by-category' . $this->categories);
             $newCount = isset($res->success) && $res->success ? $res->data->count : 0;
             update_option('cryptopay_lite_new_product_notification_date', date('Y-m-d'));
             update_option('cryptopay_lite_new_product_notification_count', $newCount);
