@@ -18,10 +18,6 @@
     <rule ref="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
     <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
     <rule ref="Squiz.Commenting.FunctionComment.MissingReturn"/>
-    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
-    <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
-        <severity>0</severity>
-    </rule>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectStrictTypesFormat" />

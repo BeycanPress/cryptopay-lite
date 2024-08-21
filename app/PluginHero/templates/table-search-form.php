@@ -1,4 +1,7 @@
-
+<?php 
+    // @phpcs:disable WordPress.Security.NonceVerification.Missing
+    // @phpcs:disable WordPress.Security.NonceVerification.Recommended
+?>
 <form>
     <?php if (!empty($_GET)) {
         foreach ($_GET as $key => $value) { ?>

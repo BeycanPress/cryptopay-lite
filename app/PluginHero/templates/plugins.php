@@ -1,7 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wrap">
     <h1 class="wp-heading-inline">
-        <?php echo esc_html__('BeycanPress Plugins', 'tokenico'); ?>
+        <?php echo esc_html__('BeycanPress Plugins'); ?>
     </h1>
     <hr class="wp-header-end">
     <br>
@@ -14,7 +14,7 @@
                             foreach ($plugins as $product) : ?>
                                 <li>
                                     <a href="<?php echo esc_url($product->permalink) ?>" target="_blank">
-                                        <img src="<?php echo esc_url($product->image) ?>" alt="<?php echo esc_attr($product->title) ?>">
+                                        <img src="<?php echo $product->landingPage ? esc_url($product->landingPage) : esc_url($product->image); ?>" alt="<?php echo esc_attr($product->title) ?>">
                                         <span><?php echo esc_html($product->title) ?></span>
                                     </a>
                                 </li>

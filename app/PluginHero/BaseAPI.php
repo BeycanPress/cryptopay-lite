@@ -17,6 +17,11 @@ abstract class BaseAPI
     private array $nameSpaces;
 
     /**
+     * @var array<mixed>
+     */
+    private array $middlewares = [];
+
+    /**
      * @param array<string,array<mixed>> $routeList
      * @return void
      */
@@ -33,6 +38,9 @@ abstract class BaseAPI
                     foreach ($routes as $route => $config) {
                         $callback = is_array($config) ? $config['callback'] : $config;
                         $methods = isset($config['methods']) ? $config['methods'] : ['POST', 'GET'];
+                        if (isset($config['middleware'])) {
+                            $this->addMiddleware($nameSpace . '/' . $route, $config['middleware']);
+                        }
                         register_rest_route($nameSpace, $route, [
                             'callback' => [$this, $callback],
                             'methods' => $methods,
@@ -53,7 +61,46 @@ abstract class BaseAPI
             throw new \Exception('Invalid API type');
         }
 
+        add_filter('rest_pre_dispatch', [$this, 'middlewareFilter'], 10, 3);
+
         Helpers::addAPI($this);
+    }
+
+    /**
+     * @param string $nameSpace
+     * @param array<mixed>|\Closure $caller
+     * @return void
+     */
+    protected function addMiddleware(string $nameSpace, array|\Closure $caller): void
+    {
+        $this->middlewares[$nameSpace] = $caller;
+    }
+
+    /**
+     * @param mixed $result
+     * @param \WP_REST_Server $server
+     * @param \WP_REST_Request $request
+     * @return mixed
+     */
+    public function middlewareFilter(mixed $result, \WP_REST_Server $server, \WP_REST_Request $request): mixed
+    {
+        if (empty($this->middlewares)) {
+            return $result;
+        }
+
+        $path = implode('/', Helpers::getRoutePaths($request->get_route()));
+
+        foreach ($this->middlewares as $endpoint => $caller) {
+            if (false !== strpos($path, $endpoint)) {
+                if (is_array($caller)) {
+                    $result = call_user_func_array($caller, [$result, $server, $request]);
+                } else {
+                    $result = $caller($result, $server, $request);
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**

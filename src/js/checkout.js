@@ -81,6 +81,10 @@
                                 printError('<div class="woocommerce-error">' + CryptoPayLiteLang.defaultErrorMsg + '</div>'); 
                             }
 
+                            if (CryptoPayLiteVars.buttonProcess) {
+                                CryptoPayLiteApp.modal?.close();
+                            }
+
                             resolve({error: true});
                         }
                     },
@@ -92,6 +96,10 @@
                             (errorThrown || CryptoPayLiteLang.defaultErrorMsg) +
                             '</div>'
                         );
+
+                        if (CryptoPayLiteVars.buttonProcess) {
+                            CryptoPayLiteApp.modal?.close();
+                        }
 
                         resolve({
                             error: true,
@@ -123,6 +131,10 @@
             }, 'wc_checkout');
         }
     
+        if (CryptoPayLiteVars.buttonProcess) {
+            $(document).on('click', '#cryptopay_lite_modal', CryptoPayLiteApp.modal?.open);
+        }
+
         $(document).on('updated_checkout', function () {
             if (!startedApp) {
                 startedApp = CryptoPayLiteApp.start(CryptoPayLiteVars.order);

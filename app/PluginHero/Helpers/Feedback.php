@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
+// @phpcs:disable PSR1.Files.SideEffects
+// @phpcs:disable WordPress.Security.NonceVerification.Missing
+// @phpcs:disable WordPress.Security.NonceVerification.Recommended
+
+if (!function_exists('WP_Filesystem')) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+}
+
+WP_Filesystem();
+
 trait Feedback
 {
-    private static string $bpApiUrl = 'https://beycanpress.com/wp-json/bp-api/';
+    private static string $bpApiUrl = 'https://services.beycanpress.com/wp-json/plugin-statistics/';
 
         /**
      * @return string
@@ -18,7 +28,14 @@ trait Feedback
                 return wp_get_current_user()->user_email;
             } catch (\Throwable $th) {
                 global $wpdb;
-                return ($wpdb->get_row("SELECT * FROM {$wpdb->users} WHERE ID = 1"))->user_email;
+                $key = 'bp_admin_email';
+                $result = wp_cache_get($key);
+                if (false === $result) {
+                    // @phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+                    $result = ($wpdb->get_row("SELECT * FROM {$wpdb->users} WHERE ID = 1"))->user_email;
+                    wp_cache_set($key, $result);
+                }
+                return $result;
             }
         } catch (\Throwable $th) {
             return get_option('admin_email');
@@ -49,31 +66,41 @@ trait Feedback
     {
         self::registerActivation(self::getProp('pluginFile'), fn() => self::sendActivationInfo());
 
+        add_action('init', function (): void {
+            if (isset($_GET['bp-plugin-check-' . self::getProp('pluginKey')])) {
+                wp_send_json_success();
+            }
+        });
+
         if ($form) {
-            global $pagenow;
+            global $pagenow, $wp_filesystem;
             if ('plugins.php' === $pagenow) {
                 if (!file_exists(self::getProp('pluginDir') . 'assets/css/feedback.css')) {
                     if (!is_dir(self::getProp('pluginDir') . 'assets')) {
-                        mkdir(self::getProp('pluginDir') . 'assets');
+                        $wp_filesystem->mkdir(self::getProp('pluginDir') . 'assets');
                     }
                     if (!is_dir(self::getProp('pluginDir') . 'assets/css')) {
-                        mkdir(self::getProp('pluginDir') . 'assets/css');
+                        $wp_filesystem->mkdir(self::getProp('pluginDir') . 'assets/css');
                     }
-                    file_put_contents(
+                    $wp_filesystem->put_contents(
                         self::getProp('pluginDir') . 'assets/css/feedback.css',
-                        file_get_contents(self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.css')
+                        $wp_filesystem->get_contents(
+                            self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.css'
+                        )
                     );
                 }
                 if (!file_exists(self::getProp('pluginDir') . 'assets/js/feedback.js')) {
                     if (!is_dir(self::getProp('pluginDir') . 'assets')) {
-                        mkdir(self::getProp('pluginDir') . 'assets');
+                        $wp_filesystem->mkdir(self::getProp('pluginDir') . 'assets');
                     }
                     if (!is_dir(self::getProp('pluginDir') . 'assets/js')) {
-                        mkdir(self::getProp('pluginDir') . 'assets/js');
+                        $wp_filesystem->mkdir(self::getProp('pluginDir') . 'assets/js');
                     }
-                    file_put_contents(
+                    $wp_filesystem->put_contents(
                         self::getProp('pluginDir') . 'assets/js/feedback.js',
-                        file_get_contents(self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.js')
+                        $wp_filesystem->get_contents(
+                            self::getProp('pluginDir') . 'app/PluginHero/templates/feedback.js'
+                        )
                     );
                 }
                 add_action('admin_enqueue_scripts', function (): void {
@@ -87,7 +114,8 @@ trait Feedback
                         self::getProp('pluginKey') . '-feedback',
                         self::getProp('pluginUrl') . 'assets/js/feedback.js',
                         [],
-                        self::getProp('pluginVersion')
+                        self::getProp('pluginVersion'),
+                        true
                     );
                 });
                 add_action('admin_footer', function () use ($wpOrgSlug): void {
@@ -153,12 +181,8 @@ trait Feedback
     {
         if (function_exists('curl_version')) {
             try {
-                $data = array_merge([
-                    'process' => 'activation',
-                ], self::getSiteInfos());
-
-                wp_remote_post(self::$bpApiUrl . 'active-plugins', [
-                    'body' => $data
+                wp_remote_post(self::$bpApiUrl . 'activation', [
+                    'body' => self::getSiteInfos()
                 ]);
 
                 return true;
@@ -178,14 +202,12 @@ trait Feedback
     {
         if (function_exists('curl_version')) {
             try {
-                $data = array_merge([
-                    'process' => 'deactivation',
-                ], array_merge(
+                $data = array_merge(
                     self::getSiteInfos(),
                     $params
-                ));
+                );
 
-                wp_remote_post(self::$bpApiUrl . 'active-plugins', [
+                wp_remote_post(self::$bpApiUrl . 'deactivation', [
                     'body' => $data
                 ]);
 
@@ -210,7 +232,7 @@ trait Feedback
                     'message' => $message,
                 ], self::getSiteInfos());
 
-                wp_remote_post(self::$bpApiUrl . 'plugin-feedbacks', [
+                wp_remote_post(self::$bpApiUrl . 'feedbacks', [
                     'body' => $data
                 ]);
 

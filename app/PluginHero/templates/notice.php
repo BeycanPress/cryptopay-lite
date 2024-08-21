@@ -7,7 +7,7 @@
     <p><?php $ksesEcho($notice); ?></p>
 </div>
 
-<?php if ($dismissible) : ?>
+<?php if ($dismissible && isset($id)) : ?>
     <script>
     jQuery(document).on('click', '.notice.is-dismissible', function () {
         window.onbeforeunload = function () {

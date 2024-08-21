@@ -143,16 +143,23 @@ trait QueryBuilder
                 $parameter = $predicate[2];
                 $type = isset($predicate[3]) ? mb_strtoupper($predicate[3], 'UTF-8') : $type;
                 $parameterType = $this->getParameterType($parameter);
-                if ('IN' == $condition) {
+                if ('IN' == $condition || 'NOT IN' == $condition) {
+                    if (is_array($parameter) && empty($parameter)) {
+                        continue;
+                    }
                     $parameter = array_map(function ($parameter) {
                         return "'$parameter'";
                     }, $parameter);
                     $parameterType = '(' . implode(',', $parameter) . ')';
+                    $parameter = null;
                 } elseif ('LIKE' == $condition) {
                     $parameterType = "'%" . $this->db->esc_like($parameter) . "%'";
                     $parameter = null;
                 } elseif ('NULL' == $parameterType) {
                     $parameter = null;
+                } elseif ('BETWEEN' == $condition) {
+                    $parameterType = $this->getParameterType($parameter[0])
+                    . ' AND ' . $this->getParameterType($parameter[1]);
                 }
                 $predicate = "`$columnName` $condition $parameterType";
             } else {
@@ -204,6 +211,7 @@ trait QueryBuilder
     protected function setParameter(mixed $parameter): void
     {
         if (is_array($parameter)) {
+            $this->parameters = array_merge($this->parameters, $parameter);
             return;
         } elseif (is_bool($parameter)) {
             $parameter = $parameter ? 1 : 0;

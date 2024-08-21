@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
-Tested up to: 6.6
+Tested up to: 6.6.1
 Requires PHP: 8.1
-Stable Tag: 2.3.0
-Version: 2.3.0
+Stable Tag: 2.3.1
+Version: 2.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,14 +27,14 @@ As you know, virtual POS and many other payment methods deduct commission from y
 
 **Nonsense that CryptoPay doesn't have:**
 
+* No KYC
+    * You don't need to provide any documents to start receiving payments.
+* No commission
+    * We don't charge any commission (%0 fees). Because we only charge per license.
+* No withdrawal limit
+    * All payments are made directly to your wallet, so you don't have to wait to get your money.
 * No 3rd party service
     * You can start getting paid as soon as you install the plugin without having any 3rd party services to start with.
-* No withdrawal limit, fee, date
-    * As it is completely peer to peer, customers pay directly to your wallet
-* No 1-2 business days and weekend nonsense
-    * There is no need to wait for weeks or wait to get paid as in the classic financing process
-* No touching your money for to get commission
-    * Because we only charge per license
 
 Are you ready to speed up the process of receiving WooCommerce crypto payments on WordPress with CryptoPay?
 
@@ -159,6 +159,9 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.3.1 =
+* Fixed: An optional button option has been added for conflict issues that may occur with the theme during the payment process in the WooCommerce checkout section.
 
 = 2.3.0 =
 * Added: Currency discounts

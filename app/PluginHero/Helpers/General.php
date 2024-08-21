@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero\Helpers;
 
+// @phpcs:disable PSR1.Files.SideEffects
+
+if (!function_exists('WP_Filesystem')) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+}
+
+WP_Filesystem();
+
 trait General
 {
         /**
@@ -41,7 +49,7 @@ trait General
      */
     public static function dateToTimeAgo(string $date): string
     {
-        return human_time_diff(strtotime(wp_date('Y-m-d H:i:s')), strtotime($date));
+        return human_time_diff(strtotime(wp_date('Y-m-d H:i:s')), strtotime($date)) . esc_html__(' ago');
     }
 
     /**
@@ -111,18 +119,22 @@ trait General
      */
     public static function cache(callable $function, string $file, int $time = 600): object
     {
+        global $wp_filesystem;
+
         if (file_exists($file) && time() - $time < filemtime($file)) {
-            $content = file_get_contents($file);
+            $content = $wp_filesystem->get_contents($file);
         } else {
             if (file_exists($file)) {
-                unlink($file);
+                wp_delete_file($file);
             }
 
             $content = $function();
 
-            $fp = fopen($file, 'w+');
-            fwrite($fp, $content);
-            fclose($fp);
+            if ($wp_filesystem->exists($file)) {
+                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
+            } else {
+                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
+            }
         }
 
         return (object) compact('file', 'content');
@@ -137,7 +149,7 @@ trait General
         $path = self::getProp('pluginDir') . 'cache/';
         $file = $path . $name . '.html';
         if (file_exists($file)) {
-            return unlink($file);
+            return wp_delete_file($file);
         } else {
             return false;
         }
@@ -153,7 +165,7 @@ trait General
             return $address;
         }
 
-        $parseUrl = parse_url(trim($address));
+        $parseUrl = wp_parse_url(trim($address));
         if (isset($parseUrl['host'])) {
             $domain = trim($parseUrl['host']);
         } else {

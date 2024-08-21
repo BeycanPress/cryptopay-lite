@@ -13,9 +13,9 @@
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
                     <ul class="cp-product-list">
-                        <?php if (isset($products->networkSupports)) :
-                            foreach ($products->networkSupports as $product) : 
-                                $viewEcho('pages/home-page/product', compact('product'));
+                        <?php if (isset($plugins['cryptopay-network-supports'])) :
+                            foreach ($plugins['cryptopay-network-supports'] as $plugin) : 
+                                $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
                             echo esc_html__('No product found!');
@@ -33,9 +33,9 @@
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
                     <ul class="cp-product-list">
-                        <?php if (isset($products->converterApis)) : 
-                            foreach ($products->converterApis as $product) : 
-                                $viewEcho('pages/home-page/product', compact('product'));
+                        <?php if (isset($plugins['cryptopay-converter-apis'])) : 
+                            foreach ($plugins['cryptopay-converter-apis'] as $plugin) : 
+                                $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
                             echo esc_html__('No product found!');
@@ -53,9 +53,9 @@
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
                     <ul class="cp-product-list">
-                        <?php if (isset($products->addOns)) : 
-                            foreach ($products->addOns as $product) : 
-                                $viewEcho('pages/home-page/product', compact('product'));
+                        <?php if (isset($plugins['cryptopay-add-ons'])) : 
+                            foreach ($plugins['cryptopay-add-ons'] as $plugin) : 
+                                $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
                             echo esc_html__('No product found!');
@@ -73,9 +73,9 @@
                 
                 <div class="activity-block" style="padding: 20px; box-sizing: border-box; margin:0">
                     <ul class="cp-product-list">
-                        <?php if (isset($products->integrations)) : 
-                            foreach ($products->integrations as $product) : 
-                                $viewEcho('pages/home-page/product', compact('product'));
+                        <?php if (isset($plugins['cryptopay-integrations'])) : 
+                            foreach ($plugins['cryptopay-integrations'] as $plugin) : 
+                                $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
                             echo esc_html__('No integration found!');

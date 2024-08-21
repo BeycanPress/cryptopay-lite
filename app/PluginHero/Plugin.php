@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace BeycanPress\CryptoPayLite\PluginHero;
 
+// @phpcs:disable PSR1.Files.SideEffects
+// @phpcs:disable WordPress.Security.NonceVerification.Missing
+// @phpcs:disable WordPress.Security.NonceVerification.Recommended
+
+if (!function_exists('WP_Filesystem')) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+}
+
+WP_Filesystem();
+
 abstract class Plugin
 {
     /**
@@ -51,6 +61,7 @@ abstract class Plugin
 
         if (is_admin()) {
             if (method_exists($this, 'adminProcess')) {
+                /** @disregard */
                 $this->adminProcess();
             }
             if (method_exists($this, 'adminScripts')) {
@@ -58,6 +69,7 @@ abstract class Plugin
             }
         } else {
             if (method_exists($this, 'frontendProcess')) {
+                /** @disregard */
                 $this->frontendProcess();
             }
 
@@ -119,18 +131,20 @@ abstract class Plugin
      */
     private function localization(): void
     {
+        global $wp_filesystem;
+
         $languagesFolder = Helpers::getProp('pluginDir') . 'languages';
 
         if ($textDomain = Helpers::getProp('textDomain')) {
             if (!is_dir($languagesFolder)) {
-                mkdir($languagesFolder);
+                $wp_filesystem->mkdir($languagesFolder);
             }
             add_action('init', function () use ($languagesFolder, $textDomain): void {
                 load_plugin_textdomain($textDomain, false, $languagesFolder);
             }, 8);
         } else {
             if (is_dir($languagesFolder)) {
-                rmdir($languagesFolder);
+                $wp_filesystem->delete($languagesFolder, true);
             }
         }
     }

@@ -46,7 +46,7 @@ final class Response
     private static function json(array $data, int $statusCode): void
     {
         http_response_code($statusCode);
-        die(json_encode($data));
+        die(wp_json_encode($data));
     }
 
     /**

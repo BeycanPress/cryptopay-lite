@@ -77,7 +77,7 @@ abstract class Page
                 if (isset($properties->hidden)) {
                     add_action('admin_head', function (): void {
                         echo '<style>
-                        #adminmenu #toplevel_page_' . $this->slug . ' { 
+                        #adminmenu #toplevel_page_' . esc_html($this->slug) . ' { 
                             display: none;
                         }
                         </style>';

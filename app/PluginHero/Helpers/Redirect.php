@@ -20,7 +20,7 @@ trait Redirect
      * @param string $url
      * @return void
      */
-    protected function jsRedirect(string $url): void
+    public static function jsRedirect(string $url): void
     {
         $allowedHtml = array_merge_recursive(wp_kses_allowed_html('post'), ['script' => true]);
         echo wp_kses("<script>window.location.href = '" . esc_url_raw($url) . "'</script>", $allowedHtml);

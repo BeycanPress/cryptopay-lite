@@ -25,7 +25,7 @@
                     $items = array_intersect_key($item, array_flip(array_keys($this->columns)));
 
                     foreach ($items as $val) : ?>
-                    <td><?php print($val); ?></td>
+                    <td><?php wp_kses_post($val); ?></td>
                     <?php endforeach; ?>
             </tr>
         <?php endforeach; ?>
@@ -35,7 +35,7 @@
 <script>
     (($) => {
         $('document').ready(() => {
-            let table = $('#<?php echo esc_js($id); ?>').DataTable(<?php echo wp_kses_post(json_encode($options)); ?>);
+            let table = $('#<?php echo esc_js($id); ?>').DataTable(<?php echo wp_kses_post(wp_json_encode($options)); ?>);
             table.buttons().container().appendTo($('.col-sm-6:eq(0)', table.table().container()));
         });
     })(jQuery);
