@@ -11,6 +11,7 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Gateway;
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Payment;
+use BeycanPress\CryptoPayLite\PluginHero\Hook;
 // Types
 use BeycanPress\CryptoPayLite\Types\Order\OrderType;
 
@@ -112,11 +113,16 @@ class CryptoPay extends \WC_Payment_Gateway
         $this->init_form_fields();
 
         // Load the settings.
+        /** @disregard */
         $this->init_settings();
         $this->has_fields = false;
+        /** @disregard */
         $this->title = $this->get_option('title');
+        /** @disregard */
         $this->enabled = $this->get_option('enabled');
+        /** @disregard */
         $this->description = $this->get_option('description');
+        /** @disregard */
         $this->order_button_text = $this->get_option('order_button_text');
 
         // If js not loaded yet, and user click on pay button, we need to show error if in checkout mode
@@ -135,6 +141,23 @@ class CryptoPay extends \WC_Payment_Gateway
         $paymentMethod = WC()->session->get('chosen_payment_method');
 
         if ($paymentMethod == $this->id) {
+            $button = $this->hideButtonOrShowOurButton($button);
+        }
+
+        return $button;
+    }
+
+    /**
+     * @param string $button
+     * @return string
+     */
+    public function hideButtonOrShowOurButton(string $button): string
+    {
+        if (boolval(Helpers::getSetting('checkoutProcessButtonOption'))) {
+            $button = Helpers::view('button', [
+                'buttonText' => $this->order_button_text
+            ]);
+        } else {
             $button = '';
         }
 
@@ -210,20 +233,57 @@ class CryptoPay extends \WC_Payment_Gateway
     }
 
     /**
+     * @param bool $modal
+     * @return string
+     */
+    private function startCryptoPay(bool $modal = false): string
+    {
+        $cp = (new Payment('woocommerce'))
+        ->setOrder(OrderType::fromArray([
+            'amount' => (float) \WC()->cart->total,
+            'currency' => get_woocommerce_currency()
+        ]))
+        ->setAutoStart(false);
+
+        if ($modal) {
+            $cp = $cp->modal();
+        } else {
+            $cp = $cp->html(loading:true);
+        }
+
+        Helpers::addScript('checkout.min.js', [Helpers::getProp('mainJsKey', null)]);
+
+        return $cp;
+    }
+
+    /**
+     * @return void
+     */
+    private function cryptoPayButtonProcess(): void
+    {
+        Hook::addFilter('js_variables', function (array $vars): array {
+            $vars['buttonProcess'] = true;
+            return $vars;
+        });
+        add_action('wp_footer', function (): void {
+            echo '<div style="z-index:99999999; position:relative;">'
+                . $this->startCryptoPay(true) .
+                '</div>';
+        });
+    }
+
+    /**
      * @return void
      */
     public function payment_fields(): void
     {
         if ('checkout' == Helpers::getSetting('paymentReceivingArea') && !is_wc_endpoint_url()) {
-            echo (new Payment('woocommerce'))
-            ->setOrder(OrderType::fromArray([
-                'amount' => (float) \WC()->cart->total,
-                'currency' => get_woocommerce_currency()
-            ]))
-            ->setAutoStart(false)
-            ->html(loading:true);
-
-            Helpers::addScript('checkout.min.js', [Helpers::getProp('mainJsKey', null)]);
+            if (boolval(Helpers::getSetting('checkoutProcessButtonOption'))) {
+                echo esc_html($this->description);
+                $this->cryptoPayButtonProcess();
+            } else {
+                echo $this->startCryptoPay();
+            }
         } else {
             echo esc_html($this->description);
         }

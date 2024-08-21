@@ -1,0 +1,1 @@
+<button type="button" class="button alt" id="cryptopay_lite_modal"><?php echo esc_html($buttonText) ?></button>

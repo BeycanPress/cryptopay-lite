@@ -73,20 +73,6 @@ class Loader extends PluginHero\Plugin
             new Pages\DebugLogs();
         }
 
-        add_filter('safe_style_css', function ($styles): array {
-            $styles[] = 'display';
-            $styles[] = 'justify-content';
-            $styles[] = 'max-width';
-            $styles[] = 'height';
-            return $styles;
-        });
-
-        Helpers::adminNotice(
-            '<b style="display:block;font-size:22px;text-align:center">If you want to receive commission-free cryptocurrency payments for life, don\'t miss this opportunity!</b><br><a href="https://beycanpress.com/checkout?add-to-cart=800&utm_source=lite_banner&utm_campaign=summer_discount" target="_blank" style="display:flex;justify-content:center;"><img src="'. Helpers::getImageUrl('banner.png') .'" alt="Summer Discount" style="max-width:800px;height:auto;"></a>', // @phpcs:ignore
-            'info',
-            true
-        );
-
         add_action('init', function (): void {
             new Settings\Settings();
         }, 9);

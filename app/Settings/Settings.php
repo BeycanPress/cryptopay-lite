@@ -108,6 +108,14 @@ class Settings extends Setting
                     'desc' => esc_html__('This feature is currently only available in Classic Checkout. Newer versions of WooCommerce use Block Checkout. You can create your own Classic Checkout page with the shortcode [woocommerce_checkout].', 'cryptopay')
                 ],
                 [
+                    'id'      => 'checkoutProcessButtonOption',
+                    'title'   => esc_html__('Checkout process button option', 'cryptopay'),
+                    'type' => 'switcher',
+                    'default' => false,
+                    'dependency' => ['paymentReceivingArea', '==', 'checkout'],
+                    'desc' => esc_html__('WordPress is a huge ecosystem, so sometimes there are conflicts. The reason for adding this setting is that if your site\'s CSS conflicts with CryptoPay and areas such as the header section of your site in the Checkout section remain on CryptoPay, perhaps activating this option may solve the problem. However, if it does not solve this, you need to update the CSS of your theme.', 'cryptopay')
+                ],
+                [
                     'id'      => 'paymentCompleteOrderStatus',
                     'title'   => esc_html__('Payment complete order status', 'cryptopay'),
                     'type'    => 'select',
