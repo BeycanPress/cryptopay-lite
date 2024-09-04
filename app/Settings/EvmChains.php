@@ -103,13 +103,6 @@ class EvmChains
                             'default' => true,
                         ],
                         [
-                            'id'      => 'phantom',
-                            'title'   => esc_html('Phantom'),
-                            'type'    => 'switcher',
-                            'default' => true,
-                            'desc'    => esc_html__('Phantom is only available on Ethereum (Currently only supports mainnet).', 'cryptopay'),
-                        ],
-                        [
                             'id'      => 'walletconnect',
                             'title'   => esc_html('WalletConnect'),
                             'type'    => 'switcher',
