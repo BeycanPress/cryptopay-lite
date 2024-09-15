@@ -2,10 +2,10 @@
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Requires PHP: 8.1
-Stable Tag: 2.3.3
-Version: 2.3.3
+Stable Tag: 2.3.4
+Version: 2.3.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -136,6 +136,11 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.3.4 =
+* Added: Failed reason message for transactions if is failed
+* Fixed: Not showing "open in explorer" button for mobile devices
+* Fixed: Reminder email not asking email for not logged in users
 
 = 2.3.3 =
 * Removed: Phantom Wallet support
