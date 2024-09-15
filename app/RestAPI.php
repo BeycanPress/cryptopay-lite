@@ -266,6 +266,8 @@ class RestAPI extends BaseAPI
             } catch (\Exception $e) {
                 $this->paymentData->setStatus(false);
                 $failedMessage = sprintf($this->getErrorMessage('PFE101'), $e->getMessage());
+                $this->paymentData->getParams()->set('failedReason', $failedMessage);
+                Helpers::debug('Payment finished error', 'ERROR', $e);
             }
 
             Helpers::debug('Payment finished filters before', 'INFO', $this->paymentData->forDebug());

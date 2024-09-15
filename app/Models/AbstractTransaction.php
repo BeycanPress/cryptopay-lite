@@ -153,9 +153,13 @@ abstract class AbstractTransaction extends AbstractModel
         $params = $tx->getParams()->merge($data->getParams());
         $status = $data->getStatus() ? Status::VERIFIED : Status::FAILED;
 
-        $provider = Helpers::getProvider($tx);
-        $pTx = $provider->transaction($tx->getHash());
-        $tx->getAddresses()->setSender($pTx->getSigner());
+        try {
+            $provider = Helpers::getProvider($tx);
+            $pTx = $provider->transaction($tx->getHash());
+            $tx->getAddresses()->setSender($pTx->getSigner());
+        } catch (\Throwable $th) {
+            Helpers::debug('Update with data error', 'ERROR', $th);
+        }
 
         return (bool) $this->update([
             'hash' => $data->getHash(),
