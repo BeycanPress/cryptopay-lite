@@ -13,8 +13,8 @@
                         <?php if (isset($plugins)) :
                             foreach ($plugins as $product) : ?>
                                 <li>
-                                    <a href="<?php echo esc_url($product->permalink) ?>" target="_blank">
-                                        <img src="<?php echo $product->landingPage ? esc_url($product->landingPage) : esc_url($product->image); ?>" alt="<?php echo esc_attr($product->title) ?>">
+                                    <a href="<?php echo isset($product->landing_page) ? esc_url($product->landing_page) : esc_url($product->permalink); ?>" target="_blank">
+                                        <img src="<?php echo esc_url($product->image); ?>" alt="<?php echo esc_attr($product->title) ?>">
                                         <span><?php echo esc_html($product->title) ?></span>
                                     </a>
                                 </li>
