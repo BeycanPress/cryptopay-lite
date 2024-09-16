@@ -144,12 +144,13 @@ class Verifier
 
         /** @var TransactionType $transaction */
         foreach ($transactions as $transaction) {
+            $paymentData = new PaymentDataType($model->getAddon());
+
             try {
                 if ((strtotime(current_time('mysql')) - $transaction->getCreatedAt()->getTimestamp()) < 30) {
                     continue;
                 }
 
-                $paymentData = new PaymentDataType($model->getAddon());
                 $paymentData->setHash($transaction->getHash());
                 $paymentData->setOrder($transaction->getOrder());
                 $paymentData->setParams($transaction->getParams());
@@ -180,8 +181,10 @@ class Verifier
                 Hook::callAction('payment_finished', $paymentData);
                 Hook::callAction('payment_finished_' . $model->getAddon(), $paymentData);
             } catch (\Exception $e) {
-                Helpers::debug($e->getMessage(), 'ERROR', $e);
-                $model->updateStatusToFailedByHash($transaction->getHash());
+                $paymentData->setStatus(false);
+                Helpers::debug('Verifier payment finished error', 'ERROR', $e);
+                $paymentData->getParams()->set('failedReason', $e->getMessage());
+                $paymentData->getModel()->updateWithPaymentData($paymentData, $transaction);
             }
         }
     }
