@@ -26,7 +26,7 @@ class Integrations extends Page
     /**
      * @var string
      */
-    private string $categories = '?categories=88,167,306,87';
+    private string $categories = '?categories=88,167,87';
 
     /**
      * @var string
@@ -103,7 +103,7 @@ class Integrations extends Page
             update_option('cryptopay_lite_new_product_notification_new_count', 0);
             $oldProducts = json_decode(get_option('cryptopay_lite_products_json', '{}'));
             if ($this->count || empty((array) $oldProducts)) {
-                $res = $this->client->get('get-plugins-by-category' . $this->categories);
+                $res = $this->client->get('get-cryptopay-plugins');
                 $pluginsPure = isset($res->success) && $res->success ? $res->data->plugins : [];
 
                 foreach ($pluginsPure as $key => $pluginPure) {
