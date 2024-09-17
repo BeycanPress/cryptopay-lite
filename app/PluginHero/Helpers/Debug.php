@@ -53,6 +53,7 @@ trait Debug
             $file = self::getProp('pluginDir') . 'debug.log';
 
             if ($wp_filesystem->exists($file)) {
+                $content = $wp_filesystem->get_contents($file) . $content;
                 $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
             } else {
                 $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);

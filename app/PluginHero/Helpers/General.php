@@ -130,11 +130,7 @@ trait General
 
             $content = $function();
 
-            if ($wp_filesystem->exists($file)) {
-                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
-            } else {
-                $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
-            }
+            $wp_filesystem->put_contents($file, $content, FS_CHMOD_FILE);
         }
 
         return (object) compact('file', 'content');

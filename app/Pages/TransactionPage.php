@@ -191,7 +191,7 @@ class TransactionPage extends Page
                     $result .= $tx->params->sanction->source .  ' with ' . $tx->params->sanction->api . ' API';
                 }
 
-                if (isset($tx->params->failedReason)) {
+                if (isset($tx->params->failedReason) && $tx->status == Status::FAILED->getValue()) {
                     $result .= CPL_BR2 . esc_html__('Failed reason: ', 'cryptopay');
                     $result .= $tx->params->failedReason;
                 }
