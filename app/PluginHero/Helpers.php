@@ -94,7 +94,7 @@ class Helpers
             if ($condition) {
                 $status = false;
                 add_action('admin_notices', function () use ($phpVersions, $pluginName): void {
-                    $versions = is_array($phpVersions) ? implode(', ', $phpVersions) : $phpVersions . ' or higher';
+                    $versions = is_array($phpVersions) ? implode(', ', $phpVersions) : ($phpVersions . ' or higher');
                     // @phpcs:ignore
                     $message = $pluginName . ': Your current PHP version does not support ' . self::getPHPVersion() . '. This means errors may occur due to incompatibility or other reasons. So ' . $pluginName . ' is disabled please use one of the supported versions ' . $versions . '. You can ask your server service provider to update your PHP version.';
                     printf('<div class="notice notice-error"><p>%1$s</p></div>', esc_html($message));
