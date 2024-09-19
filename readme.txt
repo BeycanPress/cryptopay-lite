@@ -92,6 +92,12 @@ The following features are available in both versions.
 * Extra network support add-ons (Bitcoin, Solana, Tron etc.)
 * Extra converter support add-ons (CoinGecko, Moralis etc.)
 
+= Requires =
+
+* PHP 8.1 or higher
+* WordPress 5.0 or higher
+* PHP Extensions: cURL, BCMath, GMP
+
 = Privacy notices =
 
 With the default configuration, this plugin, in itself, does not:
