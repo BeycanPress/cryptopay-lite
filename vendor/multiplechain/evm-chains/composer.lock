@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8682088bc379b50c9d039a0c48f24d3",
+    "content-hash": "274e56821765c825034e415880b41e60",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -530,21 +530,20 @@
         },
         {
             "name": "multiplechain/utils",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain-PHP/utils.git",
-                "reference": "70c5675299aceb010bb2596cd0a1f2760ec4ae3f"
+                "reference": "b9b64927b0127959a6fe9423cf37ee8469d3f182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain-PHP/utils/zipball/70c5675299aceb010bb2596cd0a1f2760ec4ae3f",
-                "reference": "70c5675299aceb010bb2596cd0a1f2760ec4ae3f",
+                "url": "https://api.github.com/repos/MultipleChain-PHP/utils/zipball/b9b64927b0127959a6fe9423cf37ee8469d3f182",
+                "reference": "b9b64927b0127959a6fe9423cf37ee8469d3f182",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
-                "ext-gmp": "*",
                 "ext-mbstring": "*",
                 "phpseclib/phpseclib": "~2.0.30"
             },
@@ -573,9 +572,9 @@
             "description": "MultipleChain Utils",
             "support": {
                 "issues": "https://github.com/MultipleChain-PHP/utils/issues",
-                "source": "https://github.com/MultipleChain-PHP/utils/tree/0.1.4"
+                "source": "https://github.com/MultipleChain-PHP/utils/tree/0.1.5"
             },
-            "time": "2024-06-11T09:47:47+00:00"
+            "time": "2024-10-01T02:15:53+00:00"
         },
         {
             "name": "phpseclib/phpseclib",

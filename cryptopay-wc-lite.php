@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Plugin Name: CryptoPay Lite
- * Version:     2.3.5
+ * Version:     2.3.6
  * Plugin URI:  https://beycanpress.com/cryptopay/
  * Description: All In One Cryptocurrency Payments for WordPress
  * Author:      BeycanPress LLC
@@ -62,7 +62,6 @@ $args = [
     'phpVersions' => 8.1,
     'extensions' => [
         'bcmath',
-        'gmp',
         'curl',
         'file_get_contents',
     ]

@@ -12,7 +12,7 @@
     "require": {
         "ext-bcmath": "*",
         "beycanpress/csf": "^2.3",
-        "multiplechain/evm-chains": "^0.1.23",
+        "multiplechain/evm-chains": "^0.1.24",
         "beycanpress/currency-converter": "^0.1.3"
     }
 }

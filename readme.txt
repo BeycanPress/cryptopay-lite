@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 6.6.2
 Requires PHP: 8.1
-Stable Tag: 2.3.5
-Version: 2.3.5
+Stable Tag: 2.3.6
+Version: 2.3.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,6 +92,12 @@ The following features are available in both versions.
 * Extra network support add-ons (Bitcoin, Solana, Tron etc.)
 * Extra converter support add-ons (CoinGecko, Moralis etc.)
 
+= Requires =
+
+* PHP 8.1 or higher
+* WordPress 5.0 or higher
+* PHP Extensions: cURL, BCMath
+
 = Privacy notices =
 
 With the default configuration, this plugin, in itself, does not:
@@ -136,6 +142,10 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.3.6 =
+* Fixed: WalletConnect & Web3Modal can connect only one time or you have to refresh the page
+* Removed: GMP extension requirement
 
 = 2.3.5 =
 * Updated: API Endpoints

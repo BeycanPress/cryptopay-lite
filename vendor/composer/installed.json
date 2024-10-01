@@ -2,20 +2,20 @@
     "packages": [
         {
             "name": "beycanpress/csf",
-            "version": "2.3.5",
-            "version_normalized": "2.3.5.0",
+            "version": "2.3.6",
+            "version_normalized": "2.3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeycanPress/csf.git",
-                "reference": "8abd652032c4f49cbacd9f838d5f987dd80d81a2"
+                "reference": "9f3c02a5eca67a70c442570061fcfe30d6b0353f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/8abd652032c4f49cbacd9f838d5f987dd80d81a2",
-                "reference": "8abd652032c4f49cbacd9f838d5f987dd80d81a2",
+                "url": "https://api.github.com/repos/BeycanPress/csf/zipball/9f3c02a5eca67a70c442570061fcfe30d6b0353f",
+                "reference": "9f3c02a5eca67a70c442570061fcfe30d6b0353f",
                 "shasum": ""
             },
-            "time": "2024-05-01T02:48:38+00:00",
+            "time": "2024-09-25T09:51:27+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -26,7 +26,7 @@
             "homepage": "https://github.com/BeycanPress/csf",
             "support": {
                 "issues": "https://github.com/BeycanPress/csf/issues",
-                "source": "https://github.com/BeycanPress/csf/tree/2.3.5"
+                "source": "https://github.com/BeycanPress/csf/tree/2.3.6"
             },
             "install-path": "../beycanpress/csf"
         },
@@ -218,17 +218,17 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.9.0",
-            "version_normalized": "7.9.0.0",
+            "version": "7.9.2",
+            "version_normalized": "7.9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "84ac2b2afc44e40d3e8e658a45d68d6d20437612"
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/84ac2b2afc44e40d3e8e658a45d68d6d20437612",
-                "reference": "84ac2b2afc44e40d3e8e658a45d68d6d20437612",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d281ed313b989f213357e3be1a179f02196ac99b",
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2024-07-18T11:52:56+00:00",
+            "time": "2024-07-24T11:22:20+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -327,7 +327,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.9.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9.2"
             },
             "funding": [
                 {
@@ -652,22 +652,22 @@
         },
         {
             "name": "multiplechain/evm-chains",
-            "version": "0.1.23",
-            "version_normalized": "0.1.23.0",
+            "version": "0.1.24",
+            "version_normalized": "0.1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain-PHP/evm-chains.git",
-                "reference": "d468d6f0537615a8edf9510f050023ccade80b03"
+                "reference": "68294481057c028dba51b40f9a5f1c3d6c36bae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain-PHP/evm-chains/zipball/d468d6f0537615a8edf9510f050023ccade80b03",
-                "reference": "d468d6f0537615a8edf9510f050023ccade80b03",
+                "url": "https://api.github.com/repos/MultipleChain-PHP/evm-chains/zipball/68294481057c028dba51b40f9a5f1c3d6c36bae6",
+                "reference": "68294481057c028dba51b40f9a5f1c3d6c36bae6",
                 "shasum": ""
             },
             "require": {
                 "multiplechain/definitions": "^0.1.2",
-                "multiplechain/utils": "^0.1.4",
+                "multiplechain/utils": "^0.1.5",
                 "web3p/ethereum-tx": "^0.4.3",
                 "web3p/web3.php": "^0.3.2"
             },
@@ -678,7 +678,7 @@
                 "slevomat/coding-standard": "^8.15",
                 "squizlabs/php_codesniffer": "^3.10"
             },
-            "time": "2024-06-11T10:12:52+00:00",
+            "time": "2024-10-01T03:04:19+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -699,28 +699,27 @@
             "description": "EVM Based Chains",
             "support": {
                 "issues": "https://github.com/MultipleChain-PHP/evm-chains/issues",
-                "source": "https://github.com/MultipleChain-PHP/evm-chains/tree/0.1.23"
+                "source": "https://github.com/MultipleChain-PHP/evm-chains/tree/0.1.24"
             },
             "install-path": "../multiplechain/evm-chains"
         },
         {
             "name": "multiplechain/utils",
-            "version": "0.1.4",
-            "version_normalized": "0.1.4.0",
+            "version": "0.1.5",
+            "version_normalized": "0.1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MultipleChain-PHP/utils.git",
-                "reference": "70c5675299aceb010bb2596cd0a1f2760ec4ae3f"
+                "reference": "b9b64927b0127959a6fe9423cf37ee8469d3f182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MultipleChain-PHP/utils/zipball/70c5675299aceb010bb2596cd0a1f2760ec4ae3f",
-                "reference": "70c5675299aceb010bb2596cd0a1f2760ec4ae3f",
+                "url": "https://api.github.com/repos/MultipleChain-PHP/utils/zipball/b9b64927b0127959a6fe9423cf37ee8469d3f182",
+                "reference": "b9b64927b0127959a6fe9423cf37ee8469d3f182",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
-                "ext-gmp": "*",
                 "ext-mbstring": "*",
                 "phpseclib/phpseclib": "~2.0.30"
             },
@@ -730,7 +729,7 @@
                 "slevomat/coding-standard": "^8.15",
                 "squizlabs/php_codesniffer": "^3.10"
             },
-            "time": "2024-06-11T09:47:47+00:00",
+            "time": "2024-10-01T02:15:53+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -751,7 +750,7 @@
             "description": "MultipleChain Utils",
             "support": {
                 "issues": "https://github.com/MultipleChain-PHP/utils/issues",
-                "source": "https://github.com/MultipleChain-PHP/utils/tree/0.1.4"
+                "source": "https://github.com/MultipleChain-PHP/utils/tree/0.1.5"
             },
             "install-path": "../multiplechain/utils"
         },
@@ -1761,34 +1760,34 @@
         },
         {
             "name": "react/socket",
-            "version": "v1.15.0",
-            "version_normalized": "1.15.0.0",
+            "version": "v1.16.0",
+            "version_normalized": "1.16.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket.git",
-                "reference": "216d3aec0b87f04a40ca04f481e6af01bdd1d038"
+                "reference": "23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket/zipball/216d3aec0b87f04a40ca04f481e6af01bdd1d038",
-                "reference": "216d3aec0b87f04a40ca04f481e6af01bdd1d038",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1",
+                "reference": "23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1",
                 "shasum": ""
             },
             "require": {
                 "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
                 "php": ">=5.3.0",
-                "react/dns": "^1.11",
+                "react/dns": "^1.13",
                 "react/event-loop": "^1.2",
-                "react/promise": "^3 || ^2.6 || ^1.2.1",
-                "react/stream": "^1.2"
+                "react/promise": "^3.2 || ^2.6 || ^1.2.1",
+                "react/stream": "^1.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.6 || ^5.7 || ^4.8.36",
-                "react/async": "^4 || ^3 || ^2",
+                "react/async": "^4.3 || ^3.3 || ^2",
                 "react/promise-stream": "^1.4",
-                "react/promise-timer": "^1.10"
+                "react/promise-timer": "^1.11"
             },
-            "time": "2023-12-15T11:02:10+00:00",
+            "time": "2024-07-26T10:38:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1832,7 +1831,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/socket/issues",
-                "source": "https://github.com/reactphp/socket/tree/v1.15.0"
+                "source": "https://github.com/reactphp/socket/tree/v1.16.0"
             },
             "funding": [
                 {
@@ -2151,21 +2150,21 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-mbstring": "*"
@@ -2173,7 +2172,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2024-06-19T12:30:46+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -2214,7 +2213,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
             },
             "funding": [
                 {
