@@ -15,7 +15,7 @@ WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept Crypto Payments
 
 ### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
-WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With WalletConnect support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
+WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With Reown AppKit support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
 **Review WooCommerce crypto payment gateway with video**
@@ -73,9 +73,9 @@ The following features are available in both versions.
 * WooCommerce supports
 * Special currency discounts
 * Completely P2P (Peer to Peer)
-* Mobile device support with WalletConnect
 * Fully owned (all process in your server)
 * Integrations with other plugins (16+ plugins)
+* Mobile device support with Reown AppKit (formerly WalletConnect)
 
 **Free Version:**
 

@@ -125,6 +125,7 @@ class Constants
             "redirecting" => esc_html__('Redirecting...', 'cryptopay'),
             "connecting" => esc_html__('Connecting...', 'cryptopay'),
             "cannotPaySameAddress" => esc_html__('The payment cannot proceed because the payer and receiver address are the same! Please pay with a different wallet!', 'cryptopay'),
+            "reownProjectIdRequired" => esc_html__('Reown Project ID is required! Please contact the site administrator.', 'cryptopay'),
         ]);
     }
 
