@@ -138,4 +138,22 @@ class NetworkConfig extends BaseNetworkConfig
     {
         return $this->nativeCurrency;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'hexId' => $this->hexId,
+            'name' => $this->name,
+            'mainnetId' => $this->mainnetId,
+            'rpcUrl' => $this->rpcUrl,
+            'explorerUrl' => $this->explorerUrl,
+            'nativeCurrency' => $this->nativeCurrency,
+            'testnet' => $this->isTestnet(),
+            'wsUrl' => $this->getWsUrl(),
+        ];
+    }
 }

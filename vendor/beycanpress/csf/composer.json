@@ -1,7 +1,7 @@
 {
     "name": "beycanpress/csf",
     "description": "Codestar Framework composer package",
-    "version": "2.3.5",
+    "version": "2.3.6",
     "type": "library",
     "license": "GPL-2.0",
     "author": "BeycanPress",

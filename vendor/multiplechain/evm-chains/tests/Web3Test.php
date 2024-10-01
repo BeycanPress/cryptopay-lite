@@ -29,7 +29,7 @@ class Web3Test extends TestCase
      */
     public function setUp(): void
     {
-        $this->web3 = new Web3('https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
+        $this->web3 = new Web3('https://ethereum-sepolia-rpc.publicnode.com');
     }
 
     /**

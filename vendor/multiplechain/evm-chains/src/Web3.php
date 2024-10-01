@@ -75,8 +75,11 @@ class Web3 extends Web3Base
                 }
             });
         } catch (\Exception $e) {
+            if (false !== strpos($e->getMessage(), 'insufficient funds for gas')) {
+                throw new \Exception("Insufficient funds for gas!", 16001);
+            }
             if ((time() - $this->time) >= 15) {
-                throw new \Exception("Transaction time out!", 16000);
+                throw new \Exception("Send raw transaction time out!", 16000);
             } else {
                 if (-32000 == $e->getCode() && 'invalid sender' != $e->getMessage()) {
                     return $this->sendRawTransaction($signedData);

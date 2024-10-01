@@ -28,7 +28,7 @@ class ProviderTest extends BaseTest
     public function testRpcConnection(): void
     {
         $this->assertTrue($this->provider->checkRpcConnection(
-            "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
+            "https://ethereum-sepolia-rpc.publicnode.com"
         ));
         $this->assertFalse($this->provider->checkRpcConnection(
             "https://sepolia.infura.io/v3/"

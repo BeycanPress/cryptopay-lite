@@ -54,8 +54,8 @@ class NetworksTest extends BaseTest
             'testnet' => true,
             'name' => 'Ethereum Sepolia Testnet (QR)',
             'explorerUrl' => 'https://sepolia.etherscan.io/',
-            'rpcUrl' => 'https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-            'wsUrl' => 'wss://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+            "wsUrl" => "wss://ethereum-sepolia-rpc.publicnode.com",
+            "rpcUrl" => "https://ethereum-sepolia-rpc.publicnode.com",
             'nativeCurrency' => [
                 'symbol' => 'ETH',
                 'name' => 'Ethereum',

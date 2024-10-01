@@ -27,7 +27,6 @@ class Utils
     }
 
     /**
-     *
      * @param float $value
      * @param integer $decimals
      * @return string
@@ -36,8 +35,15 @@ class Utils
     {
         $length = bcpow('10', strval($decimals));
         $newValue = bcmul(strval($value), $length, 0);
-        $newValueHex = gmp_strval(gmp_init($newValue, 10), 16);
-        return '0x' . $newValueHex;
+
+        $hex = '';
+        while (bccomp($newValue, '0') > 0) {
+            $remainder = bcmod($newValue, '16');
+            $hex = dechex(intval($remainder)) . $hex;
+            $newValue = bcdiv($newValue, '16', 0);
+        }
+
+        return '0x' . ('' === $hex ? '0' : $hex);
     }
 
     /**
@@ -48,8 +54,15 @@ class Utils
     public static function hexToNumber(string $value, int $decimals): float
     {
         $length = bcpow('10', strval($decimals));
-        $newValue = gmp_strval(gmp_init($value, 16), 10);
-        $result = bcdiv($newValue, $length, $decimals);
+
+        $decimal = '0';
+        $value = ltrim($value, '0x');
+        $len = strlen($value);
+        for ($i = 0; $i < $len; $i++) {
+            $decimal = bcadd($decimal, bcmul(strval(hexdec($value[$i])), bcpow('16', strval($len - 1 - $i))));
+        }
+
+        $result = bcdiv($decimal, $length, $decimals);
         return floatval($result);
     }
 
@@ -65,11 +78,18 @@ class Utils
         }
 
         $base58Array = [];
-        $value = gmp_init(bin2hex(implode(array_map('chr', $input))), 16);
+        $hex = bin2hex(implode(array_map('chr', $input)));
 
-        while (gmp_cmp($value, 0) > 0) {
-            list($value, $remainder) = gmp_div_qr($value, 58);
-            $base58Array[] = self::BASE58_ALPHABET[gmp_intval($remainder)];
+        $value = '0';
+        $hexLength = strlen($hex);
+        for ($i = 0; $i < $hexLength; $i++) {
+            $value = bcadd(bcmul($value, '16'), base_convert($hex[$i], 16, 10));
+        }
+
+        while (bccomp($value, '0') > 0) {
+            $remainder = bcmod($value, '58');
+            $value = bcdiv($value, '58', 0);
+            $base58Array[] = self::BASE58_ALPHABET[intval($remainder)];
         }
 
         foreach ($input as $byte) {
@@ -88,19 +108,26 @@ class Utils
      */
     public static function base58Decode(string $input): array
     {
-        $value = gmp_init(0);
+        $value = '0';
         for ($i = 0; $i < strlen($input); $i++) {
-            $value = gmp_add(gmp_mul($value, 58), intval(strpos(self::BASE58_ALPHABET, $input[$i])));
+            $value = bcadd(bcmul($value, '58'), strval(strpos(self::BASE58_ALPHABET, $input[$i])));
         }
 
-        $hex = gmp_strval($value, 16);
+        // Decimal to hexadecimal conversion
+        $hex = '';
+        while (bccomp($value, '0') > 0) {
+            $remainder = bcmod($value, '16');
+            $hex = dechex(intval($remainder)) . $hex;
+            $value = bcdiv($value, '16', 0);
+        }
+
         if (0 != strlen($hex) % 2) {
             $hex = '0' . $hex;
         }
 
-        $unpack = unpack('C*', strval(hex2bin($hex)));
+        $unpack = unpack('C*', hex2bin($hex) ?: '');
 
-        return array_values($unpack ? $unpack : []);
+        return array_values($unpack ?: []);
     }
 
     /**

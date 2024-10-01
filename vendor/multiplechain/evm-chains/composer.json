@@ -1,6 +1,6 @@
 {
     "name": "multiplechain/evm-chains",
-    "version": "0.1.23",
+    "version": "0.1.24",
     "description": "EVM Based Chains",
     "type": "library",
     "license": "MIT",
@@ -31,7 +31,7 @@
         "web3p/web3.php": "^0.3.2",
         "web3p/ethereum-tx": "^0.4.3",
         "multiplechain/definitions": "^0.1.2",
-        "multiplechain/utils": "^0.1.4"
+        "multiplechain/utils": "^0.1.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5",

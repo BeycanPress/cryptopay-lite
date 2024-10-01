@@ -1,6 +1,6 @@
 {
     "name": "multiplechain/utils",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "MultipleChain Utils",
     "type": "library",
     "license": "MIT",
@@ -27,9 +27,8 @@
         }
     ],
     "require": {
-        "ext-mbstring": "*",
         "ext-bcmath": "*",
-        "ext-gmp": "*",
+        "ext-mbstring": "*",
         "phpseclib/phpseclib": "~2.0.30"
     },
     "require-dev": {

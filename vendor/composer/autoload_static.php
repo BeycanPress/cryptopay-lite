@@ -162,8 +162,8 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -175,8 +175,8 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
         ),
         'MultipleChain\\' => 
         array (
-            0 => __DIR__ . '/..' . '/multiplechain/utils/src',
-            1 => __DIR__ . '/..' . '/multiplechain/definitions/src',
+            0 => __DIR__ . '/..' . '/multiplechain/definitions/src',
+            1 => __DIR__ . '/..' . '/multiplechain/utils/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
