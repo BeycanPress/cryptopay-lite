@@ -59,9 +59,9 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Are Network Supports available in Lite Version?**
 
-Bitcoin, Solana, Tron etc. network supports are for premium only. So you can't get Bitcoin or Solana payments by buying network support add-ons. Because network supports work with the premium version.
+Network support for Bitcoin, Solana, Tron, etc. is for premium only. So you can't get Bitcoin or Solana payments in the free version by purchasing network support plugins. Because network supports only work with the premium version.
 
-This is because some services such as “Pay by transfer to address” run on servers that cost us monthly. So it's a one-time payment of 49 dollars. It is impossible for us to cover these costs every month.
+This is because some services, such as “Pay by transfer to address (QR Code)”, run on servers that cost us a monthly fee. So it's a one-time payment of 49 dollars. It's not enough for us to cover these costs every month.
 
 **General features:**
 
@@ -73,8 +73,8 @@ The following features are available in both versions.
 * WooCommerce supports
 * Special currency discounts
 * Completely P2P (Peer to Peer)
-* Fully owned (all process in your server)
 * Integrations with other plugins (16+ plugins)
+* Self-Custody wallets (Money goes directly to your wallet)
 * Mobile device support with Reown AppKit (formerly WalletConnect)
 
 **Free Version:**
@@ -88,9 +88,9 @@ The following features are available in both versions.
 * Unlimited EVM-based network support
 * Pay by transfer to address support (QR Code)
 * Unlimited coin payments support for each network
-* Custom token & prices support (Your utility tokens)
-* Extra network support add-ons (Bitcoin, Solana, Tron etc.)
-* Extra converter support add-ons (CoinGecko, Moralis etc.)
+* You can add custom token & prices (Your utility tokens)
+* You can purchase extra converter add-ons (CoinGecko, Moralis etc.)
+* You can purchase extra network add-ons (Bitcoin, Solana, Tron etc.)
 
 = Requires =
 
