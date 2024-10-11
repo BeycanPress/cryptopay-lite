@@ -72,6 +72,14 @@ trait Feedback
             }
         });
 
+        add_action('rest_api_init', function (): void {
+            register_rest_route('bp-plugin-check', self::getProp('pluginKey'), [
+                'callback' => fn() => wp_send_json_success(),
+                'methods' => ['POST', 'GET'],
+                'permission_callback' => '__return_true'
+            ]);
+        });
+
         if ($form) {
             global $pagenow, $wp_filesystem;
             if ('plugins.php' === $pagenow) {
