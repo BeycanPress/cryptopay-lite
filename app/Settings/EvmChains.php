@@ -106,10 +106,11 @@ class EvmChains
                             'id'      => 'walletconnect',
                             'title'   => esc_html('WalletConnect (legacy)'),
                             'type'    => 'switcher',
-                            'default' => true
+                            'default' => true,
+                            'desc'    => esc_html__('If you enabled Web3Wallets, please disable it.', 'cryptopay'),
                         ],
                         [
-                            'id'      => 'web3modal',
+                            'id'      => 'web3wallets',
                             'title'   => esc_html('Web3 Wallets (Reown AppKit - formerly Web3Modal)'),
                             'type'    => 'switcher',
                             'default' => true,
