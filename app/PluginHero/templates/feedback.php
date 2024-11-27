@@ -1,4 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<?php if (!defined('ABSPATH')) exit; ?>
 <div 
     class="bp-feedback-modal" 
     id="<?php echo esc_attr($pluginKey); ?>-feedback-modal" 

@@ -22,11 +22,18 @@ abstract class BaseAPI
     private array $middlewares = [];
 
     /**
+     * @var int
+     */
+    protected int $currentUserId;
+
+    /**
      * @param array<string,array<mixed>> $routeList
      * @return void
      */
     public function addRoutes(array $routeList): void
     {
+        add_action('init', [$this, 'init']);
+
         if (empty($routeList)) {
             return;
         }
@@ -64,6 +71,14 @@ abstract class BaseAPI
         add_filter('rest_pre_dispatch', [$this, 'middlewareFilter'], 10, 3);
 
         Helpers::addAPI($this);
+    }
+
+    /**
+     * @return void
+     */
+    public function init(): void
+    {
+        $this->currentUserId = get_current_user_id();
     }
 
     /**
@@ -110,9 +125,9 @@ abstract class BaseAPI
     public function getUrl(?string $nameSpace = null): string
     {
         if ('rest' == $this->type) {
-            $nameSpace = isset($this->nameSpaces[$nameSpace])
-            ? $this->nameSpaces[$nameSpace]
-            : array_values($this->nameSpaces)[0];
+            $nameSpace = $nameSpace
+                ? $nameSpace
+                : array_values($this->nameSpaces)[0];
 
             return home_url('?rest_route=/' . $nameSpace);
         } else {

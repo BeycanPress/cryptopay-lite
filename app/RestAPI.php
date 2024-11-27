@@ -35,7 +35,7 @@ class RestAPI extends BaseAPI
     /**
      * @var int
      */
-    private int $currentUserId;
+    protected int $currentUserId;
 
     /**
      * @var Request
@@ -64,12 +64,12 @@ class RestAPI extends BaseAPI
         }
 
         // create payment data
-        add_action('rest_pre_dispatch', [$this, 'middleware'], 10, 3);
+        $this->addMiddleware('cryptopay-lite', [$this, 'middleware']);
 
         $this->addRoutes([
             'cryptopay-lite' => [
                 'init' => [
-                    'callback' => 'init',
+                    'callback' => 'initPayment',
                     'methods' => ['GET']
                 ],
                 'create-transaction' => [
@@ -120,30 +120,28 @@ class RestAPI extends BaseAPI
     public function middleware(mixed $result, \WP_REST_Server $server, \WP_REST_Request $request): mixed
     {
         // check if request is cryptopay
-        if ('cryptopay-lite' === (Helpers::getRoutePaths($request->get_route())[0] ?? null)) {
-            if ($addon = $this->request->getParam('cp_addon')) {
-                try {
-                    // check addon
-                    Helpers::checkIntegration($this->addon = $addon);
-                    $this->paymentData = new PaymentDataType($addon);
-                    $this->paymentData->setUserId($this->currentUserId);
-                    $this->paymentData->setHash($this->request->getParam('hash'));
-                    $this->paymentData->setOrder(
-                        OrderType::fromObject($this->getObjectParam('order'))
-                    );
-                    $this->paymentData->setParams(
-                        ParamsType::fromObject($this->getObjectParam('params'))
-                    );
-                    $this->paymentData->setNetwork(
-                        NetworkType::fromObject($this->getObjectParam('network'))
-                    );
-                    $this->paymentData->setDynamicData(
-                        DynamicDataType::fromObject($this->getObjectParam('dynamicData'))
-                    );
-                } catch (\Exception $e) {
-                    Helpers::debug($e->getMessage(), 'ERROR', $e);
-                    Response::error($e->getMessage(), 'INT100');
-                }
+        if ($addon = $this->request->getParam('cp_addon')) {
+            try {
+                // check addon
+                Helpers::checkIntegration($this->addon = $addon);
+                $this->paymentData = new PaymentDataType($addon);
+                $this->paymentData->setUserId($this->currentUserId);
+                $this->paymentData->setHash($this->request->getParam('hash'));
+                $this->paymentData->setOrder(
+                    OrderType::fromObject($this->getObjectParam('order'))
+                );
+                $this->paymentData->setParams(
+                    ParamsType::fromObject($this->getObjectParam('params'))
+                );
+                $this->paymentData->setNetwork(
+                    NetworkType::fromObject($this->getObjectParam('network'))
+                );
+                $this->paymentData->setDynamicData(
+                    DynamicDataType::fromObject($this->getObjectParam('dynamicData'))
+                );
+            } catch (\Exception $e) {
+                Helpers::debug($e->getMessage(), 'ERROR', $e);
+                Response::error($e->getMessage(), 'INT100');
             }
         }
 
@@ -156,7 +154,7 @@ class RestAPI extends BaseAPI
      * payment address and parameters that the relevant network may need.
      * @return void
      */
-    public function init(): void
+    public function initPayment(): void
     {
         try {
             $payment = new Payment($this->paymentData->getAddon());
@@ -321,7 +319,9 @@ class RestAPI extends BaseAPI
         ]);
 
         $this->paymentData->getModel()->update([
-            'reminderEmail' => $email
+            'reminderEmail' => $email,
+            'userId' => $this->currentUserId,
+            'updatedAt' => current_time('mysql')
         ], [
             'hash' => $this->paymentData->getHash()
         ]);

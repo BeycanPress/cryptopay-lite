@@ -1,6 +1,6 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 echo "<pre>";
 echo "Log date: " . esc_html($date) . "<br>";

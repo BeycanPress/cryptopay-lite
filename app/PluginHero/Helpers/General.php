@@ -14,7 +14,7 @@ WP_Filesystem();
 
 trait General
 {
-        /**
+    /**
      * @return string
      */
     public static function getCurrentUrl(): string
@@ -101,7 +101,7 @@ trait General
     {
         $ip = null;
         if (isset($_SERVER['REMOTE_ADDR'])) {
-            $ip = wp_unslash($_SERVER['REMOTE_ADDR']);
+            $ip = wp_unslash(esc_url_raw($_SERVER['REMOTE_ADDR']));
             $ip = rest_is_ip_address($ip);
             if (false === $ip) {
                 $ip = null;

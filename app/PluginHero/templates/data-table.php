@@ -1,3 +1,4 @@
+<?php if (!defined('ABSPATH')) exit; ?>
 <table id="<?php echo esc_attr($id); ?>" class="display">
     <thead>
         <tr>
