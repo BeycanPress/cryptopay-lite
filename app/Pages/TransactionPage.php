@@ -251,14 +251,14 @@ class TransactionPage extends Page
                 ]
             ]);
         })
-        ->createDataList(function () use ($params) {
+        ->createDataList(function ($entry, $orderQuery, $perPage, $offset) use ($params) {
             if (isset($_GET['s']) && !empty($_GET['s'])) {
                 $s = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : null;
                 $result = (object) $this->model->search($s, $params);
                 return [$result->transactions->toArray(false), $result->count];
             } else {
-                $transactions = $this->model->findBy($params, ['id', 'DESC']);
-                return [$transactions->toArray(false), $transactions->count()];
+                $transactions = $this->model->findBy($params, $orderQuery, $perPage, $offset);
+                return [$transactions->toArray(false), $this->model->getCount($params)];
             }
         });
 

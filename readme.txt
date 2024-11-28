@@ -145,6 +145,7 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 
 = 2.3.7 =
 * Fixed: User ID not adding WooCommerce checkout payment process if user set reminder email
+* Fixed: Transaction list pagination not working
 
 = 2.3.6 =
 * Fixed: WalletConnect & Web3Modal can connect only one time or you have to refresh the page
