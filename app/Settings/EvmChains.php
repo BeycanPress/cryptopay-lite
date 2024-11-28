@@ -104,16 +104,17 @@ class EvmChains
                         ],
                         [
                             'id'      => 'walletconnect',
-                            'title'   => esc_html('WalletConnect'),
-                            'type'    => 'switcher',
-                            'default' => true
-                        ],
-                        [
-                            'id'      => 'web3modal',
-                            'title'   => esc_html('Web3 Wallets (Web3Modal)'),
+                            'title'   => esc_html('WalletConnect (legacy)'),
                             'type'    => 'switcher',
                             'default' => true,
-                            'desc'    => esc_html__('It is a module within Web3Modal that supports hundreds of wallets with WalletConnect support. Since all the above wallets are already supported, you can deactivate all other wallets and allow users to make transactions only through Web3Modal.', 'cryptopay'),
+                            'desc'    => esc_html__('If you enabled Web3Wallets, please disable it.', 'cryptopay'),
+                        ],
+                        [
+                            'id'      => 'web3wallets',
+                            'title'   => esc_html('Web3 Wallets (Reown AppKit - formerly Web3Modal)'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                            'desc'    => esc_html__('It is a module within Reown AppKit that supports hundreds of wallets with WalletConnect support. Since all the above wallets are already supported, you can deactivate all other wallets and allow users to make transactions only through Reown AppKit.', 'cryptopay'),
                         ],
                     ]
                 ],

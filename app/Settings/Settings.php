@@ -62,13 +62,18 @@ class Settings extends Setting
                 ],
                 [
                     'id'      => 'wcProjectId',
-                    'title'   => esc_html__('WalletConnect Project ID', 'cryptopay'),
+                    'title'   => esc_html__('Reown AppKit ID (formerly WalletConnect)', 'cryptopay'),
                     'type'    => 'text',
-                    'desc'    => esc_html__('WalletConnect Project ID is required for WalletConnect, which are used to connect to mobile wallets on many networks. If you do not have a WalletConnect Project ID, WalletConnect will not work. You can get your project ID by registering for WalletConnect Cloud at the link below.', 'cryptopay')
+                    'desc'    => esc_html__('Project ID is required for WalletConnect and AppKit, which are used to connect to mobile wallets on many networks. If you do not have a Project ID, Reown AppKit will not work. You can get your project ID by registering for Reown Cloud at the link below.', 'cryptopay')
                     . CPL_BR2 .
                     Helpers::view('components/link', [
-                        'text' => esc_html__('WalletConnect Cloud', 'cryptopay'),
-                        'url' => 'https://cloud.walletconnect.com/sign-in'
+                        'text' => esc_html__('Reown Cloud (formerly WalletConnect)', 'cryptopay'),
+                        'url' => 'https://cloud.reown.com/sign-in'
+                    ])
+                    . CPL_BR2 .
+                    Helpers::view('components/link', [
+                        'text' => esc_html__('Guide', 'cryptopay'),
+                        'url' => 'https://beycanpress.gitbook.io/cryptopay-docs/overview/installation#id-10-reown-project-id-formerly-walletconnect'
                     ])
                     ,
                 ]

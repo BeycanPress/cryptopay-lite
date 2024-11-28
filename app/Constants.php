@@ -47,7 +47,7 @@ class Constants
             "waitingBlockConfirmations" => esc_html__('Waiting for block confirmations:', 'cryptopay'),
             "waitingTransactionConfirmations" => esc_html__('Waiting for transaction confirmation...', 'cryptopay'),
             "openInExplorer" => esc_html__('Open in explorer', 'cryptopay'),
-            "waitingConfirmation" => esc_html__('Waiting confirmation...', 'cryptopay'),
+            "waitingConfirmation" => esc_html__('Waiting for confirmation...', 'cryptopay'),
             "selectWallet" => esc_html__('Select wallet', 'cryptopay'),
             "selectPaymentMethod" => esc_html__('Select payment method', 'cryptopay'),
             "pleaseTryToConnectAgain" => esc_html__('Please try to connect again by selecting network {networkName} from your wallet!', 'cryptopay'),
@@ -58,7 +58,7 @@ class Constants
             "payNow" => esc_html__('Pay now', 'cryptopay'),
             "payWith" => esc_html__('Pay with {name}', 'cryptopay'),
             "loading" => esc_html__('Loading...', 'cryptopay'),
-            "waitingApproval" => esc_html__('Waiting approval...', 'cryptopay'),
+            "waitingApproval" => esc_html__('Waiting for approval...', 'cryptopay'),
             "paymentRejected" => esc_html__('Payment rejected!', 'cryptopay'),
             "transferAmountError" => esc_html__('Transfer amount need to be bigger from zero!', 'cryptopay'),
             "transactionCreateFail" => esc_html__('Transaction create fail! Please try again.', 'cryptopay'),
@@ -125,6 +125,7 @@ class Constants
             "redirecting" => esc_html__('Redirecting...', 'cryptopay'),
             "connecting" => esc_html__('Connecting...', 'cryptopay'),
             "cannotPaySameAddress" => esc_html__('The payment cannot proceed because the payer and receiver address are the same! Please pay with a different wallet!', 'cryptopay'),
+            "reownProjectIdRequired" => esc_html__('Reown Project ID is required! Please contact the site administrator.', 'cryptopay'),
         ]);
     }
 

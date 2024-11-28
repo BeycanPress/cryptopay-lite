@@ -58,6 +58,22 @@ class Helpers
     }
 
     /**
+     * Hi, this is a helper function to get the ionCube version.
+     * But we not use it in the wp.org plugins.
+     * Only in premium versions for protect license.
+     * @return int|null
+     */
+    public static function getIoncubeVersion(): ?int
+    {
+        if (function_exists('ioncube_loader_iversion')) {
+            $version = ioncube_loader_iversion();
+            $version = sprintf('%d', $version / 10000);
+            return intval($version);
+        }
+        return null;
+    }
+
+    /**
      * @param array<mixed> $rules
      * @param string $pluginFile
      * @return bool
@@ -83,6 +99,33 @@ class Helpers
                     $message = $pluginName . ': Your current PHP version does not support ' . self::getPHPVersion() . '. This means errors may occur due to incompatibility or other reasons. So ' . $pluginName . ' is disabled please use one of the supported versions ' . $versions . '. You can ask your server service provider to update your PHP version.';
                     printf('<div class="notice notice-error"><p>%1$s</p></div>', esc_html($message));
                 });
+            }
+        }
+
+        if (isset($rules['ioncubeVersion'])) {
+            $ionCubeVersion = self::getIoncubeVersion();
+            $requiredIonCubeVersion = $rules['ioncubeVersion'];
+            if (!is_int($requiredIonCubeVersion)) {
+                throw new \Exception('ioncubeVersion must be an integer!');
+            }
+            if (!$ionCubeVersion || $ionCubeVersion < $requiredIonCubeVersion) {
+                $status = false;
+                // @phpcs:ignore
+                add_action('admin_notices', function () use ($requiredIonCubeVersion, $ionCubeVersion, $pluginName): void {
+                    $message = $pluginName . ": Is disabled because " . ('cli' == php_sapi_name() ? 'ionCube ' . $requiredIonCubeVersion : '<a href="http://www.ioncube.com">ionCube ' . $requiredIonCubeVersion . '</a>') . " PHP Loader is not installed! In order for " . $pluginName . " to work, you must have ionCube " . $requiredIonCubeVersion . " and above. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking. Please visit " . ('cli' == php_sapi_name() ? 'ioncube.com/loaders.php' : '<a href="https://www.ioncube.com/loaders.php">ioncube.com/loaders.php</a>') . " for install assistance or you can ask your server service provider to install ionCube " . $requiredIonCubeVersion . " or above. Your current installed IonCube version is " . ($ionCubeVersion ? $ionCubeVersion : 'not installed') . "."; // @phpcs:ignore
+                    printf('<div class="notice notice-error"><p>%1$s</p></div>', wp_kses_post($message));
+                });
+            }
+            if (extension_loaded('xdebug') && $status) {
+                $modes = xdebug_info('mode');
+                $loaderFile = file_get_contents(dirname(__DIR__) . '/Loader.php', true);
+                if (isset($modes[0]) && 'off' != $modes[0] && false !== strpos($loaderFile, 'HR+')) {
+                    $status = false;
+                    add_action('admin_notices', function () use ($pluginName): void {
+                        $message = $pluginName . ': xDebug installation was detected and ' . $pluginName . ' was disabled because of it. This is because ' . $pluginName . ' uses IonCube for license protection and the IonCube Loader is incompatible with xDebug, causing the site to crash. xDebug helps developers with debug and profile, but it doesn\'t need to be on the production site. So to turn off xDebug, please set mode to off or uninstall it. If you are not familiar with this process, you can get help from your server service provider.'; // @phpcs:ignore
+                        printf('<div class="notice notice-error"><p>%1$s</p></div>', esc_html($message));
+                    });
+                }
             }
         }
 

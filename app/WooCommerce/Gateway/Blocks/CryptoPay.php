@@ -33,7 +33,7 @@ class CryptoPay extends AbstractPaymentMethodType
     /**
      * @var string
      */
-    private string $scriptId;
+    private string $scriptId = '';
 
     /**
      * @return void
@@ -94,6 +94,10 @@ class CryptoPay extends AbstractPaymentMethodType
      */
     public function get_payment_method_script_handles(): array
     {
+        if (!$this->is_active()) {
+            return [];
+        }
+
         return [$this->scriptId = Helpers::registerScript('blocks.min.js')];
     }
 

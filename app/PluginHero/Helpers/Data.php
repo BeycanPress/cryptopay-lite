@@ -226,11 +226,25 @@ trait Data
      */
     public static function getPluginData(string $file): object
     {
-        if (!function_exists('get_plugin_data')) {
-            require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-        }
-
-        $pluginData = (object) get_plugin_data($file);
+        $pluginData = (object) get_file_data($file, [
+            'Name' => 'Plugin Name',
+            'PluginURI' => 'Plugin URI',
+            'Version' => 'Version',
+            'Description' => 'Description',
+            'Author' => 'Author',
+            'AuthorURI' => 'Author URI',
+            'TextDomain' => 'Text Domain',
+            'DomainPath' => 'Domain Path',
+            'License' => 'License',
+            'LicenseURI' => 'License URI',
+            'Network' => 'Network',
+            'RequiresWP' => 'Requires at least',
+            'RequiresPHP' => 'Requires PHP',
+            'UpdateURI' => 'Update URI',
+            'RequiresPlugins' => 'Requires Plugins',
+            'Title' => 'Plugin Name',
+            'AuthorName' => 'Author'
+        ]);
 
         if (!isset($pluginData->Slug)) { // phpcs:ignore
             $pluginData->Slug = self::getPluginSlug($file); // phpcs:ignore
@@ -264,7 +278,7 @@ trait Data
             // @phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $result = $wpdb->get_row(
                 $wpdb->prepare(
-                    "SELECT * FROM $wpdb->users WHERE `%s` = %s",
+                    "SELECT * FROM $wpdb->users WHERE %s = %s",
                     $field,
                     $value
                 )
