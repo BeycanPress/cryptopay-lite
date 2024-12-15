@@ -40,6 +40,8 @@ Are you ready to speed up the process of receiving WooCommerce crypto payments o
 
 **Comparison with other services:**
 
+Compare the crypto payment gateway WordPress plugin with other services.
+
 ***CryptoPay:***
 
 ✅ All payments reach you directly. So the whole system works as P2P (Peer to Peer).
