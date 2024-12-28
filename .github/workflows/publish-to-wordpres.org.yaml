@@ -35,6 +35,10 @@ jobs:
         echo "UPLOAD_URL=$upload_url" >> $GITHUB_ENV
         echo "RELEASE_ID=$latest_release_id" >> $GITHUB_ENV
         echo "RELEASE_VERSION=$latest_release_version" >> $GITHUB_ENV
+  
+    - name: Install Subversion (SVN)
+      run: sudo apt-get update && sudo apt-get install -y subversion
+
     - name: WordPress Plugin Deploy
       id: deploy
       uses: 10up/action-wordpress-plugin-deploy@stable
