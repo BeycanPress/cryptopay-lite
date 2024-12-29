@@ -114,15 +114,12 @@ class Verifier
         int $userId = 0,
         string $code = 'all'
     ): void {
-        if (0 == $userId) {
-            $params = [
-                'status' => Status::PENDING->getValue()
-            ];
-        } else {
-            $params = [
-                'status' => Status::PENDING->getValue(),
-                'userId' => $userId
-            ];
+        $params = [
+            'status' => Status::PENDING->getValue()
+        ];
+
+        if (0 != $userId) {
+            $params['userId'] = $userId;
         }
 
         if ('all' != $code) {

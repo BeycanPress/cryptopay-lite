@@ -32,7 +32,7 @@ class Details
         if (CryptoPay::ID == $order->get_payment_method()) {
             $transaction = (new OrderTransaction())->getTransactionByOrderId($orderId);
 
-            if ($order->get_status() == Status::PENDING->getValue() && !$transaction) {
+            if ('pending' == $order->get_status() && !$transaction) {
                 Helpers::viewEcho('woocommerce/pending', ['payUrl' => $order->get_checkout_payment_url(true)]);
             } elseif (!is_null($transaction)) {
                 echo Helpers::getPaymentHtmlDetails($transaction);

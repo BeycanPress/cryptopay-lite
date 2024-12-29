@@ -28,7 +28,7 @@ class Checkout extends \WC_Checkout
     {
         $order = wc_get_order($orderId);
 
-        if ($order->get_status() != Status::PENDING->getValue()) {
+        if ('pending' != $order->get_status()) {
             wp_redirect($order->get_checkout_order_received_url());
             exit();
         } else {
