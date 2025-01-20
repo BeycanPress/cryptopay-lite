@@ -211,6 +211,15 @@ abstract class AbstractTransaction extends AbstractModel
     }
 
     /**
+     * @param string $hash
+     * @return bool
+     */
+    public function updateStatusToProcessingByHash(string $hash): bool
+    {
+        return $this->updateStatusByHash($hash, Status::PROCESSING);
+    }
+
+    /**
      * @param string $text
      * @param array<mixed> $params
      * @return array<array<object>,integer>

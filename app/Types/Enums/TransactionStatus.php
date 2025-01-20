@@ -11,6 +11,7 @@ enum TransactionStatus: string
     case PENDING = 'pending';
     case VERIFIED = 'verified';
     case FAILED = 'failed';
+    case PROCESSING = 'processing';
 
     /**
      * @return string

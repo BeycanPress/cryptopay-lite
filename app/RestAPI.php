@@ -203,7 +203,7 @@ class RestAPI extends BaseAPI
                 'userId' => $this->currentUserId,
                 'updatedAt' => current_time('mysql'),
                 'createdAt' => current_time('mysql'),
-                'status' => Status::PENDING->getValue(),
+                'status' => Status::PROCESSING->getValue(),
                 'hash' => $this->paymentData->getHash(),
                 'testnet' => Helpers::getTestnetStatus(),
                 'orderId' => $this->paymentData->getOrder()->getId(),
@@ -321,7 +321,8 @@ class RestAPI extends BaseAPI
         $this->paymentData->getModel()->update([
             'reminderEmail' => $email,
             'userId' => $this->currentUserId,
-            'updatedAt' => current_time('mysql')
+            'updatedAt' => current_time('mysql'),
+            'status' => Status::PENDING->getValue()
         ], [
             'hash' => $this->paymentData->getHash()
         ]);

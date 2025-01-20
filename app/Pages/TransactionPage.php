@@ -235,7 +235,10 @@ class TransactionPage extends Page
                 )->format('d M Y H:i');
             },
             'delete' => function ($tx) {
-                if (strtolower($tx->status) == Status::PENDING->getValue()) {
+                if (
+                    strtolower($tx->status) == Status::PENDING->getValue() ||
+                    strtolower($tx->status) == Status::PROCESSING->getValue()
+                ) {
                     return '';
                 };
                 return Helpers::view('components/delete', [
