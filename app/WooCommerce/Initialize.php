@@ -24,19 +24,21 @@ class Initialize
             new Services\Details();
 
             if (is_admin()) {
-                new TransactionPage(
-                    esc_html__('Order transactions', 'cryptopay'),
-                    'woocommerce',
-                    2,
-                    [
-                        'orderId' => function ($tx) {
-                            return Helpers::view('components/link', [
-                                'url' => get_edit_post_link($tx->orderId),
-                                'text' => $tx->orderId
-                            ]);
-                        }
-                    ]
-                );
+                add_action('init', function (): void {
+                    new TransactionPage(
+                        esc_html__('Order transactions', 'cryptopay'),
+                        'woocommerce',
+                        2,
+                        [
+                            'orderId' => function ($tx) {
+                                return Helpers::view('components/link', [
+                                    'url' => get_edit_post_link($tx->orderId),
+                                    'text' => $tx->orderId
+                                ]);
+                            }
+                        ]
+                    );
+                });
             }
         }
     }

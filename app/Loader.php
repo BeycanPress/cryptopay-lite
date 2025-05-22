@@ -30,13 +30,15 @@ class Loader extends PluginHero\Plugin
                 new WooCommerce\Initialize();
             });
         } else {
-            Helpers::adminNotice(
-                __(
-                    'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.',
-                    'cryptopay'
-                ),
-                'error'
-            );
+            add_action('init', function (): void {
+                Helpers::adminNotice(
+                    __(
+                        'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.', // @phpcs:ignore
+                        'cryptopay'
+                    ),
+                    'error'
+                );
+            }, 9);
         }
 
         add_filter(
@@ -65,15 +67,14 @@ class Loader extends PluginHero\Plugin
      */
     public function adminProcess(): void
     {
-        new Pages\HomePage();
-        new Pages\Integrations();
-        new Pages\PendingReminders();
-
-        if (file_exists(Helpers::getProp('pluginDir') . '/debug.log')) {
-            new Pages\DebugLogs();
-        }
-
         add_action('init', function (): void {
+            new Pages\HomePage();
+            new Pages\Integrations();
+            new Pages\PendingReminders();
+
+            if (file_exists(Helpers::getProp('pluginDir') . '/debug.log')) {
+                new Pages\DebugLogs();
+            }
             new Settings\Settings();
         }, 9);
     }
