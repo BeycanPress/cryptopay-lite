@@ -230,7 +230,7 @@ class Payment
                     $note = esc_html__('Your order is processing.', 'cryptopay');
                 }
 
-                $order->payment_complete();
+                $order->payment_complete($data->getHash());
                 $order->update_status(Helpers::getSetting('paymentCompleteOrderStatus'), $note);
             } else {
                 $order->update_status(
