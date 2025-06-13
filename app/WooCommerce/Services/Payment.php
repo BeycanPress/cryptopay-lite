@@ -106,6 +106,38 @@ class Payment
         ) {
             WC()->session->set('cp_posted_data', array_merge($_POST, $data));
 
+            if (!is_user_logged_in()) {
+                $guestCheckout = 'yes' === get_option('woocommerce_enable_guest_checkout');
+                $createAccount = 'yes' === get_option('woocommerce_enable_signup_and_login_from_checkout');
+                $createAccountEnabled = isset($_POST['createaccount']) && '1' === $_POST['createaccount'];
+
+                if ((!$guestCheckout || $createAccountEnabled) && $createAccount) {
+                    $useEmailAsLogin = 'yes' === get_option('woocommerce_registration_generate_username');
+                    if ($useEmailAsLogin) {
+                        if (email_exists(sanitize_email($_POST['billing_email']))) {
+                            $errors->add(
+                                'cryptopay',
+                                esc_html__(
+                                    'An account is already registered with your email address. Please login.',
+                                    'cryptopay'
+                                )
+                            );
+                        }
+                    } else {
+                        if (username_exists(sanitize_user($_POST['account_username']))) {
+                            $errors->add(
+                                'cryptopay',
+                                esc_html__(
+                                    'An account is already registered with your username. Please login.',
+                                    'cryptopay'
+                                )
+                            );
+                        }
+                    }
+                }
+            }
+
+
             // if has error
             if (!empty($errors->errors)) {
                 foreach ($errors->errors as $code => $messages) {
@@ -143,8 +175,8 @@ class Payment
                 ])->setPaymentCurrency(CurrencyType::fromObject($currency));
 
                 $init = (new CryptoPay('woocommerce'))->setOrder($order)
-                ->setParams(ParamsType::fromObject($params))
-                ->init(NetworkType::fromObject($network));
+                    ->setParams(ParamsType::fromObject($params))
+                    ->init(NetworkType::fromObject($network));
 
                 Response::success(esc_html__('Success', 'cryptopay'), [
                     'init' => $init->prepareForJsSide()
@@ -230,7 +262,7 @@ class Payment
                     $note = esc_html__('Your order is processing.', 'cryptopay');
                 }
 
-                $order->payment_complete();
+                $order->payment_complete($data->getHash());
                 $order->update_status(Helpers::getSetting('paymentCompleteOrderStatus'), $note);
             } else {
                 $order->update_status(

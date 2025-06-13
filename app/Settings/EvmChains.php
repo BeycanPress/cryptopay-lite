@@ -16,10 +16,10 @@ class EvmChains
      */
     private static array $networkMatch = [
         1 => 11155111,
+        8453 => 84532,
         56 => 97,
         43114 => 43113,
         137 => 80002,
-        250 => 4002
     ];
 
     /**
@@ -138,6 +138,12 @@ class EvmChains
                             'default' => true,
                         ],
                         [
+                            'id'      => 'id_8453',
+                            'title'   => esc_html('Base'),
+                            'type'    => 'switcher',
+                            'default' => true
+                        ],
+                        [
                             'id'      => 'id_56',
                             'title'   => esc_html('BNB Smart Chain'),
                             'type'    => 'switcher',
@@ -154,12 +160,6 @@ class EvmChains
                             'title'   => esc_html('Polygon'),
                             'type'    => 'switcher',
                             'default' => true,
-                        ],
-                        [
-                            'id'      => 'id_250',
-                            'title'   => esc_html('Fantom'),
-                            'type'    => 'switcher',
-                            'default' => true
                         ],
                     ]
                 ]
