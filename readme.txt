@@ -1,4 +1,4 @@
-=== WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
+=== Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
@@ -9,11 +9,11 @@ Version: 2.3.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept Crypto Payments, Accept Bitcoin Payments, Solana Pay, BTC, USDT, ETH, SOL, TRX
+Cryptocurrency Payment Gateway for WordPress by CryptoPay. Accept Crypto Payments, Accept Bitcoin Payments, Solana Pay, BTC, USDT, ETH, SOL, TRX
 
 == Description ==
 
-### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
+### Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
 WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With Reown AppKit support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
