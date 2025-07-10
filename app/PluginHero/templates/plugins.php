@@ -20,7 +20,7 @@
                                 </li>
                             <?php endforeach;
                         else :
-                            echo esc_html__('No product found!');
+                            echo esc_html__('No product found!', 'cryptopay');
                         endif; ?>
                     </ul>
                 </div>

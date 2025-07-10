@@ -107,42 +107,6 @@ abstract class Setting
     }
 
     /**
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    public static function live(string $key, mixed $default = null): mixed
-    {
-        if ('POST' !== $_SERVER['REQUEST_METHOD']) {
-            return null;
-        }
-
-        if (self::$params['ajax_save'] ?? true) {
-            $action = 'csf_' . self::getSettingKey() . '_ajax_save';
-
-            if (!isset($_POST[$action]) && !isset($_POST['data'])) {
-                return null;
-            }
-
-            $data = json_decode(stripslashes($_POST['data']), true);
-
-            $settings = $data[self::getSettingKey()];
-        } else {
-            if (!isset($_GET['page'])) {
-                return null;
-            }
-
-            if (self::getSettingKey() !== $_GET['page']) {
-                return null;
-            }
-
-            $settings = $_POST[self::getSettingKey()];
-        }
-
-        return $settings[$key] ?? $default;
-    }
-
-    /**
      * Easy use for get_option
      * @param string $key
      * @param mixed $default

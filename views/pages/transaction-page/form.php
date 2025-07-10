@@ -1,4 +1,5 @@
 <?php
+    if ( ! defined( 'ABSPATH' ) ) exit;
     use BeycanPress\CryptoPayLite\Types\Enums\TransactionStatus as Status;
     $verified = Status::VERIFIED;
     $failed = Status::FAILED;

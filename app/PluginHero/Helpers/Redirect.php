@@ -12,7 +12,7 @@ trait Redirect
      */
     public static function redirect(string $url): void
     {
-        wp_redirect($url);
+        admin_init($url);
         exit();
     }
 
@@ -34,7 +34,7 @@ trait Redirect
     public static function adminRedirect(string $url): void
     {
         add_action('admin_init', function () use ($url): void {
-            wp_redirect($url);
+            wp_safe_redirect($url);
             exit();
         });
     }
@@ -46,7 +46,7 @@ trait Redirect
     public static function templateRedirect(string $url): void
     {
         add_action('template_redirect', function () use ($url): void {
-            wp_redirect($url);
+            admin_init($url);
             exit();
         });
     }

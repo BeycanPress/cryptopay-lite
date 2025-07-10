@@ -49,7 +49,7 @@ class ReminderEmail
 
             $res = wp_mail(
                 $transaction->getReminderEmail(),
-                __('CryptoPay Payment Reminder', 'cryptopay'),
+                esc_html__('CryptoPay Payment Reminder', 'cryptopay'),
                 $mailContent,
                 [
                     'Content-Type: text/html; charset=UTF-8'

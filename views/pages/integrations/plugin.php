@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <li>
     <?php if (isset($plugin->new)) : ?>
         <div class="new"><?php echo esc_html__('New', 'cryptopay') ?></div>
