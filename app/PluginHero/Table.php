@@ -466,7 +466,7 @@ class Table extends \WP_List_Table
         if (in_array($columnName, array_keys($itemList))) {
             return $itemList[$columnName];
         } else {
-            return esc_html__('Key not found!');
+            return esc_html__('Key not found!', 'cryptopay');
         }
     }
 }

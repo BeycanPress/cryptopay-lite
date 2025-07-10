@@ -1,7 +1,7 @@
 <?php if (!defined('ABSPATH')) exit; ?>
 <div class="wrap">
     <h1 class="wp-heading-inline">
-        <?php echo esc_html__('BeycanPress Plugins'); ?>
+        <?php echo esc_html__('BeycanPress Plugins', 'cryptopay'); ?>
     </h1>
     <hr class="wp-header-end">
     <br>
