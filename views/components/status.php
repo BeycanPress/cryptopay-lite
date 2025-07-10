@@ -1,3 +1,4 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
-<span class="cp-status <?php echo esc_attr(esc_attr($status)); ?>"><?php echo esc_html(esc_html__(ucfirst($status), 'cryptopay')); ?></span>
+<?php /* translators: %s: Status */ ?>
+<span class="cp-status <?php echo esc_attr($status); ?>"><?php echo esc_html__(sprintf('%s', ucfirst($status)), 'cryptopay'); ?></span>

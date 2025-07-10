@@ -49,7 +49,7 @@ trait General
      */
     public static function dateToTimeAgo(string $date): string
     {
-        return human_time_diff(strtotime(wp_date('Y-m-d H:i:s')), strtotime($date)) . esc_html__(' ago');
+        return human_time_diff(strtotime(wp_date('Y-m-d H:i:s')), strtotime($date)) . esc_html__(' ago', 'cryptopay');
     }
 
     /**

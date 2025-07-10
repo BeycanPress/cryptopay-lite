@@ -45,8 +45,8 @@ class Plugins extends Page
             }
 
             parent::__construct([
-                'pageName' => esc_html__('BeycanPress Plugins'),
-                'subMenuPageName' => esc_html__('BeycanPress Plugins'),
+                'pageName' => esc_html__('BeycanPress Plugins', 'cryptopay'),
+                'subMenuPageName' => esc_html__('BeycanPress Plugins', 'cryptopay'),
                 'slug' => 'beycanpress-plugins',
                 'icon' => $this->iconUrl()
             ]);
