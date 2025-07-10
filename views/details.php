@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <section class="cryptopay-lite-payment-details">
     <h2 class="cryptopay-lite-payment-details-title">
         <?php echo esc_html__('CryptoPay Payment Details', 'cryptopay'); ?>
@@ -53,7 +55,8 @@
             </th>
             <td>
                 <?php
-                    echo ucfirst(esc_html__(str_replace('-', ' ', ($transaction->getStatus()->getValue())), 'cryptopay'));
+                    /* translators: %s: Status */
+                    echo ucfirst(esc_html__(sprintf('%s', str_replace('-', ' ', ($transaction->getStatus()->getValue()))), 'cryptopay'));
                 ?>
             </td>
         </tr>

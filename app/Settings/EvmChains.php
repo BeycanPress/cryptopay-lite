@@ -27,7 +27,7 @@ class EvmChains
      */
     public static function initSettings(): void
     {
-        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a premium feature => %s', 'cryptopay'), '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . __('Buy premium', 'cryptopay') . '</a>') . '</div><br>';
+        $proMsg = '<div style="display:flex;align-items:center">' . sprintf(esc_html__('This is a premium feature => %s', 'cryptopay'), '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugin_settings" target="_blank" class="button" style="margin-left: 10px">' . esc_html__('Buy premium', 'cryptopay') . '</a>') . '</div><br>';
 
         if (Helpers::getSetting('evmchainsActivePassive') && '' == Helpers::getSetting('evmchainsWalletAddress')) {
             Helpers::networkWillNotWorkMessage('EVM Chains');

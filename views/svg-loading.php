@@ -1,4 +1,5 @@
 <?php
+    if ( ! defined( 'ABSPATH' ) ) exit;
     use BeycanPress\CryptoPayLite\Helpers;
     if (Helpers::getTheme($addon)['mode'] === 'dark') {
         $color1 = 'rgb(28 34 43)';

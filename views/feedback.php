@@ -1,4 +1,5 @@
 <?php
+    if ( ! defined( 'ABSPATH' ) ) exit;
     use BeycanPress\CryptoPayLite\Helpers;
 ?>
 <div class="wrap">

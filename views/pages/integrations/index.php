@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <div class="wrap">
     <h1 class="wp-heading-inline">
         <?php echo esc_html__('CryptoPay', 'cryptopay'); ?>
@@ -18,7 +20,7 @@
                                 $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
-                            echo esc_html__('No product found!');
+                            echo esc_html__('No product found!', 'cryptopay');
                         endif; ?>
                     </ul>
                 </div>
@@ -38,7 +40,7 @@
                                 $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
-                            echo esc_html__('No product found!');
+                            echo esc_html__('No product found!', 'cryptopay');
                         endif; ?>
                     </ul>
                 </div>
@@ -58,7 +60,7 @@
                                 $viewEcho('pages/integrations/plugin', compact('plugin'));
                             endforeach;
                         else :
-                            echo esc_html__('No product found!');
+                            echo esc_html__('No product found!', 'cryptopay');
                         endif; ?>
                     </ul>
                 </div>

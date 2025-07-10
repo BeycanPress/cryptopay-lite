@@ -28,7 +28,8 @@ class DebugLogs extends Page
     {
         if ($_POST['delete'] ?? 0) {
             Helpers::deleteLogFile();
-            wp_redirect(admin_url('admin.php?page=cryptopay_lite_settings'));
+            wp_safe_redirect(admin_url('admin.php?page=cryptopay_lite_settings'));
+            exit();
         }
 
         Helpers::viewEcho('pages/debug-logs', [

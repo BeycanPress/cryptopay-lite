@@ -1,19 +1,19 @@
-=== WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
+=== Cryptocurrency Payment Gateway for WordPress by CryptoPay ===
 Contributors: BeycanPress
 Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable Tag: 2.3.11
-Version: 2.3.11
+Stable Tag: 2.3.12
+Version: 2.3.12
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce Cryptocurrency Payment Gateway for WordPress. Accept Crypto Payments, Accept Bitcoin Payments, Solana Pay, BTC, USDT, ETH, SOL, TRX
+Cryptocurrency Payment Gateway for WordPress by CryptoPay. Accept Crypto Payments, Accept Bitcoin Payments, Solana Pay, BTC, USDT, ETH, SOL, TRX
 
 == Description ==
 
-### WooCommerce Cryptocurrency Payment Gateway for WordPress by CryptoPay 
+### Cryptocurrency Payment Gateway for WordPress by CryptoPay 
 
 WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With Reown AppKit support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
@@ -114,6 +114,14 @@ You can easily translate with Loco translate.
 
 Read documentation: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">Documentation</a>**
 Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">Cryptocurrency payments for WooCommerce</a>**
+
+= 3rd Party Libraries & API's =
+* https://beycanpress.com/
+    * Privacy policy: https://beycanpress.com/privacy-policy/
+    * This is our website. We use it to provide support and sell premium plugins.
+* https://reown.com/
+    * Privacy policy: https://reown.com/privacy-policy
+    * This is the main package to accept crypto payments on this plugin.
 
 == Screenshots ==
 

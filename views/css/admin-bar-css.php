@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <style>
     #wp-admin-bar-cryptopay-new-product-notification .ab-item {
         display: flex!important;

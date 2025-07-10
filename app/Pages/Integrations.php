@@ -82,10 +82,10 @@ class Integrations extends Page
     public function controlNotification(): void
     {
         $oldCount = get_option('cryptopay_lite_new_product_notification_count') ?? 0;
-        if (date('Y-m-d') != get_option('cryptopay_lite_new_product_notification_date')) {
+        if (gmdate('Y-m-d') != get_option('cryptopay_lite_new_product_notification_date')) {
             $res = $this->client->get('notification-by-category' . $this->categories);
             $newCount = isset($res->success) && $res->success ? $res->data->count : 0;
-            update_option('cryptopay_lite_new_product_notification_date', date('Y-m-d'));
+            update_option('cryptopay_lite_new_product_notification_date', gmdate('Y-m-d'));
             update_option('cryptopay_lite_new_product_notification_count', $newCount);
             if (($newCount - $oldCount)) {
                 update_option('cryptopay_lite_new_product_notification_new_count', ($newCount - $oldCount));

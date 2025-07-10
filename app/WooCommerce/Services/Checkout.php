@@ -8,7 +8,6 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Services;
 use BeycanPress\CryptoPayLite\Payment;
 // Types
 use BeycanPress\CryptoPayLite\Types\Order\OrderType;
-use BeycanPress\CryptoPayLite\Types\Enums\TransactionStatus as Status;
 
 class Checkout extends \WC_Checkout
 {
@@ -29,7 +28,7 @@ class Checkout extends \WC_Checkout
         $order = wc_get_order($orderId);
 
         if ('pending' != $order->get_status()) {
-            wp_redirect($order->get_checkout_order_received_url());
+            admin_init($order->get_checkout_order_received_url());
             exit();
         } else {
             $id = (int) $order->get_id();

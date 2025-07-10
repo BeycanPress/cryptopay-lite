@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CryptoPay Lite\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-01 12:01+0000\n"
+"POT-Creation-Date: 2025-07-10 05:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Loco-Version: 2.8.0; wp-6.8.1; php-8.2.25\n"
 "X-Domain: cryptopay"
 
 #: app/Settings/Settings.php:100
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Add new"
 msgstr ""
 
-#: views/pages/integrations/index.php:51
+#: views/pages/integrations/index.php:53
 msgid "Add-ons"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "All In One Cryptocurrency Payments for WordPress"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:73 app/Pages/TransactionPage.php:120
+#: app/Pages/TransactionPage.php:120 app/Pages/PendingReminders.php:73
 msgid "Amount"
 msgstr ""
 
@@ -70,11 +70,19 @@ msgstr ""
 msgid "Amount to be paid:"
 msgstr ""
 
-#: views/details.php:43
+#: views/details.php:45
 msgid "Amount: "
 msgstr ""
 
-#: views/feedback.php:15
+#: app/WooCommerce/Services/Payment.php:120
+msgid "An account is already registered with your email address. Please login."
+msgstr ""
+
+#: app/WooCommerce/Services/Payment.php:130
+msgid "An account is already registered with your username. Please login."
+msgstr ""
+
+#: views/feedback.php:16
 msgid "An error occurred while sending your feedback."
 msgstr ""
 
@@ -84,7 +92,7 @@ msgid ""
 "administrator."
 msgstr ""
 
-#: app/RestAPI.php:415
+#: app/RestAPI.php:416
 msgid "An unknown error occurred!"
 msgstr ""
 
@@ -127,7 +135,7 @@ msgstr ""
 msgid "Block confirmation count"
 msgstr ""
 
-#: views/woocommerce/details.php:8
+#: views/woocommerce/details.php:10
 msgid "Blockchain Network"
 msgstr ""
 
@@ -163,16 +171,16 @@ msgstr ""
 msgid "Buy custom network supports"
 msgstr ""
 
-#: app/Loader.php:55
+#: app/Loader.php:57
 msgid "Buy Premium"
 msgstr ""
 
-#: app/Pages/HomePage.php:23 app/Settings/EvmChains.php:30
-#: app/Settings/Settings.php:23 views/pages/home-page/index.php:10
+#: app/Settings/EvmChains.php:30 app/Settings/Settings.php:23
+#: app/Pages/HomePage.php:23 views/pages/home-page/index.php:12
 msgid "Buy premium"
 msgstr ""
 
-#: app/Settings/EvmChains.php:124
+#: app/Settings/EvmChains.php:125
 msgid "Buy premium now"
 msgstr ""
 
@@ -209,7 +217,7 @@ msgstr ""
 msgid "Click to activate"
 msgstr ""
 
-#: views/woocommerce/pending.php:1
+#: views/woocommerce/pending.php:3
 msgid "click to pay"
 msgstr ""
 
@@ -245,11 +253,11 @@ msgstr ""
 msgid "Converter API"
 msgstr ""
 
-#: views/pages/integrations/index.php:31
+#: views/pages/integrations/index.php:33
 msgid "Converter API's"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:76 app/Pages/TransactionPage.php:124
+#: app/Pages/TransactionPage.php:124 app/Pages/PendingReminders.php:76
 msgid "Created at"
 msgstr ""
 
@@ -265,18 +273,18 @@ msgstr ""
 msgid "Cron type"
 msgstr ""
 
-#: views/pages/integrations/index.php:3
+#: views/pages/integrations/index.php:5
 msgid "CryptoPay"
 msgstr ""
 
 #. Name of the plugin
-#: app/Pages/HomePage.php:22 views/components/notification.php:2
+#: app/Pages/HomePage.php:22 views/components/notification.php:3
 #: app/WooCommerce/Gateway/CryptoPay.php:91
 #: app/WooCommerce/Gateway/CryptoPay.php:200
 msgid "CryptoPay Lite"
 msgstr ""
 
-#: views/feedback.php:19
+#: views/feedback.php:20
 msgid ""
 "CryptoPay Lite has limited features unlike the Premium version. This is "
 "because it is essentially for entry users. Because professionals will buy "
@@ -285,17 +293,17 @@ msgid ""
 "are included in Premium?"
 msgstr ""
 
-#: app/Loader.php:34
+#: app/Loader.php:35
 msgid ""
 "CryptoPay Lite: Please enter your wallet address in the settings section for "
 "CryptoPay Lite run."
 msgstr ""
 
-#: views/components/notification.php:2
+#: views/components/notification.php:3
 msgid "CryptoPay new products"
 msgstr ""
 
-#: views/details.php:3 views/woocommerce/details.php:4
+#: views/details.php:5 views/woocommerce/details.php:6
 msgid "CryptoPay Payment Details"
 msgstr ""
 
@@ -340,8 +348,8 @@ msgstr ""
 msgid "Custom prices"
 msgstr ""
 
+#: app/WooCommerce/Services/Checkout.php:76
 #: app/WooCommerce/Gateway/CryptoPay.php:322
-#: app/WooCommerce/Services/Checkout.php:77
 msgid "Customer has chosen CryptoPay payment method, payment is pending."
 msgstr ""
 
@@ -357,7 +365,7 @@ msgstr ""
 msgid "Data deletion status"
 msgstr ""
 
-#: app/Pages/DebugLogs.php:19 views/pages/debug-logs.php:3
+#: app/Pages/DebugLogs.php:19 views/pages/debug-logs.php:5
 msgid "Debug logs"
 msgstr ""
 
@@ -365,11 +373,11 @@ msgstr ""
 msgid "Debugging"
 msgstr ""
 
-#: app/Pages/TransactionPage.php:125 views/components/delete.php:1
+#: app/Pages/TransactionPage.php:125 views/components/delete.php:3
 msgid "Delete"
 msgstr ""
 
-#: views/pages/debug-logs.php:10
+#: views/pages/debug-logs.php:12
 msgid "Delete old logs"
 msgstr ""
 
@@ -386,7 +394,7 @@ msgstr ""
 msgid "Discount"
 msgstr ""
 
-#: views/woocommerce/details.php:21
+#: views/woocommerce/details.php:23
 msgid "Discount Rate"
 msgstr ""
 
@@ -398,7 +406,7 @@ msgstr ""
 msgid "Discount rate cannot be empty."
 msgstr ""
 
-#: views/details.php:34
+#: views/details.php:36
 msgid "Discount Rate: "
 msgstr ""
 
@@ -406,11 +414,11 @@ msgstr ""
 msgid "Discount rate: "
 msgstr ""
 
-#: views/woocommerce/details.php:13
+#: views/woocommerce/details.php:15
 msgid "Discounted Amount"
 msgstr ""
 
-#: views/details.php:18
+#: views/details.php:20
 msgid "Discounted Amount: "
 msgstr ""
 
@@ -418,7 +426,7 @@ msgstr ""
 msgid "Discounted amount: "
 msgstr ""
 
-#: app/Loader.php:57
+#: app/Loader.php:59
 msgid "Documentation"
 msgstr ""
 
@@ -438,7 +446,7 @@ msgstr ""
 msgid "Enable/Disable"
 msgstr ""
 
-#: app/RestAPI.php:404
+#: app/RestAPI.php:405
 msgid "Endpoint not found!"
 msgstr ""
 
@@ -458,7 +466,7 @@ msgstr ""
 msgid "EVM settings"
 msgstr ""
 
-#: views/pages/transaction-page/form.php:23
+#: views/pages/transaction-page/form.php:24
 msgid "Failed"
 msgstr ""
 
@@ -472,20 +480,20 @@ msgid ""
 "site administrator of the situation."
 msgstr ""
 
-#: views/feedback.php:6 app/Settings/Settings.php:453
+#: views/feedback.php:7 app/Settings/Settings.php:453
 #: app/Settings/Settings.php:454
 msgid "Feedback"
 msgstr ""
 
-#: views/pages/transaction-page/form.php:39
+#: views/pages/transaction-page/form.php:40
 msgid "Filter"
 msgstr ""
 
-#: views/pages/transaction-page/form.php:31
+#: views/pages/transaction-page/form.php:32
 msgid "Filter by network"
 msgstr ""
 
-#: views/pages/transaction-page/form.php:18
+#: views/pages/transaction-page/form.php:19
 msgid "Filter by status"
 msgstr ""
 
@@ -501,7 +509,7 @@ msgstr ""
 msgid "Get more info"
 msgstr ""
 
-#: app/Settings/EvmChains.php:124
+#: app/Settings/EvmChains.php:125
 msgid ""
 "Get the premium to get paid with unlimited EVM blockchain network and any "
 "cryptocurrency (token) you want!"
@@ -511,7 +519,7 @@ msgstr ""
 msgid "Guide"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:68 app/Pages/TransactionPage.php:116
+#: app/Pages/TransactionPage.php:116 app/Pages/PendingReminders.php:68
 msgid "Hash"
 msgstr ""
 
@@ -528,6 +536,10 @@ msgstr ""
 msgid ""
 "If the %s setting is active in WooCommerce settings, non-registered users "
 "can use instant payments."
+msgstr ""
+
+#: app/Settings/EvmChains.php:110
+msgid "If you enabled Web3Wallets, please disable it."
 msgstr ""
 
 #: app/Settings/Settings.php:292
@@ -554,15 +566,15 @@ msgstr ""
 msgid "Insufficient balance!"
 msgstr ""
 
-#: app/Pages/Integrations.php:71 views/pages/integrations/index.php:71
+#: app/Pages/Integrations.php:71 views/pages/integrations/index.php:73
 msgid "Integrations"
 msgstr ""
 
-#: app/RestAPI.php:402
+#: app/RestAPI.php:403
 msgid "Internal error!"
 msgstr ""
 
-#: app/Settings/EvmChains.php:116
+#: app/Settings/EvmChains.php:117
 msgid ""
 "It is a module within Reown AppKit that supports hundreds of wallets with "
 "WalletConnect support. Since all the above wallets are already supported, "
@@ -585,11 +597,11 @@ msgstr ""
 msgid "Light theme"
 msgstr ""
 
-#: app/Constants.php:60 views/cryptopay.php:1
+#: app/Constants.php:60 views/cryptopay.php:3
 msgid "Loading..."
 msgstr ""
 
-#: views/pages/debug-logs.php:16
+#: views/pages/debug-logs.php:18
 msgid "Logs not found!"
 msgstr ""
 
@@ -597,7 +609,7 @@ msgstr ""
 msgid "Mode"
 msgstr ""
 
-#: app/RestAPI.php:403
+#: app/RestAPI.php:404
 msgid "Model not found!"
 msgstr ""
 
@@ -605,28 +617,28 @@ msgstr ""
 msgid "Moralis API key not set! Please contact the site administrator."
 msgstr ""
 
-#: views/details.php:8
+#: views/details.php:10
 msgid "Name: "
 msgstr ""
 
-#: app/Pages/PendingReminders.php:72 app/Pages/TransactionPage.php:119
-#: app/Settings/Settings.php:57
+#: app/Settings/Settings.php:57 app/Pages/TransactionPage.php:119
+#: app/Pages/PendingReminders.php:72
 msgid "Network"
 msgstr ""
 
-#: views/pages/integrations/index.php:11
+#: views/pages/integrations/index.php:13
 msgid "Network supports"
 msgstr ""
 
-#: app/Settings/EvmChains.php:128
+#: app/Settings/EvmChains.php:129
 msgid "Networks"
 msgstr ""
 
-#: views/pages/integrations/plugin.php:3
+#: views/pages/integrations/plugin.php:5
 msgid "New"
 msgstr ""
 
-#: app/Constants.php:97 app/Payment.php:240
+#: app/Payment.php:240 app/Constants.php:97
 msgid ""
 "No active currencies were found on this network. Please report this to the "
 "administrator."
@@ -634,6 +646,12 @@ msgstr ""
 
 #: app/Payment.php:124
 msgid "No network is active, please activate at least one network!"
+msgstr ""
+
+#: app/PluginHero/templates/plugins.php:23
+#: views/pages/integrations/index.php:23 views/pages/integrations/index.php:43
+#: views/pages/integrations/index.php:63
+msgid "No product found!"
 msgstr ""
 
 #: app/Constants.php:74
@@ -652,7 +670,7 @@ msgstr ""
 msgid "Only Desktop"
 msgstr ""
 
-#: views/pages/integrations/index.php:11 views/pages/integrations/index.php:31
+#: views/pages/integrations/index.php:13 views/pages/integrations/index.php:33
 msgid "Only for premium"
 msgstr ""
 
@@ -680,7 +698,7 @@ msgstr ""
 msgid "Order button text"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:69 app/Pages/TransactionPage.php:117
+#: app/Pages/TransactionPage.php:117 app/Pages/PendingReminders.php:69
 msgid "Order ID"
 msgstr ""
 
@@ -692,7 +710,7 @@ msgstr ""
 msgid "Order pay"
 msgstr ""
 
-#: app/WooCommerce/Initialize.php:28
+#: app/WooCommerce/Initialize.php:29
 msgid "Order transactions"
 msgstr ""
 
@@ -712,7 +730,7 @@ msgstr ""
 msgid "Payment address:"
 msgstr ""
 
-#: views/woocommerce/details.php:26
+#: views/woocommerce/details.php:28
 msgid "Payment Amount"
 msgstr ""
 
@@ -720,7 +738,7 @@ msgstr ""
 msgid "Payment complete order status"
 msgstr ""
 
-#: app/RestAPI.php:295
+#: app/RestAPI.php:293
 msgid "Payment completed successfully"
 msgstr ""
 
@@ -736,16 +754,16 @@ msgstr ""
 msgid "Payment is being completed, please wait..."
 msgstr ""
 
-#: app/RestAPI.php:408
+#: app/RestAPI.php:409
 msgid "Payment not verified via Blockchain"
 msgstr ""
 
-#: app/RestAPI.php:409
+#: app/RestAPI.php:410
 #, php-format
 msgid "Payment not verified via Blockchain - Because reason: %s"
 msgstr ""
 
-#: app/WooCommerce/Services/Payment.php:238
+#: app/WooCommerce/Services/Payment.php:270
 msgid "Payment not verified via Blockchain!"
 msgstr ""
 
@@ -761,11 +779,11 @@ msgstr ""
 msgid "Payment timed out!"
 msgstr ""
 
-#: views/pages/transaction-page/form.php:26
+#: views/pages/transaction-page/form.php:27
 msgid "Pending"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:27 views/pages/pending-reminders/index.php:3
+#: app/Pages/PendingReminders.php:27 views/pages/pending-reminders/index.php:5
 msgid "Pending reminders"
 msgstr ""
 
@@ -773,11 +791,11 @@ msgstr ""
 msgid "Pending..."
 msgstr ""
 
-#: app/RestAPI.php:356
+#: app/RestAPI.php:357
 msgid "Please disable WP Cron from settings!"
 msgstr ""
 
-#: app/RestAPI.php:405
+#: app/RestAPI.php:406
 msgid "Please enter a valid data."
 msgstr ""
 
@@ -785,7 +803,7 @@ msgstr ""
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: app/RestAPI.php:316
+#: app/RestAPI.php:314
 msgid "Please enter a valid email!"
 msgstr ""
 
@@ -807,11 +825,11 @@ msgstr ""
 msgid "Please wait..."
 msgstr ""
 
-#: views/feedback.php:21
+#: views/feedback.php:22
 msgid "Please write your feedback here."
 msgstr ""
 
-#: views/pages/integrations/index.php:51 views/pages/integrations/index.php:71
+#: views/pages/integrations/index.php:53 views/pages/integrations/index.php:73
 msgid "Premium & Lite"
 msgstr ""
 
@@ -839,11 +857,11 @@ msgid ""
 "Reown Cloud at the link below."
 msgstr ""
 
-#: views/woocommerce/details.php:17
+#: views/woocommerce/details.php:19
 msgid "Real Amount"
 msgstr ""
 
-#: views/details.php:26
+#: views/details.php:28
 msgid "Real Amount: "
 msgstr ""
 
@@ -855,7 +873,7 @@ msgstr ""
 msgid "Receiver: "
 msgstr ""
 
-#: app/RestAPI.php:410
+#: app/RestAPI.php:411
 msgid "Redirect links cannot found!"
 msgstr ""
 
@@ -867,7 +885,7 @@ msgstr ""
 msgid "Reminder email"
 msgstr ""
 
-#: app/RestAPI.php:329
+#: app/RestAPI.php:330
 msgid "Reminder email set successfully!"
 msgstr ""
 
@@ -883,11 +901,11 @@ msgstr ""
 msgid "Reown Project ID is required! Please contact the site administrator."
 msgstr ""
 
-#: views/pages/transaction-page/form.php:40
+#: views/pages/transaction-page/form.php:41
 msgid "Reset"
 msgstr ""
 
-#: views/pages/home-page/index.php:11
+#: views/pages/home-page/index.php:13
 msgid "Review now"
 msgstr ""
 
@@ -918,7 +936,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:81 app/Pages/TransactionPage.php:132
+#: app/Pages/TransactionPage.php:132 app/Pages/PendingReminders.php:81
 msgid "Search..."
 msgstr ""
 
@@ -946,7 +964,7 @@ msgstr ""
 msgid "Selected network:"
 msgstr ""
 
-#: views/feedback.php:22
+#: views/feedback.php:23
 msgid "Send feedback"
 msgstr ""
 
@@ -962,7 +980,7 @@ msgstr ""
 msgid "Set reminder email"
 msgstr ""
 
-#: app/Loader.php:56 app/Settings/Settings.php:21
+#: app/Loader.php:58 app/Settings/Settings.php:21
 msgid "Settings"
 msgstr ""
 
@@ -978,7 +996,7 @@ msgstr ""
 msgid "Source:"
 msgstr ""
 
-#: app/Settings/EvmChains.php:129
+#: app/Settings/EvmChains.php:130
 msgid "Specify the networks you want to accept payments from."
 msgstr ""
 
@@ -986,15 +1004,15 @@ msgstr ""
 msgid "Specify the wallets you want to accept payments from."
 msgstr ""
 
-#: app/Pages/PendingReminders.php:74 app/Pages/TransactionPage.php:121
+#: app/Pages/TransactionPage.php:121 app/Pages/PendingReminders.php:74
 msgid "Status"
 msgstr ""
 
-#: views/details.php:52
+#: views/details.php:54
 msgid "Status: "
 msgstr ""
 
-#: app/WooCommerce/Services/Payment.php:149
+#: app/WooCommerce/Services/Payment.php:181
 msgid "Success"
 msgstr ""
 
@@ -1087,7 +1105,7 @@ msgid ""
 msgstr ""
 
 #. @phpcs:ignore
-#: app/RestAPI.php:412 app/Services/Converter.php:59
+#: app/RestAPI.php:413 app/Services/Converter.php:59
 msgid ""
 "There was a problem converting currency! Make sure your currency value is "
 "available in the relevant API or you define a custom value for your currency."
@@ -1192,7 +1210,7 @@ msgstr ""
 msgid "Token metadata not found!"
 msgstr ""
 
-#: app/RestAPI.php:406
+#: app/RestAPI.php:407
 msgid "Transaction already exists!"
 msgstr ""
 
@@ -1200,19 +1218,19 @@ msgstr ""
 msgid "Transaction create fail! Please try again."
 msgstr ""
 
-#: views/woocommerce/details.php:31
+#: views/woocommerce/details.php:33
 msgid "Transaction Hash"
 msgstr ""
 
-#: views/details.php:62
+#: views/details.php:65
 msgid "Transaction hash: "
 msgstr ""
 
-#: views/pages/transaction-page/index.php:3
+#: views/pages/transaction-page/index.php:5
 msgid "Transaction list"
 msgstr ""
 
-#: app/RestAPI.php:407
+#: app/RestAPI.php:408
 msgid "Transaction record not found!"
 msgstr ""
 
@@ -1230,21 +1248,21 @@ msgid ""
 "been registered."
 msgstr ""
 
-#: app/Settings/EvmChains.php:131
+#: app/Settings/EvmChains.php:132
 msgid ""
 "Unlimited and custom network support is only available in premium. As with "
 "MetaMask, you can add any EVM network you want with its information."
 msgstr ""
 
-#: app/Settings/EvmChains.php:122
+#: app/Settings/EvmChains.php:123
 msgid "Unlimited network and currency"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:75 app/Pages/TransactionPage.php:123
+#: app/Pages/TransactionPage.php:123 app/Pages/PendingReminders.php:75
 msgid "Updated at"
 msgstr ""
 
-#: app/Pages/PendingReminders.php:70 app/Pages/TransactionPage.php:118
+#: app/Pages/TransactionPage.php:118 app/Pages/PendingReminders.php:70
 msgid "User ID"
 msgstr ""
 
@@ -1256,20 +1274,20 @@ msgid ""
 "this, please make sure you have adjusted the cron settings."
 msgstr ""
 
-#: views/pages/transaction-page/form.php:20
+#: views/pages/transaction-page/form.php:21
 msgid "Verified"
 msgstr ""
 
 #: app/Constants.php:61
-msgid "Waiting approval..."
-msgstr ""
-
-#: app/Constants.php:50
-msgid "Waiting confirmation..."
+msgid "Waiting for approval..."
 msgstr ""
 
 #: app/Constants.php:47
 msgid "Waiting for block confirmations:"
+msgstr ""
+
+#: app/Constants.php:50
+msgid "Waiting for confirmation..."
 msgstr ""
 
 #: app/Constants.php:48
@@ -1414,21 +1432,21 @@ msgid ""
 "address first."
 msgstr ""
 
-#: views/feedback.php:13
+#: views/feedback.php:14
 msgid "Your feedback has been sent successfully."
 msgstr ""
 
+#: app/WooCommerce/Services/Payment.php:260
 #: app/WooCommerce/Gateway/CryptoPay.php:303
-#: app/WooCommerce/Services/Payment.php:228
 msgid "Your order is complete."
 msgstr ""
 
+#: app/WooCommerce/Services/Payment.php:262
 #: app/WooCommerce/Gateway/CryptoPay.php:305
-#: app/WooCommerce/Services/Payment.php:230
 msgid "Your order is processing."
 msgstr ""
 
-#: views/woocommerce/pending.php:1
+#: views/woocommerce/pending.php:3
 #, php-format
 msgid "Your order is waiting for payment, %s."
 msgstr ""

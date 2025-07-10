@@ -32,7 +32,7 @@ class Loader extends PluginHero\Plugin
         } else {
             add_action('init', function (): void {
                 Helpers::adminNotice(
-                    __(
+                    esc_html__(
                         'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.', // @phpcs:ignore
                         'cryptopay'
                     ),
@@ -54,9 +54,9 @@ class Loader extends PluginHero\Plugin
     public function pluginActionLinks(array $links): array
     {
         // @phpcs:disable
-        $links[] = '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugins_list" style="color: #389e38;font-weight: bold;" target="_blank">' . __('Buy Premium', 'cryptopay') . '</a>';
-        $links[] = '<a href="' . admin_url('admin.php?page=cryptopay_lite_settings') . '">' . __('Settings', 'cryptopay') . '</a>';
-        $links[] = '<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">' . __('Documentation', 'cryptopay') . '</a>';
+        $links[] = '<a href="https://beycanpress.com/chekcout/?add-to-cart=800&utm_source=lite_version&utm_medium=plugins_list" style="color: #389e38;font-weight: bold;" target="_blank">' . esc_html__('Buy Premium', 'cryptopay') . '</a>';
+        $links[] = '<a href="' . admin_url('admin.php?page=cryptopay_lite_settings') . '">' . esc_html__('Settings', 'cryptopay') . '</a>';
+        $links[] = '<a href="https://beycanpress.gitbook.io/cryptopay-docs/" target="_blank">' . esc_html__('Documentation', 'cryptopay') . '</a>';
         // @phpcs:enable
 
         return $links;
