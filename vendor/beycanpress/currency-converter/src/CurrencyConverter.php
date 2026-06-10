@@ -2,8 +2,6 @@
 
 namespace BeycanPress;
 
-use \BeycanPress\Http\Client;
-
 final class CurrencyConverter
 {
     /**
@@ -37,7 +35,7 @@ final class CurrencyConverter
      * @var array
      */
     private $apis = [
-        'CryptoCompare' => 'https://min-api.cryptocompare.com/data/price',
+        'CryptoCompare' => 'https://api.binance.com/api/v3/ticker/price',
         'CoinMarketCap' => 'https://pro-api.coinmarketcap.com/v1/tools/price-conversion',
         'CoinGecko' => 'https://api.coingecko.com/api/v3/simple/price'
     ];
@@ -117,22 +115,37 @@ final class CurrencyConverter
      */
     private function convertWithCoinGecko(string $from, string $to, float $amount) : ?float
     {   
-        $tokenList = json_decode($this->cache(function() {
-            $tokenList = $this->client->get('https://api.coingecko.com/api/v3/coins/list');
-            
-            $usdId = array_search('usd', array_column($tokenList, 'symbol'));
-            $usdId2 = array_search('usd+', array_column($tokenList, 'symbol'));
-            if (isset($tokenList[$usdId])) unset($tokenList[$usdId]);
-            if (isset($tokenList[$usdId2])) unset($tokenList[$usdId2]);
+        try {
+            $tokenList = json_decode($this->cache(function() {
+                $tokenList = $this->client->get('https://api.coingecko.com/api/v3/coins/list');
 
-            $tokenList[] = (object) [
-                'id' => 'usd',
-                'symbol' => 'usd',
-                'name' => 'USD' 
-            ];
+                // CoinGecko can return an error object (e.g. when rate-limited);
+                // bail out so a bad response is never cached for 24h.
+                if (!is_array($tokenList)) {
+                    throw new \Exception('Unexpected CoinGecko coins/list response');
+                }
 
-            return json_encode(array_values($tokenList));
-        }, 'token-list', (3600*24))->content);
+                $usdId = array_search('usd', array_column($tokenList, 'symbol'));
+                $usdId2 = array_search('usd+', array_column($tokenList, 'symbol'));
+                if (isset($tokenList[$usdId])) unset($tokenList[$usdId]);
+                if (isset($tokenList[$usdId2])) unset($tokenList[$usdId2]);
+
+                $tokenList[] = (object) [
+                    'id' => 'usd',
+                    'symbol' => 'usd',
+                    'name' => 'USD'
+                ];
+
+                return json_encode(array_values($tokenList));
+            }, 'token-list', (3600*24))->content);
+        } catch (\Throwable $e) {
+            // Transient upstream failure (rate limit, network) -> no conversion.
+            return null;
+        }
+
+        if (!is_array($tokenList)) {
+            return null;
+        }
 
         $fromId = array_search(strtolower($from), array_column($tokenList, 'symbol'));
         $toId = array_search(strtolower($to), array_column($tokenList, 'symbol'));
@@ -163,36 +176,20 @@ final class CurrencyConverter
                 'ids' => urlencode(implode(',', [$cgTo])),
                 'vs_currencies' => urlencode(implode(',', [$cgFrom]))
             ];
-    
-            $headers = [
-                'Content-Type: application/json'
-            ];
 
-            $qs = http_build_query($parameters); 
+            $qs = http_build_query($parameters);
             $request = "{$this->apiUrl}?{$qs}";
 
-            $curl = curl_init($request);
+            $response = $this->client
+                ->addHeader('Content-Type', 'application/json')
+                ->get($request);
 
-            curl_setopt_array($curl, [
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => $headers,
-                CURLOPT_RETURNTRANSFER => 1 
-            ]);
-
-            $response = json_decode(curl_exec($curl));
-
-            if (isset($response->{$cgTo})) {
-                if (isset($response->{$cgTo}->{$cgFrom})) {
-                    $result = $response->{$cgTo}->{$cgFrom};
-                } else {
-                    $result = null;
-                }
+            if (isset($response->{$cgTo}->{$cgFrom})) {
+                $result = $response->{$cgTo}->{$cgFrom};
             } else {
                 $result = null;
             }
 
-            curl_close($curl);
-            
             $cgPrice->$key = $result;
 
             file_put_contents($cgPriceFile, json_encode($cgPrice));
@@ -220,33 +217,19 @@ final class CurrencyConverter
             'convert' => $to
         ];
 
-        $headers = [
-            'Accepts: application/json',
-            'X-CMC_PRO_API_KEY: ' . $this->apiKey
-        ];
-
-        $qs = http_build_query($parameters); 
+        $qs = http_build_query($parameters);
         $request = "{$this->apiUrl}?{$qs}";
 
-
-        $curl = curl_init($request);
-
-        curl_setopt_array($curl, [
-            CURLOPT_HTTPHEADER => $headers,
-            CURLOPT_RETURNTRANSFER => 1 
-        ]);
-
-        $response = json_decode(curl_exec($curl));
+        $response = $this->client
+            ->addHeader('Accepts', 'application/json')
+            ->addHeader('X-CMC_PRO_API_KEY', (string) $this->apiKey)
+            ->get($request);
 
         if (isset($response->data)) {
-            $result = $response->data->quote->{strtoupper($to)}->price;
-        } else {
-            $result = null;
+            return $response->data->quote->{strtoupper($to)}->price;
         }
 
-        curl_close($curl); 
-
-        return $result;
+        return null;
     }
 
     /**
@@ -258,13 +241,79 @@ final class CurrencyConverter
      */
     private function convertWithCryptoCompare(string $from, string $to, float $amount) : ?float
     {
-        $apiUrl =  $this->apiUrl . '?fsym=' . $from . '&tsyms=' . $to;
-        $convertData = $this->client->get($apiUrl);
-        if (isset($convertData->$to)) {
-            return ($amount * $convertData->$to);
-        } else {
+        // Binance uses USDT instead of USD
+        $from = strtoupper($from) === 'USD' ? 'USDT' : strtoupper($from);
+        $to   = strtoupper($to) === 'USD' ? 'USDT' : strtoupper($to);
+
+        if ($from === $to) {
+            return floatval($amount);
+        }
+
+        // Direct pair: TO quoted in FROM (BTCUSDT) -> amount / price
+        if ($price = $this->getBinancePrice($to . $from)) {
+            return $amount / $price;
+        }
+
+        // Inverse pair: FROM quoted in TO (ETHBTC) -> amount * price
+        if ($price = $this->getBinancePrice($from . $to)) {
+            return $amount * $price;
+        }
+
+        // No direct pair, so bridge through USDT
+        $fromUsdt = $this->binanceToUsdt($from);
+        $toUsdt   = $this->binanceToUsdt($to);
+
+        if (!$fromUsdt || !$toUsdt) {
             return null;
         }
+
+        return $amount * ($fromUsdt / $toUsdt);
+    }
+
+    /**
+     * @param string $symbol
+     * @return float|null
+     */
+    private function binanceToUsdt(string $symbol) : ?float
+    {
+        if ('USDT' === $symbol) {
+            return 1.0;
+        }
+
+        if ($price = $this->getBinancePrice($symbol . 'USDT')) {
+            return $price;
+        }
+
+        // For inversely listed pairs such as USDTEUR
+        if ($price = $this->getBinancePrice('USDT' . $symbol)) {
+            return 1.0 / $price;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $symbol
+     * @return float|null
+     */
+    private function getBinancePrice(string $symbol) : ?float
+    {
+        $prices = json_decode($this->cache(function () {
+            $data = $this->client->get($this->apiUrl); // no params -> ALL pairs
+            $map  = [];
+
+            if (is_array($data)) {
+                foreach ($data as $item) {
+                    if (isset($item->symbol, $item->price)) {
+                        $map[$item->symbol] = $item->price;
+                    }
+                }
+            }
+
+            return json_encode($map);
+        }, 'binance-prices', 30)->content, true);
+
+        return isset($prices[$symbol]) ? floatval($prices[$symbol]) : null;
     }
 
     /**

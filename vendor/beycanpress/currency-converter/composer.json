@@ -1,6 +1,6 @@
 {
     "name": "beycanpress/currency-converter",
-    "version": "0.1.3",
+    "version": "0.1.5",
     "description": "It takes on the task of converting between fiat and cryptocurrencies.",
     "type": "library",
     "license": "MIT",
@@ -10,8 +10,7 @@
     },
     "homepage": "https://github.com/BeycanPress/currency-converter-php",
     "require": {
-        "php": ">=7.4",
-        "beycanpress/http": "^0.1.4"
+        "php": ">=7.4"
     },
     "autoload": {
         "psr-4": {
