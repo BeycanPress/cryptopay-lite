@@ -34,7 +34,6 @@ return array(
     'Fig\\Http\\Message\\' => array($vendorDir . '/fig/http-message-util/src'),
     'Evenement\\' => array($vendorDir . '/evenement/evenement/src'),
     'Elliptic\\' => array($vendorDir . '/simplito/elliptic-php/lib'),
-    'BeycanPress\\Http\\' => array($vendorDir . '/beycanpress/http/src'),
     'BeycanPress\\CryptoPayLite\\' => array($baseDir . '/app'),
     'BeycanPress\\' => array($vendorDir . '/beycanpress/currency-converter/src'),
     'BN\\' => array($vendorDir . '/simplito/bn-php/lib'),

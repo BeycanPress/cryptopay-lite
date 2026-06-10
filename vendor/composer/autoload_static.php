@@ -19,26 +19,26 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
+        'p' =>
         array (
             'phpseclib\\' => 10,
         ),
-        'k' => 
+        'k' =>
         array (
             'kornrunner\\' => 11,
         ),
-        'W' => 
+        'W' =>
         array (
             'Web3p\\RLP\\' => 10,
             'Web3p\\EthereumUtil\\' => 19,
             'Web3p\\EthereumTx\\' => 17,
             'Web3\\' => 5,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
-        'R' => 
+        'R' =>
         array (
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
@@ -52,34 +52,33 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
             'Ratchet\\RFC6455\\' => 16,
             'Ratchet\\Client\\' => 15,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
         ),
-        'M' => 
+        'M' =>
         array (
             'MultipleChain\\EvmChains\\' => 24,
             'MultipleChain\\' => 14,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
-        'F' => 
+        'F' =>
         array (
             'Fig\\Http\\Message\\' => 17,
         ),
-        'E' => 
+        'E' =>
         array (
             'Evenement\\' => 10,
             'Elliptic\\' => 9,
         ),
-        'B' => 
+        'B' =>
         array (
-            'BeycanPress\\Http\\' => 17,
             'BeycanPress\\CryptoPayLite\\' => 26,
             'BeycanPress\\' => 12,
             'BN\\' => 3,
@@ -88,137 +87,133 @@ class ComposerStaticInit8344e6b546558a6c5633ebc2f36ec0f3
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib\\' => 
+        'phpseclib\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
-        'kornrunner\\' => 
+        'kornrunner\\' =>
         array (
             0 => __DIR__ . '/..' . '/kornrunner/keccak/src',
         ),
-        'Web3p\\RLP\\' => 
+        'Web3p\\RLP\\' =>
         array (
             0 => __DIR__ . '/..' . '/web3p/rlp/src',
         ),
-        'Web3p\\EthereumUtil\\' => 
+        'Web3p\\EthereumUtil\\' =>
         array (
             0 => __DIR__ . '/..' . '/web3p/ethereum-util/src',
         ),
-        'Web3p\\EthereumTx\\' => 
+        'Web3p\\EthereumTx\\' =>
         array (
             0 => __DIR__ . '/..' . '/web3p/ethereum-tx/src',
         ),
-        'Web3\\' => 
+        'Web3\\' =>
         array (
             0 => __DIR__ . '/..' . '/web3p/web3.php/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'React\\Stream\\' => 
+        'React\\Stream\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/stream/src',
         ),
-        'React\\Socket\\' => 
+        'React\\Socket\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/socket/src',
         ),
-        'React\\Promise\\Timer\\' => 
+        'React\\Promise\\Timer\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/promise-timer/src',
         ),
-        'React\\Promise\\' => 
+        'React\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
         ),
-        'React\\Http\\' => 
+        'React\\Http\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/http/src',
         ),
-        'React\\EventLoop\\' => 
+        'React\\EventLoop\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/event-loop/src',
         ),
-        'React\\Dns\\' => 
+        'React\\Dns\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/dns/src',
         ),
-        'React\\Cache\\' => 
+        'React\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/cache/src',
         ),
-        'React\\Async\\' => 
+        'React\\Async\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/async/src',
         ),
-        'Ratchet\\RFC6455\\' => 
+        'Ratchet\\RFC6455\\' =>
         array (
             0 => __DIR__ . '/..' . '/ratchet/rfc6455/src',
         ),
-        'Ratchet\\Client\\' => 
+        'Ratchet\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/ratchet/pawl/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Http\\Client\\' => 
+        'Psr\\Http\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'MultipleChain\\EvmChains\\' => 
+        'MultipleChain\\EvmChains\\' =>
         array (
             0 => __DIR__ . '/..' . '/multiplechain/evm-chains/src',
         ),
-        'MultipleChain\\' => 
+        'MultipleChain\\' =>
         array (
             0 => __DIR__ . '/..' . '/multiplechain/definitions/src',
             1 => __DIR__ . '/..' . '/multiplechain/utils/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' => 
+        'GuzzleHttp\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' => 
+        'GuzzleHttp\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'Fig\\Http\\Message\\' => 
+        'Fig\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
         ),
-        'Evenement\\' => 
+        'Evenement\\' =>
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
         ),
-        'Elliptic\\' => 
+        'Elliptic\\' =>
         array (
             0 => __DIR__ . '/..' . '/simplito/elliptic-php/lib',
         ),
-        'BeycanPress\\Http\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/beycanpress/http/src',
-        ),
-        'BeycanPress\\CryptoPayLite\\' => 
+        'BeycanPress\\CryptoPayLite\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
-        'BeycanPress\\' => 
+        'BeycanPress\\' =>
         array (
             0 => __DIR__ . '/..' . '/beycanpress/currency-converter/src',
         ),
-        'BN\\' => 
+        'BN\\' =>
         array (
             0 => __DIR__ . '/..' . '/simplito/bn-php/lib',
         ),
-        'BI\\' => 
+        'BI\\' =>
         array (
             0 => __DIR__ . '/..' . '/simplito/bigint-wrapper-php/lib',
         ),
