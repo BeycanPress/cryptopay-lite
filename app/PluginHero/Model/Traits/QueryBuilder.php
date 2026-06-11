@@ -20,7 +20,7 @@ trait QueryBuilder
      * @param string|null $alias
      * @return self
      */
-    protected function createQuery(string $alias = null): self
+    protected function createQuery(?string $alias = null): self
     {
         $query = " SELECT * FROM $this->tableName ";
         $this->parameters = [];

@@ -13,6 +13,6 @@
         "ext-bcmath": "*",
         "beycanpress/csf": "^2.3",
         "multiplechain/evm-chains": "^0.1.24",
-        "beycanpress/currency-converter": "^0.1.3"
+        "beycanpress/currency-converter": "^0.1.6"
     }
 }

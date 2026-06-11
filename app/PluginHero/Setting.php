@@ -32,7 +32,7 @@ abstract class Setting
      * @param array<mixed> $params
      * @return void
      */
-    public function __construct(string $title, string $parent = null, array $params = [])
+    public function __construct(string $title, ?string $parent = null, array $params = [])
     {
         self::$prefix = self::getSettingKey();
 
