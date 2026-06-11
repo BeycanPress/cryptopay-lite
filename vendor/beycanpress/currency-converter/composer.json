@@ -1,6 +1,6 @@
 {
     "name": "beycanpress/currency-converter",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "It takes on the task of converting between fiat and cryptocurrencies.",
     "type": "library",
     "license": "MIT",

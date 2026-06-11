@@ -25,6 +25,11 @@ final class CurrencyConverter
     private $apiKey = null;
 
     /**
+     * @var array|null
+     */
+    private $coinbaseRates = null;
+
+    /**
      * @var array
      */
     private $needsApiKey = [
@@ -35,7 +40,7 @@ final class CurrencyConverter
      * @var array
      */
     private $apis = [
-        'CryptoCompare' => 'https://api.binance.com/api/v3/ticker/price',
+        'CryptoCompare' => 'https://api.coinbase.com/v2/exchange-rates',
         'CoinMarketCap' => 'https://pro-api.coinmarketcap.com/v1/tools/price-conversion',
         'CoinGecko' => 'https://api.coingecko.com/api/v3/simple/price'
     ];
@@ -241,79 +246,63 @@ final class CurrencyConverter
      */
     private function convertWithCryptoCompare(string $from, string $to, float $amount) : ?float
     {
-        // Binance uses USDT instead of USD
-        $from = strtoupper($from) === 'USD' ? 'USDT' : strtoupper($from);
-        $to   = strtoupper($to) === 'USD' ? 'USDT' : strtoupper($to);
+        $from = strtoupper($from);
+        $to   = strtoupper($to);
 
         if ($from === $to) {
             return floatval($amount);
         }
 
-        // Direct pair: TO quoted in FROM (BTCUSDT) -> amount / price
-        if ($price = $this->getBinancePrice($to . $from)) {
-            return $amount / $price;
-        }
+        $rates = $this->getCoinbaseRates();
 
-        // Inverse pair: FROM quoted in TO (ETHBTC) -> amount * price
-        if ($price = $this->getBinancePrice($from . $to)) {
-            return $amount * $price;
-        }
+        // rates[X] = amount of X per 1 USD. USD is the base, so its rate is 1.
+        $fromRate = ($from === 'USD') ? 1.0 : (isset($rates[$from]) ? (float) $rates[$from] : null);
+        $toRate   = ($to === 'USD')   ? 1.0 : (isset($rates[$to])   ? (float) $rates[$to]   : null);
 
-        // No direct pair, so bridge through USDT
-        $fromUsdt = $this->binanceToUsdt($from);
-        $toUsdt   = $this->binanceToUsdt($to);
-
-        if (!$fromUsdt || !$toUsdt) {
+        if (is_null($fromRate) || is_null($toRate) || $fromRate <= 0) {
             return null;
         }
 
-        return $amount * ($fromUsdt / $toUsdt);
+        // amount(from) -> USD -> to
+        return $amount * ($toRate / $fromRate);
     }
 
     /**
-     * @param string $symbol
-     * @return float|null
+     * @return array
      */
-    private function binanceToUsdt(string $symbol) : ?float
+    private function getCoinbaseRates() : array
     {
-        if ('USDT' === $symbol) {
-            return 1.0;
+        if (is_array($this->coinbaseRates)) {
+            return $this->coinbaseRates;
         }
 
-        if ($price = $this->getBinancePrice($symbol . 'USDT')) {
-            return $price;
-        }
+        $file = dirname(__DIR__) . '/cache/coinbase-rates.json';
 
-        // For inversely listed pairs such as USDTEUR
-        if ($price = $this->getBinancePrice('USDT' . $symbol)) {
-            return 1.0 / $price;
-        }
-
-        return null;
-    }
-
-    /**
-     * @param string $symbol
-     * @return float|null
-     */
-    private function getBinancePrice(string $symbol) : ?float
-    {
-        $prices = json_decode($this->cache(function () {
-            $data = $this->client->get($this->apiUrl); // no params -> ALL pairs
-            $map  = [];
-
-            if (is_array($data)) {
-                foreach ($data as $item) {
-                    if (isset($item->symbol, $item->price)) {
-                        $map[$item->symbol] = $item->price;
-                    }
-                }
+        // Only use the cache when it is fresh and non-empty (don't let an empty fetch poison it)
+        if (file_exists($file) && (time() - filemtime($file) < 30)) {
+            $cached = json_decode((string) file_get_contents($file), true);
+            if (is_array($cached) && !empty($cached)) {
+                return $this->coinbaseRates = $cached;
             }
+        }
 
-            return json_encode($map);
-        }, 'binance-prices', 30)->content, true);
+        // Single USD-based call: all fiat + crypto rates
+        $response = $this->client->get($this->apiUrl . '?currency=USD');
 
-        return isset($prices[$symbol]) ? floatval($prices[$symbol]) : null;
+        $rates = [];
+        if (isset($response->data->rates)) {
+            $rates = (array) $response->data->rates;
+        }
+
+        // Only persist a successful (non-empty) fetch to disk
+        if (!empty($rates)) {
+            if (!is_dir(dirname($file))) {
+                mkdir(dirname($file), 0775, true);
+            }
+            file_put_contents($file, json_encode($rates));
+        }
+
+        return $this->coinbaseRates = $rates;
     }
 
     /**
