@@ -156,8 +156,9 @@ Yes, our plugin comes with WooCommerce crypto payment gateway support by default
 
 == Changelog ==
 
-= 2.3.18 =
+= 2.3.19 =
 * Fixed: Confirmation process blocking
+* Fixed: Block confirmation process
 
 = 2.3.17 =
 * Updated: Default converter API Binance to Coinbase because of Binance US server restrict.

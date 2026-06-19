@@ -33,7 +33,7 @@ class Verifier
         add_action('woocommerce_thankyou_cryptopay_lite', [$this, 'wcVerifyPendingTransactions'], 1);
     }
 
-        /**
+    /**
      * @return void
      */
     public function verifyAllPendingTransactions(): void
@@ -79,8 +79,8 @@ class Verifier
         $transactionHash = $transaction->getHash();
         $provider = Helpers::getProvider($transaction);
         $receiver = $transaction->getAddresses()->getReceiver();
-        $transaction = $provider->Transaction($transaction->getHash());
 
+        $receiver = $transaction->getAddresses()->getReceiver();
         if ($currency->getAddress()) {
             $transaction = $provider->tokenTransaction($transactionHash);
         } else {
@@ -91,16 +91,27 @@ class Verifier
             return null;
         }
 
-        $confirmationCount = Helpers::getBlockConfirmationCount($network->getCode());
-        if ($confirmationCount > 0 && $transaction->getBlockConfirmationCount() < $confirmationCount) {
-            return null;
-        }
-
-        return TransactionStatus::CONFIRMED == $transaction->verifyTransfer(
+        $verificationStatus = $transaction->verifyTransfer(
             AssetDirection::INCOMING,
             $receiver,
             $amount
         );
+
+        if (TransactionStatus::CONFIRMED !== $verificationStatus) {
+            return false;
+        }
+
+        $confirmationCount = Helpers::getBlockConfirmationCount($network->getCode());
+        if ($confirmationCount > 0) {
+            $blockConfirmations = $transaction->getBlockConfirmationCount();
+            if ($blockConfirmations >= $confirmationCount) {
+                return true;
+            }
+
+            return null;
+        }
+
+        return true;
     }
 
     /**
