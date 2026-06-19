@@ -26,7 +26,7 @@
                     $items = array_intersect_key($item, array_flip(array_keys($this->columns)));
 
                     foreach ($items as $val) : ?>
-                    <td><?php wp_kses_post($val); ?></td>
+                    <td><?php echo wp_kses_post($val); ?></td>
                     <?php endforeach; ?>
             </tr>
         <?php endforeach; ?>
