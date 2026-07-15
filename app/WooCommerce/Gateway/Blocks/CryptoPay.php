@@ -7,6 +7,7 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Gateway\Blocks;
 // @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
 use BeycanPress\CryptoPayLite\Helpers;
+use BeycanPress\CryptoPayLite\Constants;
 use BeycanPress\CryptoPayLite\WooCommerce\Gateway as WCCryptoPay;
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
@@ -22,7 +23,7 @@ class CryptoPay extends AbstractPaymentMethodType
      * @var string
      */
     // @phpcs:ignore
-    protected $name = 'cryptopay_lite';
+    protected $name = Constants::GATEWAY_ID;
 
     /**
      * @var array<string,mixed>

@@ -29,21 +29,45 @@ class Loader extends PluginHero\Plugin
                 new Services\Initialize();
                 new WooCommerce\Initialize();
             });
-        } else {
-            add_action('init', function (): void {
-                Helpers::adminNotice(
-                    esc_html__(
-                        'CryptoPay Lite: Please enter your wallet address in the settings section for CryptoPay Lite run.', // @phpcs:ignore
-                        'cryptopay'
-                    ),
-                    'error'
-                );
-            }, 9);
+        }
+
+        if (is_admin()) {
+            add_action('init', [$this, 'setupNotice'], 9);
         }
 
         add_filter(
             'plugin_action_links_' . plugin_basename(Helpers::getProp('pluginFile')),
             [$this, 'pluginActionLinks']
+        );
+    }
+
+    /**
+     * Tells the merchant when CryptoPay will not show up at checkout, and sends
+     * them somewhere that fixes it rather than just naming the problem.
+     * @return void
+     */
+    public function setupNotice(): void
+    {
+        // @phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : '';
+
+        // No point nagging someone who is already standing in the wizard.
+        if (Pages\SetupWizard::SLUG === $page || Services\SetupStatus::isReady()) {
+            return;
+        }
+
+        $failing = Services\SetupStatus::failingLabels();
+
+        // The labels come out of SetupStatus already escaped; escaping again here
+        // would show a translator's apostrophe as a raw entity.
+        Helpers::adminNotice(
+            '<strong>' . esc_html__('CryptoPay Lite is not live at checkout yet.', 'cryptopay') . '</strong>'
+            . CPL_BR .
+            $failing[0]
+            . CPL_BR2 .
+            '<a href="' . esc_url(Pages\SetupWizard::wizardUrl()) . '" class="button button-primary">'
+            . esc_html__('Finish setup', 'cryptopay') . '</a>',
+            'error'
         );
     }
 
@@ -69,6 +93,7 @@ class Loader extends PluginHero\Plugin
     {
         add_action('init', function (): void {
             new Pages\HomePage();
+            new Pages\SetupWizard();
             new Pages\Integrations();
             new Pages\PendingReminders();
 
@@ -88,6 +113,12 @@ class Loader extends PluginHero\Plugin
             (new Models\OrderTransaction())->createTable();
         } catch (\Throwable $th) {
             Helpers::debug($th->getMessage(), 'ERROR', $th);
+        }
+
+        // Only walk first-time installs through setup; anyone who already finished
+        // it once is just reactivating and does not need to be sent round again.
+        if (!get_option(Pages\SetupWizard::COMPLETED_OPTION)) {
+            update_option(Pages\SetupWizard::REDIRECT_OPTION, true);
         }
     }
 

@@ -11,6 +11,14 @@ use BeycanPress\CryptoPayLite\PluginHero\Hook;
 class Constants
 {
     /**
+     * WooCommerce gateway id. Kept here rather than on the gateway class itself
+     * so it can be read without autoloading anything that extends a WooCommerce
+     * class, which would fatal when WooCommerce is inactive.
+     * @var string
+     */
+    public const GATEWAY_ID = 'cryptopay_lite';
+
+    /**
      * @return string
      */
     public static function getImagesUrl(): string

@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable Tag: 2.3.18
-Version: 2.3.18
+Stable Tag: 2.4.0
+Version: 2.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,6 +17,12 @@ Cryptocurrency Payment Gateway for WordPress & WooCommerce by CryptoPay. Accept 
 
 WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With Reown AppKit support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
+
+**Your customer sends 30. You receive 30.**
+
+This is worth saying plainly, because it is the one thing people get burned by. Most crypto payment services are custodial: your customer's money lands in *their* wallet first, they take their cut, and what is left is forwarded to you. The amount you receive is not the amount that was sent, and you find that out after the sale.
+
+CryptoPay is not a service. It is a plugin, and it is peer to peer. Your customer's wallet pays your wallet directly. We are never in the middle, we never hold your money, and we take 0% of it, because there is no way for us to touch it in the first place. The only cost is the blockchain's own gas fee, which the payer pays. No account, no KYC, no withdrawal limits, nothing to wait for.
 
 **Review WooCommerce crypto payment gateway with video**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -145,6 +151,10 @@ Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_sour
 
 == Installation ==
 
+Activate the plugin and a setup wizard opens by itself. It asks for your wallet address, switches the gateway on in WooCommerce, and lets you pick your networks and wallets. Five steps, and you are taking payments.
+
+Note that WooCommerce ships every payment gateway switched off, CryptoPay included. That single setting is the most common reason people report that CryptoPay never shows up at checkout, so the wizard handles it for you. If you skip the wizard, CryptoPay Lite tells you in the admin whenever something still stands between you and a working checkout.
+
 Some settings are restricted in CryptoPay Lite only. You can install with the same logic and add your wallet address to the relevant field.
 
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
@@ -155,6 +165,15 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.4.0 =
+* Added: Setup wizard that runs on activation and walks you through everything needed to appear at checkout
+* Added: Status check in the admin that tells you exactly what is missing when CryptoPay is not live at checkout
+* Added: Instant payments. A "Buy with Crypto" button on the product page, like PayPal
+* Added: Arbitrum One and Optimism networks
+* Fixed: Web3 Wallets (Reown AppKit) and WalletConnect were offered to customers without a Reown AppKit ID, which they cannot connect without. They are now hidden until an ID is set, and switch on by themselves once you add one
+* Fixed: Fatal error on databases that report no collation support, such as SQLite
+* Updated: WalletConnect (legacy) and Web3 Wallets no longer default to on together, a combination that conflicts
 
 = 2.3.19 =
 * Fixed: Confirmation process blocking
