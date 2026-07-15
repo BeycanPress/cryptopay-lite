@@ -10,5 +10,9 @@
             const params = window.CryptoPayLiteVars?.params || {};
             window.CryptoPayLiteApp.start(window.CryptoPayLiteVars.order, params);
         }
+
+        // include libs
+
+        //=include ./instant.js
     });
 })(jQuery);

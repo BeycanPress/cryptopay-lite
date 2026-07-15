@@ -96,8 +96,8 @@ class Settings extends Setting
                 [
                     'id'      => 'acceptInstantPayments',
                     'title'   => esc_html__('Accept instant payments', 'cryptopay'),
-                    'type'    => 'content',
-                    'content' => $proMsg . esc_html__('As with PayPal, a Buy with Crypto Pay button appears directly on the product page, and users can instantly create an order by paying directly with CryptoPay. ', 'cryptopay') . sprintf(esc_html__('If the %s setting is active in WooCommerce settings, non-registered users can use instant payments.', 'cryptopay'), '<a href="' . admin_url('admin.php?page=wc-settings&tab=account') . '" target="_blank">' . esc_html__('"Allow customers to place orders without an account"', 'cryptopay') . '</a>'),
+                    'type'    => 'switcher',
+                    'desc'    => esc_html__('As with PayPal, a Buy with Crypto Pay button appears directly on the product page, and users can instantly create an order by paying directly with CryptoPay. ', 'cryptopay') . sprintf(esc_html__('If the %s setting is active in WooCommerce settings, non-registered users can use instant payments.', 'cryptopay'), '<a href="' . admin_url('admin.php?page=wc-settings&tab=account') . '" target="_blank">' . esc_html__('"Allow customers to place orders without an account"', 'cryptopay') . '</a>'),
                     'default' => false,
                 ],
                 [

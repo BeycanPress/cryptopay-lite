@@ -36,6 +36,7 @@ class Payment
         Hook::addFilter('init_woocommerce', [$this, 'init']);
 
         // WooCommerce hooks
+        add_action('woocommerce_after_add_to_cart_form', [$this, 'instant'], 30);
         add_action('woocommerce_checkout_order_processed', [$this, 'orderProcessed'], 105, 3);
         add_action('woocommerce_after_checkout_validation', [$this, 'checkoutValidation'], 10, 2);
 
@@ -54,7 +55,18 @@ class Payment
     {
         $paymentCurrency = $data->getOrder()->getPaymentCurrency();
 
-        if ($data->getOrder()->getId()) {
+        if ($data->getParams()->get('instant')) {
+            $quantity = $data->getParams()->get('quantity');
+            $productId = $data->getParams()->get('productId');
+
+            $product = wc_get_product($productId);
+
+            $data->setOrder(OrderType::fromArray([
+                'currency' => get_woocommerce_currency(),
+                'amount' => $product->get_price() * $quantity,
+                'paymentCurrency' => $paymentCurrency->toArray()
+            ]));
+        } elseif ($data->getOrder()->getId()) {
             $order = wc_get_order($data->getOrder()->getId());
 
             $data->setOrder(OrderType::fromArray([
@@ -66,6 +78,48 @@ class Payment
         }
 
         return $data;
+    }
+
+    /**
+     * @return void
+     */
+    public function instant(): void
+    {
+        if (!Helpers::getSetting('acceptInstantPayments')) {
+            return;
+        }
+
+        global $product;
+
+        if (!$product->is_in_stock()) {
+            return;
+        }
+
+        if ($product->get_price() <= 0) {
+            return;
+        }
+
+        if (!is_singular('product')) {
+            return;
+        }
+
+        Hook::addFilter('js_variables', function (array $vars) use ($product) {
+            return array_merge($vars, [
+                'instant' => [
+                    'productId' => $product->get_id(),
+                    'amount' => $product->get_price(),
+                    'currency' => get_woocommerce_currency(),
+                    'decimals' => get_option('woocommerce_price_num_decimals'),
+                ]
+            ]);
+        });
+
+        $cryptopay = (new CryptoPay('woocommerce'))->modal();
+
+        Helpers::viewEcho('instant', [
+            'product' => $product,
+            'cryptopay' => $cryptopay
+        ]);
     }
 
     /**
@@ -207,19 +261,71 @@ class Payment
     public function beforePaymentStarted(PaymentDataType $data): PaymentDataType
     {
         try {
-            // Set posted data
-            $_POST = (array) $data->getDynamicData()->get('wcForm');
+            if ($data->getParams()->get('instant')) {
+                $product = wc_get_product($data->getParams()->get('productId'));
 
-            if (!$data->getOrder()->getId()) {
-                $postedData = WC()->session->get('cp_posted_data');
-                $order = $this->checkout->createOrder($data->getUserId(), $postedData);
-                $data->getOrder()->setId($order->get_id());
+                $order = wc_create_order();
+
+                // set order customer data
+                if ($data->getUserId()) {
+                    $userData = get_userdata($data->getUserId());
+                    $order->set_customer_id($userData->ID);
+                    // phpcs:disable
+                    $order->set_billing_first_name($userData->first_name);
+                    $order->set_billing_last_name($userData->last_name);
+                    $order->set_billing_email($userData->user_email);
+                    $order->set_billing_address_1($userData->billing_address_1); // @phpstan-ignore-line
+                    $order->set_billing_city($userData->billing_city); // @phpstan-ignore-line
+                    $order->set_billing_state($userData->billing_state); // @phpstan-ignore-line
+                    $order->set_billing_postcode($userData->billing_postcode); // @phpstan-ignore-line
+                    $order->set_billing_country($userData->billing_country); // @phpstan-ignore-line
+                    $order->set_billing_phone($userData->billing_phone); // @phpstan-ignore-line
+                    // phpcs:enable
+
+                    $order->update_meta_data(
+                        '_customer_user',
+                        $data->getUserId() // @phpstan-ignore-line
+                    );
+                }
+
+                // set order items
+                $order->add_product($product, $data->getParams()->get('quantity'), [
+                    'total' => ($product->get_price() * $data->getParams()->get('quantity')),
+                ]);
+
+                // set order totals
+                $order->calculate_totals();
+
+                // set order currency
+                $order->set_currency(get_woocommerce_currency());
+
+                // payment method
+                $order->set_payment_method(Gateway::ID);
+                $order->set_payment_method_title('CryptoPay Instant');
+
+                $order->update_status('wc-on-hold');
+
+                // save order
+                $data->getOrder()->setId($order->save());
+
                 $data->getDynamicData()->set('order', [
                     'id' => $data->getOrder()->getId(),
                 ]);
             } else {
-                $order = wc_get_order($data->getOrder()->getId());
-                $order->update_status('wc-on-hold');
+                // Set posted data
+                $_POST = (array) $data->getDynamicData()->get('wcForm');
+
+                if (!$data->getOrder()->getId()) {
+                    $postedData = WC()->session->get('cp_posted_data');
+                    $order = $this->checkout->createOrder($data->getUserId(), $postedData);
+                    $data->getOrder()->setId($order->get_id());
+                    $data->getDynamicData()->set('order', [
+                        'id' => $data->getOrder()->getId(),
+                    ]);
+                } else {
+                    $order = wc_get_order($data->getOrder()->getId());
+                    $order->update_status('wc-on-hold');
+                }
             }
         } catch (\Exception $e) {
             Response::error($e->getMessage(), 'ORDER_CREATION_ERROR', $e->getTrace());
