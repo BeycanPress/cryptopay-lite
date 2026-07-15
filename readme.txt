@@ -18,6 +18,12 @@ Cryptocurrency Payment Gateway for WordPress & WooCommerce by CryptoPay. Accept 
 WordPress Cryptocurrency Payment Gateway for WooCommerce by CryptoPay, With CryptoPay, you can receive crypto payments from supported blockchain networks such as Bitcoin Payments, Solana, Tron, especially EVM-based blockchain networks, and the currencies (tokens) under these networks. It natively supports **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">cryptocurrency payments for WooCommerce</a>**, and can also be integrated with other plugins thanks to its API. You can also receive direct payments with crypto wallets such as MetaMask, Trust Wallet, Binance Wallet and Phantom. With Reown AppKit support, you can receive **<a href="https://beycanpress.com/cryptopay/?utm_source=wporg_readme&utm_medium=cryptopay_lite">WordPress cryptocurrency payments</a>** from mobile devices.
 
 
+**Your customer sends 30. You receive 30.**
+
+This is worth saying plainly, because it is the one thing people get burned by. Most crypto payment services are custodial: your customer's money lands in *their* wallet first, they take their cut, and what is left is forwarded to you. The amount you receive is not the amount that was sent, and you find that out after the sale.
+
+CryptoPay is not a service. It is a plugin, and it is peer to peer. Your customer's wallet pays your wallet directly. We are never in the middle, we never hold your money, and we take 0% of it, because there is no way for us to touch it in the first place. The only cost is the blockchain's own gas fee, which the payer pays. No account, no KYC, no withdrawal limits, nothing to wait for.
+
 **Review WooCommerce crypto payment gateway with video**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3vaoFL4XG10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
