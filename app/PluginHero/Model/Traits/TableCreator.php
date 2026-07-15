@@ -7,9 +7,12 @@ namespace BeycanPress\CryptoPayLite\PluginHero\Model\Traits;
 trait TableCreator
 {
     /**
+     * Only assigned when the database reports collation support, but read
+     * unconditionally when building the CREATE TABLE. Without a default that is
+     * a fatal on any database that says no, such as SQLite.
      * @var string
      */
-    private string $charset;
+    private string $charset = '';
 
     /**
      * @var array<string,string>
