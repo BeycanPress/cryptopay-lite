@@ -20,6 +20,8 @@ class EvmChains
         56 => 97,
         43114 => 43113,
         137 => 80002,
+        42161 => 421614,
+        10 => 11155420,
     ];
 
     /**
@@ -119,12 +121,6 @@ class EvmChains
                     ]
                 ],
                 [
-                    'id'      => 'buyPremiumForCustomNetworks',
-                    'title'   => esc_html__('Unlimited network and currency', 'cryptopay'),
-                    'type'    => 'content',
-                    'content' => esc_html__('Get the premium to get paid with unlimited EVM blockchain network and any cryptocurrency (token) you want!', 'cryptopay') . CPL_BR2 . '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=plugin_settings&utm_medium=evm_settings&utm_campaign=unlimited_network" target="_blank">' . esc_html__('Buy premium now', 'cryptopay') . '</a>'
-                ],
-                [
                     'id'      => 'evmchainsNetworks',
                     'title'   => esc_html__('Networks', 'cryptopay'),
                     'help'    => esc_html__('Specify the networks you want to accept payments from.', 'cryptopay'),
@@ -161,7 +157,43 @@ class EvmChains
                             'type'    => 'switcher',
                             'default' => true,
                         ],
+                        [
+                            'id'      => 'id_42161',
+                            'title'   => esc_html('Arbitrum One'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ],
+                        [
+                            'id'      => 'id_10',
+                            'title'   => esc_html('Optimism'),
+                            'type'    => 'switcher',
+                            'default' => true,
+                        ],
                     ]
+                ],
+                [
+                    'id'      => 'buyPremiumForCustomNetworks',
+                    'title'   => esc_html__('Unlimited network and currency', 'cryptopay'),
+                    'type'    => 'content',
+                    'content' => esc_html__('Get the premium to get paid with unlimited EVM blockchain network and any cryptocurrency (token) you want!', 'cryptopay') . CPL_BR2 . '<a href="https://beycanpress.com/product/cryptopay-all-in-one-cryptocurrency-payments-for-wordpress/?utm_source=plugin_settings&utm_medium=evm_settings&utm_campaign=unlimited_network" target="_blank">' . esc_html__('Buy premium now', 'cryptopay') . '</a>'
+                ],
+                [
+                    'id'      => 'evmchainsQrPayments',
+                    'title'   => esc_html__('QR payments', 'cryptopay'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('By defining a Websocket URL for your networks, you can allow your customers to pay by transferring to your address with a QR code, without connecting a wallet.', 'cryptopay'),
+                ],
+                [
+                    'id'      => 'evmchainsNetworkWalletAddress',
+                    'title'   => esc_html__('Network-specific wallet address', 'cryptopay'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('Instead of a single general address, you can define a different wallet address for each blockchain network and collect the payments of each network in a separate wallet.', 'cryptopay'),
+                ],
+                [
+                    'id'      => 'evmchainsWeb3Domain',
+                    'title'   => esc_html__('Web3 domain', 'cryptopay'),
+                    'type'    => 'content',
+                    'content' => $proMsg . esc_html__('You can define a Web3 domain such as "beycanpress.eth" for your networks and show your domain to your customers instead of your wallet address.', 'cryptopay'),
                 ]
             ]
         ]);
