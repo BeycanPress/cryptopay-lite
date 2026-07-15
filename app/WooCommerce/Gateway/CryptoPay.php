@@ -11,6 +11,7 @@ namespace BeycanPress\CryptoPayLite\WooCommerce\Gateway;
 // Classes
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\Payment;
+use BeycanPress\CryptoPayLite\Constants;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 // Types
 use BeycanPress\CryptoPayLite\Types\Order\OrderType;
@@ -20,7 +21,7 @@ class CryptoPay extends \WC_Payment_Gateway
     /**
      * @var string
      */
-    public const ID = 'cryptopay_lite';
+    public const ID = Constants::GATEWAY_ID;
 
     /**
      * @var string

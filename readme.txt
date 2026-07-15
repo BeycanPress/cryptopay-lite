@@ -4,8 +4,8 @@ Tags: WooCommerce, Cryptocurrency, Payment, Gateway, Bitcoin
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable Tag: 2.3.18
-Version: 2.3.18
+Stable Tag: 2.4.0
+Version: 2.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,6 +145,10 @@ Review CryptoPay Premium: **<a href="https://beycanpress.com/cryptopay/?utm_sour
 
 == Installation ==
 
+Activate the plugin and a setup wizard opens by itself. It asks for your wallet address, switches the gateway on in WooCommerce, and lets you pick your networks and wallets. Five steps, and you are taking payments.
+
+Note that WooCommerce ships every payment gateway switched off, CryptoPay included. That single setting is the most common reason people report that CryptoPay never shows up at checkout, so the wizard handles it for you. If you skip the wizard, CryptoPay Lite tells you in the admin whenever something still stands between you and a working checkout.
+
 Some settings are restricted in CryptoPay Lite only. You can install with the same logic and add your wallet address to the relevant field.
 
 See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" target="_blank">CryptoPay installation documentation</a>**
@@ -155,6 +159,15 @@ See: **<a href="https://beycanpress.gitbook.io/cryptopay-docs/installation" targ
 Yes, our plugin comes with WooCommerce crypto payment gateway support by default. In this way, you can easily accept crypto payments in WooCommerce.
 
 == Changelog ==
+
+= 2.4.0 =
+* Added: Setup wizard that runs on activation and walks you through everything needed to appear at checkout
+* Added: Status check in the admin that tells you exactly what is missing when CryptoPay is not live at checkout
+* Added: Instant payments. A "Buy with Crypto" button on the product page, like PayPal
+* Added: Arbitrum One and Optimism networks
+* Fixed: Web3 Wallets (Reown AppKit) and WalletConnect were offered to customers without a Reown AppKit ID, which they cannot connect without. They are now hidden until an ID is set, and switch on by themselves once you add one
+* Fixed: Fatal error on databases that report no collation support, such as SQLite
+* Updated: WalletConnect (legacy) and Web3 Wallets no longer default to on together, a combination that conflicts
 
 = 2.3.19 =
 * Fixed: Confirmation process blocking

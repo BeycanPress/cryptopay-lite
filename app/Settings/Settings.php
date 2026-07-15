@@ -9,6 +9,7 @@ namespace BeycanPress\CryptoPayLite\Settings;
 use BeycanPress\CryptoPayLite\Helpers;
 use BeycanPress\CryptoPayLite\PluginHero\Hook;
 use BeycanPress\CryptoPayLite\PluginHero\Setting;
+use BeycanPress\CryptoPayLite\Services\SetupStatus;
 
 class Settings extends Setting
 {
@@ -135,10 +136,15 @@ class Settings extends Setting
                     'id'      => 'activateWooCommercePaymentGateway',
                     'title'   => esc_html__('Activate WooCommerce payment gateway', 'cryptopay'),
                     'type'    => 'content',
-                    'content' => Helpers::view('components/link', [
-                        'text' => esc_html__('Click to activate', 'cryptopay'),
-                        'url' => admin_url('admin.php?page=wc-settings&tab=checkout&section=cryptopay_lite')
-                    ])
+                    'content' => SetupStatus::gatewayEnabled()
+                        ? esc_html__('The payment gateway is enabled and visible at checkout.', 'cryptopay') . CPL_BR2 . Helpers::view('components/link', [
+                            'text' => esc_html__('Review gateway options', 'cryptopay'),
+                            'url' => SetupStatus::gatewayUrl()
+                        ])
+                        : '<strong>' . esc_html__('The payment gateway is switched off, so customers cannot see CryptoPay at checkout.', 'cryptopay') . '</strong>' . CPL_BR2 . Helpers::view('components/link', [
+                            'text' => esc_html__('Click to activate', 'cryptopay'),
+                            'url' => SetupStatus::gatewayUrl()
+                        ])
                 ]
             ]
         ]);
@@ -451,7 +457,7 @@ class Settings extends Setting
             add_submenu_page(
                 $parent,
                 esc_html__('Feedback', 'cryptopay'),
-                esc_html__('Feedback', 'cryptopay') . '<span class="awaiting-mod">NEW</span>',
+                esc_html__('Feedback', 'cryptopay'),
                 'manage_options',
                 'cryptopay_lite_feedback',
                 function (): void {
